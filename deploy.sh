@@ -24,7 +24,7 @@ git commit -m 'deploy'
 # git push -f git@github.com:key0329/key0329.github.io.git main
 
 # if you are deploying to https://key0329.github.io/<REPO>
-# git push -f https://github.com/Key0329/2022-Vue-week6.git main:gh-pages
+git push -f https://github.com/Key0329/JoinSport.git main:gh-pages
 
 
 cd -
