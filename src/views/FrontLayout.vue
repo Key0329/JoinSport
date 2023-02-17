@@ -10,7 +10,7 @@
     >
     | <router-link to="/products">前台產品列表</router-link> |
     <router-link to="/cart">前台購物車</router-link> |
-    <router-link to="/admin">後台首頁</router-link>
+    <router-link class="btn btn-primary" to="/admin">開始搜尋</router-link>
     <hr />
     <router-view></router-view>
   </div>
