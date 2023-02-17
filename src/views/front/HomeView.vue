@@ -1,5 +1,5 @@
 <template>
-  <h1>前台首頁</h1>
+  <home-banner></home-banner>
   <br />
   <br />
   <br />
@@ -28,3 +28,16 @@
   <br />
   <br />
 </template>
+
+<script>
+import HomeBanner from '../../components/front/HomeBanner.vue';
+
+export default {
+  components: {
+    HomeBanner,
+  },
+  data() {
+    return {};
+  },
+};
+</script>

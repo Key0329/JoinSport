@@ -14,7 +14,7 @@
               >Join Sport 揪運動</a
             >
           </h2>
-          <div class="flex gap-[72px] text-left">
+          <div class="flex gap-10 text-left xs:gap-[72px]">
             <div>
               <p class="text-lg text-[#6F6F6F] md:mb-4">帳號</p>
               <ul>
@@ -77,11 +77,11 @@
         <!-- icon -->
         <div>
           <div class="flex h-full flex-col justify-evenly lg:justify-between">
-            <ul class="mb-4 flex gap-6 md:gap-10">
+            <ul class="mb-4 flex gap-2 xs:gap-6 md:gap-10">
               <li>
                 <a
                   href="#"
-                  class="flex h-12 w-12 items-center justify-center rounded-full bg-white hover:scale-90"
+                  class="flex h-12 w-12 items-center justify-center rounded-full bg-white transition-transform hover:scale-90"
                   ><img
                     class=""
                     src="../../assets/images/icon/Vector-1.png"
@@ -91,7 +91,7 @@
               <li>
                 <a
                   href="#"
-                  class="flex h-12 w-12 items-center justify-center rounded-full bg-white hover:scale-90"
+                  class="flex h-12 w-12 items-center justify-center rounded-full bg-white transition-transform hover:scale-90"
                   ><img
                     class=""
                     src="../../assets/images/icon/twitter.png"
@@ -101,7 +101,7 @@
               <li>
                 <a
                   href="#"
-                  class="flex h-12 w-12 items-center justify-center rounded-full bg-white hover:scale-90"
+                  class="flex h-12 w-12 items-center justify-center rounded-full bg-white transition-transform hover:scale-90"
                   ><img
                     class=""
                     src="../../assets/images/icon/Vector-2.png"
@@ -111,7 +111,7 @@
               <li>
                 <a
                   href="#"
-                  class="flex h-12 w-12 items-center justify-center rounded-full bg-white hover:scale-90"
+                  class="flex h-12 w-12 items-center justify-center rounded-full bg-white transition-transform hover:scale-90"
                   ><img
                     class=""
                     src="../../assets/images/icon/envelope.png"
@@ -121,7 +121,7 @@
               <li>
                 <a
                   href="#"
-                  class="flex h-12 w-12 items-center justify-center rounded-full bg-white hover:scale-90"
+                  class="flex h-12 w-12 items-center justify-center rounded-full bg-white transition-transform hover:scale-90"
                   ><img
                     class=""
                     src="../../assets/images/icon/Vector.png"
