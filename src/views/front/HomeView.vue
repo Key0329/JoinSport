@@ -1,5 +1,33 @@
+<script>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Navigation } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+import HomeBanner from '../../components/front/HomeBanner.vue';
+import JoinCard from '../../components/front/JoinCard.vue';
+import GroupCard from '../../components/front/GroupCard.vue';
+
+export default {
+  components: {
+    HomeBanner,
+    JoinCard,
+    Swiper,
+    SwiperSlide,
+    GroupCard,
+  },
+  data() {
+    return {
+      modules: [Navigation],
+    };
+  },
+};
+</script>
+
 <template>
   <home-banner></home-banner>
+
+  <!-- Feature -->
   <section class="bg-[#F3F3F3] py-9 md:py-20">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl md:mb-[72px] md:text-4xl">
@@ -59,49 +87,209 @@
       >
     </div>
   </section>
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
+
+  <!-- Join Group -->
+  <section class="hidden py-9 sm:block md:py-20">
+    <div class="container">
+      <h2 class="mb-8 text-center text-3xl md:mb-16">即將到來的揪團</h2>
+      <ul
+        class="hidden gap-x-6 gap-y-10 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <li class="md:col-span-1">
+          <router-link to="login"><join-card></join-card></router-link>
+        </li>
+        <li class="md:col-span-1">
+          <router-link to=""><join-card></join-card></router-link>
+        </li>
+        <li class="md:col-span-1">
+          <router-link to=""><join-card></join-card></router-link>
+        </li>
+        <li class="md:col-span-1">
+          <router-link to=""><join-card></join-card></router-link>
+        </li>
+        <li class="md:col-span-1">
+          <router-link to=""><join-card></join-card></router-link>
+        </li>
+        <li class="md:col-span-1">
+          <router-link to=""><join-card></join-card></router-link>
+        </li>
+        <li class="hidden md:col-span-1 lg:block">
+          <router-link to=""><join-card></join-card></router-link>
+        </li>
+        <li class="hidden md:col-span-1 lg:block">
+          <router-link to=""><join-card></join-card></router-link>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="pt-9 xs:mb-12 sm:hidden md:py-20">
+    <div class="container">
+      <h2 class="mb-8 text-center text-3xl">即將到來的揪團</h2>
+      <div>
+        <swiper
+          :slides-per-view="1"
+          :space-between="24"
+          navigation
+          :modules="modules"
+          class="swiper2 relative"
+        >
+          <swiper-slide>
+            <router-link to=""><join-card></join-card></router-link>
+          </swiper-slide>
+          <swiper-slide>
+            <router-link to=""><join-card></join-card></router-link>
+          </swiper-slide>
+          <swiper-slide>
+            <router-link to=""><join-card></join-card></router-link>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hot Group -->
+  <section class="pt-9 md:py-20">
+    <div class="container">
+      <h2 class="mb-8 text-center text-3xl md:mb-0 md:text-left">熱門群組</h2>
+      <div>
+        <swiper
+          :space-between="24"
+          navigation
+          :modules="modules"
+          :breakpoints="{
+            576: {
+              slidesPerView: 2,
+            },
+            960: {
+              slidesPerView: 3,
+            },
+          }"
+          class="swiper1 relative"
+        >
+          <swiper-slide>
+            <router-link to=""><group-card></group-card></router-link>
+          </swiper-slide>
+          <swiper-slide>
+            <router-link to=""><group-card></group-card></router-link>
+          </swiper-slide>
+          <swiper-slide>
+            <router-link to=""><group-card></group-card></router-link>
+          </swiper-slide>
+          <swiper-slide>
+            <router-link to=""><group-card></group-card></router-link>
+          </swiper-slide>
+          <swiper-slide>
+            <router-link to=""><group-card></group-card></router-link>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </div>
+  </section>
 </template>
 
-<script>
-import HomeBanner from '../../components/front/HomeBanner.vue';
+<style scoped>
+.swiper1:deep(.swiper-button-next:after),
+.swiper1:deep(.swiper-button-prev:after),
+.swiper2:deep(.swiper-button-next:after),
+.swiper2:deep(.swiper-button-prev:after) {
+  font-size: 12px;
+}
 
-export default {
-  components: {
-    HomeBanner,
-  },
-  data() {
-    return {};
-  },
-};
-</script>
+.swiper1:deep(.swiper-button-next) {
+  position: absolute;
+  top: 280px;
+  right: 30%;
+  width: 36px;
+  height: 36px;
+  transform: translateX(-50%);
+  color: black;
+  border-radius: 100%;
+  background-color: #fbe3d1;
+  font-weight: 900;
+}
+.swiper1:deep(.swiper-button-prev) {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  top: 280px;
+  left: 30%;
+  transform: translateX(50%);
+  color: black;
+  border-radius: 100%;
+  background-color: #fbe3d1;
+  font-weight: 900;
+}
+
+.swiper1 {
+  padding-bottom: 60px;
+}
+
+@media (min-width: 576px) {
+  .swiper1:deep(.swiper-button-next) {
+    right: 35%;
+  }
+  .swiper1:deep(.swiper-button-prev) {
+    left: 35%;
+  }
+}
+
+@media (min-width: 960px) {
+  .swiper1 {
+    padding-top: 60px;
+    padding-bottom: 0;
+  }
+  .swiper1:deep(.swiper-button-next) {
+    top: 36px;
+    right: 0;
+  }
+  .swiper1:deep(.swiper-button-prev) {
+    top: 36px;
+    left: 85%;
+  }
+}
+
+@media (min-width: 1320px) {
+  .swiper1:deep(.swiper-button-next) {
+    right: 0;
+  }
+  .swiper1:deep(.swiper-button-prev) {
+    left: 90%;
+  }
+}
+
+.swiper2 {
+  padding-bottom: 80px;
+}
+.swiper2:deep(.swiper-button-next) {
+  position: absolute;
+  top: 450px;
+  right: 30%;
+  width: 36px;
+  height: 36px;
+  transform: translateX(-50%);
+  color: black;
+  border-radius: 100%;
+  background-color: #fbe3d1;
+  font-weight: 900;
+}
+.swiper2:deep(.swiper-button-prev) {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  top: 450px;
+  left: 30%;
+  transform: translateX(50%);
+  color: black;
+  border-radius: 100%;
+  background-color: #fbe3d1;
+  font-weight: 900;
+}
+
+@media (min-width: 375px) {
+  .swiper2:deep(.swiper-button-next),
+  .swiper2:deep(.swiper-button-prev) {
+    top: 480px;
+  }
+}
+</style>
