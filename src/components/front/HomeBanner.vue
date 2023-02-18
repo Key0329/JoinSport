@@ -120,24 +120,24 @@
         <div class="col-span-1">
           <img
             class="mb-4 h-[213px] w-full rounded-[10px] object-cover"
-            src="../../assets/images/feature01.png"
-            alt="HomeFeature01"
+            src="../../assets/images/banner/banner01.png"
+            alt="HomeBanner01"
           />
           <p class="text-center">揪團室內運動</p>
         </div>
         <div class="col-span-1">
           <img
             class="mb-4 h-[213px] w-full rounded-[10px] object-cover"
-            src="../../assets/images/feature02.png"
-            alt="HomeFeature02"
+            src="../../assets/images/banner/banner02.png"
+            alt="HomeBanner02"
           />
           <p class="text-center">探索戶外活動</p>
         </div>
         <div class="col-span-1">
           <img
             class="mb-4 h-[213px] w-full rounded-[10px] object-cover"
-            src="../../assets/images/feature03.png"
-            alt="HomeFeature03"
+            src="../../assets/images/banner/banner03.png"
+            alt="HomeBanner03"
           />
           <p class="text-center">遇見新朋友</p>
         </div>
