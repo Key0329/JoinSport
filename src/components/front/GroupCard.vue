@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-[10px] border border-primary-01 p-3">
+  <div class="rounded-[10px] border border-primary-01 bg-white p-3">
     <div class="mb-2 flex gap-6 border-b border-[#B7B7B7] pb-6">
       <div class="h-[130px] w-[130px]">
         <img

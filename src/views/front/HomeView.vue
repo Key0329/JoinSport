@@ -89,7 +89,7 @@ export default {
   </section>
 
   <!-- Join Group -->
-  <section class="hidden py-9 sm:block md:py-20">
+  <section class="relative hidden py-9 sm:block md:py-20">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl md:mb-16">即將到來的揪團</h2>
       <ul
@@ -120,6 +120,11 @@ export default {
           <router-link to=""><join-card></join-card></router-link>
         </li>
       </ul>
+      <img
+        class="absolute top-10 -left-[250px] -z-10"
+        src="../../assets/images/banner/Vector-1.png"
+        alt="bg-image"
+      />
     </div>
   </section>
 
@@ -149,7 +154,7 @@ export default {
   </section>
 
   <!-- Hot Group -->
-  <section class="pt-9 md:py-20">
+  <section class="relative overflow-hidden pt-9 md:py-24">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl md:mb-0 md:text-left">熱門群組</h2>
       <div>
@@ -184,6 +189,11 @@ export default {
           </swiper-slide>
         </swiper>
       </div>
+      <img
+        class="absolute -right-[210px] top-0 -z-10 hidden md:block"
+        src="../../assets/images/banner/Vector-2.png"
+        alt="bg-image-2"
+      />
     </div>
   </section>
 </template>
@@ -240,10 +250,12 @@ export default {
     padding-bottom: 0;
   }
   .swiper1:deep(.swiper-button-next) {
+    background-color: #ef5230;
     top: 36px;
     right: 0;
   }
   .swiper1:deep(.swiper-button-prev) {
+    background-color: #ef5230;
     top: 36px;
     left: 85%;
   }
