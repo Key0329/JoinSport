@@ -82,7 +82,7 @@ export default {
           </p>
         </div>
       </div>
-      <router-link class="btn btn-primary mx-auto w-fit" to=""
+      <router-link class="btn btn-primary mx-auto w-fit transition-colors" to=""
         >加入 Join Sport</router-link
       >
     </div>
