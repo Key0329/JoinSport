@@ -4,6 +4,7 @@ import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+import HomeHeader from '../../components/front/HomeHeader.vue';
 import HomeBanner from '../../components/front/HomeBanner.vue';
 import JoinCard from '../../components/front/JoinCard.vue';
 import GroupCard from '../../components/front/GroupCard.vue';
@@ -15,6 +16,7 @@ export default {
     Swiper,
     SwiperSlide,
     GroupCard,
+    HomeHeader,
   },
   data() {
     return {
@@ -25,6 +27,7 @@ export default {
 </script>
 
 <template>
+  <home-header></home-header>
   <home-banner></home-banner>
 
   <!-- Feature -->
@@ -82,7 +85,7 @@ export default {
           </p>
         </div>
       </div>
-      <router-link class="btn btn-primary mx-auto w-fit transition-colors" to=""
+      <router-link class="btn btn-primary mx-auto w-fit" to=""
         >加入 Join Sport</router-link
       >
     </div>
@@ -154,7 +157,7 @@ export default {
   </section>
 
   <!-- Hot Group -->
-  <section class="relative overflow-hidden pt-9 md:py-24">
+  <section class="relative mb-10 overflow-hidden pt-9 md:py-24">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl md:mb-0 md:text-left">熱門群組</h2>
       <div>
@@ -194,6 +197,15 @@ export default {
         src="../../assets/images/banner/Vector-2.png"
         alt="bg-image-2"
       />
+    </div>
+  </section>
+
+  <section class="bg-primary-02 py-10">
+    <div class="container">
+      <div class="flex justify-end">
+        <h3 class="mr-10 text-xl">立刻創建自己的群組</h3>
+        <router-link to="" class="btn btn-primary">建立群組</router-link>
+      </div>
     </div>
   </section>
 </template>

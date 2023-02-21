@@ -22,7 +22,7 @@
     @apply py-2 px-10 text-center rounded;
   }
   .btn-primary {
-    @apply bg-primary-01 text-white hover:bg-secondary-yellow hover:text-[#3D3D3D] focus:bg-secondary-blue focus:text-black;
+    @apply bg-primary-01 text-white transition-all duration-150 ease-in-out hover:bg-secondary-yellow hover:text-[#3D3D3D] focus:bg-secondary-blue focus:text-black;
   }
   .tag{
     @apply py-2 px-4 rounded-full bg-secondary-yellow

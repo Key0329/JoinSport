@@ -1,7 +1,5 @@
 <template>
-  <footer
-    class="mt-20 border-t-4 border-primary-01 bg-primary-03 py-8 md:py-10"
-  >
+  <footer class="border-t-4 border-primary-01 bg-primary-03 py-8 md:py-10">
     <div class="container">
       <div
         class="flex flex-col items-center gap-4 md:flex-row md:items-stretch md:justify-between"

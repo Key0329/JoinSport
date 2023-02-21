@@ -16,6 +16,21 @@ const routes = [
         name: 'Login',
         component: () => import('../views/front/LoginView.vue'),
       },
+      {
+        path: 'JoinList',
+        name: 'JoinList',
+        component: () => import('../views/front/JoinListView.vue'),
+      },
+      {
+        path: 'JoinDetail',
+        name: 'JoinDetail',
+        component: () => import('../views/front/JoinDetailView.vue'),
+      },
+      {
+        path: 'Group',
+        name: 'Group',
+        component: () => import('../views/front/GroupView.vue'),
+      },
     ],
   },
   {

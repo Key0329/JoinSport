@@ -88,12 +88,10 @@ export default {
               />
             </div>
           </div>
-          <button
-            type="button"
-            class="btn btn-primary mb-6 w-full transition-colors ease-in-out md:mb-4"
-          >
+          <button type="button" class="btn btn-primary mb-6 w-full md:mb-4">
             開始搜尋
           </button>
+          <!-- tags -->
           <ul class="mb-3 flex flex-wrap gap-x-2 gap-y-6 md:gap-2">
             <li>
               <a
@@ -160,9 +158,10 @@ export default {
         />
       </div>
 
+      <!-- links -->
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div class="col-span-1">
-          <router-link to="/login" class="group">
+          <router-link to="/JoinList" class="group">
             <img
               class="mb-4 h-[213px] w-full rounded-[10px] object-cover group-hover:opacity-90"
               src="../../assets/images/banner/banner01.png"
