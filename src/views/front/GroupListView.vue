@@ -1,3 +1,3 @@
 <template>
-  <div>detail</div>
+  <div>Group</div>
 </template>

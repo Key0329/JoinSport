@@ -161,7 +161,7 @@ export default {
       <!-- links -->
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div class="col-span-1">
-          <router-link to="/JoinList" class="group">
+          <router-link to="/List" class="group">
             <img
               class="mb-4 h-[213px] w-full rounded-[10px] object-cover group-hover:opacity-90"
               src="../../assets/images/banner/banner01.png"

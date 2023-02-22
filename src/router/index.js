@@ -17,19 +17,21 @@ const routes = [
         component: () => import('../views/front/LoginView.vue'),
       },
       {
-        path: 'JoinList',
-        name: 'JoinList',
-        component: () => import('../views/front/JoinListView.vue'),
-      },
-      {
-        path: 'JoinDetail',
-        name: 'JoinDetail',
-        component: () => import('../views/front/JoinDetailView.vue'),
-      },
-      {
-        path: 'Group',
-        name: 'Group',
-        component: () => import('../views/front/GroupView.vue'),
+        path: 'List',
+        name: 'List',
+        component: () => import('../views/front/ListView.vue'),
+        children: [
+          {
+            path: 'JoinList',
+            name: 'JoinList',
+            component: () => import('../views/front/JoinListView.vue'),
+          },
+          {
+            path: 'GroupList',
+            name: 'GroupList',
+            component: () => import('../views/front/GroupListView.vue'),
+          },
+        ],
       },
     ],
   },

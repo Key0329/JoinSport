@@ -1,47 +1,31 @@
 <script>
-import FrontHeader from '../../components/front/FrontHeader.vue';
+import JoinCard from '@/components/front/JoinCard.vue';
 
 export default {
   components: {
-    FrontHeader,
+    JoinCard,
   },
 };
 </script>
 
 <template>
-  <front-header></front-header>
-  <section>
+  <section class="pb-20">
     <div class="container">
-      <router-link to="/">揪團</router-link>
-      <router-link to="/">群組</router-link>
+      <h2 class="mb-10 text-3xl">熱門揪團</h2>
+      <div class="grid grid-cols-12 gap-12">
+        <div class="col-span-8 grid grid-cols-2 gap-8">
+          <div class="col-span-1"><join-card></join-card></div>
+          <div class="col-span-1"><join-card></join-card></div>
+          <div class="col-span-1"><join-card></join-card></div>
+          <div class="col-span-1"><join-card></join-card></div>
+          <div class="col-span-1"><join-card></join-card></div>
+          <div class="col-span-1"><join-card></join-card></div>
+          <div class="col-span-1"><join-card></join-card></div>
+          <div class="col-span-1"><join-card></join-card></div>
+          <div class="col-span-1"><join-card></join-card></div>
+        </div>
+        <div class="col-span-4">456</div>
+      </div>
     </div>
   </section>
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
 </template>
