@@ -1,7 +1,7 @@
 <template>
-  <header class="w-full border-b">
-    <nav class="flex justify-between px-4 py-3 md:py-4">
-      <div class="flex">
+  <header class="fixed z-20 w-full bg-white md:static">
+    <nav class="flex justify-between border-b px-4 py-3 md:py-4">
+      <div class="md:flex">
         <h2 class="mr-8">
           <a
             class="h-10 w-[163px] overflow-hidden whitespace-nowrap bg-[url('./images/logo/JoinSport01.png')] bg-cover bg-no-repeat indent-[101%] hover:opacity-75"
@@ -9,40 +9,43 @@
             >Join Sport 揪運動</a
           >
         </h2>
-        <div
-          class="flex w-[200px] items-center rounded-l-lg border border-r-0 border-[#B7B7B7] py-2"
-        >
-          <span
-            class="material-icons pointer-events-none ml-2 mr-2 text-primary-01"
+        <!-- search bar -->
+        <div class="hidden md:flex">
+          <div
+            class="flex w-[200px] items-center rounded-l-lg border border-r-0 border-[#B7B7B7] py-2"
           >
-            search
-          </span>
-          <input
-            class="w-full bg-transparent text-sm focus:outline-none"
-            type="text"
-            placeholder="搜尋 ＂爬山＂"
-          />
-        </div>
-        <div
-          class="flex w-[200px] items-center border border-r-0 border-[#B7B7B7] py-2"
-        >
-          <span
-            class="material-icons pointer-events-none ml-5 mr-3 text-primary-01"
+            <span
+              class="material-icons pointer-events-none ml-2 mr-2 text-primary-01"
+            >
+              search
+            </span>
+            <input
+              class="w-full bg-transparent text-sm focus:outline-none"
+              type="text"
+              placeholder="搜尋 ＂爬山＂"
+            />
+          </div>
+          <div
+            class="flex w-[200px] items-center border border-r-0 border-[#B7B7B7] py-2"
           >
-            room
-          </span>
-          <input
-            class="w-full bg-transparent text-sm focus:outline-none"
-            type="text"
-            placeholder="地區"
-          />
+            <span
+              class="material-icons pointer-events-none ml-5 mr-3 text-primary-01"
+            >
+              room
+            </span>
+            <input
+              class="w-full bg-transparent text-sm focus:outline-none"
+              type="text"
+              placeholder="地區"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary rounded-l-none rounded-r-lg px-4"
+          >
+            搜尋
+          </button>
         </div>
-        <button
-          type="button"
-          class="btn btn-primary rounded-l-none rounded-r-lg px-4"
-        >
-          搜尋
-        </button>
       </div>
       <ul class="hidden items-center gap-10 md:flex">
         <li>
@@ -94,5 +97,39 @@
         ><span class="material-icons"> menu </span></a
       >
     </nav>
+    <!-- search bar (phone) -->
+    <div class="flex md:hidden">
+      <div
+        class="flex w-full items-center border border-r-0 border-[#B7B7B7] py-2"
+      >
+        <span
+          class="material-icons pointer-events-none ml-2 mr-2 text-primary-01"
+        >
+          search
+        </span>
+        <input
+          class="w-full bg-transparent text-sm focus:outline-none"
+          type="text"
+          placeholder="搜尋 ＂爬山＂"
+        />
+      </div>
+      <div
+        class="hidden w-full items-center border border-r-0 border-[#B7B7B7] py-2 sm:flex"
+      >
+        <span
+          class="material-icons pointer-events-none ml-5 mr-3 text-primary-01"
+        >
+          room
+        </span>
+        <input
+          class="w-full bg-transparent text-sm focus:outline-none"
+          type="text"
+          placeholder="地區"
+        />
+      </div>
+      <button type="button" class="btn btn-primary w-1/2 rounded-none px-4">
+        搜尋
+      </button>
+    </div>
   </header>
 </template>

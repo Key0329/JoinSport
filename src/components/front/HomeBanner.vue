@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-  <section class="overflow-hidden pb-9 md:pb-[76px]">
+  <section class="overflow-hidden pt-[72px] pb-9 md:pb-[76px]">
     <div class="container">
       <div class="relative grid grid-cols-12 gap-6">
         <div class="col-span-12 mt-9 md:col-span-5 lg:mt-[120px]">
@@ -94,53 +94,25 @@ export default {
           <!-- tags -->
           <ul class="mb-3 flex flex-wrap gap-x-2 gap-y-6 md:gap-2">
             <li>
-              <a
-                class="tag text-sm transition-transform hover:scale-x-110 hover:text-primary-03"
-                href="#"
-                >羽球</a
-              >
+              <a class="tag" href="#">羽球</a>
             </li>
             <li>
-              <a
-                class="tag text-sm transition-transform hover:scale-x-110 hover:text-primary-03"
-                href="#"
-                >馬拉松</a
-              >
+              <a class="tag" href="#">馬拉松</a>
             </li>
             <li>
-              <a
-                class="tag text-sm transition-transform hover:scale-x-110 hover:text-primary-03"
-                href="#"
-                >爬山</a
-              >
+              <a class="tag" href="#">爬山</a>
             </li>
             <li>
-              <a
-                class="tag text-sm transition-transform hover:scale-x-110 hover:text-primary-03"
-                href="#"
-                >保齡球</a
-              >
+              <a class="tag" href="#">保齡球</a>
             </li>
             <li>
-              <a
-                class="tag text-sm transition-transform hover:scale-x-110 hover:text-primary-03"
-                href="#"
-                >潛水</a
-              >
+              <a class="tag" href="#">潛水</a>
             </li>
             <li>
-              <a
-                class="tag text-sm transition-transform hover:scale-x-110 hover:text-primary-03"
-                href="#"
-                >攀岩</a
-              >
+              <a class="tag" href="#">攀岩</a>
             </li>
             <li>
-              <a
-                class="tag text-sm transition-transform hover:scale-x-110 hover:text-primary-03"
-                href="#"
-                >衝浪</a
-              >
+              <a class="tag" href="#">衝浪</a>
             </li>
           </ul>
         </div>
