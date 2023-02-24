@@ -88,7 +88,11 @@ export default {
               />
             </div>
           </div>
-          <button type="button" class="btn btn-primary mb-6 w-full md:mb-4">
+          <button
+            type="button"
+            class="btn btn-primary p-ripple mb-6 w-full md:mb-4"
+            v-ripple
+          >
             開始搜尋
           </button>
           <!-- tags -->
@@ -133,7 +137,7 @@ export default {
       <!-- links -->
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div class="col-span-1">
-          <router-link to="/List" class="group">
+          <router-link to="/JoinList/JoinListHot" class="group">
             <img
               class="mb-4 h-[213px] w-full rounded-[10px] object-cover group-hover:opacity-90"
               src="../../assets/images/banner/banner01.png"

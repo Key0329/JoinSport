@@ -70,7 +70,8 @@
       </div>
       <RouterLink
         to="/"
-        class="btn btn-primary group-hover:bg-secondary-yellow group-hover:text-[#3D3D3D]"
+        class="btn-primary btn p-ripple w-full group-hover:bg-secondary-yellow group-hover:text-[#3D3D3D]"
+        v-ripple
         >查看詳情</RouterLink
       >
     </div>

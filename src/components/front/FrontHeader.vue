@@ -1,5 +1,5 @@
 <template>
-  <header class="fixed z-20 w-full bg-white md:static">
+  <header class="fixed z-30 w-full bg-white">
     <nav class="flex justify-between border-b px-4 py-3 md:py-4">
       <div class="md:flex">
         <h2 class="mr-8">

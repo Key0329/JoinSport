@@ -85,9 +85,14 @@ export default {
           </p>
         </div>
       </div>
-      <router-link class="btn btn-primary mx-auto w-fit" to=""
-        >加入 Join Sport</router-link
-      >
+      <div class="flex justify-center">
+        <router-link
+          class="btn-primary btn p-ripple mx-auto w-fit"
+          v-ripple
+          to=""
+          >加入 Join Sport</router-link
+        >
+      </div>
     </div>
   </section>
 
@@ -204,7 +209,9 @@ export default {
     <div class="container">
       <div class="flex justify-end">
         <h3 class="mr-10 text-xl">立刻創建自己的群組</h3>
-        <router-link to="" class="btn btn-primary">建立群組</router-link>
+        <router-link to="" class="btn-primary btn p-ripple" v-ripple
+          >建立群組</router-link
+        >
       </div>
     </div>
   </section>
