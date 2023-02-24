@@ -1,36 +1,3 @@
-<template>
-  <div style="height: 400px; width: 800px">
-    <!-- 初始化地圖設定 -->
-    <l-map ref="myMap" :zoom="zoom" :center="center" :options="options">
-      <!-- 載入圖資 -->
-      <l-tile-layer :url="url" :attribution="attribution" />
-
-      <!-- 自己所在位置 -->
-      <l-marker ref="location" :lat-lng="center">
-        <l-popup> 你的位置 <a href="#">123</a> </l-popup>
-      </l-marker>
-      <!-- 創建標記點 -->
-      <l-marker :lat-lng="item.local" v-for="item in data" :key="item.id">
-        <!-- 標記點樣式判斷 -->
-        <l-icon
-          :icon-url="
-            item.name === '夢時代購物中心' ? icon.type.gold : icon.type.black
-          "
-          :shadow-url="icon.shadowUrl"
-          :icon-size="icon.iconSize"
-          :icon-anchor="icon.iconAnchor"
-          :popup-anchor="icon.popupAnchor"
-          :shadow-size="icon.shadowSize"
-        />
-        <!-- 彈出視窗 -->
-        <l-popup>
-          {{ item.name }}
-        </l-popup>
-      </l-marker>
-    </l-map>
-  </div>
-</template>
-
 <script>
 import { latLng } from 'leaflet';
 
@@ -84,3 +51,36 @@ export default {
   },
 };
 </script>
+
+<template>
+  <div class="h-[400px] w-full">
+    <!-- 初始化地圖設定 -->
+    <l-map ref="myMap" :zoom="zoom" :center="center" :options="options">
+      <!-- 載入圖資 -->
+      <l-tile-layer :url="url" :attribution="attribution" />
+
+      <!-- 自己所在位置 -->
+      <l-marker ref="location" :lat-lng="center">
+        <l-popup> 你的位置 <a href="#">123</a> </l-popup>
+      </l-marker>
+      <!-- 創建標記點 -->
+      <l-marker :lat-lng="item.local" v-for="item in data" :key="item.id">
+        <!-- 標記點樣式判斷 -->
+        <l-icon
+          :icon-url="
+            item.name === '夢時代購物中心' ? icon.type.gold : icon.type.black
+          "
+          :shadow-url="icon.shadowUrl"
+          :icon-size="icon.iconSize"
+          :icon-anchor="icon.iconAnchor"
+          :popup-anchor="icon.popupAnchor"
+          :shadow-size="icon.shadowSize"
+        />
+        <!-- 彈出視窗 -->
+        <l-popup>
+          {{ item.name }}
+        </l-popup>
+      </l-marker>
+    </l-map>
+  </div>
+</template>

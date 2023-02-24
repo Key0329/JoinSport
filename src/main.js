@@ -11,6 +11,8 @@ import Ripple from 'primevue/ripple';
 import AutoComplete from 'primevue/autocomplete';
 import Dropdown from 'primevue/dropdown';
 import TabMenu from 'primevue/tabmenu';
+import Avatar from 'primevue/avatar';
+import AvatarGroup from 'primevue/avatargroup';
 
 // 載入 vue2-leaflet，依照自己需要載入組件
 import {
@@ -70,6 +72,8 @@ app.component('PButton', Button);
 app.component('AutoComplete', AutoComplete);
 app.component('PDropdown', Dropdown);
 app.component('TabMenu', TabMenu);
+app.component('PAvatar', Avatar);
+app.component('AvatarGroup', AvatarGroup);
 
 // Map
 app.component('l-map', LMap);

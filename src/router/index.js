@@ -33,6 +33,11 @@ const routes = [
           },
         ],
       },
+      {
+        path: 'JoinDetail',
+        name: 'JoinDetail',
+        component: () => import('../views/front/JoinDetailView.vue'),
+      },
     ],
   },
   {

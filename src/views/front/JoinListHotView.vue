@@ -22,7 +22,9 @@ export default {
       <div class="grid gap-8 md:grid-cols-12 lg:gap-0">
         <div class="col-span-7 flex flex-col gap-6">
           <div class="col-span-1">
-            <RouterLink to="/"><join-card-row></join-card-row></RouterLink>
+            <RouterLink to="/JoinDetail"
+              ><join-card-row></join-card-row
+            ></RouterLink>
           </div>
           <div class="col-span-1">
             <RouterLink to="/"><join-card-row></join-card-row></RouterLink>
@@ -50,9 +52,7 @@ export default {
           </div>
         </div>
 
-        <aside
-          class="sticky top-[286px] col-span-4 col-end-13 hidden h-[400px] md:flex"
-        >
+        <aside class="sticky top-[286px] col-span-4 col-end-13 hidden md:flex">
           <LeafletMap></LeafletMap>
         </aside>
       </div>
