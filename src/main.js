@@ -13,6 +13,9 @@ import Dropdown from 'primevue/dropdown';
 import TabMenu from 'primevue/tabmenu';
 import Avatar from 'primevue/avatar';
 import AvatarGroup from 'primevue/avatargroup';
+import TabView from 'primevue/tabview';
+import TabPanel from 'primevue/tabpanel';
+import Textarea from 'primevue/textarea';
 
 // 載入 vue2-leaflet，依照自己需要載入組件
 import {
@@ -74,6 +77,9 @@ app.component('PDropdown', Dropdown);
 app.component('TabMenu', TabMenu);
 app.component('PAvatar', Avatar);
 app.component('AvatarGroup', AvatarGroup);
+app.component('TabView', TabView);
+app.component('TabPanel', TabPanel);
+app.component('PTextarea', Textarea);
 
 // Map
 app.component('l-map', LMap);

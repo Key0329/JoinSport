@@ -14,26 +14,12 @@
       10:00
     </p>
     <!-- card img -->
-    <div class="relative">
+    <div>
       <img
         class="rounded-t-[10px]"
         src="../../assets/images/group/group07.png"
         alt="card-img-01"
       />
-      <ul class="absolute bottom-3 left-2 flex flex-wrap gap-2">
-        <li>
-          <span class="tag py-1 hover:text-black">潛水</span>
-        </li>
-        <li>
-          <span class="tag py-1 hover:text-black">水上運動</span>
-        </li>
-        <li>
-          <span class="tag py-1 hover:text-black">戶外</span>
-        </li>
-        <li>
-          <span class="tag py-1 hover:text-black">屏東</span>
-        </li>
-      </ul>
     </div>
     <!-- card body -->
     <div class="rounded-b-[10px] border-x border-b px-3 pt-2 pb-3 sm:border-0">
