@@ -209,9 +209,9 @@ export default {
   <section class="bg-primary-02 py-10">
     <div class="container">
       <div class="flex justify-end">
-        <h3 class="mr-10 text-xl">立刻創建自己的群組</h3>
-        <router-link to="" class="btn-primary btn p-ripple" v-ripple
-          >建立群組</router-link
+        <h3 class="mr-10 text-xl">立刻創建自己的揪團</h3>
+        <router-link to="/CreateJoin" class="btn-primary btn p-ripple" v-ripple
+          >開啟揪團</router-link
         >
       </div>
     </div>

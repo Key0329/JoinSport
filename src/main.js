@@ -16,6 +16,7 @@ import AvatarGroup from 'primevue/avatargroup';
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import Textarea from 'primevue/textarea';
+import Steps from 'primevue/steps';
 
 // 載入 vue2-leaflet，依照自己需要載入組件
 import {
@@ -80,6 +81,7 @@ app.component('AvatarGroup', AvatarGroup);
 app.component('TabView', TabView);
 app.component('TabPanel', TabPanel);
 app.component('PTextarea', Textarea);
+app.component('PSteps', Steps);
 
 // Map
 app.component('l-map', LMap);

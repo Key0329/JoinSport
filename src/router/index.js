@@ -38,6 +38,29 @@ const routes = [
         name: 'JoinDetail',
         component: () => import('../views/front/JoinDetailView.vue'),
       },
+      {
+        path: 'CreateJoin',
+        name: 'CreateJoin',
+        component: () => import('../views/front/CreateJoinView.vue'),
+        children: [
+          {
+            path: 'step1',
+            name: 'CreateJoinStepOne',
+            component: () => import('../views/front/CreateJoinStepOneView.vue'),
+          },
+          {
+            path: 'step2',
+            name: 'CreateJoinStepTwo',
+            component: () => import('../views/front/CreateJoinStepTwoView.vue'),
+          },
+          {
+            path: 'step3',
+            name: 'CreateJoinStepThree',
+            component: () =>
+              import('../views/front/CreateJoinStepThreeView.vue'),
+          },
+        ],
+      },
     ],
   },
   {
