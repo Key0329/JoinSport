@@ -20,9 +20,11 @@ export default {
 </script>
 <template>
   <front-header></front-header>
-  <section class="pt-[92px] pb-5">
+  <section class="pt-[120px] pb-5 md:pt-[92px]">
     <div class="container">
-      <h2 class="mb-4 text-3xl font-bold">周末 # 羽球 # 新店運動中心</h2>
+      <h2 class="mb-4 text-xl font-bold md:text-3xl">
+        周末 # 羽球 # 新店運動中心
+      </h2>
       <div class="flex items-center gap-4">
         <PAvatar
           image="/src/assets/images/avatar/avatar01.png"
@@ -36,17 +38,45 @@ export default {
       </div>
     </div>
   </section>
-  <section class="bg-primary-03 py-20">
+  <section class="bg-primary-03 py-10 md:py-20">
     <div class="container">
-      <div class="grid h-full grid-cols-12 border-b border-[#3d3d3d] pb-20">
-        <div class="col-span-8">
+      <div
+        class="grid h-full grid-cols-12 border-b border-[#3d3d3d] pb-10 md:pb-20"
+      >
+        <div class="col-span-12 md:col-span-8">
           <img
             src="../../assets/images/group/group06.png"
             alt="JoinDetailImage"
-            class="mb-10 rounded"
+            class="rounded md:mb-10"
           />
-          <h3 class="mb-8 text-xl font-medium">揪團詳情</h3>
-          <article class="mb-20">
+          <div
+            class="mb-4 flex items-center justify-between border-b md:mb-0 md:hidden md:border-0"
+          >
+            <h3
+              class="whitespace-nowrap text-lg font-medium md:mb-8 md:text-xl"
+            >
+              揪團詳情
+            </h3>
+            <div class="p-4">
+              <p
+                class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
+              >
+                <span class="material-icons mr-1 text-primary-01">
+                  schedule </span
+                >3/25 10:00
+              </p>
+              <p
+                class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
+              >
+                <span class="material-icons text-primary-01"> room </span
+                >捷運新店區公所
+              </p>
+              <span class="pl-8 text-sm text-[#b7b7b7]"
+                >231新北市新店區北新路一段88巷12號</span
+              >
+            </div>
+          </div>
+          <article class="mb-10 md:mb-20">
             平常上班上課讓身心勞累，想要假日舒展筋骨運動一下順便認識新朋友，一起來
             2 小時羽球歡樂團吧! <br /><br />
             不管是新手、中手、老手通通都歡迎，不用怕程度高低，開心打球最重要!
@@ -59,7 +89,7 @@ export default {
             時間: 3/25 (六) 下午 6 - 8 點<br />
           </article>
           <div
-            class="mb-20 flex justify-evenly border-y border-[#3d3d3d] py-10"
+            class="mb-10 flex justify-evenly border-y border-[#3d3d3d] py-10 md:mb-20"
           >
             <div class="text-center">
               <span class="material-symbols-outlined text-4xl">
@@ -92,7 +122,7 @@ export default {
               </ul>
             </TabPanel>
             <TabPanel header="更多照片">
-              <div class="flex justify-evenly gap-2">
+              <div class="flex flex-col justify-evenly gap-2 md:flex-row">
                 <div class="w-full">
                   <img
                     src="../../assets/images/group/group07.png"
@@ -117,7 +147,7 @@ export default {
               </div>
             </TabPanel>
             <TabPanel header="留言">
-              <ul class="mb-20 flex flex-col gap-8">
+              <ul class="mb-10 flex flex-col gap-8 md:mb-20">
                 <li class="flex gap-4">
                   <div>
                     <PAvatar
@@ -236,7 +266,9 @@ export default {
           </TabView>
         </div>
         <!-- sidebar -->
-        <aside class="sticky top-20 col-span-3 col-end-13 h-[717px]">
+        <aside
+          class="sticky top-20 col-span-3 col-end-13 hidden h-[717px] md:block"
+        >
           <div class="mb-6 rounded-lg bg-white p-4">
             <div class="flex items-center gap-4">
               <div class="w-1/3">
@@ -295,23 +327,23 @@ export default {
         </aside>
       </div>
       <div class="pt-10">
-        <div class="container">
-          <h3 class="mb-8 text-xl font-medium">相似的揪團活動</h3>
-          <ul class="flex flex-col justify-between gap-6 md:flex-row">
-            <li><JoinCardRow></JoinCardRow></li>
-            <li><JoinCardRow></JoinCardRow></li>
-          </ul>
-        </div>
+        <h3 class="mb-8 text-xl font-medium">相似的揪團活動</h3>
+        <ul class="flex flex-col justify-between gap-6 md:flex-row">
+          <li><JoinCardRow></JoinCardRow></li>
+          <li><JoinCardRow></JoinCardRow></li>
+        </ul>
       </div>
     </div>
   </section>
 
   <section class="sticky bottom-0 z-30 bg-white py-5">
     <div class="container">
-      <div class="flex justify-between">
-        <div>
-          <p>三月 25 日 星期六 10:00</p>
-          <h2 class="text-xl font-bold">周末 # 羽球 # 新店運動中心</h2>
+      <div class="flex flex-col items-center md:flex-row md:justify-between">
+        <div class="mb-2 md:mb-0">
+          <p class="mb-2 md:mb-0">三月 25 日 星期六 10:00</p>
+          <h2 class="text-lg font-semibold sm:text-xl">
+            周末 # 羽球 # 新店運動中心
+          </h2>
         </div>
         <div class="flex items-center gap-6">
           <p>3 個空位</p>

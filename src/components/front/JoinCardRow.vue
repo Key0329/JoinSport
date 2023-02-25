@@ -25,9 +25,6 @@
         <li>
           <span class="tag py-1 hover:text-black">南部</span>
         </li>
-        <li>
-          <span class="tag py-1 hover:text-black">自行抵達</span>
-        </li>
       </ul>
     </div>
     <!-- card body -->
@@ -38,7 +35,7 @@
       <p class="mb-4 text-sm text-[#6f6f6f]">
         不管是新手、中手、老手通通都歡迎，不用怕程度高低，開心打球最重要!
       </p>
-      <div class="flex justify-end gap-2">
+      <div class="flex flex-col justify-end gap-2 md:flex-row">
         <p
           class="flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D]"
         >
@@ -52,8 +49,8 @@
           >3/25 10:00
         </p>
       </div>
-      <div class="flex items-end">
-        <div>
+      <div class="flex flex-col md:flex-row md:items-end">
+        <div class="mb-2 md:mb-0">
           <ul class="my-3 flex -space-x-2 overflow-hidden">
             <li>
               <img
@@ -84,7 +81,7 @@
         </div>
         <RouterLink
           to="/"
-          class="btn-primary btn p-ripple ml-auto p-2 group-hover:bg-secondary-yellow group-hover:text-[#3D3D3D] sm:w-1/4"
+          class="btn-primary btn p-ripple p-2 group-hover:bg-secondary-yellow group-hover:text-[#3D3D3D] sm:w-1/4 md:ml-auto"
           v-ripple
           >查看詳情</RouterLink
         >
