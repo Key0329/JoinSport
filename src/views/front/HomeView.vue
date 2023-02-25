@@ -136,6 +136,7 @@ export default {
     </div>
   </section>
 
+  <!-- Coming Group -->
   <section class="pt-9 xs:mb-12 sm:hidden md:py-20">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl">即將到來的揪團</h2>

@@ -1,15 +1,15 @@
 <script>
-import LeafletMap from '@/components/front/LeafletMap.vue';
 import FrontHeader from '@/components/front/FrontHeader.vue';
 import JoinAttendees from '@/components/front/JoinAttendees.vue';
 import JoinCardRow from '@/components/front/JoinCardRow.vue';
+import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
 
 export default {
   components: {
     FrontHeader,
-    LeafletMap,
     JoinAttendees,
     JoinCardRow,
+    JoinDetailAside,
   },
   data() {
     return {
@@ -38,7 +38,8 @@ export default {
       </div>
     </div>
   </section>
-  <section class="bg-primary-03 py-10 md:py-20">
+
+  <main class="bg-primary-03 py-10 md:py-20">
     <div class="container">
       <div
         class="grid h-full grid-cols-12 border-b border-[#3d3d3d] pb-10 md:pb-20"
@@ -192,50 +193,6 @@ export default {
                     >
                   </div>
                 </li>
-                <li class="flex gap-4">
-                  <div>
-                    <PAvatar
-                      image="/src/assets/images/avatar/avatar01.png"
-                      size="xlarge"
-                      shape="circle"
-                      class="mb-2"
-                    />
-                  </div>
-                  <div class="w-full rounded-lg bg-white p-4">
-                    <p class="mb-2 text-sm">Annie</p>
-                    <p class="mb-4">請問租借球拍的費用是多少呢?</p>
-                    <div class="mb-2 flex text-sm">
-                      <span class="mr-2">B1</span>
-                      <span class="mr-2">4 小時前</span>
-                      <a href="#" class="text-[#b7b7b7]">回覆</a>
-                    </div>
-                    <a href="#" class="text-sm text-[#b1b1b1]"
-                      >— 查看其他 1 則留言</a
-                    >
-                  </div>
-                </li>
-                <li class="flex gap-4">
-                  <div>
-                    <PAvatar
-                      image="/src/assets/images/avatar/avatar01.png"
-                      size="xlarge"
-                      shape="circle"
-                      class="mb-2"
-                    />
-                  </div>
-                  <div class="w-full rounded-lg bg-white p-4">
-                    <p class="mb-2 text-sm">Annie</p>
-                    <p class="mb-4">請問租借球拍的費用是多少呢?</p>
-                    <div class="mb-2 flex text-sm">
-                      <span class="mr-2">B1</span>
-                      <span class="mr-2">4 小時前</span>
-                      <a href="#" class="text-[#b7b7b7]">回覆</a>
-                    </div>
-                    <a href="#" class="text-sm text-[#b1b1b1]"
-                      >— 查看其他 1 則留言</a
-                    >
-                  </div>
-                </li>
               </ul>
               <div>
                 <p class="mb-4">留言</p>
@@ -266,65 +223,7 @@ export default {
           </TabView>
         </div>
         <!-- sidebar -->
-        <aside
-          class="sticky top-20 col-span-3 col-end-13 hidden h-[717px] md:block"
-        >
-          <div class="mb-6 rounded-lg bg-white p-4">
-            <div class="flex items-center gap-4">
-              <div class="w-1/3">
-                <img
-                  class="rounded-lg"
-                  src="../../assets/images/group/group03.png"
-                  alt="group"
-                />
-              </div>
-              <div>
-                <h4>大台北羽球群組</h4>
-                <p>公開群組</p>
-              </div>
-            </div>
-          </div>
-          <ul class="mb-6 flex flex-wrap items-center gap-2">
-            <li>
-              <a class="tag" href="#">羽球</a>
-            </li>
-            <li>
-              <a class="tag" href="#">潛水</a>
-            </li>
-            <li>
-              <a class="tag" href="#">橄欖球</a>
-            </li>
-            <li>
-              <a class="tag" href="#">高爾夫球</a>
-            </li>
-            <li>
-              <a class="tag" href="#">攀岩</a>
-            </li>
-          </ul>
-          <div class="rounded-t-lg bg-white p-4">
-            <p
-              class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
-            >
-              <span class="material-icons mr-1 text-primary-01"> schedule </span
-              >3/25 10:00
-            </p>
-            <p
-              class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
-            >
-              <span class="material-icons text-primary-01"> room </span
-              >捷運新店區公所
-            </p>
-            <span class="pl-8 text-sm text-[#b7b7b7]"
-              >231新北市新店區北新路一段88巷12號</span
-            >
-          </div>
-          <LeafletMap class="h-[300px]"></LeafletMap>
-          <div class="rounded-b-ld bg-white p-4">
-            <button type="button" class="btn btn-primary w-full">
-              <i class="pi pi-comments mr-2"></i>揪團聊天
-            </button>
-          </div>
-        </aside>
+        <JoinDetailAside></JoinDetailAside>
       </div>
       <div class="pt-10">
         <h3 class="mb-8 text-xl font-medium">相似的揪團活動</h3>
@@ -334,7 +233,7 @@ export default {
         </ul>
       </div>
     </div>
-  </section>
+  </main>
 
   <section class="sticky bottom-0 z-30 bg-white py-5">
     <div class="container">
