@@ -38,9 +38,6 @@ export default {
       <li>
         <a class="tag" href="#">高爾夫球</a>
       </li>
-      <li>
-        <a class="tag" href="#">攀岩</a>
-      </li>
     </ul>
     <div class="rounded-t-lg bg-white p-4">
       <p
@@ -59,7 +56,7 @@ export default {
       >
     </div>
     <LeafletMap class="h-[300px]"></LeafletMap>
-    <div class="rounded-b-ld bg-white p-4">
+    <div class="rounded-b-lg bg-white p-4">
       <button type="button" class="btn btn-primary w-full">
         <i class="pi pi-comments mr-2"></i>揪團聊天
       </button>

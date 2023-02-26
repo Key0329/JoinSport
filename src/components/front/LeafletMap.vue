@@ -53,7 +53,7 @@ export default {
 </script>
 
 <template>
-  <div class="h-[400px] w-full">
+  <div class="h-[300px] w-full">
     <!-- 初始化地圖設定 -->
     <l-map ref="myMap" :zoom="zoom" :center="center" :options="options">
       <!-- 載入圖資 -->

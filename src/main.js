@@ -19,11 +19,10 @@ import Textarea from 'primevue/textarea';
 import Steps from 'primevue/steps';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
-import Checkbox from 'primevue/checkbox';
 import Calendar from 'primevue/calendar';
 import Divider from 'primevue/divider';
 import Toast from 'primevue/toast';
-import InputMask from 'primevue/inputmask';
+import InputNumber from 'primevue/inputnumber';
 
 // 載入 vue2-leaflet，依照自己需要載入組件
 import {
@@ -33,13 +32,8 @@ import {
   LPopup,
   LIcon,
 } from '@vue-leaflet/vue-leaflet';
-// 載入 css
 import 'leaflet/dist/leaflet.css';
 // import { Icon } from 'leaflet';
-
-import { defineRule, Form, Field, ErrorMessage, configure } from 'vee-validate';
-import AllRules from '@vee-validate/rules';
-import { localize, loadLocaleFromURL } from '@vee-validate/i18n';
 
 import { LoadingPlugin } from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
@@ -47,22 +41,11 @@ import 'vue-loading-overlay/dist/css/index.css';
 import router from './router';
 import App from './App.vue';
 
-import './assets/theme.css';
+import './assets/PrimeVueTheme/theme.css';
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 
 import './assets/style.css';
-
-Object.keys(AllRules).forEach((rule) => {
-  defineRule(rule, AllRules[rule]);
-});
-
-loadLocaleFromURL('./zh_TW.json');
-
-configure({
-  generateMessage: localize('zh_TW'),
-  validateOnInput: true,
-});
 
 const app = createApp(App);
 
@@ -71,11 +54,6 @@ app.use(router);
 app.use(VueAxios, axios);
 app.use(PrimeVue, { ripple: true });
 app.use(LoadingPlugin);
-
-// validate
-app.component('VForm', Form);
-app.component('VField', Field);
-app.component('ErrorMessage', ErrorMessage);
 
 // PrimeVue
 app.component('PDialog', Dialog);
@@ -91,11 +69,10 @@ app.component('PTextarea', Textarea);
 app.component('PSteps', Steps);
 app.component('InputText', InputText);
 app.component('PPassword', Password);
-app.component('PCheckbox', Checkbox);
 app.component('PCalendar', Calendar);
 app.component('PDivider', Divider);
 app.component('PToast', Toast);
-app.component('InputMask', InputMask);
+app.component('InputNumber', InputNumber);
 
 // Map
 app.component('l-map', LMap);
