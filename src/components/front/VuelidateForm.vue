@@ -1,7 +1,8 @@
 <script>
-// import { required } from '@vuelidate/validators';
+import { mapState, mapActions } from 'pinia';
 import { useVuelidate } from '@vuelidate/core';
 import required from '@/utils/i18n-validators';
+import createSteps from '@/stores/front/createSteps';
 
 export default {
   setup: () => ({ v$: useVuelidate() }),
@@ -12,41 +13,30 @@ export default {
       date: null,
       costPerPerson: null,
       paymentMethod: '',
-      paymentMethods: [
-        {
-          method: '我請客',
-        },
-        {
-          method: '各付各的',
-        },
-      ],
       startTime: '',
-      joinNum: '',
+      joinNum: null,
       submitted: false,
     };
   },
   computed: {
-    joinNums() {
-      return Array.from({ length: 20 }, (value, index) => ({
-        number: index + 1,
-      }));
-    },
-    startTimes() {
-      const start = new Date('2000-01-01T00:00:00Z');
-      const end = new Date('2000-01-02T00:00:00Z');
-      const step = 15; // 間隔為15分鐘
+    ...mapState(createSteps, [
+      'joinNums',
+      'startTimes',
+      'paymentMethods',
+      'formData',
+    ]),
+    tempFormData() {
+      const tempFormData = {
+        name: this.name,
+        address: this.address,
+        date: this.date,
+        costPerPerson: this.costPerPerson,
+        paymentMethod: this.paymentMethod,
+        startTime: this.startTime,
+        joinNum: this.joinNum,
+      };
 
-      const times = Array.from(
-        { length: (end - start) / (step * 60 * 1000) + 1 },
-        (v, i) => {
-          const t = new Date(start.getTime() + i * step * 60 * 1000);
-          return t.toTimeString().slice(0, 5);
-        }
-      );
-
-      const startTimes = times.map((time) => ({ time }));
-
-      return startTimes;
+      return tempFormData;
     },
   },
   validations() {
@@ -82,26 +72,39 @@ export default {
         return;
       }
 
-      this.toggleDialog();
+      this.updateFormData(this.tempFormData);
+      localStorage.setItem(
+        'createTempFormData',
+        JSON.stringify(this.tempFormData)
+      );
+      this.$emit('goToStep2');
     },
-    toggleDialog() {
-      this.showMessage = !this.showMessage;
-
-      if (!this.showMessage) {
-        this.resetForm();
+    loadingForm() {
+      if (localStorage.getItem('createTempFormData')) {
+        const tempForm = JSON.parse(localStorage.getItem('createTempFormData'));
+        this.name = tempForm.name;
+        this.address = tempForm.address;
+        this.date = tempForm.date.slice(0, tempForm.date.indexOf('T'));
+        this.costPerPerson = tempForm.costPerPerson;
+        this.paymentMethod = tempForm.paymentMethod;
+        this.startTime = tempForm.startTime;
+        this.joinNum = tempForm.joinNum;
       }
     },
     resetForm() {
       this.name = '';
+      this.address = '';
       this.date = null;
+      this.costPerPerson = null;
+      this.paymentMethod = '';
+      this.startTime = '';
+      this.joinNum = null;
       this.submitted = false;
     },
+    ...mapActions(createSteps, ['updateFormData']),
   },
   mounted() {
-    // const emailInput = this.$refs.emailInput.$el;
-    // if (emailInput) {
-    //   emailInput.setAttribute('autocomplete', 'email');
-    // }
+    this.loadingForm();
   },
 };
 </script>
@@ -110,7 +113,7 @@ export default {
   <div class="flex justify-center">
     <form
       @submit.prevent="() => handleSubmit(!v$.$invalid)"
-      class="p-fluid flex w-1/2 flex-col gap-6"
+      class="flex w-1/2 flex-col gap-6"
     >
       <!-- name -->
       <div>
@@ -126,6 +129,7 @@ export default {
             type="text"
             v-model="v$.name.$model"
             placeholder="請輸入揪團名稱"
+            class="w-full"
             :class="{ 'p-invalid': v$.name.$invalid && submitted }"
           />
         </div>
@@ -148,6 +152,7 @@ export default {
           <InputText
             id="address"
             type="text"
+            class="w-full"
             v-model="v$.address.$model"
             placeholder="請輸入活動地址"
             :class="{ 'p-invalid': v$.address.$invalid && submitted }"
@@ -227,6 +232,7 @@ export default {
               v-model="paymentMethod"
               :options="paymentMethods"
               optionLabel="method"
+              class="w-full"
               :class="{ 'p-invalid': v$.paymentMethod.$invalid && submitted }"
             />
             <label for="paymentMethod">付費方式</label>
@@ -248,6 +254,7 @@ export default {
             <InputNumber
               id="costPerPerson"
               v-model="costPerPerson"
+              class="w-full"
               :class="{ 'p-invalid': v$.costPerPerson.$invalid && submitted }"
             />
             <label for="costPerPerson">每人費用</label>
@@ -269,6 +276,7 @@ export default {
             <PDropdown
               id="joinNum"
               v-model="joinNum"
+              class="w-full"
               :options="joinNums"
               optionLabel="number"
               :class="{ 'p-invalid': v$.joinNum.$invalid && submitted }"
@@ -286,7 +294,13 @@ export default {
         </div>
       </div>
 
-      <PButton type="submit" label="Submit" class="mt-8" />
+      <PButton
+        type="submit"
+        label="下一步"
+        icon="pi pi-arrow-right"
+        iconPos="right"
+        class="mt-16 ml-auto w-1/4"
+      />
     </form>
   </div>
 </template>
