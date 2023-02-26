@@ -19,17 +19,22 @@ export default {
     };
   },
   computed: {
-    ...mapState(createSteps, [
-      'joinNums',
-      'startTimes',
-      'paymentMethods',
-      'formData',
-    ]),
+    dateString() {
+      const date = new Date(this.date);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const dateString = `${year}-${month.toString().padStart(2, '0')}-${day
+        .toString()
+        .padStart(2, '0')}`;
+
+      return dateString;
+    },
     tempFormData() {
       const tempFormData = {
         name: this.name,
         address: this.address,
-        date: this.date,
+        date: this.dateString,
         costPerPerson: this.costPerPerson,
         paymentMethod: this.paymentMethod,
         startTime: this.startTime,
@@ -38,6 +43,12 @@ export default {
 
       return tempFormData;
     },
+    ...mapState(createSteps, [
+      'joinNums',
+      'startTimes',
+      'paymentMethods',
+      'formData',
+    ]),
   },
   validations() {
     return {
@@ -82,9 +93,11 @@ export default {
     loadingForm() {
       if (localStorage.getItem('createTempFormData')) {
         const tempForm = JSON.parse(localStorage.getItem('createTempFormData'));
+        const [date] = tempForm.date.split('T');
+
         this.name = tempForm.name;
         this.address = tempForm.address;
-        this.date = tempForm.date.slice(0, tempForm.date.indexOf('T'));
+        this.date = date;
         this.costPerPerson = tempForm.costPerPerson;
         this.paymentMethod = tempForm.paymentMethod;
         this.startTime = tempForm.startTime;
