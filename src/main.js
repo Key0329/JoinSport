@@ -17,6 +17,13 @@ import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import Textarea from 'primevue/textarea';
 import Steps from 'primevue/steps';
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import Checkbox from 'primevue/checkbox';
+import Calendar from 'primevue/calendar';
+import Divider from 'primevue/divider';
+import Toast from 'primevue/toast';
+import InputMask from 'primevue/inputmask';
 
 // 載入 vue2-leaflet，依照自己需要載入組件
 import {
@@ -40,7 +47,7 @@ import 'vue-loading-overlay/dist/css/index.css';
 import router from './router';
 import App from './App.vue';
 
-import 'primevue/resources/themes/tailwind-light/theme.css';
+import './assets/theme.css';
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 
@@ -82,6 +89,13 @@ app.component('TabView', TabView);
 app.component('TabPanel', TabPanel);
 app.component('PTextarea', Textarea);
 app.component('PSteps', Steps);
+app.component('InputText', InputText);
+app.component('PPassword', Password);
+app.component('PCheckbox', Checkbox);
+app.component('PCalendar', Calendar);
+app.component('PDivider', Divider);
+app.component('PToast', Toast);
+app.component('InputMask', InputMask);
 
 // Map
 app.component('l-map', LMap);

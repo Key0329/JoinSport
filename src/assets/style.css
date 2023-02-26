@@ -28,3 +28,12 @@
     @apply py-2 px-4 rounded-full bg-secondary-yellow transition-transform hover:scale-x-110 hover:text-primary-03 text-sm whitespace-nowrap
   }
 }
+
+.p-button {
+  color: black;
+  border-color: #d4d4d8;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 5%);
+}
+
+
+

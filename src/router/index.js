@@ -45,19 +45,24 @@ const routes = [
         children: [
           {
             path: 'step1',
-            name: 'CreateJoinStepOne',
-            component: () => import('../views/front/CreateJoinStepOneView.vue'),
+            name: 'CreateJoinInfo',
+            component: () => import('../views/front/CreateJoinInfoView.vue'),
           },
           {
             path: 'step2',
-            name: 'CreateJoinStepTwo',
-            component: () => import('../views/front/CreateJoinStepTwoView.vue'),
+            name: 'CreateJoinTags',
+            component: () => import('../views/front/CreateJoinTagsView.vue'),
           },
           {
             path: 'step3',
-            name: 'CreateJoinStepThree',
+            name: 'CreateJoinDescription',
             component: () =>
-              import('../views/front/CreateJoinStepThreeView.vue'),
+              import('../views/front/CreateJoinDescriptionView.vue'),
+          },
+          {
+            path: 'step4',
+            name: 'CreateJoinFinish',
+            component: () => import('../views/front/CreateJoinFinishView.vue'),
           },
         ],
       },

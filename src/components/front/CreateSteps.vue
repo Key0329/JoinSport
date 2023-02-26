@@ -17,7 +17,7 @@ export default {
         },
         {
           label: '開團成功',
-          to: '/CreateJoin/step1',
+          to: '/CreateJoin/step4',
         },
       ],
     };

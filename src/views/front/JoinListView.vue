@@ -111,10 +111,6 @@ export default {
 :deep(.list-view-search .p-inputtext) {
   padding-right: 0;
 }
-:deep(.p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link) {
-  color: #ef5230;
-  border-color: #ef5230;
-}
 :deep(
     .p-tabmenu
       .p-tabmenu-nav
