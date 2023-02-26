@@ -35,5 +35,58 @@
   box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 5%);
 }
 
+.p-button:focus {
+  box-shadow: 0 0 0 1px #EF5230;
+}
 
+.p-button:enabled:hover {
+  background: #ef5230;
+  color: #ffffff;
+  border-color: #ef5230;
+}
 
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+  background: #ffffff;
+  border-color: #ef5230;
+  color: #ef5230;
+}
+
+.p-inputtext:enabled:focus {
+  box-shadow: 0 0 0 1px #fbe3d1;
+  border-color: #ef5230;
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 1px #fbe3d1;
+  border-color: #ef5230;
+}
+
+.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus {
+  box-shadow: 0 0 0 1px #ef5230;
+}
+
+.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus {
+  box-shadow: 0 0 0 1px #ef5230;
+}
+
+.p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):focus {
+  box-shadow: 0 0 0 1px #ef5230;
+}
+
+.p-datepicker .p-timepicker button:focus {
+  box-shadow: 0 0 0 1px #ef5230;
+}
+
+.p-datepicker table td > span:focus {
+  box-shadow: 0 0 0 1px #ef5230;
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover {
+  color: #ef5230;
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-prev:focus,
+.p-datepicker .p-datepicker-header .p-datepicker-next:focus {
+  box-shadow: 0 0 0 1px #ef5230;
+}

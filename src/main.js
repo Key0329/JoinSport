@@ -41,7 +41,7 @@ import 'vue-loading-overlay/dist/css/index.css';
 import router from './router';
 import App from './App.vue';
 
-import './assets/PrimeVueTheme/theme.css';
+import 'primevue/resources/themes/tailwind-light/theme.css';
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 
