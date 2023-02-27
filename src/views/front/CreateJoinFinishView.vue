@@ -1,3 +1,14 @@
+<script>
+import StepPagination from '@/components/front/StepPagination.vue';
+
+export default {
+  components: {
+    StepPagination,
+  },
+};
+</script>
+
 <template>
-  <div>123</div>
+  <div>four</div>
+  <StepPagination></StepPagination>
 </template>

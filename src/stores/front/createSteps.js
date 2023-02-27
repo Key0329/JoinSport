@@ -3,15 +3,6 @@ import { defineStore } from 'pinia';
 
 export default defineStore('products', {
   state: () => ({
-    formData: {
-      name: '',
-      address: '',
-      date: null,
-      costPerPerson: null,
-      paymentMethod: '',
-      startTime: '',
-      joinNum: '',
-    },
     paymentMethods: [
       {
         method: '我請客',
@@ -20,6 +11,20 @@ export default defineStore('products', {
         method: '各付各的',
       },
     ],
+    tags: [
+      '攀岩',
+      '籃球',
+      '足球',
+      '羽毛球',
+      '網球',
+      '游泳',
+      '慢跑',
+      '瑜伽',
+      '拳擊',
+      '跳繩',
+      '滑板',
+    ],
+    isChildFormValid: null,
   }),
   getters: {
     joinNums() {
@@ -44,18 +49,20 @@ export default defineStore('products', {
 
       return startTimes;
     },
+    tagList() {
+      const tagList = this.tags.map((tag) => {
+        return {
+          label: tag,
+          value: tag,
+        };
+      });
+
+      return tagList;
+    },
   },
   actions: {
-    updateFormData(tempFormData) {
-      this.formData = { ...tempFormData };
-      console.log(this.formData);
-    },
-    toggleDialog() {
-      this.showMessage = !this.showMessage;
-
-      if (!this.showMessage) {
-        this.resetForm();
-      }
+    updateFormValid(state) {
+      this.isChildFormValid = state;
     },
   },
 });

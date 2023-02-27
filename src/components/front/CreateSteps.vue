@@ -26,7 +26,7 @@ export default {
 </script>
 
 <template>
-  <PSteps :model="items" :readonly="false" />
+  <PSteps :model="items" />
 </template>
 
 <style scoped>

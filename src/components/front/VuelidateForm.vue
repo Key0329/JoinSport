@@ -1,5 +1,5 @@
 <script>
-import { mapState, mapActions } from 'pinia';
+import { mapState } from 'pinia';
 import { useVuelidate } from '@vuelidate/core';
 import required from '@/utils/i18n-validators';
 import createSteps from '@/stores/front/createSteps';
@@ -43,12 +43,7 @@ export default {
 
       return tempFormData;
     },
-    ...mapState(createSteps, [
-      'joinNums',
-      'startTimes',
-      'paymentMethods',
-      'formData',
-    ]),
+    ...mapState(createSteps, ['joinNums', 'startTimes', 'paymentMethods']),
   },
   validations() {
     return {
@@ -83,13 +78,12 @@ export default {
         return;
       }
 
-      this.updateFormData(this.tempFormData);
       localStorage.setItem(
         'createTempFormData',
         JSON.stringify(this.tempFormData)
       );
-      this.$emit('goToStep2');
     },
+
     loadingForm() {
       if (localStorage.getItem('createTempFormData')) {
         const tempForm = JSON.parse(localStorage.getItem('createTempFormData'));
@@ -114,7 +108,6 @@ export default {
       this.joinNum = null;
       this.submitted = false;
     },
-    ...mapActions(createSteps, ['updateFormData']),
   },
   mounted() {
     this.loadingForm();
@@ -124,10 +117,7 @@ export default {
 
 <template>
   <div class="flex justify-center">
-    <form
-      @submit.prevent="() => handleSubmit(!v$.$invalid)"
-      class="flex w-1/2 flex-col gap-6"
-    >
+    <form class="flex w-1/2 flex-col gap-6">
       <!-- name -->
       <div>
         <div class="flex items-center">
@@ -306,14 +296,6 @@ export default {
           >
         </div>
       </div>
-
-      <PButton
-        type="submit"
-        label="下一步"
-        icon="pi pi-arrow-right"
-        iconPos="right"
-        class="mt-16 ml-auto w-1/4"
-      />
     </form>
   </div>
 </template>
