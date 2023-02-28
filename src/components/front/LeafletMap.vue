@@ -34,10 +34,9 @@ export default {
       },
     };
   },
-  mounted() {
-    // 等地圖創建後執行
-    this.$nextTick(() => {
-      // 獲得目前位置
+  methods: {
+    // 獲得目前位置
+    getCurrentLocation() {
       navigator.geolocation.getCurrentPosition((position) => {
         const p = position.coords;
         // 將中心點設為目前的位置
@@ -47,6 +46,12 @@ export default {
         this.$refs.location?.leafletObject?.openPopup();
         this.zoom = 13;
       });
+    },
+  },
+  mounted() {
+    // 等地圖創建後執行
+    this.$nextTick(() => {
+      this.getCurrentLocation();
     });
   },
 };

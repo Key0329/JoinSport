@@ -23,6 +23,11 @@ export default {
       modules: [Navigation],
     };
   },
+  beforeRouteEnter(to, from, next) {
+    // 當路由進入時，讓頁面滾動到最上方
+    window.scrollTo(0, 0);
+    next();
+  },
 };
 </script>
 
@@ -210,7 +215,10 @@ export default {
     <div class="container">
       <div class="flex justify-end">
         <h3 class="mr-10 text-xl">立刻創建自己的揪團</h3>
-        <router-link to="/CreateJoin" class="btn-primary btn p-ripple" v-ripple
+        <router-link
+          to="/CreateJoin/step1"
+          class="btn-primary btn p-ripple"
+          v-ripple
           >開啟揪團</router-link
         >
       </div>

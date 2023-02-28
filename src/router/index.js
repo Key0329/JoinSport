@@ -61,8 +61,13 @@ const routes = [
           },
           {
             path: 'step4',
-            name: 'CreateJoinFinish',
-            component: () => import('../views/front/CreateJoinFinishView.vue'),
+            name: 'CreateJoinPreviewView',
+            component: () => import('../views/front/CreateJoinPreviewView.vue'),
+          },
+          {
+            path: 'step5',
+            name: 'CreateJoinSuccessView',
+            component: () => import('../views/front/CreateJoinSuccessView.vue'),
           },
         ],
       },

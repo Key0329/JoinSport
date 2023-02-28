@@ -19,6 +19,10 @@ export default {
           label: '頁面預覽',
           to: '/CreateJoin/step4',
         },
+        {
+          label: '開團完成',
+          to: '/CreateJoin/step5',
+        },
       ],
     };
   },

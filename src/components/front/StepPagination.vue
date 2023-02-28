@@ -60,5 +60,14 @@ export default {
       class="ml-auto w-1/4"
       @click="nextStep"
     />
+    <PButton
+      v-if="parseInt(currentStep) === 4"
+      type="button"
+      label="確認開團"
+      icon="pi pi-arrow-right"
+      iconPos="right"
+      class="ml-auto w-1/4"
+      @click="nextStep"
+    />
   </div>
 </template>

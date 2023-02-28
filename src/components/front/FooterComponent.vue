@@ -127,8 +127,15 @@
                 /></a>
               </li>
             </ul>
-            <p class="text-center text-xs text-[#3D3D3D] md:text-end">
+            <p
+              class="flex flex-col text-center text-xs text-[#3D3D3D] md:text-end"
+            >
               Copyright© Join Sport All Rights Reserved.
+              <a
+                target="_blank"
+                href="https://icons8.com/icon/YLcBDJsEZ49a/confetti"
+                >Confetti icon by Icons8</a
+              >
             </p>
           </div>
         </div>

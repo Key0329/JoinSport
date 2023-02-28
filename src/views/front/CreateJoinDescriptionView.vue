@@ -25,16 +25,15 @@ export default {
   mounted() {
     this.getLocalArticle();
   },
+  beforeRouteEnter(to, from, next) {
+    // 當路由進入時，讓頁面滾動到最上方
+    window.scrollTo(0, 0);
+    next();
+  },
 };
 </script>
 
 <template>
-  <!-- <QuillEditor
-    v-model:content="editorValue"
-    contentType="html"
-    readOnly
-    theme="bubble"
-  /> -->
   <section class="py-10">
     <div class="container">
       <div class="mb-10 flex flex-col items-center">

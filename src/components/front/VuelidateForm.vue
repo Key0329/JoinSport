@@ -8,7 +8,7 @@ export default {
   setup: () => ({ v$: useVuelidate() }),
   data() {
     return {
-      name: '',
+      title: '',
       address: '',
       date: null,
       costPerPerson: null,
@@ -32,7 +32,7 @@ export default {
     },
     tempFormData() {
       const tempFormData = {
-        name: this.name,
+        title: this.title,
         address: this.address,
         date: this.dateString,
         costPerPerson: this.costPerPerson,
@@ -47,7 +47,7 @@ export default {
   },
   validations() {
     return {
-      name: {
+      title: {
         required,
       },
       address: {
@@ -89,7 +89,7 @@ export default {
         const tempForm = JSON.parse(localStorage.getItem('createTempFormData'));
         const [date] = tempForm.date.split('T');
 
-        this.name = tempForm.name;
+        this.title = tempForm.title;
         this.address = tempForm.address;
         this.date = date;
         this.costPerPerson = tempForm.costPerPerson;
@@ -99,7 +99,7 @@ export default {
       }
     },
     resetForm() {
-      this.name = '';
+      this.title = '';
       this.address = '';
       this.date = null;
       this.costPerPerson = null;
@@ -118,29 +118,29 @@ export default {
 <template>
   <div class="flex justify-center">
     <form class="flex w-1/2 flex-col gap-6">
-      <!-- name -->
+      <!-- title -->
       <div>
         <div class="flex items-center">
           <label
-            for="name"
+            for="title"
             class="mr-4 whitespace-nowrap px-2"
-            :class="{ 'p-error': v$.name.$invalid && submitted }"
-            >揪團名稱</label
+            :class="{ 'p-error': v$.title.$invalid && submitted }"
+            >揪團標題</label
           >
           <InputText
-            id="name"
+            id="title"
             type="text"
-            v-model="v$.name.$model"
-            placeholder="請輸入揪團名稱"
+            v-model="v$.title.$model"
+            placeholder="請輸入揪團標題"
             class="w-full"
-            :class="{ 'p-invalid': v$.name.$invalid && submitted }"
+            :class="{ 'p-invalid': v$.title.$invalid && submitted }"
           />
         </div>
 
         <small
-          v-if="(v$.name.$invalid && submitted) || v$.name.$pending.$response"
+          v-if="(v$.title.$invalid && submitted) || v$.title.$pending.$response"
           class="p-error block text-end"
-          >{{ v$.name.required.$message.replace('Value', '名稱') }}</small
+          >{{ v$.title.required.$message.replace('Value', '標題') }}</small
         >
       </div>
       <!-- address -->
