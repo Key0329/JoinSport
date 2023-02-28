@@ -71,6 +71,38 @@ const routes = [
           },
         ],
       },
+      {
+        path: 'Member',
+        name: 'Member',
+        component: () => import('../views/front/MemberView.vue'),
+        children: [
+          {
+            path: 'List',
+            name: 'List',
+            component: () => import('../views/front/MemberListView.vue'),
+          },
+          {
+            path: 'Host',
+            name: 'Host',
+            component: () => import('../views/front/MemberHostView.vue'),
+          },
+          {
+            path: 'Collection',
+            name: 'Collection',
+            component: () => import('../views/front/MemberCollectionView.vue'),
+          },
+          {
+            path: 'Account',
+            name: 'Account',
+            component: () => import('../views/front/MemberAccountView.vue'),
+          },
+          {
+            path: 'Info',
+            name: 'Info',
+            component: () => import('../views/front/MemberInfoView.vue'),
+          },
+        ],
+      },
     ],
   },
   {

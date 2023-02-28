@@ -9,7 +9,7 @@
             >Join Sport 揪運動</a
           >
         </h2>
-        <ul class="hidden items-center gap-10 md:flex">
+        <!-- <ul class="items-center hidden gap-10 md:flex">
           <li>
             <router-link
               class="transition-colors hover:text-primary-01 focus:text-secondary-blue"
@@ -24,19 +24,19 @@
               >登入 / 註冊</router-link
             >
           </li>
-        </ul>
-        <ul class="hidden items-center gap-10 md:flex md:hidden">
+        </ul> -->
+        <ul class="hidden items-center gap-10 md:flex">
           <li>
             <router-link
               class="hover:text-primary-01 focus:text-secondary-blue"
-              to=""
+              to="JoinList/JoinListHot"
               >揪團列表</router-link
             >
           </li>
           <li>
             <router-link
               class="hover:text-primary-01 focus:text-secondary-blue"
-              to="login"
+              to="Member/MemberJoinList"
               >我的揪團</router-link
             >
           </li>

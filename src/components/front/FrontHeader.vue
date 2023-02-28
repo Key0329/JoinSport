@@ -47,7 +47,7 @@
           </button>
         </div>
       </div>
-      <ul class="hidden items-center gap-10 md:flex">
+      <!-- <ul class="items-center hidden gap-10 md:flex">
         <li>
           <router-link
             class="transition-colors hover:text-primary-01 focus:text-secondary-blue"
@@ -62,8 +62,8 @@
             >登入 / 註冊</router-link
           >
         </li>
-      </ul>
-      <ul class="hidden items-center gap-10 md:flex md:hidden">
+      </ul> -->
+      <ul class="hidden items-center gap-10 md:flex">
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
