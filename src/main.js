@@ -1,36 +1,40 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import { QuillEditor } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
-import PrimeVue from 'primevue/config';
+import Steps from 'primevue/steps';
+import Toast from 'primevue/toast';
+import Editor from 'primevue/editor';
 import Dialog from 'primevue/dialog';
 import Button from 'primevue/button';
-import Ripple from 'primevue/ripple';
-import AutoComplete from 'primevue/autocomplete';
-import Dropdown from 'primevue/dropdown';
-import TabMenu from 'primevue/tabmenu';
 import Avatar from 'primevue/avatar';
-import AvatarGroup from 'primevue/avatargroup';
+import Ripple from 'primevue/ripple';
+import TabMenu from 'primevue/tabmenu';
+import Divider from 'primevue/divider';
 import TabView from 'primevue/tabview';
+import PrimeVue from 'primevue/config';
+import Dropdown from 'primevue/dropdown';
 import TabPanel from 'primevue/tabpanel';
 import Textarea from 'primevue/textarea';
-import Steps from 'primevue/steps';
-import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Calendar from 'primevue/calendar';
-import Divider from 'primevue/divider';
-import Toast from 'primevue/toast';
+import InputText from 'primevue/inputtext';
 import InputNumber from 'primevue/inputnumber';
+import AvatarGroup from 'primevue/avatargroup';
+import AutoComplete from 'primevue/autocomplete';
 
 // 載入 vue2-leaflet，依照自己需要載入組件
 import {
   LMap,
-  LTileLayer,
-  LMarker,
-  LPopup,
   LIcon,
+  LPopup,
+  LMarker,
+  LTileLayer,
 } from '@vue-leaflet/vue-leaflet';
 import 'leaflet/dist/leaflet.css';
 // import { Icon } from 'leaflet';
@@ -56,30 +60,33 @@ app.use(PrimeVue, { ripple: true });
 app.use(LoadingPlugin);
 
 // PrimeVue
+app.component('PSteps', Steps);
+app.component('PToast', Toast);
+app.component('PAvatar', Avatar);
 app.component('PDialog', Dialog);
 app.component('PButton', Button);
-app.component('AutoComplete', AutoComplete);
-app.component('PDropdown', Dropdown);
+app.component('PEditor', Editor);
 app.component('TabMenu', TabMenu);
-app.component('PAvatar', Avatar);
-app.component('AvatarGroup', AvatarGroup);
 app.component('TabView', TabView);
+app.component('PDivider', Divider);
 app.component('TabPanel', TabPanel);
+app.component('PDropdown', Dropdown);
 app.component('PTextarea', Textarea);
-app.component('PSteps', Steps);
-app.component('InputText', InputText);
 app.component('PPassword', Password);
 app.component('PCalendar', Calendar);
-app.component('PDivider', Divider);
-app.component('PToast', Toast);
+app.component('InputText', InputText);
 app.component('InputNumber', InputNumber);
+app.component('AvatarGroup', AvatarGroup);
+app.component('AutoComplete', AutoComplete);
 
 // Map
 app.component('l-map', LMap);
-app.component('l-tile-layer', LTileLayer);
-app.component('l-marker', LMarker);
-app.component('l-popup', LPopup);
 app.component('l-icon', LIcon);
+app.component('l-popup', LPopup);
+app.component('l-marker', LMarker);
+app.component('l-tile-layer', LTileLayer);
+
+app.component('QuillEditor', QuillEditor);
 
 app.config.productionTip = false;
 

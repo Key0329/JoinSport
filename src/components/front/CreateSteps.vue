@@ -12,11 +12,11 @@ export default {
           to: '/CreateJoin/step2',
         },
         {
-          label: '詳細描述與照片',
+          label: '活動簡介',
           to: '/CreateJoin/step3',
         },
         {
-          label: '開團成功',
+          label: '頁面預覽',
           to: '/CreateJoin/step4',
         },
       ],

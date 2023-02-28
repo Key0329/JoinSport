@@ -45,9 +45,18 @@ export default {
     deleteTag(i) {
       this.selectedTags.splice(i, 1);
     },
-    goToStep3() {
-      this.$router.push('/CreateJoin/step3');
+    saveTagsToLocal() {
+      localStorage.setItem('selectedTags', JSON.stringify(this.selectedTags));
     },
+    getLocalTags() {
+      if (localStorage.getItem('selectedTags')) {
+        const tempTags = JSON.parse(localStorage.getItem('selectedTags'));
+        this.selectedTags = tempTags;
+      }
+    },
+  },
+  mounted() {
+    this.getLocalTags();
   },
 };
 </script>
@@ -89,7 +98,7 @@ export default {
             </button>
           </li>
         </ul>
-        <div class="mb-20 w-1/2">
+        <div class="mb-10 w-1/2">
           <h3 class="mb-4 ml-2 text-lg">Tags :</h3>
           <ul class="flex flex-wrap">
             <li
@@ -112,24 +121,11 @@ export default {
             </li>
           </ul>
         </div>
-        <!-- <div class="flex justify-between w-1/2">
-          <RouterLink to="/CreateJoin/step1"
-            ><PButton
-              type="button"
-              label="上一步"
-              icon="pi pi-arrow-left"
-              iconPos="left"
-          /></RouterLink>
-          <PButton
-            type="button"
-            label="下一步"
-            icon="pi pi-arrow-right"
-            iconPos="right"
-            @click="goToStep3"
-          />
-        </div> -->
         <div class="mx-auto w-1/2">
-          <StepPagination></StepPagination>
+          <StepPagination
+            @emit-next="saveTagsToLocal"
+            @emit-prev="saveTagsToLocal"
+          ></StepPagination>
         </div>
       </div>
     </div>

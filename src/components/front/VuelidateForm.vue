@@ -84,7 +84,7 @@ export default {
       );
     },
 
-    loadingForm() {
+    getLocalForm() {
       if (localStorage.getItem('createTempFormData')) {
         const tempForm = JSON.parse(localStorage.getItem('createTempFormData'));
         const [date] = tempForm.date.split('T');
@@ -110,7 +110,7 @@ export default {
     },
   },
   mounted() {
-    this.loadingForm();
+    this.getLocalForm();
   },
 };
 </script>

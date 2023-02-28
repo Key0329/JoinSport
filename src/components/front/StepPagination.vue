@@ -13,20 +13,19 @@ export default {
   },
   methods: {
     prevStep() {
-      // const currentStep = this.$route.path.match(/\d+$/)?.[0];
       const prevStep = parseInt(this.currentStep, 10) - 1;
       const newRoute = this.$route.path.replace(/\d+$/, prevStep);
+
+      this.$emit('emitPrev');
+
       this.$router.push(newRoute);
-      // this.currentStep = prevStep;
     },
     nextStep() {
-      // const currentStep = this.$route.path.match(/\d+$/)?.[0];
       const nextStep = parseInt(this.currentStep, 10) + 1;
       const newRoute = this.$route.path.replace(/\d+$/, nextStep);
 
-      if (parseInt(this.currentStep, 10) === 1) {
-        this.$emit('emitEvent');
-      }
+      this.$emit('emitNext');
+
       if (this.isChildFormValid) {
         return;
       }
@@ -42,7 +41,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex justify-between">
+  <div class="flex justify-between border-t pt-10">
     <PButton
       v-if="parseInt(currentStep) !== 1"
       type="button"
