@@ -1,10 +1,51 @@
 {
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
+  "users": [
+    {
+      "id": 1,
+      "creationDate": "",
+      "name": "Jack",
+      "email": "springfield0329@gmail.com",
+      "password": "123456",
+      "img": "",
+      "favoriteSports": [
+        "攀岩",
+        "衝浪",
+        "棒球"
+      ]
+    },
+    {
+      "id": 2,
+      "creationDate": "",
+      "name": "Steve",
+      "email": "steve5566@gmail.com",
+      "password": "123",
+      "img": "",
+      "favoriteSports": [
+        "排球",
+        "羽球",
+        "桌球 "
+      ]
+    }
   ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 },
-    { "id": 2, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" }
+  "activities": [
+    {
+      "id": 1,
+      "title": "宜蘭外澳衝浪",
+      "userId": "1",
+      "imgs": [],
+      "locationId": "",
+      "description": "",
+      "content": "",
+      "startDate": "",
+      "expiryDate": "",
+      "maxJoinNum": 8,
+      "cost": 1000,
+      "tags": [
+        "戶外運動",
+        "衝浪",
+        "水上活動",
+        "陽光"
+      ]
+    }
+  ]
 }
