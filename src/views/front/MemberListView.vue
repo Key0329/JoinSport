@@ -25,7 +25,9 @@ export default {
             <i class="pi pi-calendar-plus mr-2 text-lg"></i
             >今天沒有符合條件的活動 2023 年 3 月 18 日
           </p>
-          <p class="group-hover:text-primary-01">探索更多揪團活動</p>
+          <p class="flex items-center group-hover:text-primary-01">
+            探索更多揪團活動 <i class="pi pi-search-plus ml-1 text-xs"></i>
+          </p>
         </RouterLink>
       </li>
       <li class="mb-20">

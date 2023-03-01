@@ -76,6 +76,7 @@ export default {
 };
 </script>
 <template>
+  <!-- info -->
   <section class="mb-10 border-b pb-10">
     <h1 class="mb-10 text-4xl">編輯個人資訊</h1>
     <div class="mb-10 flex items-center">
@@ -85,7 +86,7 @@ export default {
         class="info-avatar mr-10 w-20"
         shape="circle"
       />
-      <button type="button" class="btn btn-primary">設定頭像</button>
+      <button type="button" class="btn btn-primary">變更頭像</button>
     </div>
     <form>
       <div class="flex flex-col">
@@ -93,11 +94,10 @@ export default {
           for="name"
           class="mb-4 mr-4 whitespace-nowrap px-2"
           :class="{ 'p-error': v$.name.$invalid && submitted }"
-          >姓名 (必填)</label
+          >姓名</label
         >
         <div class="flex items-center">
           <InputText
-            ref="nameInput"
             id="name"
             type="text"
             v-model="v$.name.$model"
@@ -134,6 +134,7 @@ export default {
     </form>
   </section>
 
+  <!-- tags -->
   <section>
     <h2 class="mb-8 text-xl">設定個人標籤</h2>
     <h3 class="mb-4 text-lg">
@@ -148,7 +149,7 @@ export default {
       @keyup.enter="addTag($event)"
       optionLabel="label"
       loadingIcon="false"
-      placeholder="輸入想要的標籤 ( 例如: 攀岩 )"
+      placeholder="輸入適合您的標籤 ( 例如: 攀岩 )"
       :disabled="selectedTags.length === 5"
       class="w- mb-10"
     />
