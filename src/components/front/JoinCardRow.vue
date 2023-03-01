@@ -5,25 +5,25 @@
     <!-- card img -->
     <div class="relative w-full sm:w-1/2">
       <img
-        class="h-full rounded-tl-[10px]"
+        class="h-full rounded-l-[10px]"
         src="../../assets/images/group/group07.png"
         alt="card-img-01"
       />
-      <ul class="absolute bottom-3 left-2 flex flex-col flex-wrap gap-2">
+      <ul class="absolute top-3 left-2 flex flex-col flex-wrap gap-1">
         <li>
-          <span class="tag py-1 hover:text-black">潛水</span>
+          <span class="tag py-1 text-xs hover:text-black">潛水</span>
         </li>
         <li>
-          <span class="tag py-1 hover:text-black">水上運動</span>
+          <span class="tag py-1 text-xs hover:text-black">水上運動</span>
         </li>
         <li>
-          <span class="tag py-1 hover:text-black">戶外</span>
+          <span class="tag py-1 text-xs hover:text-black">戶外</span>
         </li>
         <li>
-          <span class="tag py-1 hover:text-black">屏東</span>
+          <span class="tag py-1 text-xs hover:text-black">屏東</span>
         </li>
         <li>
-          <span class="tag py-1 hover:text-black">南部</span>
+          <span class="tag py-1 text-xs hover:text-black">南部</span>
         </li>
       </ul>
     </div>
