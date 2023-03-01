@@ -67,21 +67,21 @@
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
-            to=""
+            to="/JoinList/JoinListHot"
             >揪團列表</router-link
           >
         </li>
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
-            to="login"
+            to="/Member/List"
             >我的揪團</router-link
           >
         </li>
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
-            to="login"
+            to="/Member/Info"
             >會員資料</router-link
           >
         </li>
