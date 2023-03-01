@@ -2,12 +2,14 @@
 import FrontHeader from '@/components/front/FrontHeader.vue';
 import MemberPanel from '@/components/front/MemberPanel.vue';
 import PanelMenu from '@/components/front/PanelMenu.vue';
+import FullCalendarList from '@/components/front/FullCalendarList.vue';
 
 export default {
   components: {
     FrontHeader,
     MemberPanel,
     PanelMenu,
+    FullCalendarList,
   },
   data() {
     return {};
@@ -23,6 +25,7 @@ export default {
         <div class="col-span-4">
           <MemberPanel></MemberPanel>
           <PanelMenu></PanelMenu>
+          <FullCalendarList></FullCalendarList>
         </div>
         <div class="col-span-7 col-end-13"><RouterView></RouterView></div>
       </div>

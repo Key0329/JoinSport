@@ -101,6 +101,11 @@ const routes = [
             name: 'Info',
             component: () => import('../views/front/MemberInfoView.vue'),
           },
+          {
+            path: 'Calendar',
+            name: 'Calendar',
+            component: () => import('../views/front/MemberCalendarView.vue'),
+          },
         ],
       },
     ],

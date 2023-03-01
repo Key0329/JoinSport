@@ -9,6 +9,11 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.4",
+    "@fullcalendar/daygrid": "^6.1.4",
+    "@fullcalendar/list": "^6.1.4",
+    "@fullcalendar/timegrid": "^6.1.4",
+    "@fullcalendar/vue3": "^6.1.4",
     "@vee-validate/i18n": "^4.7.4",
     "@vee-validate/rules": "^4.7.4",
     "@vue-leaflet/vue-leaflet": "^0.8.4",

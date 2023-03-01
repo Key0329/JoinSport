@@ -10,7 +10,7 @@ export default {
             {
               label: '我參加的揪團',
               icon: 'pi pi-fw pi-users',
-              to: '/Member/JoinList',
+              to: '/Member/List',
             },
             {
               label: '我主持的揪團',
