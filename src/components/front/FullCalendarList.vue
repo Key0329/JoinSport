@@ -72,10 +72,12 @@ export default {
 </script>
 
 <template>
-  <FullCalendar :options="calendarOptions" />
-  <RouterLink
-    to="/Member/Calendar"
-    class="mt-2 flex items-center justify-end hover:text-primary-01"
-    >詳細月曆<i class="pi pi-arrow-up-right ml-1"></i
-  ></RouterLink>
+  <div>
+    <FullCalendar :options="calendarOptions" />
+    <RouterLink
+      to="/Member/Calendar"
+      class="mt-1 flex items-center justify-end hover:text-primary-01"
+      >詳細月曆<i class="pi pi-arrow-up-right ml-1"></i
+    ></RouterLink>
+  </div>
 </template>
