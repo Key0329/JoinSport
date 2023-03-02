@@ -1,6 +1,8 @@
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation } from 'swiper';
+import { mapActions, mapState } from 'pinia';
+import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -23,10 +25,19 @@ export default {
       modules: [Navigation],
     };
   },
+  computed: {
+    ...mapState(joinActivitiesStore, ['activitiesList']),
+  },
+  methods: {
+    ...mapActions(joinActivitiesStore, ['getActivities']),
+  },
   beforeRouteEnter(to, from, next) {
     // 當路由進入時，讓頁面滾動到最上方
     window.scrollTo(0, 0);
     next();
+  },
+  mounted() {
+    this.getActivities();
   },
 };
 </script>
@@ -86,7 +97,7 @@ export default {
             加入主題群組
           </h3>
           <p class="mx-auto w-[296px]">
-            除了加入揪團，您還可以加入主題群組，例如：戶外運動、藝術創作、美食探索...加入群組，隨時與同好交流、分享心得！
+            除了加入揪團，您還可以加入運動群組，例如：戶外運動、周末羽球、全台潛水...加入群組，隨時與同好交流、分享心得！
           </p>
         </div>
       </div>
@@ -100,37 +111,21 @@ export default {
       </div>
     </div>
   </section>
-
-  <!-- Join Group -->
+  <!-- Coming activities -->
   <section class="relative hidden py-9 sm:block md:py-20">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl md:mb-16">即將到來的揪團</h2>
       <ul
         class="hidden gap-x-6 gap-y-10 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
-        <li class="md:col-span-1">
-          <router-link to="login"><join-card></join-card></router-link>
-        </li>
-        <li class="md:col-span-1">
-          <router-link to=""><join-card></join-card></router-link>
-        </li>
-        <li class="md:col-span-1">
-          <router-link to=""><join-card></join-card></router-link>
-        </li>
-        <li class="md:col-span-1">
-          <router-link to=""><join-card></join-card></router-link>
-        </li>
-        <li class="md:col-span-1">
-          <router-link to=""><join-card></join-card></router-link>
-        </li>
-        <li class="md:col-span-1">
-          <router-link to=""><join-card></join-card></router-link>
-        </li>
-        <li class="hidden md:col-span-1 lg:block">
-          <router-link to=""><join-card></join-card></router-link>
-        </li>
-        <li class="hidden md:col-span-1 lg:block">
-          <router-link to=""><join-card></join-card></router-link>
+        <li
+          v-for="activity in activitiesList"
+          :key="activity.id"
+          class="md:col-span-1"
+        >
+          <router-link to="login" class="h-full"
+            ><join-card :activity="activity"></join-card
+          ></router-link>
         </li>
       </ul>
       <img
@@ -141,7 +136,7 @@ export default {
     </div>
   </section>
 
-  <!-- Coming Group -->
+  <!-- Coming activities mobile-->
   <section class="pt-9 xs:mb-12 sm:hidden md:py-20">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl">即將到來的揪團</h2>
@@ -167,7 +162,7 @@ export default {
     </div>
   </section>
 
-  <!-- Hot Group -->
+  <!-- Hot activities -->
   <section class="relative mb-10 overflow-hidden pt-9 md:py-24">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl md:mb-0 md:text-left">熱門群組</h2>

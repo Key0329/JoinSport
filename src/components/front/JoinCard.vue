@@ -1,6 +1,16 @@
+<script>
+export default {
+  props: {
+    activity: {
+      type: Object,
+    },
+  },
+};
+</script>
+
 <template>
   <div
-    class="group relative rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)]"
+    class="group relative flex h-full flex-col rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)]"
   >
     <p
       class="absolute top-4 left-2 z-[3] flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D]"
@@ -22,11 +32,13 @@
       />
     </div>
     <!-- card body -->
-    <div class="rounded-b-[10px] border-x border-b px-3 pt-2 pb-3 sm:border-0">
-      <h5 class="mb-2 text-lg">周末#羽球#新店運動中心</h5>
-      <p class="mb-4 text-sm text-[#6f6f6f]">
-        不管是新手、中手、老手通通都歡迎，不用怕程度高低，開心打球最重要!
+    <div class="rounded-b-[10px] border-x border-b px-3 pt-2 sm:border-0">
+      <h5 class="mb-2 text-lg">{{ activity?.title }}</h5>
+      <p class="text-sm text-[#6f6f6f]">
+        {{ activity?.description }}
       </p>
+    </div>
+    <div class="mt-auto px-3 pb-3">
       <ul class="my-3 flex -space-x-2 overflow-hidden">
         <li>
           <img
