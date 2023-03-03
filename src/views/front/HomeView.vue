@@ -26,10 +26,15 @@ export default {
     };
   },
   computed: {
-    ...mapState(joinActivitiesStore, ['activitiesList']),
+    ...mapState(joinActivitiesStore, ['activitiesListChangeDate', 'newData']),
+    shuffledActivities() {
+      const activitiesCopy = [...this.activitiesListChangeDate];
+      const randomAct = activitiesCopy.sort(() => Math.random() - 0.5);
+      return randomAct.slice(0, 8);
+    },
   },
   methods: {
-    ...mapActions(joinActivitiesStore, ['getActivities']),
+    ...mapActions(joinActivitiesStore, ['getActivities', 'getOrders']),
   },
   beforeRouteEnter(to, from, next) {
     // 當路由進入時，讓頁面滾動到最上方
@@ -38,6 +43,7 @@ export default {
   },
   mounted() {
     this.getActivities();
+    this.getOrders();
   },
 };
 </script>
@@ -45,7 +51,7 @@ export default {
 <template>
   <home-header></home-header>
   <home-banner></home-banner>
-
+  {{ newData }}
   <!-- Feature -->
   <section class="bg-[#F3F3F3] py-9 md:py-20">
     <div class="container">
@@ -119,7 +125,7 @@ export default {
         class="hidden gap-x-6 gap-y-10 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <li
-          v-for="activity in activitiesList"
+          v-for="activity in shuffledActivities"
           :key="activity.id"
           class="md:col-span-1"
         >

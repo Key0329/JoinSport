@@ -13,21 +13,22 @@ export default {
     class="group relative flex h-full flex-col rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)]"
   >
     <p
-      class="absolute top-4 left-2 z-[3] flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D]"
+      class="absolute top-4 left-2 z-[3] flex items-center rounded-full bg-primary-03 py-1 pl-2 pr-3 text-sm text-[#3D3D3D]"
     >
-      <span class="material-icons text-primary-01"> room </span>捷運新店區公所
+      <span class="material-icons text-primary-01"> room </span
+      >{{ activity?.location }}
     </p>
     <p
-      class="absolute top-14 left-2 z-[3] flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D]"
+      class="absolute top-14 left-2 z-[3] flex items-center rounded-full bg-primary-03 py-1 pl-2 pr-3 text-sm text-[#3D3D3D]"
     >
-      <span class="material-icons mr-1 text-primary-01"> schedule </span>3/25
-      10:00
+      <span class="material-icons mr-1 text-primary-01"> schedule </span
+      >{{ activity?.date }} {{ activity?.startTime?.time }}
     </p>
     <!-- card img -->
     <div>
       <img
-        class="rounded-t-[10px]"
-        src="../../assets/images/group/group07.png"
+        class="h-[200px] w-full rounded-t-[10px]"
+        :src="activity?.mainImg"
         alt="card-img-01"
       />
     </div>
