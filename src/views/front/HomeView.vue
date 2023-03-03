@@ -26,10 +26,20 @@ export default {
     };
   },
   computed: {
-    ...mapState(joinActivitiesStore, ['activitiesListChangeDate', 'newData']),
+    ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
     shuffledActivities() {
-      const activitiesCopy = [...this.activitiesListChangeDate];
-      const randomAct = activitiesCopy.sort(() => Math.random() - 0.5);
+      const activitiesCopy = [...this.restructureActivitiesList];
+
+      // 將參與者的相片數量控制在 3 張以下
+      const newActivitiesCopy = activitiesCopy.map((item) => {
+        const newItem = { ...item };
+        if (newItem.participants.length > 3) {
+          newItem.participants = newItem.participants.slice(0, 3);
+        }
+        return newItem;
+      });
+
+      const randomAct = newActivitiesCopy.sort(() => Math.random() - 0.5);
       return randomAct.slice(0, 8);
     },
   },
@@ -51,7 +61,6 @@ export default {
 <template>
   <home-header></home-header>
   <home-banner></home-banner>
-  {{ newData }}
   <!-- Feature -->
   <section class="bg-[#F3F3F3] py-9 md:py-20">
     <div class="container">

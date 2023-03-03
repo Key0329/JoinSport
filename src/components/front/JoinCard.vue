@@ -41,31 +41,32 @@ export default {
     </div>
     <div class="mt-auto px-3 pb-3">
       <ul class="my-3 flex -space-x-2 overflow-hidden">
-        <li>
+        <li
+          v-for="(participant, i) in activity?.participants"
+          :key="'participant' + i"
+        >
           <img
             class="inline-block h-9 w-9 rounded-full ring-2 ring-white"
-            src="../../assets/images/avatar/avatar01.png"
+            :src="participant"
             alt="avatar01"
           />
         </li>
-        <li>
-          <img
-            class="inline-block h-9 w-9 rounded-full ring-2 ring-white"
-            src="../../assets/images/avatar/avatar02.png"
-            alt="avatar02"
-          />
-        </li>
-        <li>
-          <img
-            class="inline-block h-9 w-9 rounded-full ring-2 ring-white"
-            src="../../assets/images/avatar/avatar03.png"
-            alt="avatar03"
-          />
+        <li v-if="activity?.numParticipants > 3">
+          <div
+            class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-400 text-white ring-2 ring-white"
+          >
+            +{{ activity.numParticipants - 3 }}
+          </div>
         </li>
       </ul>
       <div class="mb-2 flex justify-between">
-        <span class="mr-2 text-sm">11 位已參加揪團</span>
-        <span class="text-sm text-red-500">剩餘 1 空位</span>
+        <span class="mr-2 text-sm"
+          >{{ activity?.numParticipants }} 位已參加揪團</span
+        >
+        <span class="text-sm text-red-500"
+          >剩餘
+          {{ activity?.maxJoinNum - activity?.numParticipants }} 空位</span
+        >
       </div>
       <RouterLink
         to="/"
