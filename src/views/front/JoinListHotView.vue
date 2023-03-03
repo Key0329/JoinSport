@@ -22,17 +22,30 @@ export default {
       currentPage,
       pageLimit,
     }) => {
+      // 依照參與人數排序熱門程度
       const tempList = restructureActivitiesList.sort((a, b) => {
         return b.numParticipants - a.numParticipants;
       });
 
+      // 維持大頭貼張數在 3 張
+      const newActivitiesCopy = tempList.map((item) => {
+        const newItem = { ...item };
+
+        if (newItem.participants.length > 3) {
+          newItem.participants = newItem.participants.slice(0, 3);
+        }
+
+        return newItem;
+      });
+
+      // 分配頁數
       const start = (currentPage - 1) * pageLimit;
       const end = currentPage * pageLimit;
 
-      const sliced = Object.keys(tempList)
+      const sliced = Object.keys(newActivitiesCopy)
         .slice(start, end)
         .reduce((acc, key) => {
-          acc[key] = restructureActivitiesList[key];
+          acc[key] = newActivitiesCopy[key];
           return acc;
         }, {});
 

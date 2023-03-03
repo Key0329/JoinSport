@@ -31,6 +31,8 @@ export default defineStore('joinActivities', {
             participants: [],
             numParticipants: 0,
             tags: [],
+            address: '',
+            updateDate: '',
           };
         }
 
@@ -51,6 +53,8 @@ export default defineStore('joinActivities', {
           mainImg,
           maxJoinNum,
           tags,
+          updateDate,
+          address,
         } = item;
         const arr = item.date.split('-');
         const newDate = `${arr[1]}/${arr[2]}`;
@@ -64,6 +68,8 @@ export default defineStore('joinActivities', {
           newData[activityId - 1].mainImg = mainImg;
           newData[activityId - 1].maxJoinNum = maxJoinNum;
           newData[activityId - 1].tags = tags;
+          newData[activityId - 1].updateDate = updateDate;
+          newData[activityId - 1].address = address;
         } else {
           // 如果 newData 陣列中沒有這個 activityId，就將這個活動加入 newData 陣列
           newData[activityId - 1] = {
@@ -76,6 +82,8 @@ export default defineStore('joinActivities', {
             maxJoinNum,
             participants: [],
             numParticipants: 0,
+            updateDate,
+            address,
             tags,
           };
         }

@@ -69,8 +69,13 @@ export default {
             </li>
           </ul>
           <div>
-            <span class="mr-2 text-sm">11 位已參加揪團</span>
-            <span class="text-sm text-red-500">剩餘 1 空位</span>
+            <span class="mr-2 text-sm"
+              >{{ activity.numParticipants }} 位已參加揪團</span
+            >
+            <span class="text-sm text-red-500"
+              >剩餘
+              {{ activity.maxJoinNum - activity.numParticipants }} 空位</span
+            >
           </div>
         </div>
         <RouterLink
