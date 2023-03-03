@@ -30,6 +30,7 @@ export default defineStore('joinActivities', {
             maxJoinNum: 0,
             participants: [],
             numParticipants: 0,
+            tags: [],
           };
         }
 
@@ -42,8 +43,15 @@ export default defineStore('joinActivities', {
       // 以 activitiesList 為基礎，調整日期格式
       this.activitiesList.forEach((item) => {
         const activityId = item.id;
-        const { title, description, location, startTime, mainImg, maxJoinNum } =
-          item;
+        const {
+          title,
+          description,
+          location,
+          startTime,
+          mainImg,
+          maxJoinNum,
+          tags,
+        } = item;
         const arr = item.date.split('-');
         const newDate = `${arr[1]}/${arr[2]}`;
 
@@ -55,6 +63,7 @@ export default defineStore('joinActivities', {
           newData[activityId - 1].startTime = startTime;
           newData[activityId - 1].mainImg = mainImg;
           newData[activityId - 1].maxJoinNum = maxJoinNum;
+          newData[activityId - 1].tags = tags;
         } else {
           // 如果 newData 陣列中沒有這個 activityId，就將這個活動加入 newData 陣列
           newData[activityId - 1] = {
@@ -67,35 +76,39 @@ export default defineStore('joinActivities', {
             maxJoinNum,
             participants: [],
             numParticipants: 0,
+            tags,
           };
         }
       });
 
-      console.log(newData);
       return newData;
     },
   },
   actions: {
-    async getActivities() {
-      try {
-        const path = `${VITE_URL}/activities`;
-        const res = await axios.get(path);
-        this.activitiesList = res.data;
-        // console.log(this.activitiesList);
-      } catch (error) {
-        console.dir(error);
-        alert('error!');
-      }
+    getActivities() {
+      const path = `${VITE_URL}/activities`;
+      axios
+        .get(path)
+        .then((res) => {
+          this.activitiesList = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+          alert('err');
+        });
     },
-    async getOrders() {
-      try {
-        const path = `${VITE_URL}/orders?_expand=activity&_expand=user`;
-        const res = await axios.get(path);
-        this.orders = res.data;
-      } catch (error) {
-        console.dir(error);
-        alert('error!');
-      }
+
+    getOrders() {
+      const path = `${VITE_URL}/orders?_expand=activity&_expand=user`;
+      axios
+        .get(path)
+        .then((res) => {
+          this.orders = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+          alert('err');
+        });
     },
   },
 });

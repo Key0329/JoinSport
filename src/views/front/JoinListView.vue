@@ -8,8 +8,8 @@ export default {
   data() {
     return {
       listTypes: [
-        { label: '熱門', icon: 'pi pi-fw pi-hot', to: '/JoinList/JoinListHot' },
-        { label: '最新', icon: 'pi pi-fw pi-new', to: '/JoinList/JoinListNew' },
+        { label: '熱門', icon: 'pi pi-fw pi-hot', to: '/JoinList/Hot' },
+        { label: '最新', icon: 'pi pi-fw pi-new', to: '/JoinList/New' },
       ],
       selectedTime: null,
       selectedType: null,

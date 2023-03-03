@@ -140,7 +140,7 @@ export default {
           <router-link to="/JoinList/JoinListHot" class="group">
             <img
               class="mb-4 h-[213px] w-full rounded-[10px] object-cover group-hover:opacity-90"
-              src="../../assets/images/banner/banner01.png"
+              src="../../assets/images/banner/banner04.jpg"
               alt="HomeBanner01"
             />
             <p

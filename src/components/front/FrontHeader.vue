@@ -67,7 +67,7 @@
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
-            to="/JoinList/JoinListHot"
+            to="/JoinList/Hot"
             >揪團列表</router-link
           >
         </li>

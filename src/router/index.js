@@ -22,13 +22,13 @@ const routes = [
         component: () => import('../views/front/JoinListView.vue'),
         children: [
           {
-            path: 'JoinListHot',
-            name: 'JoinListHot',
+            path: 'Hot/:id(\\d+)?',
+            name: 'Hot',
             component: () => import('../views/front/JoinListHotView.vue'),
           },
           {
-            path: 'JoinListNew',
-            name: 'JoinListNew',
+            path: 'New/:id(\\d+)?',
+            name: 'New',
             component: () => import('../views/front/JoinListNewView.vue'),
           },
         ],
