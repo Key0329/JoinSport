@@ -39,6 +39,9 @@ const routes = [
             path: 'New/:page(\\d+)?',
             name: 'New',
             component: () => import('../views/front/JoinListNewView.vue'),
+            meta: {
+              title: 'New - Join Sport',
+            },
           },
         ],
       },
@@ -46,6 +49,9 @@ const routes = [
         path: 'JoinDetail',
         name: 'JoinDetail',
         component: () => import('../views/front/JoinDetailView.vue'),
+        meta: {
+          title: 'Activity Detail - Join Sport',
+        },
       },
       {
         path: 'CreateJoin',
@@ -56,27 +62,42 @@ const routes = [
             path: 'step1',
             name: 'CreateJoinInfo',
             component: () => import('../views/front/CreateJoinInfoView.vue'),
+            meta: {
+              title: 'Info - createJoin - Join Sport',
+            },
           },
           {
             path: 'step2',
             name: 'CreateJoinTags',
             component: () => import('../views/front/CreateJoinTagsView.vue'),
+            meta: {
+              title: 'Tags - createJoin - Join Sport',
+            },
           },
           {
             path: 'step3',
             name: 'CreateJoinDescription',
             component: () =>
               import('../views/front/CreateJoinDescriptionView.vue'),
+            meta: {
+              title: 'Description - createJoin - Join Sport',
+            },
           },
           {
             path: 'step4',
             name: 'CreateJoinPreviewView',
             component: () => import('../views/front/CreateJoinPreviewView.vue'),
+            meta: {
+              title: 'Preview - createJoin - Join Sport',
+            },
           },
           {
             path: 'step5',
             name: 'CreateJoinSuccessView',
             component: () => import('../views/front/CreateJoinSuccessView.vue'),
+            meta: {
+              title: 'Success - createJoin - Join Sport',
+            },
           },
         ],
       },
@@ -89,31 +110,49 @@ const routes = [
             path: 'List',
             name: 'List',
             component: () => import('../views/front/MemberListView.vue'),
+            meta: {
+              title: 'List - Member - Join Sport',
+            },
           },
           {
             path: 'Host',
             name: 'Host',
             component: () => import('../views/front/MemberHostView.vue'),
+            meta: {
+              title: 'Host - Member - Join Sport',
+            },
           },
           {
             path: 'Collection',
             name: 'Collection',
             component: () => import('../views/front/MemberCollectionView.vue'),
+            meta: {
+              title: 'Collection - Member - Join Sport',
+            },
           },
           {
             path: 'Account',
             name: 'Account',
             component: () => import('../views/front/MemberAccountView.vue'),
+            meta: {
+              title: 'Account - Member - Join Sport',
+            },
           },
           {
             path: 'Info',
             name: 'Info',
             component: () => import('../views/front/MemberInfoView.vue'),
+            meta: {
+              title: 'Info - Member - Join Sport',
+            },
           },
           {
             path: 'Calendar',
             name: 'Calendar',
             component: () => import('../views/front/MemberCalendarView.vue'),
+            meta: {
+              title: 'Calendar - Member - Join Sport',
+            },
           },
         ],
       },

@@ -3,25 +3,22 @@ import JoinCardRow from '@/components/front/JoinCardRow.vue';
 import LeafletMap from '@/components/front/LeafletMap.vue';
 import { mapActions, mapState } from 'pinia';
 import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import PaginationComponent from '@/components/front/PaginationComponent.vue';
 
 export default {
   components: {
     JoinCardRow,
     LeafletMap,
+    PaginationComponent,
   },
   data() {
     return {
       currentPage: 1,
-      pageLimit: 10,
     };
   },
   computed: {
     ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
-    hotActivitiesList: ({
-      restructureActivitiesList,
-      currentPage,
-      pageLimit,
-    }) => {
+    hotActivitiesList: ({ restructureActivitiesList, arrangePage }) => {
       // 依照更新日期排序
       const tempList = restructureActivitiesList.sort((a, b) => {
         const dateA = new Date(a.updateDate);
@@ -29,47 +26,27 @@ export default {
         return dateB - dateA;
       });
 
-      // 維持大頭貼張數在 3 張
-      const newActivitiesCopy = tempList.map((item) => {
-        const newItem = { ...item };
-
-        if (newItem.participants.length > 3) {
-          newItem.participants = newItem.participants.slice(0, 3);
-        }
-
-        return newItem;
-      });
-
-      // 分配頁數
-      const start = (currentPage - 1) * pageLimit;
-      const end = currentPage * pageLimit;
-
-      const sliced = Object.keys(newActivitiesCopy)
-        .slice(start, end)
-        .reduce((acc, key) => {
-          acc[key] = newActivitiesCopy[key];
-          return acc;
-        }, {});
-
-      const newList = Object.values(sliced);
-
-      const data = {
-        list: newList,
-        pageTotal: Math.ceil(
-          Object.keys(restructureActivitiesList).length / pageLimit
-        ),
-      };
-
-      console.log(data);
-      return data;
+      return arrangePage(tempList);
     },
   },
   methods: {
-    ...mapActions(joinActivitiesStore, ['getOrders', 'getActivities']),
+    ...mapActions(joinActivitiesStore, [
+      'getOrders',
+      'getActivities',
+      'changePage',
+      'arrangePage',
+    ]),
+  },
+  watch: {
+    $route(to) {
+      this.currentPage = to.params.page;
+      this.changePage(to.params.page);
+    },
   },
   mounted() {
     this.getActivities();
     this.getOrders();
+    this.changePage(this.$route.params.page);
   },
 };
 </script>
@@ -78,6 +55,13 @@ export default {
   <section class="pt-4 pb-20 md:pt-10">
     <div class="container">
       <h2 class="mb-6 text-center text-2xl md:mb-10 md:text-start">最新揪團</h2>
+      <!-- pagination -->
+      <PaginationComponent
+        :currentPage="currentPage"
+        :pageTotal="hotActivitiesList.pageTotal"
+        :pageUrl="'/JoinList/New/'"
+        class="mb-4"
+      ></PaginationComponent>
       <div class="grid md:grid-cols-12 lg:gap-0">
         <ul class="col-span-7 flex flex-col gap-6">
           <li
