@@ -46,7 +46,7 @@ const routes = [
         ],
       },
       {
-        path: 'JoinDetail',
+        path: 'JoinDetail/id=:id',
         name: 'JoinDetail',
         component: () => import('../views/front/JoinDetailView.vue'),
         meta: {

@@ -1,8 +1,11 @@
 <script>
+import axios from 'axios';
 import FrontHeader from '@/components/front/FrontHeader.vue';
 import JoinAttendees from '@/components/front/JoinAttendees.vue';
 import JoinCardRow from '@/components/front/JoinCardRow.vue';
 import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
+
+const { VITE_URL } = import.meta.env;
 
 export default {
   components: {
@@ -13,8 +16,42 @@ export default {
   },
   data() {
     return {
+      activity: [],
+      orders: [],
       textareaValue: '',
     };
+  },
+  methods: {
+    getActivityDetail(id) {
+      const path = `${VITE_URL}/activities/${id}?_expand=user&_expand=group`;
+      axios
+        .get(path)
+        .then((res) => {
+          this.activity = res.data;
+          console.log(this.activity);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert('err');
+        });
+    },
+    getActivityOrders(id) {
+      const path = `${VITE_URL}/orders?activityId=${id}&_expand=user`;
+      axios
+        .get(path)
+        .then((res) => {
+          this.orders = res.data;
+          console.log(this.orders);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert('err');
+        });
+    },
+  },
+  mounted() {
+    this.getActivityDetail(this.$route.params.id);
+    this.getActivityOrders(this.$route.params.id);
   },
 };
 </script>
@@ -23,17 +60,13 @@ export default {
   <section class="pt-[120px] pb-5 md:pt-[92px]">
     <div class="container">
       <h2 class="mb-4 text-xl font-bold md:text-3xl">
-        周末 # 羽球 # 新店運動中心
+        {{ activity.title }}
       </h2>
       <div class="flex items-center gap-4">
-        <PAvatar
-          image="/src/assets/images/avatar/avatar01.png"
-          size="xlarge"
-          shape="circle"
-        />
+        <PAvatar :image="activity?.user?.img" size="xlarge" shape="circle" />
         <div>
           <p>主辦者</p>
-          <p>Jack</p>
+          <p>{{ activity?.user?.name }}</p>
         </div>
       </div>
     </div>
@@ -46,7 +79,7 @@ export default {
       >
         <div class="col-span-12 md:col-span-8">
           <img
-            src="../../assets/images/group/group06.png"
+            :src="activity.mainImg"
             alt="JoinDetailImage"
             class="rounded md:mb-10"
           />
@@ -65,30 +98,21 @@ export default {
               >
                 <span class="material-icons mr-1 text-primary-01">
                   schedule </span
-                >3/25 10:00
+                >{{ activity.date }} {{ activity?.startTime?.time }}
               </p>
               <p
                 class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
               >
                 <span class="material-icons text-primary-01"> room </span
-                >捷運新店區公所
+                >{{ activity.location }}
               </p>
-              <span class="pl-8 text-sm text-[#b7b7b7]"
-                >231新北市新店區北新路一段88巷12號</span
-              >
+              <span class="pl-8 text-sm text-[#b7b7b7]">{{
+                activity.address
+              }}</span>
             </div>
           </section>
           <article class="mb-10 md:mb-20">
-            平常上班上課讓身心勞累，想要假日舒展筋骨運動一下順便認識新朋友，一起來
-            2 小時羽球歡樂團吧! <br /><br />
-            不管是新手、中手、老手通通都歡迎，不用怕程度高低，開心打球最重要!
-            <br /><br />
-            請自備球拍或向加入的球友商借，或者向三樓櫃檯租借，羽毛球團主會提供<br /><br />
-            為了防止被放鴿子，審核加入後在聊天室無回應將會請出，開打前會再次確認，無故缺席絕對給一星負評<br /><br />
-            地點: 新店國民運動中心 ( 捷運新店區公所 2 號出口 ) <br />
-            球場: 7樓羽球場單面場 D 、E 場地依序換場<br />
-            費用: 1 人 150 元<br />
-            時間: 3/25 (六) 下午 6 - 8 點<br />
+            {{ activity.content }}
           </article>
           <section
             class="mb-10 flex justify-evenly border-y border-[#3d3d3d] py-10 md:mb-20"
@@ -97,54 +121,35 @@ export default {
               <span class="material-symbols-outlined text-4xl">
                 credit_card
               </span>
-              <p>各付各的</p>
+              <p>{{ activity.paymentMethod }}</p>
             </div>
             <div class="text-center">
               <span class="material-symbols-outlined text-4xl">
                 monetization_on
               </span>
-              <p>$ 150</p>
+              <p>$ {{ activity.cost }}</p>
             </div>
             <div class="text-center">
               <span class="material-symbols-outlined text-4xl"> group </span>
-              <p>8 人</p>
+              <p>{{ activity.maxJoinNum }} 人</p>
             </div>
           </section>
           <TabView>
             <TabPanel header="參與者">
               <ul class="flex flex-wrap gap-4">
-                <li><JoinAttendees></JoinAttendees></li>
-                <li><JoinAttendees></JoinAttendees></li>
-                <li><JoinAttendees></JoinAttendees></li>
-                <li><JoinAttendees></JoinAttendees></li>
-                <li><JoinAttendees></JoinAttendees></li>
-                <li><JoinAttendees></JoinAttendees></li>
-                <li><JoinAttendees></JoinAttendees></li>
-                <li><JoinAttendees></JoinAttendees></li>
+                <li v-for="user in orders" :key="user.userId">
+                  <JoinAttendees :user="user"></JoinAttendees>
+                </li>
               </ul>
             </TabPanel>
             <TabPanel header="更多照片">
               <div class="flex flex-col justify-evenly gap-2 md:flex-row">
-                <div class="w-full">
-                  <img
-                    src="../../assets/images/group/group07.png"
-                    alt="JoinDetailImg"
-                    class="h-full"
-                  />
-                </div>
-                <div class="w-full">
-                  <img
-                    src="../../assets/images/group/group01.png"
-                    alt="JoinDetailImg"
-                    class="h-full"
-                  />
-                </div>
-                <div class="w-full">
-                  <img
-                    src="../../assets/images/group/group09.png"
-                    alt="JoinDetailImg"
-                    class="h-full"
-                  />
+                <div
+                  class="w-full"
+                  v-for="(img, i) in activity.imgs"
+                  :key="img + i"
+                >
+                  <img :src="img" alt="JoinDetailImg" class="h-full" />
                 </div>
               </div>
             </TabPanel>

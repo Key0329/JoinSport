@@ -74,7 +74,7 @@
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
-            to="/Member/List/1"
+            to="/Member/List"
             >我的揪團</router-link
           >
         </li>

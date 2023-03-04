@@ -1,13 +1,26 @@
+<script>
+export default {
+  props: {
+    user: {
+      type: Object,
+      required: true,
+    },
+  },
+};
+</script>
+
 <template>
-  <div class="bg-white px-4 py-2 text-center md:px-10 md:py-5">
+  <div
+    class="flex h-[120px] w-[120px] flex-col items-center justify-center rounded-full bg-white text-center"
+  >
     <PAvatar
-      image="/src/assets/images/avatar/avatar01.png"
+      :image="user?.user?.img"
       md:size="xlarge"
       shape="circle"
-      class="mb-1 md:mb-4"
+      class="mb-1 md:mb-3"
     />
     <p>
-      <strong>stephen</strong>
+      <strong>{{ user?.user?.name }}</strong>
     </p>
     <p>成員</p>
   </div>

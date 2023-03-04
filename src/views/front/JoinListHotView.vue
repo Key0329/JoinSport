@@ -67,7 +67,7 @@ export default {
             v-for="(activity, i) in hotActivitiesList.list"
             :key="activity.title + i"
           >
-            <RouterLink to="/JoinDetail"
+            <RouterLink :to="`/JoinDetail/id=${activity.id}`"
               ><join-card-row :activity="activity"></join-card-row
             ></RouterLink>
           </li>

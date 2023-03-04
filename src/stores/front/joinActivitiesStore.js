@@ -100,7 +100,6 @@ export default defineStore('joinActivities', {
         pageTotal,
       };
 
-      console.log(data);
       return data;
     },
   },
