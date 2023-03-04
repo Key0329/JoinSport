@@ -16,11 +16,11 @@ export default {
     <div class="relative w-full sm:w-1/2">
       <img
         class="h-full rounded-l-[10px]"
-        :src="activity.mainImg"
+        :src="activity?.mainImg"
         alt="card-img-01"
       />
       <ul class="absolute top-3 left-2 flex flex-col flex-wrap gap-1">
-        <li v-for="(tag, i) in activity.tags" :key="tag + i">
+        <li v-for="(tag, i) in activity?.tags" :key="tag + i">
           <span class="tag py-1 text-xs hover:text-black">{{ tag }}</span>
         </li>
       </ul>
@@ -29,29 +29,29 @@ export default {
     <div
       class="w-full rounded-b-[10px] border-x border-b px-3 pt-2 pb-3 sm:border-0"
     >
-      <h5 class="mb-2 text-lg">{{ activity.title }}</h5>
+      <h5 class="mb-2 text-lg">{{ activity?.title }}</h5>
       <p class="mb-4 text-sm text-[#6f6f6f]">
-        {{ activity.description }}
+        {{ activity?.description }}
       </p>
       <div class="flex flex-col justify-end gap-2 md:flex-row">
         <p
           class="flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D]"
         >
           <span class="material-icons text-primary-01"> room </span
-          >{{ activity.location }}
+          >{{ activity?.location }}
         </p>
         <p
           class="flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D]"
         >
           <span class="material-icons mr-1 text-primary-01"> schedule </span
-          >{{ activity.date }} {{ activity.startTime.time }}
+          >{{ activity?.date }} {{ activity?.startTime?.time }}
         </p>
       </div>
       <div class="flex flex-col md:flex-row md:items-end">
         <div class="mb-2 md:mb-0">
           <ul class="my-3 flex -space-x-2 overflow-hidden">
             <li
-              v-for="(participant, i) in activity.participants"
+              v-for="(participant, i) in activity?.participants"
               :key="'participant' + i"
             >
               <img
@@ -60,21 +60,21 @@ export default {
                 alt="avatar01"
               />
             </li>
-            <li v-if="activity.numParticipants > 3">
+            <li v-if="activity?.numParticipants > 3">
               <div
                 class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-400 text-white ring-2 ring-white"
               >
-                +{{ activity.numParticipants - 3 }}
+                +{{ activity?.numParticipants - 3 }}
               </div>
             </li>
           </ul>
           <div>
             <span class="mr-2 text-sm"
-              >{{ activity.numParticipants }} 位已參加揪團</span
+              >{{ activity?.numParticipants }} 位已參加揪團</span
             >
             <span class="text-sm text-red-500"
               >剩餘
-              {{ activity.maxJoinNum - activity.numParticipants }} 空位</span
+              {{ activity?.maxJoinNum - activity?.numParticipants }} 空位</span
             >
           </div>
         </div>

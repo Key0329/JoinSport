@@ -10,11 +10,17 @@ const routes = [
         path: '',
         name: 'Home',
         component: () => import('../views/front/HomeView.vue'),
+        meta: {
+          title: 'Join Sport',
+        },
       },
       {
         path: 'login',
         name: 'Login',
         component: () => import('../views/front/LoginView.vue'),
+        meta: {
+          title: 'Login in - Join Sport',
+        },
       },
       {
         path: 'JoinList',
@@ -22,12 +28,15 @@ const routes = [
         component: () => import('../views/front/JoinListView.vue'),
         children: [
           {
-            path: 'Hot/:id(\\d+)?',
+            path: 'Hot/:page(\\d+)?',
             name: 'Hot',
             component: () => import('../views/front/JoinListHotView.vue'),
+            meta: {
+              title: 'Hot - Join Sport',
+            },
           },
           {
-            path: 'New/:id(\\d+)?',
+            path: 'New/:page(\\d+)?',
             name: 'New',
             component: () => import('../views/front/JoinListNewView.vue'),
           },
@@ -137,6 +146,15 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   linkActiveClass: 'active',
+  scrollBehavior() {
+    // always scroll to top
+    return { top: 0 };
+  },
+});
+
+router.beforeEach((to, from, next) => {
+  window.document.title = to.meta.title;
+  next();
 });
 
 export default router;

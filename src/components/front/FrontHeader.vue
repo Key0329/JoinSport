@@ -67,14 +67,14 @@
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
-            to="/JoinList/Hot"
+            to="/JoinList/Hot/1"
             >揪團列表</router-link
           >
         </li>
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
-            to="/Member/List"
+            to="/Member/List/1"
             >我的揪團</router-link
           >
         </li>

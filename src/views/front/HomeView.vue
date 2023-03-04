@@ -49,11 +49,6 @@ export default {
   methods: {
     ...mapActions(joinActivitiesStore, ['getActivities', 'getOrders']),
   },
-  beforeRouteEnter(to, from, next) {
-    // 當路由進入時，讓頁面滾動到最上方
-    window.scrollTo(0, 0);
-    next();
-  },
   mounted() {
     this.getActivities();
     this.getOrders();

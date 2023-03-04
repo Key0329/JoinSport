@@ -3,85 +3,65 @@ import JoinCardRow from '@/components/front/JoinCardRow.vue';
 import LeafletMap from '@/components/front/LeafletMap.vue';
 import { mapActions, mapState } from 'pinia';
 import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import PaginationComponent from '@/components/front/PaginationComponent.vue';
 
 export default {
+  name: 'JoinListHotView',
   components: {
     JoinCardRow,
     LeafletMap,
+    PaginationComponent,
   },
   data() {
     return {
       currentPage: 1,
-      pageLimit: 10,
     };
   },
   computed: {
     ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
-    hotActivitiesList: ({
-      restructureActivitiesList,
-      currentPage,
-      pageLimit,
-    }) => {
+    hotActivitiesList: ({ restructureActivitiesList, arrangePage }) => {
       // 依照參與人數排序熱門程度
       const tempList = restructureActivitiesList.sort((a, b) => {
         return b.numParticipants - a.numParticipants;
       });
 
-      // 維持大頭貼張數在 3 張
-      const newActivitiesCopy = tempList.map((item) => {
-        const newItem = { ...item };
-
-        if (newItem.participants.length > 3) {
-          newItem.participants = newItem.participants.slice(0, 3);
-        }
-
-        return newItem;
-      });
-
-      // 分配頁數
-      const start = (currentPage - 1) * pageLimit;
-      const end = currentPage * pageLimit;
-
-      const sliced = Object.keys(newActivitiesCopy)
-        .slice(start, end)
-        .reduce((acc, key) => {
-          acc[key] = newActivitiesCopy[key];
-          return acc;
-        }, {});
-
-      const newList = Object.values(sliced);
-
-      const data = {
-        list: newList,
-        pageTotal: Math.ceil(
-          Object.keys(restructureActivitiesList).length / pageLimit
-        ),
-      };
-
-      console.log(data);
-      return data;
+      return arrangePage(tempList);
     },
   },
   methods: {
-    ...mapActions(joinActivitiesStore, ['getOrders', 'getActivities']),
+    ...mapActions(joinActivitiesStore, [
+      'getOrders',
+      'getActivities',
+      'changePage',
+      'arrangePage',
+    ]),
   },
-  beforeRouteEnter(to, from, next) {
-    // 當路由進入時，讓頁面滾動到最上方
-    window.scrollTo(0, 0);
-    next();
+  watch: {
+    $route(to) {
+      this.currentPage = to.params.page;
+      this.changePage(to.params.page);
+    },
   },
   mounted() {
     this.getActivities();
     this.getOrders();
+    this.changePage(this.$route.params.page);
   },
 };
 </script>
 
 <template>
-  <section class="pt-4 pb-20 md:pt-10">
+  <main class="pt-4 pb-20 md:pt-10">
     <div class="container">
       <h2 class="mb-6 text-center text-2xl md:mb-10 md:text-start">熱門揪團</h2>
-      <div class="grid gap-8 md:grid-cols-12 lg:gap-0">
+      <!-- pagination -->
+      <PaginationComponent
+        :currentPage="currentPage"
+        :pageTotal="hotActivitiesList.pageTotal"
+        :pageUrl="'/JoinList/Hot/'"
+        class="mb-4"
+      ></PaginationComponent>
+      <section class="grid gap-8 md:grid-cols-12 lg:gap-0">
         <ul class="col-span-7 flex flex-col gap-6">
           <li
             v-for="(activity, i) in hotActivitiesList.list"
@@ -98,7 +78,7 @@ export default {
         >
           <LeafletMap></LeafletMap>
         </aside>
-      </div>
+      </section>
     </div>
-  </section>
+  </main>
 </template>
