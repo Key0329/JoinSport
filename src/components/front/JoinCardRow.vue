@@ -10,7 +10,7 @@ export default {
 
 <template>
   <div
-    class="group flex flex-col gap-4 rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] sm:flex-row"
+    class="group flex h-full flex-col gap-4 rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] sm:flex-row"
   >
     <!-- card img -->
     <div class="relative w-full sm:w-1/2">

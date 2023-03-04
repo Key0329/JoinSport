@@ -1,5 +1,7 @@
 <script>
 import axios from 'axios';
+import { mapState, mapActions } from 'pinia';
+import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
 import FrontHeader from '@/components/front/FrontHeader.vue';
 import JoinAttendees from '@/components/front/JoinAttendees.vue';
 import JoinCardRow from '@/components/front/JoinCardRow.vue';
@@ -21,6 +23,53 @@ export default {
       textareaValue: '',
     };
   },
+  computed: {
+    ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
+
+    newDateActivity() {
+      if (!this.activity.date) {
+        return {};
+      }
+
+      const datePart = this.activity.date.split('-');
+      const date = `${datePart[1]}/${datePart[2]}`;
+      const dayOfWeek = new Date(this.activity.date).getDay();
+      const dayOfWeekText = [
+        '星期日',
+        '星期一',
+        '星期二',
+        '星期三',
+        '星期四',
+        '星期五',
+        '星期六',
+      ][dayOfWeek];
+
+      const newDateActivity = {
+        ...this.activity,
+        date,
+        dayOfWeekText,
+      };
+
+      return newDateActivity;
+    },
+    slicedActivities() {
+      // 避免 side effect
+      const tempActivity = [...this.restructureActivitiesList];
+      // 避免選到同個活動
+      const excluded = tempActivity.filter((activity) => {
+        if (!activity.id) {
+          return [];
+        }
+
+        return activity.id !== parseInt(this.$route.params.id, 10);
+      });
+      // 亂序排列
+      const random = excluded.sort(() => Math.random() - 0.5);
+      // 選出兩個推播
+      const sliced = random.slice(0, 2);
+      return sliced;
+    },
+  },
   methods: {
     getActivityDetail(id) {
       const path = `${VITE_URL}/activities/${id}?_expand=user&_expand=group`;
@@ -28,7 +77,6 @@ export default {
         .get(path)
         .then((res) => {
           this.activity = res.data;
-          console.log(this.activity);
         })
         .catch((err) => {
           console.log(err);
@@ -48,10 +96,20 @@ export default {
           alert('err');
         });
     },
+
+    ...mapActions(joinActivitiesStore, ['getActivities', 'getOrders']),
+  },
+  watch: {
+    $route(to) {
+      this.getActivityDetail(to.params.id);
+      this.getActivityOrders(to.params.id);
+    },
   },
   mounted() {
     this.getActivityDetail(this.$route.params.id);
     this.getActivityOrders(this.$route.params.id);
+    this.getActivities();
+    this.getOrders();
   },
 };
 </script>
@@ -60,13 +118,17 @@ export default {
   <section class="pt-[120px] pb-5 md:pt-[92px]">
     <div class="container">
       <h2 class="mb-4 text-xl font-bold md:text-3xl">
-        {{ activity.title }}
+        {{ newDateActivity.title }}
       </h2>
       <div class="flex items-center gap-4">
-        <PAvatar :image="activity?.user?.img" size="xlarge" shape="circle" />
+        <PAvatar
+          :image="newDateActivity?.user?.img"
+          size="xlarge"
+          shape="circle"
+        />
         <div>
           <p>主辦者</p>
-          <p>{{ activity?.user?.name }}</p>
+          <p>{{ newDateActivity?.user?.name }}</p>
         </div>
       </div>
     </div>
@@ -79,7 +141,7 @@ export default {
       >
         <div class="col-span-12 md:col-span-8">
           <img
-            :src="activity.mainImg"
+            :src="newDateActivity.mainImg"
             alt="JoinDetailImage"
             class="rounded md:mb-10"
           />
@@ -98,21 +160,22 @@ export default {
               >
                 <span class="material-icons mr-1 text-primary-01">
                   schedule </span
-                >{{ activity.date }} {{ activity?.startTime?.time }}
+                >{{ newDateActivity?.date }}
+                {{ newDateActivity?.startTime?.time }}
               </p>
               <p
                 class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
               >
                 <span class="material-icons text-primary-01"> room </span
-                >{{ activity.location }}
+                >{{ newDateActivity.location }}
               </p>
               <span class="pl-8 text-sm text-[#b7b7b7]">{{
-                activity.address
+                newDateActivity.address
               }}</span>
             </div>
           </section>
           <article class="mb-10 md:mb-20">
-            {{ activity.content }}
+            {{ newDateActivity.content }}
           </article>
           <section
             class="mb-10 flex justify-evenly border-y border-[#3d3d3d] py-10 md:mb-20"
@@ -121,17 +184,17 @@ export default {
               <span class="material-symbols-outlined text-4xl">
                 credit_card
               </span>
-              <p>{{ activity.paymentMethod }}</p>
+              <p>{{ newDateActivity.paymentMethod }}</p>
             </div>
             <div class="text-center">
               <span class="material-symbols-outlined text-4xl">
                 monetization_on
               </span>
-              <p>$ {{ activity.cost }}</p>
+              <p>$ {{ newDateActivity.cost }}</p>
             </div>
             <div class="text-center">
               <span class="material-symbols-outlined text-4xl"> group </span>
-              <p>{{ activity.maxJoinNum }} 人</p>
+              <p>{{ newDateActivity.maxJoinNum }} 人</p>
             </div>
           </section>
           <TabView>
@@ -146,7 +209,7 @@ export default {
               <div class="flex flex-col justify-evenly gap-2 md:flex-row">
                 <div
                   class="w-full"
-                  v-for="(img, i) in activity.imgs"
+                  v-for="(img, i) in newDateActivity.imgs"
                   :key="img + i"
                 >
                   <img :src="img" alt="JoinDetailImg" class="h-full" />
@@ -229,13 +292,20 @@ export default {
           </TabView>
         </div>
         <!-- sidebar -->
-        <JoinDetailAside></JoinDetailAside>
+        <JoinDetailAside :activity="newDateActivity"></JoinDetailAside>
       </div>
       <section class="pt-10">
-        <h3 class="mb-8 text-xl font-medium">相似的揪團活動</h3>
-        <ul class="flex flex-col justify-between gap-6 md:flex-row">
-          <li><JoinCardRow></JoinCardRow></li>
-          <li><JoinCardRow></JoinCardRow></li>
+        <h3 class="mb-8 text-xl font-medium">更多揪團活動</h3>
+        <ul class="grid grid-cols-2 gap-6">
+          <li
+            class="col-span-1"
+            v-for="activity in slicedActivities"
+            :key="activity.id"
+          >
+            <RouterLink class="h-full" :to="`/JoinDetail/id=${activity.id}`"
+              ><join-card-row :activity="activity"></join-card-row
+            ></RouterLink>
+          </li>
         </ul>
       </section>
     </div>
@@ -245,13 +315,26 @@ export default {
     <div class="container">
       <div class="flex flex-col items-center md:flex-row md:justify-between">
         <div class="mb-2 md:mb-0">
-          <p class="mb-2 md:mb-0">三月 25 日 星期六 10:00</p>
+          <p class="mb-2 flex items-center md:mb-0">
+            <span class="material-symbols-outlined mr-1 text-primary-01">
+              calendar_month
+            </span>
+            {{ newDateActivity.date }}
+            {{ newDateActivity.dayOfWeekText }}
+            <span class="material-icons ml-2 mr-1 text-primary-01">
+              schedule
+            </span>
+            {{ newDateActivity?.startTime?.time }}
+          </p>
           <h2 class="text-lg font-semibold sm:text-xl">
-            周末 # 羽球 # 新店運動中心
+            {{ newDateActivity.title }}
           </h2>
         </div>
         <div class="flex items-center gap-6">
-          <p>3 個空位</p>
+          <p>
+            {{ newDateActivity.maxJoinNum - orders.length }}
+            個空位
+          </p>
           <a href="#">
             <i class="pi pi-star text-lg"></i>
           </a>

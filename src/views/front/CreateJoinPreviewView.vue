@@ -14,7 +14,16 @@ export default {
       tempTags: [],
     };
   },
+  computed: {
+    tempActivity() {
+      const tempActivity = {
+        ...this.tempForm,
+        tags: this.tempTags,
+      };
 
+      return tempActivity;
+    },
+  },
   methods: {
     getLocalData() {
       if (localStorage.getItem('createTempFormData')) {
@@ -48,11 +57,6 @@ export default {
   },
   mounted() {
     this.getLocalData();
-  },
-  beforeRouteEnter(to, from, next) {
-    // 當路由進入時，讓頁面滾動到最上方
-    window.scrollTo(0, 0);
-    next();
   },
 };
 </script>
@@ -197,10 +201,7 @@ export default {
           </TabView>
         </div>
         <!-- sidebar -->
-        <JoinDetailAside
-          :temp-form="tempForm"
-          :temp-tags="tempTags"
-        ></JoinDetailAside>
+        <JoinDetailAside :activity="tempActivity"></JoinDetailAside>
       </div>
     </div>
   </main>

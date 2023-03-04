@@ -64,10 +64,7 @@ export default {
       ></PaginationComponent>
       <div class="grid md:grid-cols-12 lg:gap-0">
         <ul class="col-span-7 flex flex-col gap-6">
-          <li
-            v-for="(activity, i) in hotActivitiesList.list"
-            :key="activity.title + i"
-          >
+          <li v-for="activity in hotActivitiesList.list" :key="activity.id">
             <RouterLink to="/"
               ><join-card-row :activity="activity"></join-card-row
             ></RouterLink>

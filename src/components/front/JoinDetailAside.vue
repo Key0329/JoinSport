@@ -6,11 +6,14 @@ export default {
     LeafletMap,
   },
   props: {
-    tempForm: {
+    // tempForm: {
+    //   type: Object,
+    // },
+    // tempTags: {
+    //   type: Array,
+    // },
+    activity: {
       type: Object,
-    },
-    tempTags: {
-      type: Array,
     },
   },
 };
@@ -33,31 +36,30 @@ export default {
         </div>
       </div>
     </div>
-    <ul class="mb-6 flex flex-wrap items-center gap-2">
-      <template v-if="tempTags">
-        <li v-for="(tag, i) of tempTags" :key="tag + i">
+    <template v-if="activity">
+      <ul class="mb-6 flex flex-wrap items-center gap-2">
+        <li v-for="(tag, i) of activity.tags" :key="tag + i">
           <a class="tag" href="#">{{ tag }}</a>
         </li>
-      </template>
-      <template v-else>
-        <li>
-          <a class="tag" href="#">攀岩</a>
-        </li>
-      </template>
-    </ul>
+      </ul>
+    </template>
     <div class="rounded-t-lg bg-white p-4">
       <p
         class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
       >
-        <span class="material-icons mr-1 text-primary-01"> schedule </span>
-        {{ tempForm?.date || '03/29' }}
-        {{ tempForm?.startTime?.time || '10:00' }}
+        <span class="material-symbols-outlined mr-1 text-primary-01">
+          calendar_month
+        </span>
+        {{ activity?.date }}
+        {{ activity?.dayOfWeekText }}
+        <span class="material-icons ml-2 mr-1 text-primary-01"> schedule </span>
+        {{ activity?.startTime?.time }}
       </p>
       <p
         class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
       >
         <span class="material-icons text-primary-01"> room </span
-        >{{ tempForm?.address || '231新北市新店區北新路一段88巷10號' }}
+        >{{ activity.address }}
       </p>
     </div>
     <LeafletMap class="h-[300px]"></LeafletMap>
