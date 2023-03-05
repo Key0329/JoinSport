@@ -6,12 +6,6 @@ export default {
     LeafletMap,
   },
   props: {
-    // tempForm: {
-    //   type: Object,
-    // },
-    // tempTags: {
-    //   type: Array,
-    // },
     activity: {
       type: Object,
     },

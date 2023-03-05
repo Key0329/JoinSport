@@ -19,7 +19,15 @@ const routes = [
         name: 'Login',
         component: () => import('../views/front/LoginView.vue'),
         meta: {
-          title: 'Login in - Join Sport',
+          title: 'Login - Join Sport',
+        },
+      },
+      {
+        path: 'Register',
+        name: 'Register',
+        component: () => import('../views/front/RegisterView.vue'),
+        meta: {
+          title: 'Register - Join Sport',
         },
       },
       {

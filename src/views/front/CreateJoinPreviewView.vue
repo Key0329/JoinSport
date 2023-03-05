@@ -240,13 +240,10 @@ export default {
 </template>
 
 <style scoped>
-:deep(.p-tabview-nav) {
-  background-color: #faede2;
-}
-:deep(.p-tabview-nav li) {
-  background-color: #faede2;
-}
-:deep(.p-tabview-nav li .p-tabview-nav-link) {
+:deep(.p-tabview-nav),
+:deep(.p-tabview-nav li),
+:deep(.p-tabview-nav li .p-tabview-nav-link),
+:deep(.p-tabview-panels) {
   background-color: #faede2;
 }
 :deep(.p-tabview-nav li.p-highlight .p-tabview-nav-link) {
@@ -256,8 +253,5 @@ export default {
 }
 :deep(.p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus) {
   box-shadow: inset 0 0 0 0;
-}
-:deep(.p-tabview-panels) {
-  background-color: #faede2;
 }
 </style>

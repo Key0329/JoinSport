@@ -1,7 +1,7 @@
 {
   "code": "zh_TW",
   "validations": {
-    "required": "Value 為必填",
+    "required": "Value 必填",
     "alpha": "Value 須以英文組成",
     "alpha_dash": "Value 須以英數、斜線及底線組成",
     "alpha_num": "Value 須以英數組成",
@@ -10,21 +10,21 @@
     "confirmed": " Value 不一致",
     "digits": "Value 須為 0:{length} 位數字",
     "dimensions": "Value 圖片尺寸不正確。須為 0:{width} x 1:{height} 像素",
-    "email": "Value 須為有效的電子信箱",
+    "email": "請檢查格式，須為有效的電子信箱",
     "excluded": "Value 的選項無效",
     "ext": "Value 須為有效的檔案",
     "image": "Value 須為圖片",
     "one_of": "Value 的選項無效",
     "integer": "Value 須為整數",
     "length": "Value 的長度須為 0:{length}",
-    "max": "Value 不能大於 0:{length} 個字元",
+    "maxLength": "不能大於 {max} 個字元",
     "max_value": "Value 不得大於 0:{max}",
     "mimes": "Value 須為有效的檔案類型",
-    "min": "Value 不能小於 0:{length} 個字元",
+    "minLength": "不能小於 {min} 個字元",
     "min_value": "Value 不得小於 0:{min}",
     "numeric": "Value 須為數字",
     "regex": "Value 的格式錯誤",
-    "required_if": "Value 為必填",
+    "required_if": "Value212 為必填",
     "size": "Value 的檔案須小於 0:{size}KB"
   }
 }
