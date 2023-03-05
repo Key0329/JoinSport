@@ -6,9 +6,6 @@ export default {
   methods: {
     ...mapActions(authStore, ['getToken', 'logOut']),
   },
-  mounted() {
-    console.log(this.$route);
-  },
 };
 </script>
 

@@ -29,14 +29,14 @@ export default {
           icon: 'pi pi-fw pi-user',
           items: [
             {
-              label: '帳號管理',
+              label: '個人資訊',
               icon: 'pi pi-fw pi-align-left',
-              to: '/Member/Account',
+              to: '/Member/Info',
             },
             {
-              label: '個人資訊',
+              label: '個人標籤',
               icon: 'pi pi-fw pi-id-card',
-              to: '/Member/Info',
+              to: '/Member/Tags',
             },
           ],
         },

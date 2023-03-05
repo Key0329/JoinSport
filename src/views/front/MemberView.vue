@@ -42,4 +42,11 @@ export default {
 :deep(.p-panelmenu-header .p-panelmenu-header-content) {
   background-color: #faede2;
 }
+:deep(
+    .p-panelmenu
+      .p-panelmenu-header:not(.p-disabled):focus
+      .p-panelmenu-header-content
+  ) {
+  box-shadow: 0 0 0 1px #faede2;
+}
 </style>

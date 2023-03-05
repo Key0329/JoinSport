@@ -154,11 +154,11 @@ const routes = [
             },
           },
           {
-            path: 'Account',
-            name: 'Account',
-            component: () => import('../views/front/MemberAccountView.vue'),
+            path: 'Tags',
+            name: 'Tags',
+            component: () => import('../views/front/MemberTagsView.vue'),
             meta: {
-              title: 'Account - Member - Join Sport',
+              title: 'Tags - Member - Join Sport',
               requiresAuth: true,
             },
           },

@@ -62,8 +62,9 @@ export default {
 
       axios
         .post(path, registerData)
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
+          alert('註冊成功');
+          this.$router.push('/login');
         })
         .catch((err) => {
           console.log(err);

@@ -25,7 +25,7 @@ export default defineStore('authStore', {
     },
     getUserId() {
       return document.cookie.replace(
-        /(?:(?:^|.*;\s*)userId\s*=\s*([^;]*).*$)|^.*$/,
+        /(?:(?:^|.*;\s*)JoinSportUserId\s*=\s*([^;]*).*$)|^.*$/,
         '$1'
       );
     },
