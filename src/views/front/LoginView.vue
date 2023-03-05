@@ -56,7 +56,6 @@ export default {
         email: this.email,
         password: this.password,
       };
-
       const path = `${VITE_URL}/login`;
 
       axios
@@ -72,6 +71,9 @@ export default {
           if (!this.checked) {
             localStorage.removeItem('loginEmail');
           }
+
+          alert('登入成功');
+
           // 從重定向参数中取出之前頁面的路徑
           const redirect = this.$route.query.redirect || '/';
           // 重定向回之前的頁面
@@ -82,8 +84,8 @@ export default {
         });
     },
     setCookie(token, userId) {
-      // 設定一天過期
-      const expires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      // 設定三天過期
+      const expires = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
       // 設定 max-age 計算 token 可存活秒數
       document.cookie = `JoinSportToken=${token}; max-age=${
         (expires - new Date()) / 1000

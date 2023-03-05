@@ -1,3 +1,17 @@
+<script>
+import { mapActions } from 'pinia';
+import authStore from '@/stores/front/authStore';
+
+export default {
+  methods: {
+    ...mapActions(authStore, ['getToken', 'logOut']),
+  },
+  mounted() {
+    console.log(this.$route);
+  },
+};
+</script>
+
 <template>
   <header class="fixed z-30 w-full bg-white">
     <nav class="flex justify-between border-b px-4 py-3 md:py-4">
@@ -47,26 +61,32 @@
           </button>
         </div>
       </div>
-      <!-- <ul class="items-center hidden gap-10 md:flex">
+      <ul v-if="!getToken()" class="hidden items-center gap-10 md:flex">
         <li>
           <router-link
             class="transition-colors hover:text-primary-01 focus:text-secondary-blue"
-            to="groupList"
+            to="/JoinList/Hot/1"
+            :class="{
+              'text-primary-01': $route.path.includes('/JoinList/Hot'),
+            }"
             >揪團列表</router-link
           >
         </li>
         <li>
           <router-link
             class="transition-colors hover:text-primary-01 focus:text-secondary-blue"
-            to="login"
+            to="/login"
             >登入 / 註冊</router-link
           >
         </li>
-      </ul> -->
-      <ul class="hidden items-center gap-10 md:flex">
+      </ul>
+      <ul v-else class="hidden items-center gap-10 md:flex">
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
+            :class="{
+              'text-primary-01': $route.path.includes('/JoinList/Hot'),
+            }"
             to="/JoinList/Hot/1"
             >揪團列表</router-link
           >
@@ -74,6 +94,7 @@
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
+            :class="{ 'text-primary-01': $route.path.includes('/Member/List') }"
             to="/Member/List"
             >我的揪團</router-link
           >
@@ -81,8 +102,18 @@
         <li>
           <router-link
             class="hover:text-primary-01 focus:text-secondary-blue"
+            :class="{ 'text-primary-01': $route.path.includes('/Member/Info') }"
             to="/Member/Info"
             >會員資料</router-link
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            @click.prevent="logOut(this.$router)"
+            class="transition-colors hover:text-primary-01 focus:text-secondary-blue"
+            to="/login"
+            >登出</a
           >
         </li>
         <li>

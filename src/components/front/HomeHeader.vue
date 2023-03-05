@@ -1,3 +1,14 @@
+<script>
+import { mapActions } from 'pinia';
+import authStore from '@/stores/front/authStore';
+
+export default {
+  methods: {
+    ...mapActions(authStore, ['getToken', 'logOut']),
+  },
+};
+</script>
+
 <template>
   <header class="fixed z-20 w-full border-b bg-white md:border-none">
     <div class="container">
@@ -9,23 +20,23 @@
             >Join Sport 揪運動</a
           >
         </h2>
-        <!-- <ul class="items-center hidden gap-10 md:flex">
+        <ul v-if="!getToken()" class="hidden items-center gap-10 md:flex">
           <li>
             <router-link
               class="transition-colors hover:text-primary-01 focus:text-secondary-blue"
-              to="groupList"
+              to="/JoinList/Hot/1"
               >揪團列表</router-link
             >
           </li>
           <li>
             <router-link
               class="transition-colors hover:text-primary-01 focus:text-secondary-blue"
-              to="login"
+              to="/login"
               >登入 / 註冊</router-link
             >
           </li>
-        </ul> -->
-        <ul class="hidden items-center gap-10 md:flex">
+        </ul>
+        <ul v-else class="hidden items-center gap-10 md:flex">
           <li>
             <router-link
               class="hover:text-primary-01 focus:text-secondary-blue"
@@ -45,6 +56,15 @@
               class="hover:text-primary-01 focus:text-secondary-blue"
               to="/Member/Info"
               >會員資料</router-link
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              @click.prevent="logOut(this.$router)"
+              class="transition-colors hover:text-primary-01 focus:text-secondary-blue"
+              to="/login"
+              >登出</a
             >
           </li>
           <li>

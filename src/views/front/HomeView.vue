@@ -34,7 +34,7 @@ export default {
       const newActivitiesCopy = activitiesCopy.map((item) => {
         const newItem = { ...item };
 
-        if (newItem.participants.length > 3) {
+        if (newItem?.participants?.length > 3) {
           newItem.participants = newItem.participants.slice(0, 3);
         }
 

@@ -32,5 +32,14 @@ export default defineStore('authStore', {
     alertLogIn() {
       alert('請先登入');
     },
+    logOut(router) {
+      document.cookie =
+        'JoinSportToken=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      document.cookie =
+        'JoinSportUserId=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      this.isLoggedIn = false;
+      alert('登出成功');
+      router.push('/login');
+    },
   },
 });
