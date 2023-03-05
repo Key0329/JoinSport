@@ -46,15 +46,10 @@ export default {
       this.submitted = true;
 
       if (!isFormValid) {
-        console.log(456);
         return;
       }
 
-      console.log(123);
-      // localStorage.setItem(
-      //   'createTempFormData',
-      //   JSON.stringify(this.tempFormData)
-      // );
+      this.login();
     },
     login() {
       const loginData = {
@@ -62,8 +57,48 @@ export default {
         password: this.password,
       };
 
-      axios.post;
+      const path = `${VITE_URL}/login`;
+
+      axios
+        .post(path, loginData)
+        .then((res) => {
+          const token = res.data.accessToken;
+          const userId = res.data.user.id;
+
+          this.setCookie(token, userId);
+          if (this.checked) {
+            localStorage.setItem('loginEmail', JSON.stringify(this.email));
+          }
+          if (!this.checked) {
+            localStorage.removeItem('loginEmail');
+          }
+          // 從重定向参数中取出之前頁面的路徑
+          const redirect = this.$route.query.redirect || '/';
+          // 重定向回之前的頁面
+          this.$router.push(redirect);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
+    setCookie(token, userId) {
+      // 設定一天過期
+      const expires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      // 設定 max-age 計算 token 可存活秒數
+      document.cookie = `JoinSportToken=${token}; max-age=${
+        (expires - new Date()) / 1000
+      }`;
+      document.cookie = `JoinSportUserId=${userId}; max-age=${
+        (expires - new Date()) / 1000
+      }`;
+    },
+  },
+  mounted() {
+    const loginEmail = JSON.parse(localStorage.getItem('loginEmail'));
+    if (loginEmail) {
+      this.email = loginEmail;
+      this.checked = true;
+    }
   },
 };
 </script>
@@ -73,7 +108,7 @@ export default {
   <main class="py-[120px]">
     <div class="container">
       <div class="flex">
-        <div class="flex items-center justify-center">
+        <div class="hidden items-center justify-center md:flex">
           <img
             class="h-2/3"
             src="../../assets/images/banner/Frame.png"

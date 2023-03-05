@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import authStore from '@/stores/front/authStore';
 
 const routes = [
   {
@@ -12,6 +13,7 @@ const routes = [
         component: () => import('../views/front/HomeView.vue'),
         meta: {
           title: 'Join Sport',
+          requiresAuth: false,
         },
       },
       {
@@ -20,6 +22,7 @@ const routes = [
         component: () => import('../views/front/LoginView.vue'),
         meta: {
           title: 'Login - Join Sport',
+          requiresAuth: false,
         },
       },
       {
@@ -28,6 +31,7 @@ const routes = [
         component: () => import('../views/front/RegisterView.vue'),
         meta: {
           title: 'Register - Join Sport',
+          requiresAuth: false,
         },
       },
       {
@@ -41,6 +45,7 @@ const routes = [
             component: () => import('../views/front/JoinListHotView.vue'),
             meta: {
               title: 'Hot - Join Sport',
+              requiresAuth: false,
             },
           },
           {
@@ -49,6 +54,7 @@ const routes = [
             component: () => import('../views/front/JoinListNewView.vue'),
             meta: {
               title: 'New - Join Sport',
+              requiresAuth: false,
             },
           },
         ],
@@ -59,6 +65,7 @@ const routes = [
         component: () => import('../views/front/JoinDetailView.vue'),
         meta: {
           title: 'Activity Detail - Join Sport',
+          requiresAuth: false,
         },
       },
       {
@@ -72,6 +79,7 @@ const routes = [
             component: () => import('../views/front/CreateJoinInfoView.vue'),
             meta: {
               title: 'Info - createJoin - Join Sport',
+              requiresAuth: true,
             },
           },
           {
@@ -80,6 +88,7 @@ const routes = [
             component: () => import('../views/front/CreateJoinTagsView.vue'),
             meta: {
               title: 'Tags - createJoin - Join Sport',
+              requiresAuth: true,
             },
           },
           {
@@ -89,6 +98,7 @@ const routes = [
               import('../views/front/CreateJoinDescriptionView.vue'),
             meta: {
               title: 'Description - createJoin - Join Sport',
+              requiresAuth: true,
             },
           },
           {
@@ -97,6 +107,7 @@ const routes = [
             component: () => import('../views/front/CreateJoinPreviewView.vue'),
             meta: {
               title: 'Preview - createJoin - Join Sport',
+              requiresAuth: true,
             },
           },
           {
@@ -105,6 +116,7 @@ const routes = [
             component: () => import('../views/front/CreateJoinSuccessView.vue'),
             meta: {
               title: 'Success - createJoin - Join Sport',
+              requiresAuth: true,
             },
           },
         ],
@@ -120,6 +132,7 @@ const routes = [
             component: () => import('../views/front/MemberListView.vue'),
             meta: {
               title: 'List - Member - Join Sport',
+              requiresAuth: true,
             },
           },
           {
@@ -128,6 +141,7 @@ const routes = [
             component: () => import('../views/front/MemberHostView.vue'),
             meta: {
               title: 'Host - Member - Join Sport',
+              requiresAuth: true,
             },
           },
           {
@@ -136,6 +150,7 @@ const routes = [
             component: () => import('../views/front/MemberCollectionView.vue'),
             meta: {
               title: 'Collection - Member - Join Sport',
+              requiresAuth: true,
             },
           },
           {
@@ -144,6 +159,7 @@ const routes = [
             component: () => import('../views/front/MemberAccountView.vue'),
             meta: {
               title: 'Account - Member - Join Sport',
+              requiresAuth: true,
             },
           },
           {
@@ -152,6 +168,7 @@ const routes = [
             component: () => import('../views/front/MemberInfoView.vue'),
             meta: {
               title: 'Info - Member - Join Sport',
+              requiresAuth: true,
             },
           },
           {
@@ -160,6 +177,7 @@ const routes = [
             component: () => import('../views/front/MemberCalendarView.vue'),
             meta: {
               title: 'Calendar - Member - Join Sport',
+              requiresAuth: true,
             },
           },
         ],
@@ -199,6 +217,24 @@ const router = createRouter({
   },
 });
 
+// 檢查登入權限
+router.beforeEach(async (to) => {
+  const auth = authStore();
+  if (to.meta.requiresAuth && !auth.checkLogIn()) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    auth.alertLogIn();
+    return {
+      path: '/login',
+      // save the location we were at to come back later
+      query: { redirect: to.fullPath },
+    };
+  }
+
+  return Promise.resolve();
+});
+
+// HTML title
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title;
   next();

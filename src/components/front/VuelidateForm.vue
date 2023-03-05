@@ -1,7 +1,7 @@
 <script>
 import { mapState } from 'pinia';
 import { useVuelidate } from '@vuelidate/core';
-import required from '@/utils/i18n-validators';
+import { required } from '@/utils/i18n-validators';
 import createSteps from '@/stores/front/createSteps';
 
 export default {
