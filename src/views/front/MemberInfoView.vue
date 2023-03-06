@@ -41,7 +41,13 @@ export default {
         return;
       }
 
-      this.editMemberData(this.userId, this.name, this.email);
+      const data = {
+        ...this.user,
+        email: this.email,
+        name: this.name,
+      };
+
+      this.editMemberData(data);
       this.isDisabled = true;
     },
     editName() {
