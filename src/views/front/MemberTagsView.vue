@@ -80,9 +80,6 @@ export default {
       this.editMemberData(data);
       this.isDisabled = true;
     },
-    editName() {
-      this.isDisabled = false;
-    },
     enableEdit() {
       this.isDisabled = !this.isDisabled;
     },

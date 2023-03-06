@@ -25,6 +25,8 @@ export default defineStore('joinActivities', {
           date: newDate,
           participants: [],
           numParticipants: 0,
+          participantsId: [],
+          originDate: item.date,
         };
       });
 
@@ -32,15 +34,18 @@ export default defineStore('joinActivities', {
       this.orders.forEach(({ user, activity }) => {
         const activityId = activity.id;
         const { img } = user;
+        const { id } = user;
 
         // 先確認 newList[activityId - 1] 是否存在，不存在就建立一個空的物件
         newList[activityId - 1] = newList[activityId - 1] || {
           participants: [],
+          participantsId: [],
         };
         // 將參與者的圖片路徑加入 participants 陣列中
         newList[activityId - 1].participants.push(img);
         newList[activityId - 1].numParticipants =
           newList[activityId - 1].participants.length;
+        newList[activityId - 1].participantsId.push(id);
       });
 
       // 維持大頭貼張數在 3 張
