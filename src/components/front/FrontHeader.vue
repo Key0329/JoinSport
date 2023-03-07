@@ -71,6 +71,14 @@ export default {
         </li>
         <li>
           <router-link
+            class="hover:text-primary-01 focus:text-secondary-blue"
+            :class="{ 'text-primary-01': $route.path.includes('/CreateJoin') }"
+            to="/CreateJoin/step1"
+            >我要開團</router-link
+          >
+        </li>
+        <li>
+          <router-link
             class="transition-colors hover:text-primary-01 focus:text-secondary-blue"
             to="/login"
             >登入 / 註冊</router-link
@@ -86,6 +94,14 @@ export default {
             }"
             to="/JoinList/Hot/1"
             >揪團列表</router-link
+          >
+        </li>
+        <li>
+          <router-link
+            class="hover:text-primary-01 focus:text-secondary-blue"
+            :class="{ 'text-primary-01': $route.path.includes('/CreateJoin') }"
+            to="/CreateJoin/step1"
+            >我要開團</router-link
           >
         </li>
         <li>

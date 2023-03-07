@@ -62,10 +62,6 @@ app.use(VueAxios, axios);
 app.use(ConfirmationService);
 app.use(PrimeVue, {
   ripple: true,
-  locale: {
-    accept: '確認',
-    reject: '取消',
-  },
 });
 
 // PrimeVue

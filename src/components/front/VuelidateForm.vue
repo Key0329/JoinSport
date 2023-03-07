@@ -9,13 +9,24 @@ export default {
   data() {
     return {
       title: '',
+      description: '',
+      city: '',
+      district: '',
       address: '',
-      date: null,
-      costPerPerson: null,
-      paymentMethod: '',
+      date: '2023-03-19',
       startTime: '',
+      paymentMethod: '',
+      costPerPerson: null,
       joinNum: null,
       submitted: false,
+      area: [
+        { name: '台北市' },
+        { name: 'Rome' },
+        { name: 'London' },
+        { name: 'Istanbul' },
+        { name: 'Paris' },
+      ],
+      tempDistrict: [],
     };
   },
   computed: {
@@ -33,21 +44,57 @@ export default {
     tempFormData() {
       const tempFormData = {
         title: this.title,
+        description: this.description,
+        city: this.city,
+        district: this.district,
         address: this.address,
         date: this.dateString,
-        costPerPerson: this.costPerPerson,
-        paymentMethod: this.paymentMethod,
         startTime: this.startTime,
+        paymentMethod: this.paymentMethod,
+        costPerPerson: this.costPerPerson,
         joinNum: this.joinNum,
       };
 
       return tempFormData;
+    },
+    taiwanCities() {
+      const cities = this.tempDistrict.map((city) => {
+        return { name: city.name };
+      });
+
+      return cities;
+    },
+    districts() {
+      const districtsMap = this.tempDistrict.reduce((acc, cur) => {
+        const city = cur.name;
+        const districts = cur.districts.map((district) => ({
+          name: district.name,
+        }));
+
+        if (acc[city]) {
+          acc[city].push(...districts);
+        } else {
+          acc[city] = districts;
+        }
+        return acc;
+      }, {});
+
+      return districtsMap[this.city?.name];
     },
     ...mapState(createSteps, ['joinNums', 'startTimes', 'paymentMethods']),
   },
   validations() {
     return {
       title: {
+        required,
+      },
+      description: {
+        required,
+      },
+      city: {
+        required,
+      },
+      district: {
         required,
       },
       address: {
@@ -90,6 +137,9 @@ export default {
         const [date] = tempForm.date.split('T');
 
         this.title = tempForm.title;
+        this.description = tempForm.description;
+        this.city = tempForm.city;
+        this.district = tempForm.district;
         this.address = tempForm.address;
         this.date = date;
         this.costPerPerson = tempForm.costPerPerson;
@@ -100,6 +150,9 @@ export default {
     },
     resetForm() {
       this.title = '';
+      this.description = '';
+      this.city = '';
+      this.district = '';
       this.address = '';
       this.date = null;
       this.costPerPerson = null;
@@ -108,9 +161,50 @@ export default {
       this.joinNum = null;
       this.submitted = false;
     },
+    getTaiwanDistrictData() {
+      const path =
+        'https://gist.githubusercontent.com/abc873693/2804e64324eaaf26515281710e1792df/raw/a1e1fc17d04b47c564bbd9dba0d59a6a325ec7c1/taiwan_districts.json';
+
+      this.$http
+        .get(path)
+        .then((res) => {
+          this.tempDistrict = res.data;
+        })
+        .then((err) => {
+          console.log(err);
+        });
+    },
+    changeToZhTW() {
+      this.$primevue.config.locale.emptyMessage = '請先選擇縣市';
+      this.$primevue.config.locale.monthNames = [
+        '一月',
+        '二月',
+        '三月',
+        '四月',
+        '五月',
+        '六月',
+        '七月',
+        '八月',
+        '九月',
+        '十月',
+        '十一月',
+        '十二月',
+      ];
+      this.$primevue.config.locale.dayNamesMin = [
+        '日',
+        '一',
+        '二',
+        '三',
+        '四',
+        '五',
+        '六',
+      ];
+    },
   },
   mounted() {
     this.getLocalForm();
+    this.getTaiwanDistrictData();
+    this.changeToZhTW();
   },
 };
 </script>
@@ -143,6 +237,89 @@ export default {
           >{{ v$.title.required.$message.replace('Value', '標題') }}</small
         >
       </div>
+      <!-- description -->
+      <div>
+        <div class="flex items-center">
+          <label
+            for="description"
+            class="mr-4 whitespace-nowrap px-2"
+            :class="{ 'p-error': v$.description.$invalid && submitted }"
+            >揪團描述</label
+          >
+          <InputText
+            id="description"
+            type="text"
+            v-model="v$.description.$model"
+            placeholder="簡單描述此揪團"
+            class="w-full"
+            :class="{ 'p-invalid': v$.description.$invalid && submitted }"
+          />
+        </div>
+
+        <small
+          v-if="
+            (v$.description.$invalid && submitted) ||
+            v$.description.$pending.$response
+          "
+          class="p-error block text-end"
+          >{{
+            v$.description.required.$message.replace('Value', '描述')
+          }}</small
+        >
+      </div>
+      <!-- location -->
+      <div class="flex gap-4">
+        <!-- city -->
+        <div>
+          <div class="flex items-center">
+            <label
+              for="city"
+              class="mr-4 whitespace-nowrap px-2"
+              :class="{ 'p-error': v$.city.$invalid && submitted }"
+              >活動地區</label
+            >
+            <PDropdown
+              id="city"
+              v-model="v$.city.$model"
+              optionLabel="name"
+              placeholder="請選擇活動縣市"
+              :options="taiwanCities"
+              :filter="true"
+              :showClear="true"
+              class="w-full"
+              :class="{ 'p-invalid': v$.city.$invalid && submitted }"
+            />
+          </div>
+
+          <small
+            v-if="(v$.city.$invalid && submitted) || v$.city.$pending.$response"
+            class="p-error block text-end"
+            >{{ v$.city.required.$message.replace('Value', '縣市') }}</small
+          >
+        </div>
+        <!-- district -->
+        <div>
+          <PDropdown
+            id="district"
+            v-model="v$.district.$model"
+            optionLabel="name"
+            placeholder="請選擇活動地區"
+            :options="districts"
+            :filter="true"
+            :showClear="true"
+            class="w-full"
+            :class="{ 'p-invalid': v$.district.$invalid && submitted }"
+          />
+          <small
+            v-if="
+              (v$.district.$invalid && submitted) ||
+              v$.district.$pending.$response
+            "
+            class="p-error block text-end"
+            >{{ v$.district.required.$message.replace('Value', '地區') }}</small
+          >
+        </div>
+      </div>
       <!-- address -->
       <div>
         <div class="flex items-center">
@@ -170,60 +347,65 @@ export default {
           >{{ v$.address.required.$message.replace('Value', '地址') }}</small
         >
       </div>
-      <!-- date -->
-      <div>
-        <div class="flex items-center">
-          <label
-            for="date"
-            class="mr-4 whitespace-nowrap px-2"
-            :class="{ 'p-error': v$.date.$invalid && submitted }"
-            >活動日期</label
+      <div class="flex justify-between">
+        <!-- date -->
+        <div>
+          <div class="flex items-center">
+            <label
+              for="date"
+              class="mr-4 whitespace-nowrap px-2"
+              :class="{ 'p-error': v$.date.$invalid && submitted }"
+              >活動日期</label
+            >
+            <PCalendar
+              id="date"
+              v-model="v$.date.$model"
+              placeholder="請選擇活動日期"
+              dateFormat="yy-mm-dd"
+              :showIcon="true"
+              class="w-full"
+              :class="{ 'p-invalid': v$.date.$invalid && submitted }"
+            />
+          </div>
+
+          <small
+            v-if="(v$.date.$invalid && submitted) || v$.date.$pending.$response"
+            class="p-error block text-end"
+            >{{ v$.date.required.$message.replace('Value', '日期') }}</small
           >
-          <PCalendar
-            id="date"
-            v-model="v$.date.$model"
-            placeholder="請選擇活動日期"
-            :showIcon="true"
-            class="w-full"
-            :class="{ 'p-invalid': v$.date.$invalid && submitted }"
-          />
         </div>
 
-        <small
-          v-if="(v$.date.$invalid && submitted) || v$.date.$pending.$response"
-          class="p-error block text-end"
-          >{{ v$.date.required.$message.replace('Value', '日期') }}</small
-        >
-      </div>
+        <!-- start time -->
+        <div>
+          <div class="flex items-center">
+            <label
+              for="startTime"
+              class="mr-4 whitespace-nowrap px-2"
+              :class="{ 'p-error': v$.startTime.$invalid && submitted }"
+              >開始時間</label
+            >
+            <PDropdown
+              id="startTime"
+              v-model="startTime"
+              :options="startTimes"
+              optionLabel="time"
+              placeholder="請選擇開始時間"
+              class="w-full"
+              :class="{ 'p-invalid': v$.startTime.$invalid && submitted }"
+            />
+          </div>
 
-      <!-- start time -->
-      <div>
-        <div class="flex items-center">
-          <label
-            for="startTime"
-            class="mr-4 whitespace-nowrap px-2"
-            :class="{ 'p-error': v$.startTime.$invalid && submitted }"
-            >開始時間</label
+          <small
+            v-if="
+              (v$.startTime.$invalid && submitted) ||
+              v$.startTime.$pending.$response
+            "
+            class="p-error block text-end"
+            >{{
+              v$.startTime.required.$message.replace('Value', '時間')
+            }}</small
           >
-          <PDropdown
-            id="startTime"
-            v-model="startTime"
-            :options="startTimes"
-            optionLabel="time"
-            placeholder="請選擇開始時間"
-            class="w-full"
-            :class="{ 'p-invalid': v$.startTime.$invalid && submitted }"
-          />
         </div>
-
-        <small
-          v-if="
-            (v$.startTime.$invalid && submitted) ||
-            v$.startTime.$pending.$response
-          "
-          class="p-error block text-end"
-          >{{ v$.startTime.required.$message.replace('Value', '時間') }}</small
-        >
       </div>
 
       <div class="mt-6 flex items-center justify-between gap-6">

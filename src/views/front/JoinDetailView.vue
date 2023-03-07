@@ -163,6 +163,10 @@ export default {
         },
       });
     },
+    changeToZhTW() {
+      this.$primevue.config.locale.accept = '確認';
+      this.$primevue.config.locale.reject = '取消';
+    },
   },
   watch: {
     $route(to) {
@@ -178,6 +182,7 @@ export default {
     this.getActivities();
     this.getOrders();
     this.userId = this.getUserId();
+    this.changeToZhTW();
   },
 };
 </script>
