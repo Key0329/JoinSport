@@ -27,6 +27,8 @@ import PanelMenu from 'primevue/panelmenu';
 import InputNumber from 'primevue/inputnumber';
 import AvatarGroup from 'primevue/avatargroup';
 import AutoComplete from 'primevue/autocomplete';
+import ConfirmDialog from 'primevue/confirmdialog';
+import ConfirmationService from 'primevue/confirmationservice';
 
 // 載入 vue2-leaflet，依照自己需要載入組件
 import {
@@ -55,9 +57,16 @@ const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
-app.use(VueAxios, axios);
-app.use(PrimeVue, { ripple: true });
 app.use(LoadingPlugin);
+app.use(VueAxios, axios);
+app.use(ConfirmationService);
+app.use(PrimeVue, {
+  ripple: true,
+  locale: {
+    accept: '確認',
+    reject: '取消',
+  },
+});
 
 // PrimeVue
 app.component('PSteps', Steps);
@@ -78,6 +87,7 @@ app.component('PanelMenu', PanelMenu);
 app.component('InputNumber', InputNumber);
 app.component('AvatarGroup', AvatarGroup);
 app.component('AutoComplete', AutoComplete);
+app.component('ConfirmDialog', ConfirmDialog);
 
 // Map
 app.component('l-map', LMap);

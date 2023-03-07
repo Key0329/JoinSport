@@ -1,7 +1,7 @@
 <script>
-import axios from 'axios';
 import { mapState, mapActions } from 'pinia';
 import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import authStore from '@/stores/front/authStore';
 import FrontHeader from '@/components/front/FrontHeader.vue';
 import JoinAttendees from '@/components/front/JoinAttendees.vue';
 import JoinCardRow from '@/components/front/JoinCardRow.vue';
@@ -10,6 +10,7 @@ import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
 const { VITE_URL } = import.meta.env;
 
 export default {
+  inject: ['reload'],
   components: {
     FrontHeader,
     JoinAttendees,
@@ -18,6 +19,7 @@ export default {
   },
   data() {
     return {
+      userId: null,
       activity: [],
       orders: [],
       textareaValue: '',
@@ -57,7 +59,7 @@ export default {
       const tempActivity = [...this.restructureActivitiesList];
       // 避免選到同個活動
       const excluded = tempActivity.filter((activity) => {
-        if (!activity.id) {
+        if (!activity?.id) {
           return [];
         }
 
@@ -69,11 +71,24 @@ export default {
       const sliced = random.slice(0, 2);
       return sliced;
     },
+    hadJoined() {
+      return (
+        this.orders.find(
+          (item) => item.userId === parseInt(this.userId, 10)
+        ) !== undefined
+      );
+    },
+    isHost() {
+      return this.activity.userId === this.userId;
+    },
   },
   methods: {
+    ...mapActions(joinActivitiesStore, ['getActivities', 'getOrders']),
+    ...mapActions(authStore, ['getUserId']),
+
     getActivityDetail(id) {
       const path = `${VITE_URL}/activities/${id}?_expand=user&_expand=group`;
-      axios
+      this.$http
         .get(path)
         .then((res) => {
           this.activity = res.data;
@@ -84,20 +99,70 @@ export default {
         });
     },
     getActivityOrders(id) {
-      const path = `${VITE_URL}/orders?activityId=${id}&_expand=user`;
-      axios
+      const path = `${VITE_URL}/orders?isCancelled=false&activityId=${id}&_expand=user`;
+      this.$http
         .get(path)
         .then((res) => {
           this.orders = res.data;
-          console.log(this.orders);
         })
         .catch((err) => {
           console.log(err);
           alert('err');
         });
     },
+    confirmJoin() {
+      const data = {
+        userId: parseInt(this.userId, 10),
+        activityId: this.activity.id,
+        isCancelled: false,
+      };
 
-    ...mapActions(joinActivitiesStore, ['getActivities', 'getOrders']),
+      const path = `${VITE_URL}/orders`;
+
+      this.$confirm.require({
+        message: `${this.activity.title}`,
+        header: '確認參加',
+
+        accept: () => {
+          this.$http
+            .post(path, data)
+            .then(() => {
+              alert('報名成功');
+              this.reload();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        },
+      });
+    },
+    cancelJoin() {
+      const userOrder = this.orders.find(
+        (order) => order.userId === parseInt(this.userId, 10)
+      );
+      const { id } = userOrder;
+      const data = {
+        isCancelled: true,
+      };
+      const path = `${VITE_URL}/orders/${id}`;
+
+      this.$confirm.require({
+        message: `${this.activity.title}`,
+        header: '確認取消',
+
+        accept: () => {
+          this.$http
+            .patch(path, data)
+            .then(() => {
+              alert('取消揪團成功');
+              this.reload();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        },
+      });
+    },
   },
   watch: {
     $route(to) {
@@ -112,6 +177,7 @@ export default {
     this.getActivityOrders(this.$route.params.id);
     this.getActivities();
     this.getOrders();
+    this.userId = this.getUserId();
   },
 };
 </script>
@@ -305,7 +371,10 @@ export default {
             :key="activity.id"
           >
             <RouterLink class="h-full" :to="`/JoinDetail/id=${activity.id}`"
-              ><join-card-row :activity="activity"></join-card-row
+              ><join-card-row
+                :activity="activity"
+                :userId="userId"
+              ></join-card-row
             ></RouterLink>
           </li>
         </ul>
@@ -340,11 +409,53 @@ export default {
           <a href="#">
             <i class="pi pi-star text-lg"></i>
           </a>
-          <button type="button" class="btn btn-primary py-4">我要參加</button>
+          <template v-if="isHost">
+            <button
+              type="button"
+              class="btn btn-primary py-4 hover:bg-primary-01 hover:text-white"
+              disabled
+            >
+              主辦者
+            </button>
+            <button
+              type="button"
+              class="btn border border-primary-01 py-4 hover:bg-primary-01 hover:text-white"
+            >
+              取消此揪團
+            </button>
+          </template>
+          <template v-else-if="hadJoined">
+            <button
+              type="button"
+              class="btn btn-primary py-4 hover:bg-primary-01 hover:text-white"
+              disabled
+            >
+              已參加
+            </button>
+            <button
+              type="button"
+              class="btn border border-primary-01 py-4 hover:bg-primary-01 hover:text-white"
+              @click="cancelJoin"
+              label="cancel"
+            >
+              取消報名
+            </button>
+          </template>
+          <button
+            v-else
+            type="button"
+            class="btn btn-primary py-4"
+            @click="confirmJoin"
+            label="confirm"
+          >
+            我要參加
+          </button>
         </div>
       </div>
     </div>
   </section>
+
+  <ConfirmDialog></ConfirmDialog>
 </template>
 
 <style scoped>

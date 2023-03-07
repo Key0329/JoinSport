@@ -3,6 +3,7 @@ import JoinCardRow from '@/components/front/JoinCardRow.vue';
 import LeafletMap from '@/components/front/LeafletMap.vue';
 import { mapActions, mapState } from 'pinia';
 import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import authStore from '@/stores/front/authStore';
 import PaginationComponent from '@/components/front/PaginationComponent.vue';
 
 export default {
@@ -14,6 +15,7 @@ export default {
   },
   data() {
     return {
+      userId: null,
       currentPage: 1,
     };
   },
@@ -35,6 +37,7 @@ export default {
       'changePage',
       'arrangePage',
     ]),
+    ...mapActions(authStore, ['getUserId']),
   },
   watch: {
     $route(to) {
@@ -46,6 +49,7 @@ export default {
     this.getActivities();
     this.getOrders();
     this.changePage(this.$route.params.page);
+    this.userId = this.getUserId();
   },
 };
 </script>
@@ -65,7 +69,10 @@ export default {
         <ul class="col-span-7 flex flex-col gap-6">
           <li v-for="activity in hotActivitiesList.list" :key="activity.id">
             <RouterLink :to="`/JoinDetail/id=${activity.id}`"
-              ><join-card-row :activity="activity"></join-card-row
+              ><join-card-row
+                :activity="activity"
+                :userId="userId"
+              ></join-card-row
             ></RouterLink>
           </li>
         </ul>

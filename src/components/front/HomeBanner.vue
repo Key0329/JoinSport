@@ -137,7 +137,7 @@ export default {
       <!-- links -->
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div class="col-span-1">
-          <router-link to="/JoinList/JoinListHot" class="group">
+          <router-link to="/JoinList/Hot" class="group">
             <img
               class="mb-4 h-[213px] w-full rounded-[10px] object-cover group-hover:opacity-90"
               src="../../assets/images/banner/banner04.jpg"
@@ -155,7 +155,7 @@ export default {
           </router-link>
         </div>
         <div class="col-span-1">
-          <router-link to="/login" class="group">
+          <router-link to="/JoinList/Hot" class="group">
             <img
               class="mb-4 h-[213px] w-full rounded-[10px] object-cover group-hover:opacity-90"
               src="../../assets/images/banner/banner02.png"

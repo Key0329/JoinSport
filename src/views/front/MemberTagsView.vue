@@ -5,8 +5,10 @@ import memberStore from '@/stores/front/memberStore';
 import authStore from '@/stores/front/authStore';
 
 export default {
+  inject: ['reload'],
   data() {
     return {
+      userId: null,
       isDisabled: true,
       tempSelectedTag: '',
       selectedTags: [],
@@ -73,11 +75,14 @@ export default {
     },
     handleSubmit() {
       const data = {
-        ...this.user,
+        id: this.userId,
         favoriteSports: this.selectedTags,
       };
 
+      console.log(data);
+
       this.editMemberData(data);
+      this.reload();
       this.isDisabled = true;
     },
     enableEdit() {
@@ -95,6 +100,7 @@ export default {
       this.selectedTags = JSON.parse(JSON.stringify(this.user.favoriteSports));
     },
   },
+
   mounted() {
     this.getSportsData();
     this.userId = this.getUserId();

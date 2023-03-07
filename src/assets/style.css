@@ -35,7 +35,8 @@
   box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 5%);
 }
 
-.p-button:focus {
+.p-button:focus,.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus,.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus,.p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):focus,.p-datepicker .p-timepicker button:focus,.p-datepicker table td > span:focus,.p-datepicker .p-datepicker-header .p-datepicker-prev:focus,
+.p-datepicker .p-datepicker-header .p-datepicker-next:focus {
   box-shadow: 0 0 0 1px #EF5230;
 }
 
@@ -45,48 +46,38 @@
   border-color: #ef5230;
 }
 
-.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link,.p-datepicker table td > span.p-highlight {
   background: #ffffff;
   border-color: #ef5230;
   color: #ef5230;
 }
 
-.p-inputtext:enabled:focus {
+.p-inputtext:enabled:focus,.p-dropdown:not(.p-disabled).p-focus {
   box-shadow: 0 0 0 1px #fbe3d1;
   border-color: #ef5230;
 }
 
-.p-dropdown:not(.p-disabled).p-focus {
-  box-shadow: 0 0 0 1px #fbe3d1;
-  border-color: #ef5230;
-}
-
-.p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):focus {
-  box-shadow: 0 0 0 1px #ef5230;
-}
-
-.p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):focus {
-  box-shadow: 0 0 0 1px #ef5230;
-}
-
-.p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):focus {
-  box-shadow: 0 0 0 1px #ef5230;
-}
-
-.p-datepicker .p-timepicker button:focus {
-  box-shadow: 0 0 0 1px #ef5230;
-}
-
-.p-datepicker table td > span:focus {
-  box-shadow: 0 0 0 1px #ef5230;
-}
 
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover,
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover {
   color: #ef5230;
 }
 
-.p-datepicker .p-datepicker-header .p-datepicker-prev:focus,
-.p-datepicker .p-datepicker-header .p-datepicker-next:focus {
-  box-shadow: 0 0 0 1px #ef5230;
+.p-button.p-button-text:enabled:hover,.p-button.p-button-text:enabled:active,.p-button:enabled:active{
+  color: #EF5230;
+  background-color: #fbe3d1;
+  border-color: #EF5230;
+}
+.p-button.p-button-text{
+  color: #d4d4d8;
+}
+.p-dialog{
+  width: 300px;
+}
+.p-confirm-dialog .p-dialog-content{
+  justify-content: center;
+}
+
+.p-confirm-dialog-message{
+  font-size: 24px;
 }

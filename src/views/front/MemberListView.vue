@@ -110,7 +110,7 @@ export default {
       <li v-if="!hasTodayActivity" class="mb-10">
         <h3 class="mb-6 border-b pb-4 text-xl">今天</h3>
         <RouterLink
-          to="/JoinList/JoinListHot"
+          to="/JoinList/Hot/1"
           class="group flex flex-col items-center justify-center py-10"
         >
           <p class="mb-4 flex items-center text-lg">

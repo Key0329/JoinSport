@@ -118,7 +118,7 @@ export default {
         <router-link
           class="btn-primary btn p-ripple mx-auto w-fit"
           v-ripple
-          to=""
+          to="/register"
           >加入 Join Sport</router-link
         >
       </div>
@@ -136,7 +136,7 @@ export default {
           :key="activity.id"
           class="md:col-span-1"
         >
-          <router-link to="login" class="h-full"
+          <router-link :to="`/JoinDetail/id=${activity.id}`" class="h-full"
             ><join-card :activity="activity"></join-card
           ></router-link>
         </li>

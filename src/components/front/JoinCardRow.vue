@@ -4,6 +4,20 @@ export default {
     activity: {
       type: Object,
     },
+    userId: {
+      type: String,
+    },
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    hasJoined() {
+      return this.activity.participantsId.includes(parseInt(this.userId, 10));
+    },
+    isHost() {
+      return this.activity.userId === this.userId;
+    },
   },
 };
 </script>
@@ -29,11 +43,25 @@ export default {
     <div
       class="w-full rounded-b-[10px] border-x border-b px-3 pt-2 pb-3 sm:border-0"
     >
-      <h5 class="mb-2 text-lg">{{ activity?.title }}</h5>
+      <div class="flex items-center justify-between">
+        <h5 class="mb-2 text-lg">{{ activity?.title }}</h5>
+        <div
+          v-if="hasJoined"
+          class="flex items-center rounded-lg bg-primary-04 px-2 py-1 text-xs text-gray-600"
+        >
+          <i class="pi pi-check mr-1"></i>已參加揪團
+        </div>
+        <div
+          v-else-if="isHost"
+          class="flex items-center rounded-lg bg-primary-01 px-2 py-1 text-xs text-white"
+        >
+          <i class="pi pi-user mr-1"></i>您是主辦者
+        </div>
+      </div>
       <p class="mb-4 text-sm text-[#6f6f6f]">
         {{ activity?.description }}
       </p>
-      <div class="flex flex-col justify-end gap-2 md:flex-row">
+      <div class="mb-2 flex flex-col gap-2 md:flex-row">
         <p
           class="flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D]"
         >

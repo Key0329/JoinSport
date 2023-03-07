@@ -3,7 +3,6 @@ import FrontHeader from '@/components/front/FrontHeader.vue';
 import { useVuelidate } from '@vuelidate/core';
 import { helpers } from '@vuelidate/validators';
 import { required, minLength, email } from '@/utils/i18n-validators';
-import axios from 'axios';
 
 const { VITE_URL } = import.meta.env;
 
@@ -56,11 +55,13 @@ export default {
       const registerData = {
         email: this.email,
         password: this.password,
+        name: '',
+        favoriteSports: [],
       };
 
       const path = `${VITE_URL}/register`;
 
-      axios
+      this.$http
         .post(path, registerData)
         .then(() => {
           alert('註冊成功');

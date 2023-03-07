@@ -76,7 +76,7 @@ export default defineStore('joinActivities', {
     },
 
     getOrders() {
-      const path = `${VITE_URL}/orders?_expand=activity&_expand=user`;
+      const path = `${VITE_URL}/orders?isCancelled=false&_expand=activity&_expand=user`;
       axios
         .get(path)
         .then((res) => {

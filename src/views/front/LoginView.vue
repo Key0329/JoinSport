@@ -3,7 +3,6 @@ import FrontHeader from '@/components/front/FrontHeader.vue';
 import { useVuelidate } from '@vuelidate/core';
 import { helpers } from '@vuelidate/validators';
 import { required, minLength, email } from '@/utils/i18n-validators';
-import axios from 'axios';
 
 const { VITE_URL } = import.meta.env;
 
@@ -58,7 +57,7 @@ export default {
       };
       const path = `${VITE_URL}/login`;
 
-      axios
+      this.$http
         .post(path, loginData)
         .then((res) => {
           const token = res.data.accessToken;

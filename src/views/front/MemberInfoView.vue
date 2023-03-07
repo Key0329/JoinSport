@@ -42,7 +42,7 @@ export default {
       }
 
       const data = {
-        ...this.user,
+        id: this.userId,
         email: this.email,
         name: this.name,
       };
