@@ -1,1 +1,0 @@
-import{_ as t,o as e,a as o}from"./index-d13cd449.js";const n={data(){return{}}},s={class:"container"};function a(c,r,i,_,p,d){return e(),o("div",s,"this login")}const l=t(n,[["render",a]]);export{l as default};
