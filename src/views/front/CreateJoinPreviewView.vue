@@ -1,17 +1,19 @@
 <script>
 import StepPagination from '@/components/front/StepPagination.vue';
 import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
+import JoinAttendees from '@/components/front/JoinAttendees.vue';
 
 export default {
   components: {
     StepPagination,
     JoinDetailAside,
+    JoinAttendees,
   },
   data() {
     return {
       tempForm: {},
-      editorContent: '',
       tempTags: [],
+      editorContent: '',
     };
   },
   computed: {
@@ -57,6 +59,7 @@ export default {
   },
   mounted() {
     this.getLocalData();
+    console.log(this.tempForm);
   },
 };
 </script>
@@ -88,7 +91,7 @@ export default {
       >
         <div class="col-span-12 md:col-span-8">
           <img
-            src="../../assets/images/group/group06.png"
+            src="../../assets/images/activities/activity01.jpg"
             alt="JoinDetailImage"
             class="rounded md:mb-10"
           />
@@ -146,7 +149,19 @@ export default {
             </div>
           </section>
           <TabView>
-            <TabPanel header="參與者"></TabPanel>
+            <TabPanel header="參與者">
+              <ul class="flex flex-wrap gap-4">
+                <li>
+                  <JoinAttendees></JoinAttendees>
+                </li>
+                <li>
+                  <JoinAttendees></JoinAttendees>
+                </li>
+                <li>
+                  <JoinAttendees></JoinAttendees>
+                </li>
+              </ul>
+            </TabPanel>
             <TabPanel header="更多照片">
               <div class="flex flex-col justify-evenly gap-2 md:flex-row">
                 <div class="w-full">
@@ -180,17 +195,20 @@ export default {
                     rows="5"
                     class="mb-2 w-full"
                     placeholder="留下您的想法"
+                    disabled
                   />
                   <div class="flex justify-end gap-4">
                     <button
                       type="button"
-                      class="btn bg-white transition-colors hover:bg-primary-02"
+                      class="btn transition-color bg-white disabled:opacity-50"
+                      disabled
                     >
                       取消
                     </button>
                     <button
                       type="button"
-                      class="btn bg-primary-04 transition-colors hover:bg-primary-02"
+                      class="btn transition-color bg-primary-04 disabled:opacity-50"
+                      disabled
                     >
                       確認
                     </button>
@@ -221,12 +239,12 @@ export default {
         </div>
         <div class="flex items-center gap-6">
           <p>{{ tempForm.joinNum?.number }} 個空位</p>
-          <a href="#">
+          <p>
             <i class="pi pi-star text-lg"></i>
-          </a>
+          </p>
           <button
             type="button"
-            class="btn btn-primary py-4 disabled:opacity-70"
+            class="btn btn-primary py-4 hover:bg-primary-01 hover:text-white disabled:opacity-70"
             disabled
           >
             我要參加

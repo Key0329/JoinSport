@@ -67,7 +67,7 @@ export default {
       <h1 class="mb-8 text-center text-4xl">選擇適合的標籤來描述將要開的團</h1>
       <h2 class="mb-12 text-center text-xl">
         請盡量詳細地選擇，將會幫助您的揪團找到最適合的團員<br />可以新增
-        <strong class="text-primary-01">{{ 4 - selectedTags.length }}</strong>
+        <strong class="text-primary-01">{{ 5 - selectedTags.length }}</strong>
         個標籤
       </h2>
       <div class="flex flex-col items-center justify-center">
@@ -79,7 +79,7 @@ export default {
           optionLabel="label"
           loadingIcon="false"
           placeholder="輸入適合揪團的標籤 ( 例如: 攀岩、潛水、戶外運動 )"
-          :disabled="selectedTags.length === 4"
+          :disabled="selectedTags.length === 5"
           class="mb-10 flex w-full justify-center"
         />
         <ul class="mb-[100px] flex w-1/2 flex-wrap gap-3">
@@ -109,10 +109,10 @@ export default {
               <button
                 class="mb-2 mr-2 rounded-full bg-primary-02 px-8 py-2 hover:bg-primary-04"
                 type="button"
-                :disabled="selectedTags.length === 4"
+                :disabled="selectedTags.length === 5"
                 :class="{
                   hidden: selectedTags.some((item) => item === tag),
-                  'cursor-not-allowed opacity-50': selectedTags.length === 4,
+                  'cursor-not-allowed opacity-50': selectedTags.length === 5,
                 }"
                 @click="addTag($event)"
               >
