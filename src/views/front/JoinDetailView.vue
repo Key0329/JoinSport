@@ -52,6 +52,7 @@ export default {
         dayOfWeekText,
       };
 
+      console.log(newDateActivity);
       return newDateActivity;
     },
     slicedActivities() {
@@ -110,7 +111,7 @@ export default {
           alert('err');
         });
     },
-    confirmJoin() {
+    userConfirmJoin() {
       const data = {
         userId: parseInt(this.userId, 10),
         activityId: this.activity.id,
@@ -136,7 +137,7 @@ export default {
         },
       });
     },
-    cancelJoin() {
+    userCancelJoin() {
       const userOrder = this.orders.find(
         (order) => order.userId === parseInt(this.userId, 10)
       );
@@ -155,6 +156,30 @@ export default {
             .patch(path, data)
             .then(() => {
               alert('取消揪團成功');
+              this.reload();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        },
+      });
+    },
+    hostCancelActivity() {
+      const { id } = this.$route.params;
+      const data = {
+        isCancelled: true,
+      };
+      const path = `${VITE_URL}/activities/${id}`;
+
+      this.$confirm.require({
+        message: `${this.activity.title}`,
+        header: '確認關閉此揪團',
+
+        accept: () => {
+          this.$http
+            .patch(path, data)
+            .then(() => {
+              alert('已關閉此揪團');
               this.reload();
             })
             .catch((err) => {
@@ -188,7 +213,10 @@ export default {
 </script>
 <template>
   <front-header></front-header>
-  <section class="pt-[120px] pb-5 md:pt-[92px]">
+  <section
+    v-if="!newDateActivity.isCancelled === true"
+    class="pt-[120px] pb-5 md:pt-[92px]"
+  >
     <div class="container">
       <h2 class="mb-4 text-xl font-bold md:text-3xl">
         {{ newDateActivity.title }}
@@ -207,7 +235,10 @@ export default {
     </div>
   </section>
 
-  <main class="bg-primary-03 py-10 md:py-20">
+  <main
+    v-if="!newDateActivity.isCancelled === true"
+    class="bg-primary-03 py-10 md:py-20"
+  >
     <div class="container">
       <div
         class="grid h-full grid-cols-12 border-b border-[#3d3d3d] pb-10 md:pb-20"
@@ -387,7 +418,40 @@ export default {
     </div>
   </main>
 
-  <section class="sticky bottom-0 z-30 bg-white py-5">
+  <main v-else>
+    <div
+      class="flex h-screen flex-col items-center justify-center bg-primary-03"
+    >
+      <h1 class="text-4xl">Oops...此揪團已取消</h1>
+      <h2 class="mb-4 text-xl font-bold md:text-3xl">
+        {{ newDateActivity.title }}
+      </h2>
+      <div class="mb-10 flex items-center gap-4">
+        <PAvatar
+          :image="newDateActivity?.user?.img"
+          size="xlarge"
+          shape="circle"
+        />
+        <div>
+          <p>主辦者</p>
+          <p>{{ newDateActivity?.user?.name }}</p>
+        </div>
+      </div>
+      <router-link to="/">
+        <PButton
+          type="button"
+          label="回到首頁"
+          icon="pi pi-home"
+          iconPos="right"
+        />
+      </router-link>
+    </div>
+  </main>
+
+  <section
+    v-if="!newDateActivity.isCancelled === true"
+    class="sticky bottom-0 z-30 bg-white py-5"
+  >
     <div class="container">
       <div class="flex flex-col items-center md:flex-row md:justify-between">
         <div class="mb-2 md:mb-0">
@@ -424,6 +488,7 @@ export default {
             </button>
             <button
               type="button"
+              @click="hostCancelActivity"
               class="btn border border-primary-01 py-4 hover:bg-primary-01 hover:text-white"
             >
               取消此揪團
@@ -440,7 +505,7 @@ export default {
             <button
               type="button"
               class="btn border border-primary-01 py-4 hover:bg-primary-01 hover:text-white"
-              @click="cancelJoin"
+              @click="userCancelJoin"
               label="cancel"
             >
               取消報名
@@ -450,7 +515,7 @@ export default {
             v-else
             type="button"
             class="btn btn-primary py-4"
-            @click="confirmJoin"
+            @click="userConfirmJoin"
             label="confirm"
           >
             我要參加

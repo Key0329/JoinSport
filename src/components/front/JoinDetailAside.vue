@@ -44,7 +44,7 @@ export default {
         <span class="material-symbols-outlined mr-1 text-primary-01">
           calendar_month
         </span>
-        {{ activity?.date }}
+        {{ activity?.newDate }}
         {{ activity?.dayOfWeekText }}
         <span class="material-icons ml-2 mr-1 text-primary-01"> schedule </span>
         {{ activity?.startTime?.time }}

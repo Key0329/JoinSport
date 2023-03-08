@@ -16,18 +16,17 @@ export default defineStore('joinActivities', {
 
       // 以 activitiesList 為基礎，調整日期格式
       this.activitiesList.forEach((item) => {
-        const activityId = item.id;
         const arr = item.date.split('-');
         const newDate = `${arr[1]}/${arr[2]}`;
 
-        newList[activityId - 1] = {
+        newList.push({
           ...item,
           date: newDate,
           participants: [],
           numParticipants: 0,
           participantsId: [],
           originDate: item.date,
-        };
+        });
       });
 
       // 以 orders 為基礎，整理出參與者與參與人數

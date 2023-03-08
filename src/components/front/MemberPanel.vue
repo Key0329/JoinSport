@@ -34,7 +34,9 @@ export default {
     </div>
     <ul class="flex flex-wrap gap-2">
       <li v-for="tag in user.favoriteSports" :key="'tag' + tag">
-        <p class="tag">{{ tag }}</p>
+        <p class="tag flex items-center">
+          <i class="pi pi-tag mr-1"></i> {{ tag }}
+        </p>
       </li>
     </ul>
   </div>

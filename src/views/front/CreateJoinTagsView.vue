@@ -88,7 +88,9 @@ export default {
             v-for="(tag, i) in selectedTags"
             :key="tag + i"
           >
-            <span class="mr-8 text-lg">{{ tag }}</span>
+            <span class="mr-8 text-lg"
+              ><i class="pi pi-tag mr-2"></i>{{ tag }}</span
+            >
             <button
               type="button"
               class="flex h-5 w-5 items-center justify-center rounded-full bg-primary-03"

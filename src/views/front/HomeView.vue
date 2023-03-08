@@ -28,10 +28,12 @@ export default {
   computed: {
     ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
     shuffledActivities() {
-      const activitiesCopy = [...this.restructureActivitiesList];
+      const filterList = this.restructureActivitiesList.filter(
+        (activity) => activity.isCancelled === false
+      );
 
       // 將參與者的相片數量控制在 3 張以下
-      const newActivitiesCopy = activitiesCopy.map((item) => {
+      const newActivitiesCopy = filterList.map((item) => {
         const newItem = { ...item };
 
         if (newItem?.participants?.length > 3) {

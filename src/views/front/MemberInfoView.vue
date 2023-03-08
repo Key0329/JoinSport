@@ -6,6 +6,7 @@ import authStore from '@/stores/front/authStore';
 import memberStore from '@/stores/front/memberStore';
 
 export default {
+  inject: ['reload'],
   setup: () => ({ v$: useVuelidate() }),
   data() {
     return {
@@ -49,6 +50,7 @@ export default {
 
       this.editMemberData(data);
       this.isDisabled = true;
+      this.reload();
     },
     editName() {
       this.isDisabled = false;

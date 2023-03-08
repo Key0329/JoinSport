@@ -144,7 +144,9 @@ export default {
         </h3>
         <ul>
           <li v-for="activity in activities" :key="activity.id" class="mb-6">
-            <JoinCardRow :activity="activity"></JoinCardRow>
+            <RouterLink :to="`/JoinDetail/id=${activity?.id}`">
+              <JoinCardRow :activity="activity"></JoinCardRow>
+            </RouterLink>
           </li>
         </ul>
       </li>

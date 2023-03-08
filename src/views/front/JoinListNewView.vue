@@ -2,10 +2,12 @@
 import JoinCardRow from '@/components/front/JoinCardRow.vue';
 import LeafletMap from '@/components/front/LeafletMap.vue';
 import { mapActions, mapState } from 'pinia';
+import authStore from '@/stores/front/authStore';
 import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
 import PaginationComponent from '@/components/front/PaginationComponent.vue';
 
 export default {
+  name: 'JoinListNewView',
   components: {
     JoinCardRow,
     LeafletMap,
@@ -13,14 +15,19 @@ export default {
   },
   data() {
     return {
+      userId: null,
       currentPage: 1,
     };
   },
   computed: {
     ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
     hotActivitiesList: ({ restructureActivitiesList, arrangePage }) => {
+      // 刪掉已取消的揪團
+      const filterList = restructureActivitiesList.filter(
+        (activity) => activity.isCancelled === false
+      );
       // 依照更新日期排序
-      const tempList = restructureActivitiesList.sort((a, b) => {
+      const tempList = filterList.sort((a, b) => {
         const dateA = new Date(a.updateDate);
         const dateB = new Date(b.updateDate);
         return dateB - dateA;
@@ -36,6 +43,7 @@ export default {
       'changePage',
       'arrangePage',
     ]),
+    ...mapActions(authStore, ['getUserId']),
   },
   watch: {
     $route(to) {
@@ -47,6 +55,7 @@ export default {
     this.getActivities();
     this.getOrders();
     this.changePage(this.$route.params.page);
+    this.userId = this.getUserId();
   },
 };
 </script>
@@ -64,9 +73,12 @@ export default {
       ></PaginationComponent>
       <div class="grid md:grid-cols-12 lg:gap-0">
         <ul class="col-span-7 flex flex-col gap-6">
-          <li v-for="activity in hotActivitiesList.list" :key="activity.id">
-            <RouterLink to="/"
-              ><join-card-row :activity="activity"></join-card-row
+          <li v-for="activity in hotActivitiesList.list" :key="activity?.id">
+            <RouterLink :to="`/JoinDetail/id=${activity?.id}`"
+              ><join-card-row
+                :userId="userId"
+                :activity="activity"
+              ></join-card-row
             ></RouterLink>
           </li>
         </ul>

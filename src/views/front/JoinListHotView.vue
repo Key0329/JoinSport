@@ -22,8 +22,13 @@ export default {
   computed: {
     ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
     hotActivitiesList: ({ restructureActivitiesList, arrangePage }) => {
+      // 刪掉已取消的揪團
+      const filterList = restructureActivitiesList.filter(
+        (activity) => activity.isCancelled === false
+      );
+
       // 依照參與人數排序熱門程度
-      const tempList = restructureActivitiesList.sort((a, b) => {
+      const tempList = filterList.sort((a, b) => {
         return b.numParticipants - a.numParticipants;
       });
 
@@ -67,8 +72,8 @@ export default {
       ></PaginationComponent>
       <section class="grid gap-8 md:grid-cols-12 lg:gap-0">
         <ul class="col-span-7 flex flex-col gap-6">
-          <li v-for="activity in hotActivitiesList.list" :key="activity.id">
-            <RouterLink :to="`/JoinDetail/id=${activity.id}`"
+          <li v-for="activity in hotActivitiesList.list" :key="activity?.id">
+            <RouterLink :to="`/JoinDetail/id=${activity?.id}`"
               ><join-card-row
                 :activity="activity"
                 :userId="userId"

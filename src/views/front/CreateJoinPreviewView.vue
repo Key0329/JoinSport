@@ -1,4 +1,6 @@
 <script>
+import { mapActions } from 'pinia';
+import authStore from '@/stores/front/authStore';
 import StepPagination from '@/components/front/StepPagination.vue';
 import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
 import JoinAttendees from '@/components/front/JoinAttendees.vue';
@@ -11,6 +13,7 @@ export default {
   },
   data() {
     return {
+      userId: null,
       tempForm: {},
       tempTags: [],
       editorContent: '',
@@ -20,18 +23,37 @@ export default {
     tempActivity() {
       const tempActivity = {
         ...this.tempForm,
+        userId: this.userId,
+        city: this.tempForm.city?.name,
+        district: this.tempForm.district?.name,
         tags: this.tempTags,
+        mainImg:
+          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity01.jpg?raw=true',
+        imgs: [
+          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity0101.jpg?raw=true',
+          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity0102.jpg?raw=true',
+          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity0103.jpg?raw=true',
+        ],
+        content: this.editorContent,
+        maxJoinNum: this.tempForm.joinNum?.number,
+        cost: this.tempForm.costPerPerson,
+        paymentMethod: this.tempForm.paymentMethod?.method,
+        groupId: '',
+        updateDate: new Date().getTime(),
+        isCancelled: false,
       };
 
       return tempActivity;
     },
   },
   methods: {
+    ...mapActions(authStore, ['getUserId']),
+
     getLocalData() {
       if (localStorage.getItem('createTempFormData')) {
         const tempForm = JSON.parse(localStorage.getItem('createTempFormData'));
         const datePart = tempForm.date.split('-');
-        const date = `${datePart[1]}/${datePart[2]}`;
+        const newDate = `${datePart[1]}/${datePart[2]}`;
         const dayOfWeek = new Date(tempForm.date).getDay();
         const dayOfWeekText = [
           '星期日',
@@ -43,7 +65,7 @@ export default {
           '星期六',
         ][dayOfWeek];
 
-        this.tempForm = { ...tempForm, date, dayOfWeekText };
+        this.tempForm = { ...tempForm, newDate, dayOfWeekText };
       }
 
       if (localStorage.getItem('editorValue')) {
@@ -59,7 +81,7 @@ export default {
   },
   mounted() {
     this.getLocalData();
-    console.log(this.tempForm);
+    this.userId = this.getUserId();
   },
 };
 </script>
@@ -67,9 +89,14 @@ export default {
 <template>
   <section class="px-4 pt-20 pb-5">
     <div class="container">
-      <h2 class="mb-4 text-xl font-bold md:text-3xl">
-        {{ tempForm.title }}
-      </h2>
+      <div class="flex items-center">
+        <h2 class="mb-4 mr-4 text-xl font-bold md:text-3xl">
+          {{ tempForm.title }}
+        </h2>
+        <p class="items-end">
+          {{ tempForm.city?.name }} {{ tempForm.district?.name }}
+        </p>
+      </div>
       <div class="flex items-center gap-4">
         <PAvatar
           image="/src/assets/images/avatar/avatar01.png"
@@ -110,7 +137,7 @@ export default {
               >
                 <span class="material-icons mr-1 text-primary-01">
                   schedule </span
-                >{{ tempForm.date }} {{ tempForm.startTime?.time }}
+                >{{ tempForm.newDate }} {{ tempForm.startTime?.time }}
               </p>
               <p
                 class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
@@ -230,7 +257,7 @@ export default {
       <div class="flex flex-col items-center md:flex-row md:justify-between">
         <div class="mb-2 md:mb-0">
           <p class="mb-2 md:mb-0">
-            {{ tempForm.date }} {{ tempForm.dayOfWeekText }}
+            {{ tempForm.newDate }} {{ tempForm.dayOfWeekText }}
             {{ tempForm.startTime?.time }}
           </p>
           <h2 class="text-lg font-semibold sm:text-xl">
@@ -254,7 +281,7 @@ export default {
     </div>
   </section>
 
-  <StepPagination class="mt-20"></StepPagination>
+  <StepPagination :activity="tempActivity" class="mt-20"></StepPagination>
 </template>
 
 <style scoped>

@@ -2,7 +2,14 @@
 import { mapState } from 'pinia';
 import createSteps from '../../stores/front/createSteps';
 
+const { VITE_URL } = import.meta.env;
+
 export default {
+  props: {
+    activity: {
+      type: Object,
+    },
+  },
   data() {
     return {
       currentStep: null,
@@ -31,6 +38,20 @@ export default {
       }
 
       this.$router.push(newRoute);
+    },
+    handleSubmit() {
+      const path = `${VITE_URL}/activities`;
+      const data = this.activity;
+
+      this.$http
+        .post(path, data)
+        .then((res) => {
+          console.log(res.data);
+          this.nextStep();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 
@@ -67,7 +88,7 @@ export default {
       icon="pi pi-arrow-right"
       iconPos="right"
       class="ml-auto w-1/4"
-      @click="nextStep"
+      @click="handleSubmit"
     />
   </div>
 </template>

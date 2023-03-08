@@ -13,10 +13,10 @@ export default {
   },
   computed: {
     hasJoined() {
-      return this.activity.participantsId.includes(parseInt(this.userId, 10));
+      return this.activity?.participantsId?.includes(parseInt(this.userId, 10));
     },
     isHost() {
-      return this.activity.userId === this.userId;
+      return this.activity?.userId === this.userId;
     },
   },
 };
@@ -66,7 +66,7 @@ export default {
           class="flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D]"
         >
           <span class="material-icons text-primary-01"> room </span
-          >{{ activity?.location }}
+          >{{ activity?.city }}{{ activity?.district }}
         </p>
         <p
           class="flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D]"
@@ -107,7 +107,7 @@ export default {
           </div>
         </div>
         <RouterLink
-          to="/"
+          :to="`/JoinDetail/id=${activity?.id}`"
           class="btn-primary btn p-ripple p-2 group-hover:bg-secondary-yellow group-hover:text-[#3D3D3D] sm:w-1/4 md:ml-auto"
           v-ripple
           >查看詳情</RouterLink
