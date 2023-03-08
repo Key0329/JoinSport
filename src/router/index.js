@@ -145,6 +145,47 @@ const routes = [
             },
           },
           {
+            path: 'Edit',
+            name: 'Edit',
+            component: () => import('../views/front/MemberEditView.vue'),
+            meta: {
+              title: 'Edit - Member - Join Sport',
+              requiresAuth: true,
+            },
+            children: [
+              {
+                path: 'EditInfo=:id&title=:title',
+                name: 'EditInfo',
+                component: () =>
+                  import('../views/front/MemberEditInfoView.vue'),
+                meta: {
+                  title: 'EditInfo - Member - Join Sport',
+                  requiresAuth: true,
+                },
+              },
+              {
+                path: 'EditTags=:id&title=:title',
+                name: 'EditTags',
+                component: () =>
+                  import('../views/front/MemberEditTagsView.vue'),
+                meta: {
+                  title: 'EditTags - Member - Join Sport',
+                  requiresAuth: true,
+                },
+              },
+              {
+                path: 'EditContent=:id&title=:title',
+                name: 'EditContent',
+                component: () =>
+                  import('../views/front/MemberEditContentView.vue'),
+                meta: {
+                  title: 'EditContent - Member - Join Sport',
+                  requiresAuth: true,
+                },
+              },
+            ],
+          },
+          {
             path: 'Collection',
             name: 'Collection',
             component: () => import('../views/front/MemberCollectionView.vue'),

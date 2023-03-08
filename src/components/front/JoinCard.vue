@@ -16,7 +16,7 @@ export default {
       class="absolute top-4 left-2 z-[3] flex items-center rounded-full bg-primary-03 py-1 pl-2 pr-3 text-sm text-[#3D3D3D]"
     >
       <span class="material-icons text-primary-01"> room </span
-      >{{ activity?.location }}
+      >{{ activity?.city }}{{ activity?.district }}
     </p>
     <p
       class="absolute top-14 left-2 z-[3] flex items-center rounded-full bg-primary-03 py-1 pl-2 pr-3 text-sm text-[#3D3D3D]"

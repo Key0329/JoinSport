@@ -33,7 +33,9 @@ export default {
     <div class="container">
       <h1 class="mb-8 text-center text-4xl">三個步驟，讓您快速開團</h1>
       <h2 class="mb-12 text-center text-xl">首先設定必要的資訊</h2>
-      <VuelidateForm ref="childForm"></VuelidateForm>
+      <div class="flex justify-center">
+        <VuelidateForm ref="childForm"></VuelidateForm>
+      </div>
       <div class="mx-auto mt-20 w-1/2">
         <StepPagination @emit-next="submitChildForm"></StepPagination>
       </div>

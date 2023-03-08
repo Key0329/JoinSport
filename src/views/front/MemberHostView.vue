@@ -8,18 +8,12 @@ export default {
   data() {
     return {
       activities: [],
-      isRemoved: false,
     };
   },
   computed: {
     currentActivities() {
       return this.activities.filter(
         (activity) => activity.isCancelled !== true
-      );
-    },
-    cancelledActivities() {
-      return this.activities.filter(
-        (activity) => activity.isCancelled === true
       );
     },
   },
@@ -32,16 +26,11 @@ export default {
       this.$http
         .get(path)
         .then((res) => {
-          console.log(res.data);
           this.activities = res.data;
         })
         .catch((err) => {
           console.log(err);
         });
-    },
-    remove() {
-      this.isRemoved = true;
-      alert('已清除');
     },
   },
   mounted() {
@@ -57,13 +46,11 @@ export default {
       <table class="mb-[160px] table-fixed">
         <thead>
           <tr class="border-b border-gray-300">
-            <th width="20%" class="py-2 text-start font-normal">名稱</th>
+            <th width="25%" class="py-2 text-start font-normal">名稱</th>
             <th width="15%" class="py-2 text-start font-normal">日期</th>
-            <th width="35%" class="py-2 text-start font-normal">地點</th>
-            <th width="15%" class="py-2 text-center font-normal">
-              參與人數 / 最大
-            </th>
-            <th width="15%" class="py-2"></th>
+            <th width="30%" class="py-2 text-start font-normal">地點</th>
+            <th width="10%" class="py-2 text-center font-normal">參與人數</th>
+            <th width="20%" class="py-2"></th>
           </tr>
         </thead>
         <tbody>
@@ -73,46 +60,25 @@ export default {
               <td class="py-2">{{ activity.date }}</td>
               <td class="py-2">{{ activity.address }}</td>
               <td class="py-2 text-center">{{ activity.maxJoinNum }}</td>
-              <td class="py-2 text-center">
-                <button type="button" class="btn btn-primary px-2 py-1">
-                  <i class="pi pi-user-edit mr-1"></i> 編輯
-                </button>
-              </td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
-    </section>
-
-    <section v-if="cancelledActivities">
-      <h1 class="mb-8 text-3xl">已取消的揪團</h1>
-      <table class="table-fixed">
-        <thead>
-          <tr class="border-b border-gray-300">
-            <th width="20%" class="py-2 text-start font-normal">名稱</th>
-            <th width="15%" class="py-2 text-start font-normal">日期</th>
-            <th width="35%" class="py-2 text-start font-normal">地點</th>
-            <th width="15%" class="py-2 text-center font-normal">
-              參與人數 / 最大
-            </th>
-            <th width="15%" class="py-2"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <template v-for="activity in cancelledActivities" :key="activity?.id">
-            <tr v-if="!isRemoved" class="mb-4">
-              <td class="py-2">{{ activity.title }}</td>
-              <td class="py-2">{{ activity.date }}</td>
-              <td class="py-2">{{ activity.address }}</td>
-              <td class="py-2 text-center">{{ activity.maxJoinNum }}</td>
-              <td class="py-2 text-center">
-                <button
-                  type="button"
-                  class="btn btn-primary px-2 py-1"
-                  @click="remove"
+              <td class="flex gap-1 py-2 text-center">
+                <RouterLink :to="`/JoinDetail/id=${activity.id}`">
+                  <button
+                    type="button"
+                    class="btn border border-primary-01 px-2 py-1 hover:bg-primary-01 hover:text-white"
+                  >
+                    <i class="pi pi-image"></i> 頁面
+                  </button>
+                </RouterLink>
+                <RouterLink
+                  :to="`/Member/Edit/EditInfo=${activity.id}&title=${activity.title}`"
                 >
-                  <i class="pi pi-trash mr-1"></i>清除
-                </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary h-full px-2 py-1"
+                  >
+                    <i class="pi pi-user-edit"></i> 編輯
+                  </button>
+                </RouterLink>
               </td>
             </tr>
           </template>

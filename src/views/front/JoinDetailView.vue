@@ -52,14 +52,17 @@ export default {
         dayOfWeekText,
       };
 
-      console.log(newDateActivity);
       return newDateActivity;
     },
     slicedActivities() {
       // 避免 side effect
       const tempActivity = [...this.restructureActivitiesList];
+      // 刪掉已取消的揪團
+      const filterList = tempActivity.filter(
+        (activity) => activity.isCancelled === false
+      );
       // 避免選到同個活動
-      const excluded = tempActivity.filter((activity) => {
+      const excluded = filterList.filter((activity) => {
         if (!activity?.id) {
           return [];
         }
@@ -271,7 +274,7 @@ export default {
                 class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
               >
                 <span class="material-icons text-primary-01"> room </span
-                >{{ newDateActivity.location }}
+                >{{ newDateActivity.city }}{{ newDateActivity.district }}
               </p>
               <span class="pl-8 text-sm text-[#b7b7b7]">{{
                 newDateActivity.address
@@ -294,7 +297,7 @@ export default {
               <span class="material-symbols-outlined text-4xl">
                 monetization_on
               </span>
-              <p>$ {{ newDateActivity.cost }}</p>
+              <p>$ {{ newDateActivity.costPerPerson }}</p>
             </div>
             <div class="text-center">
               <span class="material-symbols-outlined text-4xl"> group </span>
