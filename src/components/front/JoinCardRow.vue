@@ -18,6 +18,9 @@ export default {
     isHost() {
       return this.activity?.userId === this.userId;
     },
+    isCancelled() {
+      return this.activity?.isCancelled;
+    },
   },
 };
 </script>
@@ -25,6 +28,7 @@ export default {
 <template>
   <div
     class="group flex h-full flex-col gap-4 rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] sm:flex-row"
+    :class="{ 'opacity-50': isCancelled }"
   >
     <!-- card img -->
     <div class="relative w-full sm:w-1/2">
@@ -56,6 +60,12 @@ export default {
           class="flex items-center rounded-lg bg-primary-01 px-2 py-1 text-xs text-white"
         >
           <i class="pi pi-user mr-1"></i>您是主辦者
+        </div>
+        <div
+          v-else-if="isCancelled"
+          class="flex items-center rounded-lg bg-red-400 px-2 py-1 text-xs text-white"
+        >
+          <i class="pi pi-user mr-1"></i>此揪團已取消
         </div>
       </div>
       <p class="mb-4 text-sm text-[#6f6f6f]">

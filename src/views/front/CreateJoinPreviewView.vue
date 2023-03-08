@@ -5,6 +5,8 @@ import StepPagination from '@/components/front/StepPagination.vue';
 import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
 import JoinAttendees from '@/components/front/JoinAttendees.vue';
 
+const { VITE_URL } = import.meta.env;
+
 export default {
   components: {
     StepPagination,
@@ -13,6 +15,7 @@ export default {
   },
   data() {
     return {
+      user: {},
       userId: null,
       tempForm: {},
       tempTags: [],
@@ -28,11 +31,11 @@ export default {
         district: this.tempForm.district?.name,
         tags: this.tempTags,
         mainImg:
-          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity01.jpg?raw=true',
+          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity15.jpg?raw=true',
         imgs: [
-          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity0101.jpg?raw=true',
-          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity0102.jpg?raw=true',
-          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity0103.jpg?raw=true',
+          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity1501.jpg?raw=true',
+          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity1502.jpg?raw=true',
+          'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity1503.jpg?raw=true',
         ],
         content: this.editorContent,
         maxJoinNum: this.tempForm.joinNum?.number,
@@ -78,10 +81,24 @@ export default {
         this.tempTags = tempTags;
       }
     },
+    getUser() {
+      const id = this.userId;
+      const path = `${VITE_URL}/users/${id}`;
+
+      this.$http
+        .get(path)
+        .then((res) => {
+          this.user = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   mounted() {
     this.getLocalData();
     this.userId = this.getUserId();
+    this.getUser();
   },
 };
 </script>
@@ -98,14 +115,10 @@ export default {
         </p>
       </div>
       <div class="flex items-center gap-4">
-        <PAvatar
-          image="/src/assets/images/avatar/avatar01.png"
-          size="xlarge"
-          shape="circle"
-        />
+        <PAvatar :image="user.img" size="xlarge" shape="circle" />
         <div>
           <p>主辦者</p>
-          <p>Jack</p>
+          <p>{{ user.name }}</p>
         </div>
       </div>
     </div>
@@ -118,7 +131,7 @@ export default {
       >
         <div class="col-span-12 md:col-span-8">
           <img
-            src="../../assets/images/activities/activity01.jpg"
+            src="../../assets/images/activities/activity15.jpg"
             alt="JoinDetailImage"
             class="rounded md:mb-10"
           />
@@ -193,21 +206,21 @@ export default {
               <div class="flex flex-col justify-evenly gap-2 md:flex-row">
                 <div class="w-full">
                   <img
-                    src="../../assets/images/group/group07.png"
+                    src="../../assets/images/activities/activity1501.jpg"
                     alt="JoinDetailImg"
                     class="h-full"
                   />
                 </div>
                 <div class="w-full">
                   <img
-                    src="../../assets/images/group/group01.png"
+                    src="../../assets/images/activities/activity1502.jpg"
                     alt="JoinDetailImg"
                     class="h-full"
                   />
                 </div>
                 <div class="w-full">
                   <img
-                    src="../../assets/images/group/group09.png"
+                    src="../../assets/images/activities/activity1503.jpg"
                     alt="JoinDetailImg"
                     class="h-full"
                   />

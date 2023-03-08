@@ -48,6 +48,13 @@ export default {
         .then((res) => {
           console.log(res.data);
           this.nextStep();
+
+          const keysToRemove = [
+            'createTempFormData',
+            'editorValue',
+            'selectedTags',
+          ];
+          keysToRemove.forEach((key) => localStorage.removeItem(key));
         })
         .catch((err) => {
           console.log(err);

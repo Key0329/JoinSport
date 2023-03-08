@@ -422,7 +422,7 @@ export default {
     <div
       class="flex h-screen flex-col items-center justify-center bg-primary-03"
     >
-      <h1 class="text-4xl">Oops...此揪團已取消</h1>
+      <h1 class="mb-10 text-4xl">Oops...此揪團已取消</h1>
       <h2 class="mb-4 text-xl font-bold md:text-3xl">
         {{ newDateActivity.title }}
       </h2>
