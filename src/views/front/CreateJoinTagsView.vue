@@ -1,6 +1,6 @@
 <script>
-import { mapState } from 'pinia';
-import createSteps from '@/stores/front/createSteps';
+import { mapState, mapActions } from 'pinia';
+import tagsStore from '@/stores/tagsStore';
 import StepPagination from '@/components/front/StepPagination.vue';
 
 export default {
@@ -15,9 +15,11 @@ export default {
     };
   },
   computed: {
-    ...mapState(createSteps, ['tags', 'tagList']),
+    ...mapState(tagsStore, ['tags', 'tagList']),
   },
   methods: {
+    ...mapActions(tagsStore, ['getTags']),
+
     searchTag(event) {
       if (this.selectedTags.length <= 4) {
         setTimeout(() => {
@@ -32,17 +34,32 @@ export default {
       }
     },
     addTag(event) {
+      // 下方可點選 tags
       if (event.target.tagName === 'BUTTON') {
         const newTag = event.target.textContent;
         this.selectedTags.push(newTag);
         this.tempSelectedTag = '';
-      } else {
-        const newTag = event.target.value;
-        this.selectedTags.push(newTag);
-        this.tempSelectedTag = '';
+        return;
       }
+
+      // Enter 輸入
+      const newTag = event.target.value;
+
+      // 判斷是否有重複標籤或沒有內容
+      const tagExists = this.selectedTags.some((item) => item === newTag);
+      if (tagExists) {
+        alert('已有相同標籤');
+        return;
+      }
+      if (newTag === '') {
+        alert('請輸入標籤內容');
+        return;
+      }
+
+      this.selectedTags.push(newTag);
+      this.tempSelectedTag = '';
     },
-    deleteTag(i) {
+    removeTag(i) {
       this.selectedTags.splice(i, 1);
     },
     saveTagsToLocal() {
@@ -57,6 +74,7 @@ export default {
   },
   mounted() {
     this.getLocalTags();
+    this.getTags();
   },
 };
 </script>
@@ -94,7 +112,7 @@ export default {
             <button
               type="button"
               class="flex h-5 w-5 items-center justify-center rounded-full bg-primary-03"
-              @click="deleteTag(i)"
+              @click="removeTag(i)"
             >
               <i class="pi pi-times text-xs"></i>
             </button>

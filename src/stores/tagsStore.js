@@ -5,28 +5,28 @@ const { VITE_URL } = import.meta.env;
 
 export default defineStore('sportsStore', {
   state: () => ({
-    sports: [],
+    tags: [],
   }),
   getters: {
-    sportList() {
-      const sportList = this.sports.map((sport) => {
+    tagList() {
+      const tagList = this.tags.map((tag) => {
         return {
-          label: sport,
-          value: sport,
+          label: tag,
+          value: tag,
         };
       });
 
-      return sportList;
+      return tagList;
     },
   },
   actions: {
-    getSportsData() {
+    getTags() {
       const path = `${VITE_URL}/sports`;
 
       axios
         .get(path)
         .then((res) => {
-          this.sports = res.data;
+          this.tags = res.data;
         })
         .catch((err) => {
           console.log(err);

@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'pinia';
-import sportsStore from '@/stores/sportsStore';
+import tagsStore from '@/stores/tagsStore';
 import memberStore from '@/stores/front/memberStore';
 import authStore from '@/stores/front/authStore';
 
@@ -17,12 +17,12 @@ export default {
     };
   },
   computed: {
-    ...mapState(sportsStore, ['sports', 'sportList']),
+    ...mapState(tagsStore, ['tags', 'tagList']),
     ...mapState(memberStore, ['user']),
   },
   methods: {
     ...mapActions(authStore, ['getUserId']),
-    ...mapActions(sportsStore, ['getSportsData']),
+    ...mapActions(tagsStore, ['getTags']),
     ...mapActions(memberStore, ['getMemberData', 'editMemberData']),
 
     searchTag(event) {
@@ -39,15 +39,23 @@ export default {
       }
     },
     addTag(event) {
+      // 下方可點選 tags
       if (event.target.tagName === 'BUTTON') {
         const newTag = event.target.textContent;
         this.selectedTags.push(newTag);
         this.tempSelectedTag = '';
         return;
       }
+      // 新增按鈕
       if (event.target.tagName === 'A') {
         // autocomplete 是物件
         const newTag = this.tempSelectedTag.value || this.tempSelectedTag;
+        // 判斷是否有重複標籤或沒有內容
+        const tagExists = this.selectedTags.some((item) => item === newTag);
+        if (tagExists) {
+          alert('已有相同標籤');
+          return;
+        }
         if (newTag === '') {
           alert('請輸入標籤內容');
           return;
@@ -58,8 +66,10 @@ export default {
         return;
       }
 
+      // Enter 輸入
       const newTag = event.target.value;
-      // 判斷是否有重複標籤
+
+      // 判斷是否有重複標籤或沒有內容
       const tagExists = this.selectedTags.some((item) => item === newTag);
       if (tagExists) {
         alert('已有相同標籤');
@@ -79,8 +89,6 @@ export default {
         favoriteSports: this.selectedTags,
       };
 
-      console.log(data);
-
       this.editMemberData(data);
       this.reload();
       this.isDisabled = true;
@@ -91,10 +99,13 @@ export default {
     removeTag(i) {
       this.selectedTags.splice(i, 1);
     },
+    cancelEdit() {
+      this.reload();
+    },
   },
   watch: {
-    sportList() {
-      this.filterList = JSON.parse(JSON.stringify(this.sportList));
+    tagList() {
+      this.filterList = JSON.parse(JSON.stringify(this.tagList));
     },
     user() {
       this.selectedTags = JSON.parse(JSON.stringify(this.user.favoriteSports));
@@ -102,7 +113,7 @@ export default {
   },
 
   mounted() {
-    this.getSportsData();
+    this.getTags();
     this.userId = this.getUserId();
     this.getMemberData(this.userId);
   },
@@ -166,16 +177,19 @@ export default {
             <i class="pi pi-times text-xs"></i>
           </button>
         </li>
-        <li v-if="!isDisabled">
-          <button
-            type="button"
-            @click="handleSubmit"
-            class="btn btn-primary px-3"
-          >
-            儲存變更
-          </button>
-        </li>
       </ul>
+      <div v-if="!isDisabled" class="mt-10 ml-auto flex gap-4">
+        <button
+          type="button"
+          @click="handleSubmit"
+          class="btn btn-primary px-3"
+        >
+          儲存變更
+        </button>
+        <button type="button" @click="cancelEdit" class="btn btn-primary px-3">
+          取消
+        </button>
+      </div>
     </section>
     <section v-if="!isDisabled">
       <div class="mb-10">
@@ -183,7 +197,7 @@ export default {
         <ul class="flex flex-wrap">
           <li
             class="flex items-center justify-center"
-            v-for="(tag, i) in sports"
+            v-for="(tag, i) in tags"
             :key="tag + i"
           >
             <button

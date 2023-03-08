@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-// import axios from 'axios';
 
 export default defineStore('products', {
   state: () => ({
@@ -10,19 +9,6 @@ export default defineStore('products', {
       {
         method: '各付各的',
       },
-    ],
-    tags: [
-      '攀岩',
-      '籃球',
-      '足球',
-      '羽毛球',
-      '網球',
-      '游泳',
-      '慢跑',
-      '瑜伽',
-      '拳擊',
-      '跳繩',
-      '滑板',
     ],
     isChildFormValid: null,
   }),
@@ -48,16 +34,6 @@ export default defineStore('products', {
       const startTimes = times.map((time) => ({ time }));
 
       return startTimes;
-    },
-    tagList() {
-      const tagList = this.tags.map((tag) => {
-        return {
-          label: tag,
-          value: tag,
-        };
-      });
-
-      return tagList;
     },
   },
   actions: {

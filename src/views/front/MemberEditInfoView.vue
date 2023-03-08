@@ -6,12 +6,14 @@ import createSteps from '@/stores/front/createSteps';
 const { VITE_URL } = import.meta.env;
 
 export default {
+  inject: ['reload'],
   components: {
     VuelidateForm,
   },
   data() {
     return {
       activity: {},
+      isDisabled: true,
     };
   },
   computed: {
@@ -43,9 +45,19 @@ export default {
           console.log(err);
         });
     },
+    enableEdit() {
+      this.isDisabled = !this.isDisabled;
+    },
+    cancelEdit() {
+      this.reload();
+    },
+    removeLocal() {
+      localStorage.removeItem('createTempFormData');
+    },
   },
   mounted() {
     this.getActivity();
+    this.removeLocal();
   },
 };
 </script>
@@ -53,12 +65,21 @@ export default {
 <template>
   <section class="mb-10 py-10">
     <VuelidateForm :activity="activity" ref="childForm"></VuelidateForm>
-    <button
-      type="button"
-      class="btn btn-primary mt-10 ml-auto flex"
-      @click="submitChildForm"
-    >
-      確認
-    </button>
+    <div class="mt-16 flex gap-4">
+      <button
+        type="button"
+        class="btn btn-primary ml-auto"
+        @click="submitChildForm"
+      >
+        確認
+      </button>
+      <button
+        type="button"
+        @click="cancelEdit"
+        class="btn border border-primary-01 hover:bg-primary-01 hover:text-white"
+      >
+        取消
+      </button>
+    </div>
   </section>
 </template>
