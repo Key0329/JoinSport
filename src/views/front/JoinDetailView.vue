@@ -59,7 +59,7 @@ export default {
       const tempActivity = [...this.restructureActivitiesList];
       // 刪掉已取消的揪團
       const filterList = tempActivity.filter(
-        (activity) => activity.isCancelled === false
+        (activity) => activity?.isCancelled === false
       );
       // 避免選到同個活動
       const excluded = filterList.filter((activity) => {
@@ -195,6 +195,7 @@ export default {
       this.$primevue.config.locale.accept = '確認';
       this.$primevue.config.locale.reject = '取消';
     },
+    addToBookmark() {},
   },
   watch: {
     $route(to) {
@@ -282,7 +283,12 @@ export default {
             </div>
           </section>
           <article class="mb-10 md:mb-20">
-            {{ newDateActivity.content }}
+            <QuillEditor
+              v-model:content="newDateActivity.content"
+              contentType="html"
+              readOnly
+              theme="bubble"
+            />
           </article>
           <section
             class="mb-10 flex justify-evenly border-y border-[#3d3d3d] py-10 md:mb-20"
@@ -478,9 +484,11 @@ export default {
             {{ newDateActivity.maxJoinNum - orders.length }}
             個空位
           </p>
-          <a href="#">
+          <!-- 收藏 -->
+          <button type="button">
             <i class="pi pi-star text-lg"></i>
-          </a>
+          </button>
+          <!-- 主辦者 -->
           <template v-if="isHost">
             <button
               type="button"
@@ -497,6 +505,7 @@ export default {
               取消此揪團
             </button>
           </template>
+          <!-- 參與者 - 已參加 -->
           <template v-else-if="hadJoined">
             <button
               type="button"
@@ -514,15 +523,17 @@ export default {
               取消報名
             </button>
           </template>
-          <button
-            v-else
-            type="button"
-            class="btn btn-primary py-4"
-            @click="userConfirmJoin"
-            label="confirm"
-          >
-            我要參加
-          </button>
+          <!-- 參與者 - 尚未參加 -->
+          <template v-else>
+            <button
+              type="button"
+              class="btn btn-primary py-4"
+              @click="userConfirmJoin"
+              label="confirm"
+            >
+              我要參加
+            </button>
+          </template>
         </div>
       </div>
     </div>

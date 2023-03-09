@@ -13,7 +13,6 @@ export default defineStore('joinActivities', {
   getters: {
     restructureActivitiesList() {
       const newList = [];
-
       // 以 activitiesList 為基礎，調整日期格式
       this.activitiesList.forEach((item) => {
         const arr = item.date.split('-');

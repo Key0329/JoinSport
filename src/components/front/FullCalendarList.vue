@@ -1,4 +1,7 @@
 <script>
+import { mapActions, mapState } from 'pinia';
+import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import authStore from '@/stores/front/authStore';
 import FullCalendar from '@fullcalendar/vue3';
 import listPlugin from '@fullcalendar/list';
 import zhTw from '@fullcalendar/core/locales/zh-tw';
@@ -19,60 +22,88 @@ export default {
           center: '',
           right: '',
         },
+        eventDidMount: (info) => {
+          if (info.event.extendedProps.status === 'done') {
+            const bgStyle = info.el.style;
+            bgStyle.backgroundColor = '#faede2';
+
+            // Change color of dot marker
+            const dotEl =
+              info.el.getElementsByClassName('fc-list-event-dot')[0];
+            if (dotEl) {
+              dotEl.style.borderColor = '#f1675d';
+            }
+          }
+        },
+        eventClick: (info) => {
+          // alert('Event: ' + info.event.id);
+          this.$router.push(`/JoinDetail/id=${info.event.id}`);
+        },
         events: [
           { title: '開會', start: new Date() },
           {
             title: '打球',
-            start: '2023-03-01T14:30:00',
-            // extendedProps: {
-            //   status: 'done',
-            // },
-          },
-          {
-            title: '生日派對',
-            start: '2023-03-02T07:00:00',
-            borderColor: 'red',
-          },
-          {
-            title: '生日派對',
-            start: '2023-03-02T07:00:00',
-            borderColor: 'red',
-          },
-          {
-            title: '生日派對',
-            start: '2023-03-02T07:00:00',
-            borderColor: 'red',
-          },
-          {
-            title: '生日派對',
-            start: '2023-03-02T07:00:00',
-            borderColor: 'red',
-          },
-          {
-            title: '生日派對',
-            start: '2023-03-02T07:00:00',
-            borderColor: 'red',
-          },
-          {
-            title: '生日派對',
-            start: '2023-03-02T07:00:00',
-            borderColor: 'red',
-          },
-          {
-            title: '生日派對',
-            start: '2023-03-02T07:00:00',
-            borderColor: 'red',
+            start: '2023-03-10T14:30:00',
+            extendedProps: {
+              status: 'done',
+            },
           },
         ],
-        editable: false,
+        editable: true,
       },
     };
+  },
+  computed: {
+    ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
+
+    getMemberEvent() {
+      // 取出 userId
+      const id = parseInt(this.getUserId(), 10);
+      // 取出此會員參與的活動
+      const filteredArray = this.restructureActivitiesList.filter((activity) =>
+        activity.participantsId.includes(id)
+      );
+      // 調整需要的格式
+      const membersActivities = filteredArray.map((activity) => {
+        const time = `${activity.originDate}T${activity.startTime?.time}:00`;
+        const status =
+          new Date(time).getTime() - new Date().getTime() < 0 ? 'done' : '';
+
+        const schedule = {
+          title: activity.title,
+          id: activity.id,
+          start: time,
+          borderColor: '#36D488',
+          extendedProps: {
+            status,
+          },
+        };
+
+        return schedule;
+      });
+
+      return membersActivities;
+    },
+  },
+  methods: {
+    ...mapActions(joinActivitiesStore, ['getActivities', 'getOrders']),
+    ...mapActions(authStore, ['getUserId']),
+  },
+  watch: {
+    getMemberEvent(to) {
+      this.calendarOptions.events = to;
+    },
+  },
+  mounted() {
+    this.getActivities();
+    this.getOrders();
   },
 };
 </script>
 
 <template>
-  <div>
+  <div class="my-6">
+    <h3 class="text-lg">本周活動</h3>
     <FullCalendar :options="calendarOptions" />
     <RouterLink
       to="/Member/Calendar"
