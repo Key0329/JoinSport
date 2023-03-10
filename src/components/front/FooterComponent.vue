@@ -1,3 +1,5 @@
+import { RouterLink } from 'vue-router';
+
 <template>
   <footer class="border-t-4 border-primary-01 bg-primary-03 py-8 md:py-10">
     <div class="container">
@@ -6,10 +8,10 @@
       >
         <div class="flex flex-col items-center lg:flex-row">
           <h2 class="mb-4 md:mr-[134px] lg:mb-0">
-            <a
+            <RouterLink
+              to="/"
               class="h-12 w-[196px] overflow-hidden whitespace-nowrap bg-[url('./images/logo/JoinSport03.png')] bg-cover bg-no-repeat indent-[101%] hover:opacity-75"
-              href="#"
-              >Join Sport 揪運動</a
+              >Join Sport 揪運動</RouterLink
             >
           </h2>
           <div class="flex gap-10 text-left xs:gap-[72px]">

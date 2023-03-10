@@ -8,7 +8,7 @@ const routes = [
     component: () => import('../views/FrontLayout.vue'),
     children: [
       {
-        path: '/',
+        path: '',
         name: 'Home',
         component: () => import('../views/front/HomeView.vue'),
         meta: {
