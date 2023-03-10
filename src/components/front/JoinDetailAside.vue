@@ -10,6 +10,9 @@ export default {
       type: Object,
     },
   },
+  mounted() {
+    console.log(this.$route.path.includes('step'));
+  },
 };
 </script>
 
@@ -53,10 +56,18 @@ export default {
         class="flex items-center rounded-full py-1 px-2 text-sm text-[#3D3D3D]"
       >
         <span class="material-icons text-primary-01"> room </span
-        >{{ activity.address }}
+        ><a
+          class="hover:text-primary-01"
+          target="blank"
+          :href="`https://www.google.com.tw/maps/place/${activity.address}`"
+          >{{ activity.address }}</a
+        >
       </p>
     </div>
-    <LeafletMap class="h-[300px]"></LeafletMap>
+    <LeafletMap
+      v-if="!this.$route.path.includes('step')"
+      :mapActivity="activity"
+    ></LeafletMap>
     <div class="rounded-b-lg bg-white p-4">
       <button type="button" class="btn btn-primary w-full">
         <i class="pi pi-comments mr-2"></i>揪團聊天

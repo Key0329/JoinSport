@@ -5,7 +5,7 @@ import StepPagination from '@/components/front/StepPagination.vue';
 import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
 import JoinAttendees from '@/components/front/JoinAttendees.vue';
 
-const { VITE_URL } = import.meta.env;
+const { VITE_URL, VITE_MAP_KEY, VITE_MAP_URL } = import.meta.env;
 
 export default {
   components: {
@@ -20,6 +20,7 @@ export default {
       tempForm: {},
       tempTags: [],
       editorContent: '',
+      location: [],
     };
   },
   computed: {
@@ -38,14 +39,16 @@ export default {
           'https://github.com/Key0329/JoinSport/blob/main/src/assets/images/activities/activity1503.jpg?raw=true',
         ],
         content: this.editorContent,
-        maxJoinNum: this.tempForm.joinNum?.number,
+        maxJoinNum: this.tempForm.maxJoinNum?.number,
         cost: this.tempForm.costPerPerson,
         paymentMethod: this.tempForm.paymentMethod?.method,
         groupId: '',
         updateDate: new Date().getTime(),
         isCancelled: false,
+        location: this.location,
       };
 
+      console.log(tempActivity);
       return tempActivity;
     },
   },
@@ -80,6 +83,8 @@ export default {
         const tempTags = JSON.parse(localStorage.getItem('selectedTags'));
         this.tempTags = tempTags;
       }
+
+      console.log(this.tempForm);
     },
     getUser() {
       const id = this.userId;
@@ -94,11 +99,26 @@ export default {
           console.log(err);
         });
     },
+    getMapLatLng(address) {
+      const path = `${VITE_MAP_URL}?address=${address}&key=${VITE_MAP_KEY}`;
+
+      this.$http
+        .get(path)
+        .then((res) => {
+          const tempLocation = res.data.results[0].geometry.location;
+          this.location = [tempLocation.lat, tempLocation.lng];
+          console.log(this.location);
+        })
+        .then((err) => {
+          console.log(err);
+        });
+    },
   },
   mounted() {
     this.getLocalData();
     this.userId = this.getUserId();
     this.getUser();
+    this.getMapLatLng(this.tempForm.address);
   },
 };
 </script>
@@ -185,7 +205,7 @@ export default {
             </div>
             <div class="text-center">
               <span class="material-symbols-outlined text-4xl"> group </span>
-              <p>{{ tempForm.joinNum?.number }} 人</p>
+              <p>{{ tempForm.maxJoinNum?.number }} 人</p>
             </div>
           </section>
           <TabView>
@@ -278,7 +298,7 @@ export default {
           </h2>
         </div>
         <div class="flex items-center gap-6">
-          <p>{{ tempForm.joinNum?.number }} 個空位</p>
+          <p>{{ tempForm.maxJoinNum?.number }} 個空位</p>
           <p>
             <i class="pi pi-star text-lg"></i>
           </p>

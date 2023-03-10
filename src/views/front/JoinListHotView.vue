@@ -85,7 +85,7 @@ export default {
         <aside
           class="sticky top-[286px] col-span-4 col-end-13 hidden h-[400px] md:flex"
         >
-          <LeafletMap></LeafletMap>
+          <LeafletMap :mapActivities="hotActivitiesList.list"></LeafletMap>
         </aside>
       </section>
     </div>

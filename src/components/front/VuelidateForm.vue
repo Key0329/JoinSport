@@ -328,8 +328,6 @@ export default {
             optionLabel="name"
             placeholder="請選擇活動縣市"
             :options="taiwanCities"
-            :filter="true"
-            :showClear="true"
             class="w-full"
             :class="{ 'p-invalid': v$.city.$invalid && submitted }"
           />
@@ -349,8 +347,6 @@ export default {
           optionLabel="name"
           placeholder="請選擇活動地區"
           :options="districts"
-          :filter="true"
-          :showClear="true"
           class="w-full"
           :class="{ 'p-invalid': v$.district.$invalid && submitted }"
         />

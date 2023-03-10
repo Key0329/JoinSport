@@ -52,6 +52,7 @@ export default {
         dayOfWeekText,
       };
 
+      console.log(newDateActivity);
       return newDateActivity;
     },
     slicedActivities() {

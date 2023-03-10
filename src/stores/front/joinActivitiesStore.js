@@ -94,9 +94,12 @@ export default defineStore('joinActivities', {
 
       const sliced = list.slice(start, end);
 
-      const pageTotal = Math.ceil(
-        this.restructureActivitiesList.length / this.pageLimit
+      // 刪掉已取消的揪團
+      const filterList = this.restructureActivitiesList.filter(
+        (activity) => activity.isCancelled === false
       );
+
+      const pageTotal = Math.ceil(filterList.length / this.pageLimit);
 
       const data = {
         list: sliced,

@@ -1,19 +1,29 @@
 <script>
+import { mapState, mapActions } from 'pinia';
+import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
 import { latLng } from 'leaflet';
 
 export default {
+  props: {
+    mapActivities: {
+      type: Array,
+    },
+    mapActivity: {
+      type: Object,
+    },
+  },
   data() {
     return {
       // 模擬資料
       data: [
-        { id: 1, name: '夢時代購物中心', local: [22.595153, 120.306923] },
-        { id: 2, name: '漢神百貨', local: [22.61942, 120.296386] },
-        { id: 3, name: '漢神巨蛋', local: [22.669603, 120.302288] },
-        { id: 4, name: '大統百貨', local: [22.630748, 120.318033] },
+        { name: '宜蘭外澳衝浪', local: [24.878043, 121.8415] },
+        { name: '週末橋下籃球小聚', local: [25.051434, 121.552293] },
+        { name: '台灣室內抱石之旅', local: [25.034027, 121.497107] },
+        { name: '單車日行千里', local: [24.94545, 121.373392] },
       ],
 
       zoom: 8,
-      center: latLng(23.854929, 121.052003),
+      center: latLng(23.854929, 121.052),
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: `©<a href="http://osm.org/copyright">OpenStreetMap</a> contributors`,
       options: {
@@ -21,8 +31,7 @@ export default {
       },
       icon: {
         type: {
-          black:
-            'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+          grey: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
           gold: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
         },
         shadowUrl:
@@ -34,7 +43,41 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapState(joinActivitiesStore, ['activitiesList']),
+
+    filterActivities() {
+      if (this.mapActivities) {
+        return this.mapActivities.filter(
+          (activity) => activity.isCancelled !== true
+        );
+      }
+      return null;
+    },
+    locationData() {
+      if (this.filterActivities) {
+        return this.filterActivities.map((activity) => {
+          return {
+            id: activity.id,
+            name: activity.title,
+            local: activity.location,
+            img: activity.mainImg,
+          };
+        });
+      }
+      return [
+        {
+          id: this.mapActivity.id,
+          name: this.mapActivity.title,
+          local: this.mapActivity.location,
+          img: this.mapActivity.mainImg,
+        },
+      ];
+    },
+  },
   methods: {
+    ...mapActions(joinActivitiesStore, ['getActivities']),
+
     // 獲得目前位置
     getCurrentLocation() {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -48,6 +91,11 @@ export default {
       });
     },
   },
+  watch: {
+    locationData(to) {
+      this.data = to;
+    },
+  },
   mounted() {
     // 等地圖創建後執行
     this.$nextTick(() => {
@@ -58,7 +106,7 @@ export default {
 </script>
 
 <template>
-  <div class="h-[300px] w-full">
+  <div class="h-[400px] w-full">
     <!-- 初始化地圖設定 -->
     <l-map ref="myMap" :zoom="zoom" :center="center" :options="options">
       <!-- 載入圖資 -->
@@ -66,15 +114,17 @@ export default {
 
       <!-- 自己所在位置 -->
       <l-marker ref="location" :lat-lng="center">
-        <l-popup> 你的位置 <a href="#">123</a> </l-popup>
+        <l-popup>你的位置</l-popup>
       </l-marker>
       <!-- 創建標記點 -->
-      <l-marker :lat-lng="item.local" v-for="item in data" :key="item.id">
+      <l-marker
+        :lat-lng="activity.local"
+        v-for="activity in data"
+        :key="activity.id"
+      >
         <!-- 標記點樣式判斷 -->
         <l-icon
-          :icon-url="
-            item.name === '夢時代購物中心' ? icon.type.gold : icon.type.black
-          "
+          :icon-url="icon.type.gold"
           :shadow-url="icon.shadowUrl"
           :icon-size="icon.iconSize"
           :icon-anchor="icon.iconAnchor"
@@ -83,7 +133,13 @@ export default {
         />
         <!-- 彈出視窗 -->
         <l-popup>
-          {{ item.name }}
+          <RouterLink class="group" :to="`/joinDetail/id=${activity.id}`">
+            <img :src="activity.img" alt="activity-photo" />
+            <p class="flex items-center text-black group-hover:text-primary-01">
+              {{ activity.name }}
+              <i class="pi pi-external-link ml-1 text-xs"></i>
+            </p>
+          </RouterLink>
         </l-popup>
       </l-marker>
     </l-map>
