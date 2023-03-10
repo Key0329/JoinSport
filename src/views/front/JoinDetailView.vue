@@ -394,11 +394,10 @@ export default {
               <ul class="mb-10 flex flex-col gap-8 md:mb-20">
                 <li class="flex gap-4">
                   <div>
-                    <PAvatar
-                      image="/src/assets/images/avatar/avatar01.png"
-                      size="xlarge"
-                      shape="circle"
-                      class="mb-2"
+                    <img
+                      class="inline-block h-20 w-20 rounded-full ring-2 ring-white"
+                      src="../../assets/images/avatar/avatar01.png"
+                      alt="avatar01"
                     />
                   </div>
                   <div class="w-full rounded-lg bg-white p-4">
@@ -416,11 +415,10 @@ export default {
                 </li>
                 <li class="flex gap-4">
                   <div>
-                    <PAvatar
-                      image="/src/assets/images/avatar/avatar01.png"
-                      size="xlarge"
-                      shape="circle"
-                      class="mb-2"
+                    <img
+                      class="inline-block h-20 w-20 rounded-full ring-2 ring-white"
+                      src="../../assets/images/avatar/avatar01.png"
+                      alt="avatar01"
                     />
                   </div>
                   <div class="w-full rounded-lg bg-white p-4">
