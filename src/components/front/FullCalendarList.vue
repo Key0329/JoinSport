@@ -26,6 +26,7 @@ export default {
           if (info.event.extendedProps.status === 'done') {
             const bgStyle = info.el.style;
             bgStyle.backgroundColor = '#faede2';
+            bgStyle.textDecoration = 'line-through';
 
             // Change color of dot marker
             const dotEl =

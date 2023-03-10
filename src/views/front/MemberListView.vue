@@ -10,15 +10,20 @@ export default {
   computed: {
     ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
 
-    membersActivities() {
+    // 篩選出此會員參與的活動
+    filteredArray() {
       // 取出 userId
       const id = parseInt(this.getUserId(), 10);
       // 取出此會員參與的活動
       const filteredArray = this.restructureActivitiesList.filter((activity) =>
         activity.participantsId.includes(id)
       );
+
+      return filteredArray;
+    },
+    membersActivities() {
       // 調整需要的日期格式
-      const membersActivities = filteredArray.map((activity) => {
+      const membersActivities = this.filteredArray.map((activity) => {
         const month = activity.date?.split('/')[0];
         const day = activity.date?.split('/')[1];
         const year = new Date().getFullYear();
@@ -66,13 +71,6 @@ export default {
     },
 
     hasTodayActivity() {
-      // 取出 userId
-      const id = parseInt(this.getUserId(), 10);
-      // 取出此會員參與的活動
-      const filteredArray = this.restructureActivitiesList.filter((activity) =>
-        activity.participantsId.includes(id)
-      );
-
       // 今天的日期
       const year = new Date().getFullYear();
       const currentMonth = new Date().getMonth() + 1;
@@ -84,8 +82,9 @@ export default {
 
       // 找有沒有活動的日期跟今天相同
       const hasTodayActivity =
-        filteredArray.find((activity) => activity.originDate === todayDate) !==
-        undefined;
+        this.filteredArray.find(
+          (activity) => activity.originDate === todayDate
+        ) !== undefined;
 
       return hasTodayActivity;
     },

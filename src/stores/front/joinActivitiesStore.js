@@ -85,6 +85,7 @@ export default defineStore('joinActivities', {
           alert('err');
         });
     },
+
     changePage(currentPage = 1) {
       this.currentPage = currentPage;
     },

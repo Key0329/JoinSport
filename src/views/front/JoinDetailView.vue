@@ -23,6 +23,8 @@ export default {
       activity: [],
       orders: [],
       textareaValue: '',
+      bookmarkId: null,
+      isBookmarked: false,
     };
   },
   computed: {
@@ -52,7 +54,6 @@ export default {
         dayOfWeekText,
       };
 
-      console.log(newDateActivity);
       return newDateActivity;
     },
     slicedActivities() {
@@ -97,6 +98,7 @@ export default {
         .get(path)
         .then((res) => {
           this.activity = res.data;
+          return this.getActivityBookmark();
         })
         .catch((err) => {
           console.log(err);
@@ -109,6 +111,24 @@ export default {
         .get(path)
         .then((res) => {
           this.orders = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+          alert('err');
+        });
+    },
+    getActivityBookmark() {
+      const path = `${VITE_URL}/users/${this.userId}/bookmarks?activityId=${this.activity.id}`;
+
+      this.$http
+        .get(path)
+        .then((res) => {
+          if (res.data[0]) {
+            if (res.data[0].isCancelled === false) {
+              this.isBookmarked = true;
+            }
+            this.bookmarkId = res.data[0].id;
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -196,7 +216,47 @@ export default {
       this.$primevue.config.locale.accept = '確認';
       this.$primevue.config.locale.reject = '取消';
     },
-    addToBookmark() {},
+    handleBookmark() {
+      if (!this.bookmarkId && this.isBookmarked === false) {
+        const path = `${VITE_URL}/bookmarks/`;
+        const data = {
+          userId: parseInt(this.userId, 10),
+          activityId: this.activity.id,
+          isCancelled: false,
+        };
+
+        this.$http
+          .post(path, data)
+          .then((res) => {
+            console.log(res.data);
+            this.isBookmarked = true;
+            this.bookmarkId = res.data.id;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        return;
+      }
+
+      const id = this.bookmarkId;
+      const path = `${VITE_URL}/bookmarks/${id}`;
+      const data = {
+        isCancelled: false,
+      };
+      if (this.isBookmarked === true) {
+        data.isCancelled = true;
+      }
+
+      this.$http
+        .patch(path, data)
+        .then(() => {
+          this.isBookmarked = !this.isBookmarked;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   watch: {
     $route(to) {
@@ -209,9 +269,9 @@ export default {
   mounted() {
     this.getActivityDetail(this.$route.params.id);
     this.getActivityOrders(this.$route.params.id);
+    this.userId = this.getUserId();
     this.getActivities();
     this.getOrders();
-    this.userId = this.getUserId();
     this.changeToZhTW();
   },
 };
@@ -486,8 +546,9 @@ export default {
             個空位
           </p>
           <!-- 收藏 -->
-          <button type="button">
-            <i class="pi pi-star text-lg"></i>
+          <button type="button" @click="handleBookmark">
+            <i v-if="!isBookmarked" class="pi pi-star text-lg"></i>
+            <i v-else class="pi pi-star-fill text-lg text-yellow-300"></i>
           </button>
           <!-- 主辦者 -->
           <template v-if="isHost">
