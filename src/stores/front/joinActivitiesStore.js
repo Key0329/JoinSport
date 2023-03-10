@@ -31,8 +31,8 @@ export default defineStore('joinActivities', {
       // 以 orders 為基礎，整理出參與者與參與人數
       this.orders.forEach(({ user, activity }) => {
         const activityId = activity.id;
-        const { img } = user;
-        const { id } = user;
+        const orderImg = user.img;
+        const userId = user.id;
 
         // 先確認 newList[activityId - 1] 是否存在，不存在就建立一個空的物件
         newList[activityId - 1] = newList[activityId - 1] || {
@@ -40,10 +40,10 @@ export default defineStore('joinActivities', {
           participantsId: [],
         };
         // 將參與者的圖片路徑加入 participants 陣列中
-        newList[activityId - 1].participants.push(img);
+        newList[activityId - 1].participants.push(orderImg);
         newList[activityId - 1].numParticipants =
           newList[activityId - 1].participants.length;
-        newList[activityId - 1].participantsId.push(id);
+        newList[activityId - 1].participantsId.push(userId);
       });
 
       // 維持大頭貼張數在 3 張
