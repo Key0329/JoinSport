@@ -65,7 +65,7 @@ const routes = [
         component: () => import('../views/front/JoinDetailView.vue'),
         meta: {
           title: 'Activity Detail - Join Sport',
-          requiresAuth: false,
+          requiresAuth: true,
         },
       },
       {
