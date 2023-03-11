@@ -10,9 +10,11 @@ import HomeHeader from '../../components/front/HomeHeader.vue';
 import HomeBanner from '../../components/front/HomeBanner.vue';
 import JoinCard from '../../components/front/JoinCard.vue';
 import GroupCard from '../../components/front/GroupCard.vue';
+import Loading from '../../components/front/LoadingComponent.vue';
 
 export default {
   components: {
+    Loading,
     HomeBanner,
     JoinCard,
     Swiper,
@@ -61,11 +63,13 @@ export default {
 
 <template>
   <VueLoading
+    :loader="false"
     v-model:active="isLoading"
     :can-cancel="true"
     :on-cancel="onCancel"
     :is-full-page="fullPage"
-  />
+    ><Loading></Loading>
+  </VueLoading>
 
   <home-header></home-header>
   <home-banner></home-banner>

@@ -27,6 +27,7 @@ import PanelMenu from 'primevue/panelmenu';
 import InputNumber from 'primevue/inputnumber';
 import AvatarGroup from 'primevue/avatargroup';
 import AutoComplete from 'primevue/autocomplete';
+import ToastService from 'primevue/toastservice';
 import ConfirmDialog from 'primevue/confirmdialog';
 import ConfirmationService from 'primevue/confirmationservice';
 
@@ -57,6 +58,7 @@ const app = createApp(App);
 app.use(createPinia());
 app.use(router);
 app.use(VueAxios, axios);
+app.use(ToastService);
 app.use(ConfirmationService);
 app.use(PrimeVue, {
   ripple: true,
