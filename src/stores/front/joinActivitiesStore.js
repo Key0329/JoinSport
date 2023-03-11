@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const { VITE_URL } = import.meta.env;
 
@@ -86,7 +87,13 @@ export default defineStore('joinActivities', {
           this.isLoading = false;
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: err.response.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
     },
 
@@ -98,7 +105,13 @@ export default defineStore('joinActivities', {
           this.orders = res.data;
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: err.response.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
     },
 

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const { VITE_URL } = import.meta.env;
 
@@ -18,7 +19,13 @@ export default defineStore('memberStore', {
           this.user = res.data;
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: err.response.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
     },
     editMemberData(data) {
@@ -30,7 +37,13 @@ export default defineStore('memberStore', {
           this.getMemberData(this.user.id);
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: err.response.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
     },
   },

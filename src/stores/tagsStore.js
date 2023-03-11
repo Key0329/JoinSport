@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const { VITE_URL } = import.meta.env;
 
@@ -29,7 +30,13 @@ export default defineStore('sportsStore', {
           this.tags = res.data;
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: err.response.message,
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
     },
   },

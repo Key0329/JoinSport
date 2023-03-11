@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import Swal from 'sweetalert2';
 
 export default defineStore('authStore', {
   state: () => ({
@@ -30,7 +31,12 @@ export default defineStore('authStore', {
       );
     },
     alertLogIn() {
-      alert('請先登入');
+      Swal.fire({
+        icon: 'warning',
+        title: '請先登入',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     },
     logOut(router) {
       document.cookie =
@@ -38,7 +44,13 @@ export default defineStore('authStore', {
       document.cookie =
         'JoinSportUserId=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       this.isLoggedIn = false;
-      alert('登出成功');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: '登出成功',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       router.push('/login');
     },
   },

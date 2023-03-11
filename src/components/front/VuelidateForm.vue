@@ -151,16 +151,23 @@ export default {
 
       this.$http
         .patch(path, data)
-        .then((res) => {
-          console.log(res.data);
-          alert('修改成功');
+        .then(() => {
+          this.$toast.add({
+            severity: 'success',
+            detail: '更新成功',
+            life: 1000,
+          });
           this.reload();
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 更新失敗`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
-
-      console.log(123);
     },
 
     getFormData() {

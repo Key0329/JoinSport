@@ -48,7 +48,6 @@ export default {
         location: this.location,
       };
 
-      console.log(tempActivity);
       return tempActivity;
     },
   },
@@ -83,8 +82,6 @@ export default {
         const tempTags = JSON.parse(localStorage.getItem('selectedTags'));
         this.tempTags = tempTags;
       }
-
-      console.log(this.tempForm);
     },
     getUser() {
       const id = this.userId;
@@ -96,7 +93,13 @@ export default {
           this.user = res.data;
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 使用者資訊獲取失敗`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     getMapLatLng(address) {
@@ -107,10 +110,15 @@ export default {
         .then((res) => {
           const tempLocation = res.data.results[0].geometry.location;
           this.location = [tempLocation.lat, tempLocation.lng];
-          console.log(this.location);
         })
         .then((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 轉換地址失敗`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     async handleSubmit() {
@@ -124,9 +132,8 @@ export default {
         this.location = [tempLocation.lat, tempLocation.lng];
         const data = this.tempActivity;
 
-        const res = await this.$http.post(path, data);
+        await this.$http.post(path, data);
 
-        console.log(res.data);
         this.$router.push('/CreateJoin/step5');
 
         const keysToRemove = [
@@ -136,7 +143,13 @@ export default {
         ];
         keysToRemove.forEach((key) => localStorage.removeItem(key));
       } catch (err) {
-        console.log(err);
+        const errMessage = err.response.statusText;
+        this.$toast.add({
+          severity: 'error',
+          detail: `${errMessage} 開團失敗`,
+          life: 1000,
+          contentStyleClass: 'custom-toast-danger',
+        });
       }
     },
   },
@@ -145,7 +158,6 @@ export default {
     this.getLocalData();
     this.userId = this.getUserId();
     this.getUser();
-    // this.getMapLatLng(this.tempForm.address);
   },
 };
 </script>
