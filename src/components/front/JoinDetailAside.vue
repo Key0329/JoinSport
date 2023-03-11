@@ -10,9 +10,6 @@ export default {
       type: Object,
     },
   },
-  mounted() {
-    console.log(this.$route.path.includes('step'));
-  },
 };
 </script>
 

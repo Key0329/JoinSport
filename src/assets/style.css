@@ -103,3 +103,7 @@
 .p-confirm-dialog-message{
   font-size: 24px;
 }
+
+.custom-toast-danger {
+  background-color: rgb(243, 198, 198);
+}

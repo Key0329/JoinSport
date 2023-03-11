@@ -44,11 +44,9 @@ export default {
       this.submitted = true;
 
       if (!isFormValid) {
-        console.log(456);
         return;
       }
 
-      console.log(123);
       this.register();
     },
     register() {
@@ -64,11 +62,23 @@ export default {
       this.$http
         .post(path, registerData)
         .then(() => {
-          alert('註冊成功');
-          this.$router.push('/login');
+          this.$toast.add({
+            severity: 'success',
+            detail: '註冊成功，返回登入頁面',
+            life: 1000,
+          });
+          setTimeout(() => {
+            this.$router.push('/login');
+          }, 1000);
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.data;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 註冊失敗`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
   },
@@ -76,6 +86,7 @@ export default {
 </script>
 
 <template>
+  <PToast></PToast>
   <FrontHeader></FrontHeader>
   <main class="py-[120px]">
     <div class="container">

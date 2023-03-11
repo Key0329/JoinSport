@@ -48,11 +48,19 @@ export default {
       // 判斷是否有重複標籤或沒有內容
       const tagExists = this.selectedTags.some((item) => item === newTag);
       if (tagExists) {
-        alert('已有相同標籤');
+        this.$toast.add({
+          severity: 'warn',
+          detail: '已有相同標籤',
+          life: 1000,
+        });
         return;
       }
       if (newTag === '') {
-        alert('請輸入標籤內容');
+        this.$toast.add({
+          severity: 'info',
+          detail: '請輸入標籤內容',
+          life: 1000,
+        });
         return;
       }
 
@@ -80,6 +88,7 @@ export default {
 </script>
 
 <template>
+  <PToast></PToast>
   <section class="py-10">
     <div class="container">
       <h1 class="mb-8 text-center text-4xl">選擇適合的標籤來描述將要開的團</h1>

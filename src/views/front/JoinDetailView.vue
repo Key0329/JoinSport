@@ -26,6 +26,7 @@ export default {
       bookmarkId: null,
       isBookmarked: false,
       imgLoading: true,
+      sectionRerender: false,
     };
   },
   computed: {
@@ -102,8 +103,13 @@ export default {
           return this.getActivityBookmark();
         })
         .catch((err) => {
-          console.log(err);
-          alert('err');
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 找不到活動資訊`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     getActivityOrders(id) {
@@ -114,8 +120,13 @@ export default {
           this.orders = res.data;
         })
         .catch((err) => {
-          console.log(err);
-          alert('err');
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 找不到參與者資訊`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     getActivityBookmark() {
@@ -132,8 +143,13 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err);
-          alert('err');
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage}'找不到收藏資料'`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     userConfirmJoin() {
@@ -153,11 +169,22 @@ export default {
           this.$http
             .post(path, data)
             .then(() => {
-              alert('報名成功');
-              this.reload();
+              // this.reload();
+              this.$toast.add({
+                severity: 'success',
+                detail: '報名成功',
+                life: 1000,
+              });
+              this.getActivityOrders(this.$route.params.id);
             })
             .catch((err) => {
-              console.log(err);
+              const errMessage = err.response.statusText;
+              this.$toast.add({
+                severity: 'error',
+                detail: `${errMessage}'報名失敗'`,
+                life: 1000,
+                contentStyleClass: 'custom-toast-danger',
+              });
             });
         },
       });
@@ -180,11 +207,21 @@ export default {
           this.$http
             .patch(path, data)
             .then(() => {
-              alert('取消揪團成功');
-              this.reload();
+              this.$toast.add({
+                severity: 'success',
+                detail: '成功取消此揪團',
+                life: 1000,
+              });
+              this.getActivityOrders(this.$route.params.id);
             })
             .catch((err) => {
-              console.log(err);
+              const errMessage = err.response.statusText;
+              this.$toast.add({
+                severity: 'error',
+                detail: `${errMessage}'取消報名失敗'`,
+                life: 1000,
+                contentStyleClass: 'custom-toast-danger',
+              });
             });
         },
       });
@@ -204,11 +241,21 @@ export default {
           this.$http
             .patch(path, data)
             .then(() => {
-              alert('已關閉此揪團');
-              this.reload();
+              this.$toast.add({
+                severity: 'success',
+                detail: '已關閉此揪團',
+                life: 1000,
+              });
+              this.getActivityDetail(this.$route.params.id);
             })
             .catch((err) => {
-              console.log(err);
+              const errMessage = err.response.statusText;
+              this.$toast.add({
+                severity: 'error',
+                detail: `${errMessage}'關閉失敗'`,
+                life: 1000,
+                contentStyleClass: 'custom-toast-danger',
+              });
             });
         },
       });
@@ -229,12 +276,17 @@ export default {
         this.$http
           .post(path, data)
           .then((res) => {
-            console.log(res.data);
             this.isBookmarked = true;
             this.bookmarkId = res.data.id;
           })
           .catch((err) => {
-            console.log(err);
+            const errMessage = err.response.statusText;
+            this.$toast.add({
+              severity: 'error',
+              detail: errMessage,
+              life: 1000,
+              contentStyleClass: 'custom-toast-danger',
+            });
           });
 
         return;
@@ -253,9 +305,29 @@ export default {
         .patch(path, data)
         .then(() => {
           this.isBookmarked = !this.isBookmarked;
+          if (this.isBookmarked === true) {
+            this.$toast.add({
+              severity: 'success',
+              detail: '加入我的收藏',
+              life: 1000,
+            });
+          }
+          if (this.isBookmarked === false) {
+            this.$toast.add({
+              severity: 'info',
+              detail: '移除我的收藏',
+              life: 1000,
+            });
+          }
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: errMessage,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     onImageLoad() {
@@ -280,7 +352,9 @@ export default {
   },
 };
 </script>
+
 <template>
+  <PToast />
   <front-header></front-header>
   <section
     v-if="!newDateActivity.isCancelled === true"
@@ -535,6 +609,7 @@ export default {
   </main>
 
   <section
+    :key="sectionRerender"
     v-if="!newDateActivity.isCancelled === true"
     class="sticky bottom-0 z-30 bg-white py-5"
   >

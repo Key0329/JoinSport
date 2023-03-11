@@ -6,7 +6,6 @@ import authStore from '@/stores/front/authStore';
 import memberStore from '@/stores/front/memberStore';
 
 export default {
-  inject: ['reload'],
   setup: () => ({ v$: useVuelidate() }),
   data() {
     return {
@@ -49,8 +48,12 @@ export default {
       };
 
       this.editMemberData(data);
+      this.$toast.add({
+        severity: 'success',
+        detail: '修改成功',
+        life: 1000,
+      });
       this.isDisabled = true;
-      this.reload();
     },
     editName() {
       this.isDisabled = false;
@@ -70,6 +73,7 @@ export default {
 };
 </script>
 <template>
+  <PToast></PToast>
   <section>
     <h1 class="mb-10 text-4xl">編輯個人資訊</h1>
     <div class="mb-10 flex items-center">

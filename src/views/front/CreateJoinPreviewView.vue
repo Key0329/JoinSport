@@ -113,12 +113,39 @@ export default {
           console.log(err);
         });
     },
+    async handleSubmit() {
+      try {
+        const mapPath = `${VITE_MAP_URL}?address=${this.tempForm.address}&key=${VITE_MAP_KEY}`;
+        const path = `${VITE_URL}/activities`;
+
+        const response = await this.$http.get(mapPath);
+
+        const tempLocation = response.data.results[0].geometry.location;
+        this.location = [tempLocation.lat, tempLocation.lng];
+        const data = this.tempActivity;
+
+        const res = await this.$http.post(path, data);
+
+        console.log(res.data);
+        this.$router.push('/CreateJoin/step5');
+
+        const keysToRemove = [
+          'createTempFormData',
+          'editorValue',
+          'selectedTags',
+        ];
+        keysToRemove.forEach((key) => localStorage.removeItem(key));
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
+
   mounted() {
     this.getLocalData();
     this.userId = this.getUserId();
     this.getUser();
-    this.getMapLatLng(this.tempForm.address);
+    // this.getMapLatLng(this.tempForm.address);
   },
 };
 </script>
@@ -314,7 +341,7 @@ export default {
     </div>
   </section>
 
-  <StepPagination :activity="tempActivity" class="mt-20"></StepPagination>
+  <StepPagination @handleSubmit="handleSubmit" class="mt-20"></StepPagination>
 </template>
 
 <style scoped>

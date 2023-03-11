@@ -29,7 +29,13 @@ export default {
           this.activities = res.data;
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 未能取得會員活動資訊`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
   },

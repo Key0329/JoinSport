@@ -62,11 +62,10 @@ export default {
 </script>
 
 <template>
+  <!-- loading -->
   <VueLoading
-    :loader="false"
     v-model:active="isLoading"
     :can-cancel="true"
-    :on-cancel="onCancel"
     :is-full-page="fullPage"
     ><Loading></Loading>
   </VueLoading>

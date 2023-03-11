@@ -23,12 +23,11 @@ export default defineStore('memberStore', {
     },
     editMemberData(data) {
       const path = `${VITE_URL}/users/${data.id}`;
-      console.log(data);
 
       axios
         .patch(path, data)
         .then(() => {
-          alert('修改成功');
+          this.getMemberData(this.user.id);
         })
         .catch((err) => {
           console.log(err);

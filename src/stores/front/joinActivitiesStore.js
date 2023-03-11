@@ -87,7 +87,6 @@ export default defineStore('joinActivities', {
         })
         .catch((err) => {
           console.log(err);
-          alert('err');
         });
     },
 
@@ -100,7 +99,6 @@ export default defineStore('joinActivities', {
         })
         .catch((err) => {
           console.log(err);
-          alert('err');
         });
     },
 

@@ -5,7 +5,6 @@ import tagsStore from '@/stores/tagsStore';
 const { VITE_URL } = import.meta.env;
 
 export default {
-  inject: ['reload'],
   data() {
     return {
       tempSelectedTag: null,
@@ -71,7 +70,13 @@ export default {
           this.selectedTags = res.data.tags;
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 未能取得活動資訊`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     updateActivityTags() {
@@ -81,20 +86,30 @@ export default {
 
       this.$http
         .patch(path, data)
-        .then((res) => {
-          console.log(res.data);
-          alert('修改成功');
+        .then(() => {
+          this.$toast.add({
+            severity: 'success',
+            detail: '修改成功',
+            life: 1000,
+          });
           this.isDisabled = true;
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 修改失敗`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     enableEdit() {
       this.isDisabled = !this.isDisabled;
     },
     cancelEdit() {
-      this.reload();
+      this.getActivity();
+      this.enableEdit();
     },
   },
   mounted() {

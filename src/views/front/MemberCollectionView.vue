@@ -88,8 +88,13 @@ export default {
           });
         })
         .catch((err) => {
-          console.log(err);
-          alert('err');
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 取得收藏資訊失敗`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
   },

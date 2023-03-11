@@ -71,15 +71,27 @@ export default {
             localStorage.removeItem('loginEmail');
           }
 
-          alert('登入成功');
+          this.$toast.add({
+            severity: 'success',
+            detail: '登入成功，即將返回頁面',
+            life: 1000,
+          });
 
           // 從重定向参数中取出之前頁面的路徑
           const redirect = this.$route.query.redirect || '/';
           // 重定向回之前的頁面
-          this.$router.push(redirect);
+          setTimeout(() => {
+            this.$router.push(redirect);
+          }, 1000);
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 登入失敗`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     setCookie(token, userId) {
@@ -105,6 +117,7 @@ export default {
 </script>
 
 <template>
+  <PToast></PToast>
   <FrontHeader></FrontHeader>
   <main class="py-[120px]">
     <div class="container">

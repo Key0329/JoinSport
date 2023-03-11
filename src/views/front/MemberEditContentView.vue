@@ -2,7 +2,6 @@
 const { VITE_URL } = import.meta.env;
 
 export default {
-  inject: ['reload'],
   data() {
     return {
       editorValue: '',
@@ -20,7 +19,13 @@ export default {
           this.editorValue = res.data.content;
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 取得活動資訊失敗`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     updateActivityContent() {
@@ -30,16 +35,25 @@ export default {
 
       this.$http
         .patch(path, data)
-        .then((res) => {
-          console.log(res.data);
-          alert('修改成功');
+        .then(() => {
+          this.$toast.add({
+            severity: 'success',
+            detail: '修改成功',
+            life: 1000,
+          });
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 更新活動資訊失敗`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     cancelEdit() {
-      this.reload();
+      this.getActivity();
     },
   },
   mounted() {

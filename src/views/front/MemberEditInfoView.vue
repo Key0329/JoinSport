@@ -6,7 +6,6 @@ import createSteps from '@/stores/front/createSteps';
 const { VITE_URL } = import.meta.env;
 
 export default {
-  inject: ['reload'],
   components: {
     VuelidateForm,
   },
@@ -42,14 +41,21 @@ export default {
           this.activity = res.data;
         })
         .catch((err) => {
-          console.log(err);
+          const errMessage = err.response.statusText;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage} 取得活動資訊失敗`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     enableEdit() {
       this.isDisabled = !this.isDisabled;
     },
     cancelEdit() {
-      this.reload();
+      this.getActivity();
+      this.enableEdit();
     },
     removeLocal() {
       localStorage.removeItem('createTempFormData');

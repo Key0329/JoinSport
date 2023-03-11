@@ -2,7 +2,7 @@
 import { mapState } from 'pinia';
 import createSteps from '../../stores/front/createSteps';
 
-const { VITE_URL } = import.meta.env;
+// const { VITE_URL } = import.meta.env;
 
 export default {
   props: {
@@ -39,26 +39,29 @@ export default {
 
       this.$router.push(newRoute);
     },
+    // handleSubmit() {
+    //   const path = `${VITE_URL}/activities`;
+    //   const data = this.activity;
+
+    //   this.$http
+    //     .post(path, data)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       this.nextStep();
+
+    //       const keysToRemove = [
+    //         'createTempFormData',
+    //         'editorValue',
+    //         'selectedTags',
+    //       ];
+    //       keysToRemove.forEach((key) => localStorage.removeItem(key));
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
     handleSubmit() {
-      const path = `${VITE_URL}/activities`;
-      const data = this.activity;
-
-      this.$http
-        .post(path, data)
-        .then((res) => {
-          console.log(res.data);
-          this.nextStep();
-
-          const keysToRemove = [
-            'createTempFormData',
-            'editorValue',
-            'selectedTags',
-          ];
-          keysToRemove.forEach((key) => localStorage.removeItem(key));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.$emit('handleSubmit');
     },
   },
 

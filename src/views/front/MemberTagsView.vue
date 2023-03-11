@@ -5,7 +5,6 @@ import memberStore from '@/stores/front/memberStore';
 import authStore from '@/stores/front/authStore';
 
 export default {
-  inject: ['reload'],
   data() {
     return {
       userId: null,
@@ -53,11 +52,19 @@ export default {
         // 判斷是否有重複標籤或沒有內容
         const tagExists = this.selectedTags.some((item) => item === newTag);
         if (tagExists) {
-          alert('已有相同標籤');
+          this.$toast.add({
+            severity: 'warn',
+            detail: '已有相同標籤',
+            life: 1000,
+          });
           return;
         }
         if (newTag === '') {
-          alert('請輸入標籤內容');
+          this.$toast.add({
+            severity: 'info',
+            detail: '請輸入標籤內容',
+            life: 1000,
+          });
           return;
         }
 
@@ -72,11 +79,19 @@ export default {
       // 判斷是否有重複標籤或沒有內容
       const tagExists = this.selectedTags.some((item) => item === newTag);
       if (tagExists) {
-        alert('已有相同標籤');
+        this.$toast.add({
+          severity: 'warn',
+          detail: '已有相同標籤',
+          life: 1000,
+        });
         return;
       }
       if (newTag === '') {
-        alert('請輸入標籤內容');
+        this.$toast.add({
+          severity: 'info',
+          detail: '請輸入標籤內容',
+          life: 1000,
+        });
         return;
       }
 
@@ -90,7 +105,11 @@ export default {
       };
 
       this.editMemberData(data);
-      this.reload();
+      this.$toast.add({
+        severity: 'success',
+        detail: '修改成功',
+        life: 1000,
+      });
       this.isDisabled = true;
     },
     enableEdit() {
@@ -100,7 +119,8 @@ export default {
       this.selectedTags.splice(i, 1);
     },
     cancelEdit() {
-      this.reload();
+      this.getMemberData(this.user.id);
+      this.enableEdit();
     },
   },
   watch: {
@@ -121,6 +141,7 @@ export default {
 </script>
 
 <template>
+  <PToast></PToast>
   <!-- tags -->
   <main>
     <h2 class="mb-8 text-xl">設定個人標籤</h2>
