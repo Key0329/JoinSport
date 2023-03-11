@@ -25,6 +25,7 @@ export default {
       textareaValue: '',
       bookmarkId: null,
       isBookmarked: false,
+      imgLoading: true,
     };
   },
   computed: {
@@ -257,6 +258,9 @@ export default {
           console.log(err);
         });
     },
+    onImageLoad() {
+      this.imgLoading = false;
+    },
   },
   watch: {
     $route(to) {
@@ -282,7 +286,14 @@ export default {
     v-if="!newDateActivity.isCancelled === true"
     class="pt-[120px] pb-5 md:pt-[92px]"
   >
-    <div class="container">
+    <div v-if="imgLoading" class="container">
+      <div class="skeleton mb-4 h-12 w-1/3 rounded-lg"></div>
+      <div class="flex items-center gap-4">
+        <div class="skeleton h-16 w-16 rounded-full"></div>
+        <div class="skeleton h-12 w-10 rounded-lg"></div>
+      </div>
+    </div>
+    <div v-else class="container">
       <h2 class="mb-4 text-xl font-bold md:text-3xl">
         {{ newDateActivity.title }}
       </h2>
@@ -309,7 +320,14 @@ export default {
         class="grid h-full grid-cols-12 border-b border-[#3d3d3d] pb-10 md:pb-20"
       >
         <div class="col-span-12 md:col-span-8">
+          <div
+            v-if="imgLoading"
+            class="skeleton flex h-full w-full items-center justify-center rounded-l-[10px]"
+          >
+            <i class="pi pi-image text-xl text-gray-500"></i>
+          </div>
           <img
+            @load="onImageLoad"
             :src="newDateActivity.mainImg"
             alt="JoinDetailImage"
             class="rounded md:mb-10"

@@ -35,7 +35,7 @@ export default {
       handler() {
         this.isLoading = false;
       },
-      immediate: true, // 立即执行
+      immediate: true,
     },
   },
 };
