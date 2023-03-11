@@ -1,4 +1,7 @@
 <script>
+// import { mapState } from 'pinia';
+// import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+
 export default {
   props: {
     activity: {
@@ -9,9 +12,13 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      isLoading: true,
+    };
   },
   computed: {
+    // ...mapState(joinActivitiesStore, ['isLoading']),
+
     hasJoined() {
       return this.activity?.participantsId?.includes(parseInt(this.userId, 10));
     },
@@ -20,6 +27,11 @@ export default {
     },
     isCancelled() {
       return this.activity?.isCancelled;
+    },
+  },
+  methods: {
+    onImageLoad() {
+      this.isLoading = false;
     },
   },
 };
@@ -31,8 +43,14 @@ export default {
     :class="{ 'opacity-50': isCancelled }"
   >
     <!-- card img -->
+
     <div class="relative w-full sm:w-1/2">
+      <div
+        v-if="isLoading"
+        class="skeleton h-full w-full rounded-l-[10px]"
+      ></div>
       <img
+        @load="onImageLoad"
         class="h-full rounded-l-[10px]"
         :src="activity?.mainImg"
         alt="card-img-01"

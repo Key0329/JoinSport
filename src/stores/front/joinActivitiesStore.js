@@ -9,6 +9,7 @@ export default defineStore('joinActivities', {
     orders: [],
     currentPage: 1,
     pageLimit: 6,
+    isLoading: true,
   }),
   getters: {
     restructureActivitiesList() {
@@ -58,6 +59,22 @@ export default defineStore('joinActivities', {
 
       return restructureActivitiesList;
     },
+    availableActivities() {
+      // 將日期轉換為時間戳
+      const list = this.restructureActivitiesList.map((activity) => {
+        const originDate = new Date(activity.originDate).getTime();
+        const updateActivity = activity;
+        updateActivity.originDate = originDate;
+        return updateActivity;
+      });
+
+      // 篩選掉過期的活動
+      const filterList = list.filter((activity) => {
+        const currentDay = new Date().getTime();
+        return activity.originDate > currentDay;
+      });
+      return filterList;
+    },
   },
   actions: {
     getActivities() {
@@ -66,6 +83,7 @@ export default defineStore('joinActivities', {
         .get(path)
         .then((res) => {
           this.activitiesList = res.data;
+          this.isLoading = false;
         })
         .catch((err) => {
           console.log(err);

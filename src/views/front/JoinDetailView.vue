@@ -28,7 +28,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
+    ...mapState(joinActivitiesStore, ['availableActivities']),
 
     newDateActivity() {
       if (!this.activity.date) {
@@ -58,7 +58,7 @@ export default {
     },
     slicedActivities() {
       // 避免 side effect
-      const tempActivity = [...this.restructureActivitiesList];
+      const tempActivity = [...this.availableActivities];
       // 刪掉已取消的揪團
       const filterList = tempActivity.filter(
         (activity) => activity?.isCancelled === false

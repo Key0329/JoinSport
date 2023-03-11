@@ -28,6 +28,7 @@ export default {
     <div>
       <img
         class="h-[200px] w-full rounded-t-[10px]"
+        :class="{ 'animate-pulse': !activity }"
         :src="activity?.mainImg"
         alt="card-img-01"
       />

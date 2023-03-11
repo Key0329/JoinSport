@@ -20,10 +20,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
-    hotActivitiesList: ({ restructureActivitiesList, arrangePage }) => {
+    ...mapState(joinActivitiesStore, ['availableActivities']),
+    hotActivitiesList: ({ availableActivities, arrangePage }) => {
       // 刪掉已取消的揪團
-      const filterList = restructureActivitiesList.filter(
+      const filterList = availableActivities.filter(
         (activity) => activity.isCancelled === false
       );
       // 依照更新日期排序

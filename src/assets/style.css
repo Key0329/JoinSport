@@ -27,6 +27,28 @@
   .tag{
     @apply py-2 px-4 rounded-full bg-secondary-yellow transition-transform hover:scale-x-110 hover:text-primary-03 text-sm whitespace-nowrap
   }
+  .skeleton{
+    background: linear-gradient(
+            100deg, 
+            rgba(256, 256, 256, 0) 30%,
+            rgba(256, 256, 256, 0.5) 50%,
+            rgba(256, 256, 256, 0) 30%)
+            #ededed;
+        background-size: 200% 100%;
+        background-position-x: 180%;
+        animation: 2s skeleton-loading ease-in-out infinite;
+  }
+  @keyframes skeleton-loading{
+    /* 0% {
+      background-color: hsl(200,20%,70%);
+    }
+    100%{
+      background-color: hsl(200,20%,95%);
+    } */
+    to{
+      background-position-x: -20%;
+    }
+  }
 }
 
 .p-button {

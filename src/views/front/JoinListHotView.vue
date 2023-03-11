@@ -20,10 +20,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
-    hotActivitiesList: ({ restructureActivitiesList, arrangePage }) => {
+    ...mapState(joinActivitiesStore, ['availableActivities', 'isLoading']),
+    hotActivitiesList: ({ availableActivities, arrangePage }) => {
       // 刪掉已取消的揪團
-      const filterList = restructureActivitiesList.filter(
+      const filterList = availableActivities.filter(
         (activity) => activity.isCancelled === false
       );
 

@@ -8,14 +8,14 @@ export default {
   components: { JoinCardRow },
 
   computed: {
-    ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
+    ...mapState(joinActivitiesStore, ['availableActivities']),
 
     // 篩選出此會員參與的活動
     filteredArray() {
       // 取出 userId
       const id = parseInt(this.getUserId(), 10);
       // 取出此會員參與的活動
-      const filteredArray = this.restructureActivitiesList.filter((activity) =>
+      const filteredArray = this.availableActivities.filter((activity) =>
         activity.participantsId.includes(id)
       );
 
@@ -131,7 +131,7 @@ export default {
         class="mb-10"
       >
         <h3
-          v-if="activities[0].day === parseInt(new Date().getDate(), 10)"
+          v-if="activities.originDate === new Date().getTime()"
           class="mb-6 border-b pb-4 text-xl"
         >
           今天

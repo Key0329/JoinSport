@@ -12,25 +12,15 @@ export default {
     return {
       userId: null,
       bookmarks: [],
+      filteredArray: [],
     };
   },
   computed: {
-    ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
+    ...mapState(joinActivitiesStore, ['availableActivities']),
 
     membersActivities() {
-      // 篩選出此會員收藏的活動
-      const filteredArray = [];
-
-      this.bookmarks.forEach((bookmark) => {
-        this.restructureActivitiesList.forEach((activity) => {
-          if (activity.id === parseInt(bookmark.activityId, 10)) {
-            filteredArray.push(activity);
-          }
-        });
-      });
-
       // 調整需要的日期格式
-      const membersActivities = filteredArray.map((activity) => {
+      const membersActivities = this.filteredArray.map((activity) => {
         const month = activity.date?.split('/')[0];
         const day = activity.date?.split('/')[1];
         const year = new Date().getFullYear();
@@ -55,7 +45,6 @@ export default {
           dayOfWeekZHTW,
           originTime,
         };
-
         return newActivity;
       });
 
@@ -86,7 +75,17 @@ export default {
       this.$http
         .get(path)
         .then((res) => {
-          this.bookmarks = res.data;
+          const bookmarks = res.data;
+
+          // 篩選出此會員收藏的活動
+          bookmarks.forEach((bookmark) => {
+            this.availableActivities.forEach((activity) => {
+              if (activity.id === parseInt(bookmark.activityId, 10)) {
+                this.filteredArray.push(activity);
+                this.bookmarks.push(bookmark);
+              }
+            });
+          });
         })
         .catch((err) => {
           console.log(err);

@@ -26,9 +26,9 @@ export default {
     };
   },
   computed: {
-    ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
+    ...mapState(joinActivitiesStore, ['availableActivities']),
     shuffledActivities() {
-      const filterList = this.restructureActivitiesList.filter(
+      const filterList = this.availableActivities.filter(
         (activity) => activity.isCancelled === false
       );
 
