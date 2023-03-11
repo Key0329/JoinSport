@@ -114,7 +114,7 @@ export default defineStore('joinActivities', {
       const sliced = list.slice(start, end);
 
       // 刪掉已取消的揪團
-      const filterList = this.restructureActivitiesList.filter(
+      const filterList = this.availableActivities.filter(
         (activity) => activity.isCancelled === false
       );
 

@@ -36,7 +36,7 @@
             #ededed;
         background-size: 200% 100%;
         background-position-x: 180%;
-        animation: 2s skeleton-loading ease-in-out infinite;
+        animation: 1s skeleton-loading ease-in-out infinite;
   }
   @keyframes skeleton-loading{
     /* 0% {

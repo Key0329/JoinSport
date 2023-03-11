@@ -5,6 +5,16 @@ export default {
       type: Object,
     },
   },
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
+  methods: {
+    onImageLoad() {
+      this.isLoading = false;
+    },
+  },
 };
 </script>
 
@@ -26,7 +36,14 @@ export default {
     </p>
     <!-- card img -->
     <div>
+      <div
+        v-if="isLoading"
+        class="skeleton flex h-full w-full items-center justify-center rounded-l-[10px]"
+      >
+        <i class="pi pi-image text-xl text-gray-500"></i>
+      </div>
       <img
+        @load="onImageLoad"
         class="h-[200px] w-full rounded-t-[10px]"
         :class="{ 'animate-pulse': !activity }"
         :src="activity?.mainImg"
@@ -46,6 +63,7 @@ export default {
           v-for="(participant, i) in activity?.participants"
           :key="'participant' + i"
         >
+          <div v-if="isLoading" class="skeleton h-9 w-9 rounded-full"></div>
           <img
             class="inline-block h-9 w-9 rounded-full ring-2 ring-white"
             :src="participant"

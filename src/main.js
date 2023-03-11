@@ -39,9 +39,8 @@ import {
   LTileLayer,
 } from '@vue-leaflet/vue-leaflet';
 import 'leaflet/dist/leaflet.css';
-// import { Icon } from 'leaflet';
 
-import { LoadingPlugin } from 'vue-loading-overlay';
+import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 
 import router from './router';
@@ -57,7 +56,6 @@ const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
-app.use(LoadingPlugin);
 app.use(VueAxios, axios);
 app.use(ConfirmationService);
 app.use(PrimeVue, {
@@ -93,6 +91,8 @@ app.component('l-marker', LMarker);
 app.component('l-tile-layer', LTileLayer);
 
 app.component('QuillEditor', QuillEditor);
+
+app.component('VueLoading', Loading);
 
 app.config.productionTip = false;
 

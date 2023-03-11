@@ -23,10 +23,11 @@ export default {
   data() {
     return {
       modules: [Navigation],
+      fullPage: true,
     };
   },
   computed: {
-    ...mapState(joinActivitiesStore, ['availableActivities']),
+    ...mapState(joinActivitiesStore, ['availableActivities', 'isLoading']),
     shuffledActivities() {
       const filterList = this.availableActivities.filter(
         (activity) => activity.isCancelled === false
@@ -59,9 +60,17 @@ export default {
 </script>
 
 <template>
+  <VueLoading
+    v-model:active="isLoading"
+    :can-cancel="true"
+    :on-cancel="onCancel"
+    :is-full-page="fullPage"
+  />
+
   <home-header></home-header>
   <home-banner></home-banner>
   <!-- Feature -->
+
   <section class="bg-[#F3F3F3] py-9 md:py-20">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl md:mb-[72px] md:text-4xl">
@@ -79,6 +88,7 @@ export default {
           >
             加入揪團
           </h3>
+
           <p class="mx-auto w-[296px]">
             馬上加入其他人已經發起的揪團，您可以看到有哪些揪團正在進行，選擇加入您感興趣的揪團。
           </p>

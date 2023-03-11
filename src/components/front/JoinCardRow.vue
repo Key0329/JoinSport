@@ -1,7 +1,4 @@
 <script>
-// import { mapState } from 'pinia';
-// import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
-
 export default {
   props: {
     activity: {
@@ -13,12 +10,11 @@ export default {
   },
   data() {
     return {
+      imgLoading: true,
       isLoading: true,
     };
   },
   computed: {
-    // ...mapState(joinActivitiesStore, ['isLoading']),
-
     hasJoined() {
       return this.activity?.participantsId?.includes(parseInt(this.userId, 10));
     },
@@ -31,7 +27,15 @@ export default {
   },
   methods: {
     onImageLoad() {
-      this.isLoading = false;
+      this.imgLoading = false;
+    },
+  },
+  watch: {
+    activity: {
+      handler() {
+        this.isLoading = false;
+      },
+      immediate: true, // 立即执行
     },
   },
 };
@@ -39,6 +43,7 @@ export default {
 
 <template>
   <div
+    v-if="isLoading"
     class="group flex h-full flex-col gap-4 rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] sm:flex-row"
     :class="{ 'opacity-50': isCancelled }"
   >
@@ -46,9 +51,55 @@ export default {
 
     <div class="relative w-full sm:w-1/2">
       <div
-        v-if="isLoading"
-        class="skeleton h-full w-full rounded-l-[10px]"
-      ></div>
+        class="skeleton flex h-full w-full items-center justify-center rounded-l-[10px]"
+      >
+        <i class="pi pi-image text-xl text-gray-500"></i>
+      </div>
+    </div>
+    <!-- card body -->
+    <div
+      class="w-full rounded-b-[10px] border-x border-b px-3 pt-2 pb-3 sm:border-0"
+    >
+      <div class="mb-2 flex items-center justify-between">
+        <h5 class="skeleton h-7 w-full rounded-lg"></h5>
+      </div>
+      <p class="skeleton mb-4 h-5 w-1/2 rounded-lg"></p>
+      <div class="mb-2 flex flex-col gap-2 md:flex-row">
+        <p class="skeleton h-8 w-1/4 rounded-lg px-2 py-1"></p>
+        <p class="skeleton h-8 w-1/4 rounded-lg px-2 py-1"></p>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-end">
+        <div class="mb-2 md:mb-0">
+          <ul class="my-3 flex -space-x-2 overflow-hidden">
+            <li class="skeleton h-9 w-9 rounded-full"></li>
+            <li class="skeleton h-9 w-9 rounded-full"></li>
+            <li class="skeleton h-9 w-9 rounded-full"></li>
+            <li class="skeleton h-9 w-9 rounded-full"></li>
+          </ul>
+          <div class="flex">
+            <p class="skeleton mr-2 h-5 w-1/2 rounded-lg"></p>
+            <p class="skeleton mr-2 h-5 w-1/2 rounded-lg"></p>
+          </div>
+        </div>
+        <p class="skeleton ml-auto h-10 w-1/4 rounded-lg"></p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    v-else
+    class="group flex h-full flex-col gap-4 rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] sm:flex-row"
+    :class="{ 'opacity-50': isCancelled }"
+  >
+    <!-- card img -->
+
+    <div class="relative w-full sm:w-1/2">
+      <div
+        v-if="imgLoading"
+        class="skeleton flex h-full w-full items-center justify-center rounded-l-[10px]"
+      >
+        <i class="pi pi-image text-xl text-gray-500"></i>
+      </div>
       <img
         @load="onImageLoad"
         class="h-full rounded-l-[10px]"
@@ -110,6 +161,10 @@ export default {
               v-for="(participant, i) in activity?.participants"
               :key="'participant' + i"
             >
+              <div
+                v-if="isLoading"
+                class="skeleton h-full w-full rounded-full"
+              ></div>
               <img
                 class="inline-block h-9 w-9 rounded-full ring-2 ring-white"
                 :src="participant"
