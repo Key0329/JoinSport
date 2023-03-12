@@ -145,10 +145,11 @@ export default {
         ];
         keysToRemove.forEach((key) => localStorage.removeItem(key));
       } catch (err) {
-        const errMessage = err.response.statusText;
+        console.log(err);
+        const errMessage = err;
         this.$toast.add({
           severity: 'error',
-          detail: `${errMessage} 開團失敗`,
+          detail: `${errMessage} 開團失敗，請檢查地址格式是否正確`,
           life: 1000,
           contentStyleClass: 'custom-toast-danger',
         });
@@ -165,6 +166,7 @@ export default {
 </script>
 
 <template>
+  <PToast></PToast>
   <section class="px-4 pt-20 pb-5">
     <div class="container">
       <div class="flex items-center">

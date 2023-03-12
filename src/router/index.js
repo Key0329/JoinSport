@@ -44,7 +44,7 @@ const routes = [
             name: 'Hot',
             component: () => import('../views/front/JoinListHotView.vue'),
             meta: {
-              title: '熱門 - Join Sport',
+              title: '揪團列表-熱門 - Join Sport',
               requiresAuth: false,
             },
           },
@@ -53,7 +53,7 @@ const routes = [
             name: 'Update',
             component: () => import('../views/front/JoinListUpdateView.vue'),
             meta: {
-              title: '最近剛新 - Join Sport',
+              title: '揪團列表-最近更新 - Join Sport',
               requiresAuth: false,
             },
           },
@@ -62,7 +62,7 @@ const routes = [
             name: 'Coming',
             component: () => import('../views/front/JoinListComingView.vue'),
             meta: {
-              title: '即將到來 - Join Sport',
+              title: '揪團列表-即將到來 - Join Sport',
               requiresAuth: false,
             },
           },
@@ -71,7 +71,7 @@ const routes = [
             name: 'Search',
             component: () => import('../views/front/JoinListSearchView.vue'),
             meta: {
-              title: '搜尋揪團 - Join Sport',
+              title: '揪團列表-搜尋揪團 - Join Sport',
               requiresAuth: false,
             },
           },

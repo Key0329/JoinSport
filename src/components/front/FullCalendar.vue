@@ -8,8 +8,6 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import zhTw from '@fullcalendar/core/locales/zh-tw';
 
 export default {
-  name: 'FullCalendar',
-
   components: {
     FullCalendar,
   },
