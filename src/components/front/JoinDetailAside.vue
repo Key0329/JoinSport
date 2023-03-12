@@ -33,7 +33,12 @@ export default {
     <template v-if="activity">
       <ul class="mb-6 flex flex-wrap items-center gap-2">
         <li v-for="(tag, i) of activity.tags" :key="tag + i">
-          <a class="tag" href="#">{{ tag }}</a>
+          <RouterLink
+            :to="`/joinList/search/text=${tag}&area=0&date=0&page=1`"
+            class="tag"
+          >
+            {{ tag }}
+          </RouterLink>
         </li>
       </ul>
     </template>

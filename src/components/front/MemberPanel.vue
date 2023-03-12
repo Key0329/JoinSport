@@ -34,9 +34,12 @@ export default {
     </div>
     <ul class="flex flex-wrap gap-2">
       <li v-for="tag in user.favoriteSports" :key="'tag' + tag">
-        <p class="tag flex items-center">
+        <RouterLink
+          :to="`/joinList/search/text=${tag}&area=0&date=0&page=1`"
+          class="tag flex items-center"
+        >
           <i class="pi pi-tag mr-1"></i> {{ tag }}
-        </p>
+        </RouterLink>
       </li>
     </ul>
   </div>

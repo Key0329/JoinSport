@@ -1,14 +1,12 @@
 <script>
-import { RouterLink } from 'vue-router';
 import { mapState, mapActions } from 'pinia';
-import tagsStore from '@/stores/tagsStore';
+import searchStore from '@/stores/searchStore';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, EffectCoverflow } from 'swiper';
 import 'swiper/swiper-bundle.css';
 
 export default {
   components: {
-    RouterLink,
     Swiper,
     SwiperSlide,
   },
@@ -16,22 +14,18 @@ export default {
     return {
       modules: [Autoplay, EffectCoverflow],
       searchTagsValue: '',
-      filteredTags: [],
       searchAreaValue: '',
-      tempDistrict: [],
       searchDateValue: '',
     };
   },
   computed: {
-    ...mapState(tagsStore, ['tags', 'tagList']),
+    ...mapState(searchStore, [
+      'tags',
+      'randomList',
+      'taiwanCities',
+      'filteredTags',
+    ]),
 
-    taiwanCities() {
-      const cities = this.tempDistrict.map((city) => {
-        return { name: city.name };
-      });
-
-      return cities;
-    },
     dateString() {
       const date = new Date(this.searchDateValue);
       const year = date.getFullYear();
@@ -43,36 +37,17 @@ export default {
 
       return dateString;
     },
+    slicedTagList() {
+      const sliced = this.randomList.slice(0, 12);
+      return sliced;
+    },
   },
   methods: {
-    ...mapActions(tagsStore, ['getTags']),
-
-    searchTag(event) {
-      setTimeout(() => {
-        this.filteredTags = this.tagList.filter((tag) => {
-          return tag.label.toLowerCase().match(event.query.toLowerCase());
-        });
-      }, 250);
-    },
-    getTaiwanDistrictData() {
-      const path =
-        'https://gist.githubusercontent.com/abc873693/2804e64324eaaf26515281710e1792df/raw/a1e1fc17d04b47c564bbd9dba0d59a6a325ec7c1/taiwan_districts.json';
-
-      this.$http
-        .get(path)
-        .then((res) => {
-          this.tempDistrict = res.data;
-        })
-        .then((err) => {
-          const errMessage = err;
-          this.$toast.add({
-            severity: 'error',
-            detail: `${errMessage}`,
-            life: 1000,
-            contentStyleClass: 'custom-toast-danger',
-          });
-        });
-    },
+    ...mapActions(searchStore, [
+      'getTags',
+      'getTaiwanDistrictData',
+      'searchText',
+    ]),
     handleSubmit() {
       let tags = this.searchTagsValue;
       if (typeof tags !== 'string') {
@@ -85,50 +60,11 @@ export default {
         const path = `/joinList/search/text=${tags || 0}&area=${
           area.name || 0
         }&date=${date ? this.dateString : 0}&page=1`;
+
         this.$router.push(path);
       } else {
         this.$router.push('/joinList/Hot/1');
       }
-
-      // if (tags && area && date) {
-      //   console.log(3);
-      //   return;
-      // }
-
-      // if (tags && area) {
-      //   console.log(2);
-      //   return;
-      // }
-
-      // if (tags && date) {
-      //   console.log(22);
-      //   return;
-      // }
-
-      // if (area && date) {
-      //   path = `/joinList/Search=${area.name}+${this.dateString}&page=1`;
-      //   console.log(path);
-      //   this.$router.push(path);
-
-      //   return;
-      // }
-
-      // if (tags || area || date) {
-      //   path = `/joinList/Search=${
-      //     tags || area.name || this.dateString
-      //   }&page=1`;
-      //   console.log(path);
-      //   this.$router.push(path);
-      // }
-
-      // this.$http
-      //   .get(path)
-      //   .then((res) => {
-      //     console.log(res.data);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
     },
   },
   mounted() {
@@ -177,7 +113,7 @@ export default {
               <AutoComplete
                 v-model="searchTagsValue"
                 :suggestions="filteredTags"
-                @complete="searchTag"
+                @complete="searchText"
                 optionLabel="label"
                 loadingIcon="false"
                 placeholder="搜尋 ＂爬山＂"
@@ -232,26 +168,13 @@ export default {
           </form>
           <!-- tags -->
           <ul class="mb-3 flex flex-wrap gap-x-2 gap-y-6 md:gap-2">
-            <li>
-              <a class="tag" href="#">羽球</a>
-            </li>
-            <li>
-              <a class="tag" href="#">馬拉松</a>
-            </li>
-            <li>
-              <a class="tag" href="#">爬山</a>
-            </li>
-            <li>
-              <a class="tag" href="#">保齡球</a>
-            </li>
-            <li>
-              <a class="tag" href="#">潛水</a>
-            </li>
-            <li>
-              <a class="tag" href="#">攀岩</a>
-            </li>
-            <li>
-              <a class="tag" href="#">衝浪</a>
+            <li v-for="tag in slicedTagList" :key="tag">
+              <RouterLink
+                :to="`/joinList/search/text=${tag.label}&area=0&date=0&page=1`"
+                class="tag"
+              >
+                {{ tag.label }}
+              </RouterLink>
             </li>
           </ul>
         </div>
@@ -272,7 +195,10 @@ export default {
       <!-- links -->
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div class="col-span-1">
-          <router-link to="/JoinList/Hot" class="group">
+          <router-link
+            to="/joinList/search/text=室內運動&area=0&date=0&page=1"
+            class="group"
+          >
             <img
               class="mb-4 h-[213px] w-full rounded-[10px] object-cover group-hover:opacity-90"
               src="../../assets/images/banner/banner04.jpg"
@@ -290,7 +216,10 @@ export default {
           </router-link>
         </div>
         <div class="col-span-1">
-          <router-link to="/JoinList/Hot" class="group">
+          <router-link
+            to="/joinList/search/text=戶外活動&area=0&date=0&page=1"
+            class="group"
+          >
             <img
               class="mb-4 h-[213px] w-full rounded-[10px] object-cover group-hover:opacity-90"
               src="../../assets/images/banner/banner02.png"

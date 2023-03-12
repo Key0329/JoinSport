@@ -1,10 +1,51 @@
 <script>
-import { mapActions } from 'pinia';
+import { mapState, mapActions } from 'pinia';
+import searchStore from '@/stores/searchStore';
 import authStore from '@/stores/front/authStore';
 
 export default {
+  data() {
+    return {
+      searchTagsValue: '',
+      searchAreaValue: '',
+    };
+  },
+  computed: {
+    ...mapState(searchStore, [
+      'tags',
+      'randomList',
+      'taiwanCities',
+      'filteredTags',
+    ]),
+  },
   methods: {
     ...mapActions(authStore, ['getToken', 'logOut']),
+    ...mapActions(searchStore, [
+      'getTags',
+      'getTaiwanDistrictData',
+      'searchText',
+    ]),
+
+    handleSubmit() {
+      let tags = this.searchTagsValue;
+      if (typeof tags !== 'string') {
+        tags = this.searchTagsValue.value;
+      }
+      const area = this.searchAreaValue;
+
+      if (tags || area) {
+        const path = `/joinList/search/text=${tags || 0}&area=${
+          area.name || 0
+        }&date=0&page=1`;
+        this.$router.push(path);
+      } else {
+        this.$router.push('/joinList/Hot/1');
+      }
+    },
+  },
+  mounted() {
+    this.getTags();
+    this.getTaiwanDistrictData();
   },
 };
 </script>
@@ -21,7 +62,11 @@ export default {
           >
         </h2>
         <!-- search bar -->
-        <div class="hidden md:flex">
+        <form
+          @submit.prevent="handleSubmit"
+          @keyup.enter="handleSubmit"
+          class="hidden md:flex"
+        >
           <div
             class="flex w-[200px] items-center rounded-l-lg border border-r-0 border-[#B7B7B7] py-2"
           >
@@ -30,10 +75,14 @@ export default {
             >
               search
             </span>
-            <input
-              class="w-full bg-transparent text-sm focus:outline-none"
-              type="text"
+            <AutoComplete
+              v-model="searchTagsValue"
+              :suggestions="filteredTags"
+              @complete="searchText"
+              optionLabel="label"
+              loadingIcon="false"
               placeholder="搜尋 ＂爬山＂"
+              class="w-full"
             />
           </div>
           <div
@@ -44,19 +93,22 @@ export default {
             >
               room
             </span>
-            <input
-              class="w-full bg-transparent text-sm focus:outline-none"
-              type="text"
-              placeholder="地區"
+            <PDropdown
+              id="city"
+              v-model="searchAreaValue"
+              optionLabel="name"
+              placeholder="選擇縣市"
+              :options="taiwanCities"
+              class="w-full"
             />
           </div>
           <button
-            type="button"
+            type="submit"
             class="btn btn-primary rounded-l-none rounded-r-lg px-4"
           >
             搜尋
           </button>
-        </div>
+        </form>
       </div>
       <ul v-if="!getToken()" class="hidden items-center gap-10 md:flex">
         <li>
@@ -177,3 +229,17 @@ export default {
     </div>
   </header>
 </template>
+
+<style scoped>
+:deep(.p-autocomplete-input),
+:deep(.p-autocomplete-input:focus),
+:deep(.p-dropdown-label),
+:deep(.p-dropdown),
+:deep(.p-dropdown:not(.p-disabled).p-focus) {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  width: 100%;
+  padding: 0;
+}
+</style>

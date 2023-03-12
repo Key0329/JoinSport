@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'pinia';
-import tagsStore from '@/stores/tagsStore';
+import searchStore from '@/stores/searchStore';
 import memberStore from '@/stores/front/memberStore';
 import authStore from '@/stores/front/authStore';
 
@@ -16,12 +16,12 @@ export default {
     };
   },
   computed: {
-    ...mapState(tagsStore, ['tags', 'tagList']),
+    ...mapState(searchStore, ['tags', 'tagList']),
     ...mapState(memberStore, ['user']),
   },
   methods: {
     ...mapActions(authStore, ['getUserId']),
-    ...mapActions(tagsStore, ['getTags']),
+    ...mapActions(searchStore, ['getTags']),
     ...mapActions(memberStore, ['getMemberData', 'editMemberData']),
 
     searchTag(event) {

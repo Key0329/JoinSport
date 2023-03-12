@@ -68,7 +68,7 @@ export default {
       <PaginationComponent
         :currentPage="currentPage"
         :pageTotal="hotActivitiesList.pageTotal"
-        :pageUrl="'/JoinList/New/'"
+        :pageUrl="'/JoinList/Update/'"
         class="mb-4"
       ></PaginationComponent>
       <div class="grid md:grid-cols-12 lg:gap-0">

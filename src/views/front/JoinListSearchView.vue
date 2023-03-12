@@ -44,7 +44,6 @@ export default {
 
         // 符合三個搜尋條件
         if (text !== '0' && area !== '0' && date !== '0') {
-          console.log(1);
           return (
             activity.tags.some((tag) => tag.includes(text)) &&
             activity.city === area &&
@@ -54,21 +53,18 @@ export default {
 
         // 符合兩個搜尋條件
         if (text !== '0' && area !== '0') {
-          console.log(2);
           return (
             activity.tags.some((tag) => tag.includes(text)) &&
             activity.city === area
           );
         }
         if (text !== '0' && date !== '0') {
-          console.log(3);
           return (
             activity.tags.some((tag) => tag.includes(text)) &&
             originDate === date
           );
         }
         if (area !== '0' && date !== '0') {
-          console.log(4);
           return activity.city === area && originDate === date;
         }
 
@@ -84,14 +80,11 @@ export default {
         return activity;
       });
 
-      console.log(filterList);
-
       // 依照參與人數排序熱門程度
       const tempList = filterList.sort((a, b) => {
         return b.numParticipants - a.numParticipants;
       });
 
-      console.log(this.arrangePage(tempList));
       return this.arrangePage(tempList);
     },
   },
@@ -115,6 +108,7 @@ export default {
     $route(to) {
       this.currentPage = to.params.page;
       this.changePage(to.params.page);
+      this.getParams();
     },
   },
   mounted() {
@@ -123,7 +117,6 @@ export default {
     this.changePage(this.$route.params.page);
     this.userId = this.getUserId();
     this.getParams();
-    console.log(this.searchText, this.searchArea, this.searchDate);
   },
 };
 </script>

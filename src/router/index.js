@@ -49,11 +49,20 @@ const routes = [
             },
           },
           {
-            path: 'New/:page(\\d+)?',
-            name: 'New',
-            component: () => import('../views/front/JoinListNewView.vue'),
+            path: 'Update/:page(\\d+)?',
+            name: 'Update',
+            component: () => import('../views/front/JoinListUpdateView.vue'),
             meta: {
-              title: 'New - Join Sport',
+              title: 'Update - Join Sport',
+              requiresAuth: false,
+            },
+          },
+          {
+            path: 'Coming/:page(\\d+)?',
+            name: 'Coming',
+            component: () => import('../views/front/JoinListComingView.vue'),
+            meta: {
+              title: 'Coming - Join Sport',
               requiresAuth: false,
             },
           },

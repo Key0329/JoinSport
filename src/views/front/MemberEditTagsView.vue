@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'pinia';
-import tagsStore from '@/stores/tagsStore';
+import searchStore from '@/stores/searchStore';
 
 const { VITE_URL } = import.meta.env;
 
@@ -14,10 +14,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(tagsStore, ['tags', 'tagList']),
+    ...mapState(searchStore, ['tags', 'tagList']),
   },
   methods: {
-    ...mapActions(tagsStore, ['getTags']),
+    ...mapActions(searchStore, ['getTags']),
 
     searchTag(event) {
       if (this.selectedTags.length <= 4) {
