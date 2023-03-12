@@ -57,6 +57,15 @@ const routes = [
               requiresAuth: false,
             },
           },
+          {
+            path: 'Search/text=:text&area=:area&date=:date&page=:page(\\d+)?',
+            name: 'Search',
+            component: () => import('../views/front/JoinListSearchView.vue'),
+            meta: {
+              title: 'Search - Join Sport',
+              requiresAuth: false,
+            },
+          },
         ],
       },
       {

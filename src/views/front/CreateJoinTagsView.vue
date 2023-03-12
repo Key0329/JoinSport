@@ -101,8 +101,8 @@ export default {
         <AutoComplete
           v-model="tempSelectedTag"
           :suggestions="filteredTags"
-          @complete="searchTag($event)"
-          @keyup.enter="addTag($event)"
+          @complete="searchTag"
+          @keyup.enter="addTag"
           optionLabel="label"
           loadingIcon="false"
           placeholder="輸入適合揪團的標籤 ( 例如: 攀岩、潛水、戶外運動 )"

@@ -8,7 +8,6 @@ const { VITE_URL } = import.meta.env;
 
 export default {
   setup: () => ({ v$: useVuelidate() }),
-  inject: ['reload'],
   props: {
     activity: {
       type: Object,
@@ -157,7 +156,7 @@ export default {
             detail: '更新成功',
             life: 1000,
           });
-          this.reload();
+          this.getFormData();
         })
         .catch((err) => {
           const errMessage = err.response.statusText;
@@ -187,19 +186,6 @@ export default {
         this.maxJoinNum = tempForm.maxJoinNum;
       }
     },
-    resetForm() {
-      this.title = '';
-      this.description = '';
-      this.city = '';
-      this.district = '';
-      this.address = '';
-      this.date = null;
-      this.costPerPerson = null;
-      this.paymentMethod = '';
-      this.startTime = '';
-      this.maxJoinNum = null;
-      this.submitted = false;
-    },
     getTaiwanDistrictData() {
       const path =
         'https://gist.githubusercontent.com/abc873693/2804e64324eaaf26515281710e1792df/raw/a1e1fc17d04b47c564bbd9dba0d59a6a325ec7c1/taiwan_districts.json';
@@ -210,7 +196,13 @@ export default {
           this.tempDistrict = res.data;
         })
         .then((err) => {
-          console.log(err);
+          const errMessage = err;
+          this.$toast.add({
+            severity: 'error',
+            detail: `${errMessage}`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
         });
     },
     changeToZhTW() {
@@ -324,13 +316,13 @@ export default {
       <div>
         <div class="flex items-center">
           <label
-            for="city"
+            for="formCity"
             class="mr-4 whitespace-nowrap px-2"
             :class="{ 'p-error': v$.city.$invalid && submitted }"
             >活動地區</label
           >
           <PDropdown
-            id="city"
+            id="formCity"
             v-model="v$.city.$model"
             optionLabel="name"
             placeholder="請選擇活動縣市"
@@ -399,13 +391,13 @@ export default {
       <div>
         <div class="flex items-center">
           <label
-            for="date"
+            for="formDate"
             class="mr-4 whitespace-nowrap px-2"
             :class="{ 'p-error': v$.date.$invalid && submitted }"
             >活動日期</label
           >
           <PCalendar
-            id="date"
+            id="formDate"
             v-model="v$.date.$model"
             placeholder="請選擇活動日期"
             dateFormat="yy-mm-dd"

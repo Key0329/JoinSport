@@ -10,7 +10,6 @@ import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
 const { VITE_URL } = import.meta.env;
 
 export default {
-  inject: ['reload'],
   components: {
     FrontHeader,
     JoinAttendees,
@@ -169,7 +168,6 @@ export default {
           this.$http
             .post(path, data)
             .then(() => {
-              // this.reload();
               this.$toast.add({
                 severity: 'success',
                 detail: '報名成功',
