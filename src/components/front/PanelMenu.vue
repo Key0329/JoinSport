@@ -1,5 +1,7 @@
 <script>
 export default {
+  name: 'PanelMenu',
+
   data() {
     return {
       items: [

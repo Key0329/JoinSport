@@ -7,7 +7,7 @@ import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
 import PaginationComponent from '@/components/front/PaginationComponent.vue';
 
 export default {
-  name: 'JoinListNewView',
+  name: 'JoinListUpdateView',
   components: {
     JoinCardRow,
     LeafletMap,

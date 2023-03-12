@@ -4,6 +4,7 @@ import searchStore from '@/stores/searchStore';
 import StepPagination from '@/components/front/StepPagination.vue';
 
 export default {
+  name: 'CreateJoinTagsView',
   components: {
     StepPagination,
   },

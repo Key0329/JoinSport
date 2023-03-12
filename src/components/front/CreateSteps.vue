@@ -1,5 +1,7 @@
 <script>
 export default {
+  name: 'CreateSteps',
+
   data() {
     return {
       items: [

@@ -12,6 +12,7 @@ const validatePassword = (password) => {
 };
 
 export default {
+  name: 'RegisterView',
   components: {
     FrontHeader,
   },

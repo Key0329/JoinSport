@@ -5,6 +5,7 @@ import memberStore from '@/stores/front/memberStore';
 import authStore from '@/stores/front/authStore';
 
 export default {
+  name: 'MemberTagsView',
   data() {
     return {
       userId: null,

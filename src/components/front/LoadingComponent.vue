@@ -1,3 +1,9 @@
+<script>
+export default {
+  name: 'LoadingComponent',
+};
+</script>
+
 <template>
   <div class="relative">
     <img

@@ -2,6 +2,8 @@
 import StepPagination from '@/components/front/StepPagination.vue';
 
 export default {
+  name: 'CreateJoinDescriptionView',
+
   components: {
     StepPagination,
   },

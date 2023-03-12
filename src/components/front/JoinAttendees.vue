@@ -1,5 +1,7 @@
 <script>
 export default {
+  name: 'JoinAttendees',
+
   props: {
     user: {
       type: Object,

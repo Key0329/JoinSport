@@ -7,6 +7,8 @@ import JoinCardRow from '@/components/front/JoinCardRow.vue';
 const { VITE_URL } = import.meta.env;
 
 export default {
+  name: 'MemberCollectionView',
+
   components: { JoinCardRow },
   data() {
     return {

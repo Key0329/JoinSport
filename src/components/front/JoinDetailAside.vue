@@ -2,6 +2,8 @@
 import LeafletMap from '@/components/front/LeafletMap.vue';
 
 export default {
+  name: 'JoinDetailAside',
+
   components: {
     LeafletMap,
   },

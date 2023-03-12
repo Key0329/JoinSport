@@ -5,6 +5,8 @@ import authStore from '@/stores/front/authStore';
 import JoinCardRow from '@/components/front/JoinCardRow.vue';
 
 export default {
+  name: 'MemberListView',
+
   components: { JoinCardRow },
 
   computed: {

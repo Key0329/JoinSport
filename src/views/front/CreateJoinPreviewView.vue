@@ -8,6 +8,8 @@ import JoinAttendees from '@/components/front/JoinAttendees.vue';
 const { VITE_URL, VITE_MAP_KEY, VITE_MAP_URL } = import.meta.env;
 
 export default {
+  name: 'CreateJoinPreviewView',
+
   components: {
     StepPagination,
     JoinDetailAside,

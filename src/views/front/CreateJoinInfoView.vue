@@ -5,6 +5,8 @@ import StepPagination from '@/components/front/StepPagination.vue';
 import createSteps from '../../stores/front/createSteps';
 
 export default {
+  name: 'CreateJoinInfoView',
+
   components: {
     VuelidateForm,
     StepPagination,

@@ -5,6 +5,8 @@ import searchStore from '@/stores/searchStore';
 import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
 
 export default {
+  name: 'JoinListView',
+
   components: {
     FrontHeader,
   },

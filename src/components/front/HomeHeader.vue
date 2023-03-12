@@ -1,10 +1,18 @@
 <script>
-import { mapActions } from 'pinia';
+import { mapState, mapActions } from 'pinia';
 import authStore from '@/stores/front/authStore';
 
 export default {
+  name: 'HomeHeader',
+
+  computed: {
+    ...mapState(authStore, ['user']),
+  },
   methods: {
-    ...mapActions(authStore, ['getToken', 'logOut']),
+    ...mapActions(authStore, ['getUserId', 'getUser', 'getToken', 'logOut']),
+  },
+  mounted() {
+    this.getUser(this.getUserId());
   },
 };
 </script>
@@ -83,7 +91,7 @@ export default {
           </li>
           <li>
             <img
-              src="../../assets/images/avatar/avatar01.png"
+              :src="user.img"
               alt="member-avatar"
               class="h-10 w-10 rounded-full object-cover"
             />

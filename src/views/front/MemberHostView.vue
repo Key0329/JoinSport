@@ -5,6 +5,8 @@ import authStore from '@/stores/front/authStore';
 const { VITE_URL } = import.meta.env;
 
 export default {
+  name: 'MemberHostView',
+
   data() {
     return {
       activities: [],

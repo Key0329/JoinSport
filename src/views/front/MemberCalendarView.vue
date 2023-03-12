@@ -2,6 +2,8 @@
 import FullCalendar from '@/components/front/FullCalendar.vue';
 
 export default {
+  name: 'MemberCalendarView',
+
   components: {
     FullCalendar,
   },

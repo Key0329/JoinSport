@@ -12,7 +12,7 @@ const routes = [
         name: 'Home',
         component: () => import('../views/front/HomeView.vue'),
         meta: {
-          title: 'Join Sport',
+          title: '首頁 - Join Sport',
           requiresAuth: false,
         },
       },
@@ -21,7 +21,7 @@ const routes = [
         name: 'Login',
         component: () => import('../views/front/LoginView.vue'),
         meta: {
-          title: 'Login - Join Sport',
+          title: '登入 - Join Sport',
           requiresAuth: false,
         },
       },
@@ -30,7 +30,7 @@ const routes = [
         name: 'Register',
         component: () => import('../views/front/RegisterView.vue'),
         meta: {
-          title: 'Register - Join Sport',
+          title: '註冊 - Join Sport',
           requiresAuth: false,
         },
       },
@@ -44,7 +44,7 @@ const routes = [
             name: 'Hot',
             component: () => import('../views/front/JoinListHotView.vue'),
             meta: {
-              title: 'Hot - Join Sport',
+              title: '熱門 - Join Sport',
               requiresAuth: false,
             },
           },
@@ -53,7 +53,7 @@ const routes = [
             name: 'Update',
             component: () => import('../views/front/JoinListUpdateView.vue'),
             meta: {
-              title: 'Update - Join Sport',
+              title: '最近剛新 - Join Sport',
               requiresAuth: false,
             },
           },
@@ -62,7 +62,7 @@ const routes = [
             name: 'Coming',
             component: () => import('../views/front/JoinListComingView.vue'),
             meta: {
-              title: 'Coming - Join Sport',
+              title: '即將到來 - Join Sport',
               requiresAuth: false,
             },
           },
@@ -71,7 +71,7 @@ const routes = [
             name: 'Search',
             component: () => import('../views/front/JoinListSearchView.vue'),
             meta: {
-              title: 'Search - Join Sport',
+              title: '搜尋揪團 - Join Sport',
               requiresAuth: false,
             },
           },
@@ -82,7 +82,7 @@ const routes = [
         name: 'JoinDetail',
         component: () => import('../views/front/JoinDetailView.vue'),
         meta: {
-          title: 'Activity Detail - Join Sport',
+          title: '揪團詳情 - Join Sport',
           requiresAuth: true,
         },
       },
@@ -96,7 +96,7 @@ const routes = [
             name: 'CreateJoinInfo',
             component: () => import('../views/front/CreateJoinInfoView.vue'),
             meta: {
-              title: 'Info - createJoin - Join Sport',
+              title: '開團資訊 - Join Sport',
               requiresAuth: true,
             },
           },
@@ -105,7 +105,7 @@ const routes = [
             name: 'CreateJoinTags',
             component: () => import('../views/front/CreateJoinTagsView.vue'),
             meta: {
-              title: 'Tags - createJoin - Join Sport',
+              title: '設定標籤 - Join Sport',
               requiresAuth: true,
             },
           },
@@ -115,7 +115,7 @@ const routes = [
             component: () =>
               import('../views/front/CreateJoinDescriptionView.vue'),
             meta: {
-              title: 'Description - createJoin - Join Sport',
+              title: '開團介紹 - Join Sport',
               requiresAuth: true,
             },
           },
@@ -124,7 +124,7 @@ const routes = [
             name: 'CreateJoinPreviewView',
             component: () => import('../views/front/CreateJoinPreviewView.vue'),
             meta: {
-              title: 'Preview - createJoin - Join Sport',
+              title: '頁面預覽 - Join Sport',
               requiresAuth: true,
             },
           },
@@ -133,7 +133,7 @@ const routes = [
             name: 'CreateJoinSuccessView',
             component: () => import('../views/front/CreateJoinSuccessView.vue'),
             meta: {
-              title: 'Success - createJoin - Join Sport',
+              title: '開團成功 - Join Sport',
               requiresAuth: true,
             },
           },
@@ -149,7 +149,7 @@ const routes = [
             name: 'List',
             component: () => import('../views/front/MemberListView.vue'),
             meta: {
-              title: 'List - Member - Join Sport',
+              title: '會員揪團列表 - Join Sport',
               requiresAuth: true,
             },
           },
@@ -158,7 +158,7 @@ const routes = [
             name: 'Host',
             component: () => import('../views/front/MemberHostView.vue'),
             meta: {
-              title: 'Host - Member - Join Sport',
+              title: '會員主持列表 - Join Sport',
               requiresAuth: true,
             },
           },
@@ -167,7 +167,7 @@ const routes = [
             name: 'Edit',
             component: () => import('../views/front/MemberEditView.vue'),
             meta: {
-              title: 'Edit - Member - Join Sport',
+              title: '編輯開團 - Join Sport',
               requiresAuth: true,
             },
             children: [
@@ -177,7 +177,7 @@ const routes = [
                 component: () =>
                   import('../views/front/MemberEditInfoView.vue'),
                 meta: {
-                  title: 'EditInfo - Member - Join Sport',
+                  title: '編輯開團資訊 - Join Sport',
                   requiresAuth: true,
                 },
               },
@@ -187,7 +187,7 @@ const routes = [
                 component: () =>
                   import('../views/front/MemberEditTagsView.vue'),
                 meta: {
-                  title: 'EditTags - Member - Join Sport',
+                  title: '編輯開團標籤 - Join Sport',
                   requiresAuth: true,
                 },
               },
@@ -197,7 +197,7 @@ const routes = [
                 component: () =>
                   import('../views/front/MemberEditContentView.vue'),
                 meta: {
-                  title: 'EditContent - Member - Join Sport',
+                  title: '編輯開團內文 - Join Sport',
                   requiresAuth: true,
                 },
               },
@@ -208,7 +208,7 @@ const routes = [
             name: 'Collection',
             component: () => import('../views/front/MemberCollectionView.vue'),
             meta: {
-              title: 'Collection - Member - Join Sport',
+              title: '會員收藏列表 - Join Sport',
               requiresAuth: true,
             },
           },
@@ -217,7 +217,7 @@ const routes = [
             name: 'Tags',
             component: () => import('../views/front/MemberTagsView.vue'),
             meta: {
-              title: 'Tags - Member - Join Sport',
+              title: '會員標籤 - Join Sport',
               requiresAuth: true,
             },
           },
@@ -226,7 +226,7 @@ const routes = [
             name: 'Info',
             component: () => import('../views/front/MemberInfoView.vue'),
             meta: {
-              title: 'Info - Member - Join Sport',
+              title: '會員資訊 - Join Sport',
               requiresAuth: true,
             },
           },
@@ -235,7 +235,7 @@ const routes = [
             name: 'Calendar',
             component: () => import('../views/front/MemberCalendarView.vue'),
             meta: {
-              title: 'Calendar - Member - Join Sport',
+              title: '揪團行事曆 - Join Sport',
               requiresAuth: true,
             },
           },

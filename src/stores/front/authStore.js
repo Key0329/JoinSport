@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia';
+import axios from 'axios';
 import Swal from 'sweetalert2';
+
+const { VITE_URL } = import.meta.env;
 
 export default defineStore('authStore', {
   state: () => ({
     isLoggedIn: false,
+    user: {},
   }),
   getters: {},
   actions: {
@@ -29,6 +33,19 @@ export default defineStore('authStore', {
         /(?:(?:^|.*;\s*)JoinSportUserId\s*=\s*([^;]*).*$)|^.*$/,
         '$1'
       );
+    },
+    getUser(id) {
+      const path = `${VITE_URL}/users/${id}`;
+
+      axios
+        .get(path)
+        .then((res) => {
+          this.user = res.data;
+          console.log(this.user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     alertLogIn() {
       Swal.fire({

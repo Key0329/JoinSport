@@ -2,6 +2,8 @@
 const { VITE_URL } = import.meta.env;
 
 export default {
+  name: 'MemberEditContentView',
+
   data() {
     return {
       editorValue: '',

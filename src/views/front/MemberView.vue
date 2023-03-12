@@ -6,6 +6,7 @@ import FullCalendarList from '@/components/front/FullCalendarList.vue';
 import ActivityPanel from '@/components/front/ActivityPanel.vue';
 
 export default {
+  name: 'MemberView',
   components: {
     FrontHeader,
     MemberPanel,

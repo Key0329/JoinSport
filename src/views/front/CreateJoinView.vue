@@ -3,6 +3,7 @@ import FrontHeader from '@/components/front/FrontHeader.vue';
 import CreateSteps from '@/components/front/CreateSteps.vue';
 
 export default {
+  name: 'CreateJoinView',
   components: {
     FrontHeader,
     CreateSteps,

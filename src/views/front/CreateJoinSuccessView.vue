@@ -1,3 +1,9 @@
+<script>
+export default {
+  name: 'CreateJoinSuccessView',
+};
+</script>
+
 <template>
   <section class="py-[100px]">
     <div class="container">

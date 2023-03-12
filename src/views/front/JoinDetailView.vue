@@ -10,6 +10,7 @@ import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
 const { VITE_URL } = import.meta.env;
 
 export default {
+  name: 'JoinDetailView',
   components: {
     FrontHeader,
     JoinAttendees,

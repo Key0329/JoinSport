@@ -7,6 +7,8 @@ import listPlugin from '@fullcalendar/list';
 import zhTw from '@fullcalendar/core/locales/zh-tw';
 
 export default {
+  name: 'FullCalendarList',
+
   components: {
     FullCalendar,
   },

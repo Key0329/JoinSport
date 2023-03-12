@@ -5,6 +5,8 @@ import searchStore from '@/stores/searchStore';
 const { VITE_URL } = import.meta.env;
 
 export default {
+  name: 'MemberEditTagsView',
+
   data() {
     return {
       tempSelectedTag: null,

@@ -7,7 +7,7 @@ import authStore from '@/stores/front/authStore';
 import PaginationComponent from '@/components/front/PaginationComponent.vue';
 
 export default {
-  name: 'JoinListHotView',
+  name: 'JoinListComingView',
   components: {
     JoinCardRow,
     LeafletMap,

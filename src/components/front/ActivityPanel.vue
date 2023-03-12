@@ -1,5 +1,7 @@
 <script>
 export default {
+  name: 'ActivityPanel',
+
   components: {},
 };
 </script>

@@ -6,6 +6,8 @@ import { Autoplay, EffectCoverflow } from 'swiper';
 import 'swiper/swiper-bundle.css';
 
 export default {
+  name: 'HomeBanner',
+
   components: {
     Swiper,
     SwiperSlide,

@@ -12,6 +12,8 @@ const validatePassword = (password) => {
 };
 
 export default {
+  name: 'LoginView',
+
   components: {
     FrontHeader,
   },

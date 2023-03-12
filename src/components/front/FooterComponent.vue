@@ -1,5 +1,11 @@
 import { RouterLink } from 'vue-router';
 
+<script>
+export default {
+  name: 'FooterComponent',
+};
+</script>
+
 <template>
   <footer class="border-t-4 border-primary-01 bg-primary-03 py-8 md:py-10">
     <div class="container">

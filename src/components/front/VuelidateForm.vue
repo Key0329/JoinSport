@@ -7,6 +7,8 @@ import createSteps from '@/stores/front/createSteps';
 const { VITE_URL } = import.meta.env;
 
 export default {
+  name: 'VuelidateForm',
+
   setup: () => ({ v$: useVuelidate() }),
   props: {
     activity: {

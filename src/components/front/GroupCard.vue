@@ -1,3 +1,9 @@
+<script>
+export default {
+  name: 'GroupCard',
+};
+</script>
+
 <template>
   <div class="rounded-[10px] border border-primary-01 bg-white p-3">
     <div class="mb-2 flex gap-6 border-b border-[#B7B7B7] pb-6">

@@ -1,3 +1,11 @@
+<script>
+export default {
+  name: 'DashboardView',
+  data() {
+    return {};
+  },
+};
+</script>
 <template>
   <h1 class="mb-5">這裡是後台頁面</h1>
   <router-link to="/">回到前台</router-link> |
@@ -7,11 +15,3 @@
   <hr />
   <router-view></router-view>
 </template>
-
-<script>
-export default {
-  data() {
-    return {};
-  },
-};
-</script>

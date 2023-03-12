@@ -4,6 +4,8 @@ import searchStore from '@/stores/searchStore';
 import authStore from '@/stores/front/authStore';
 
 export default {
+  name: 'FrontHeader',
+
   data() {
     return {
       searchTagsValue: '',

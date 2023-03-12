@@ -4,6 +4,8 @@ import authStore from '@/stores/front/authStore';
 import memberStore from '@/stores/front/memberStore';
 
 export default {
+  name: 'MemberPanel',
+
   data() {
     return {
       userId: null,

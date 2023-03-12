@@ -3,6 +3,8 @@ import { mapState } from 'pinia';
 import createSteps from '../../stores/front/createSteps';
 
 export default {
+  name: 'StepPagination',
+
   props: {
     activity: {
       type: Object,

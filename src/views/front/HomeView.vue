@@ -13,6 +13,7 @@ import GroupCard from '../../components/front/GroupCard.vue';
 import Loading from '../../components/front/LoadingComponent.vue';
 
 export default {
+  name: 'HomeView',
   components: {
     Loading,
     HomeBanner,

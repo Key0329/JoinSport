@@ -4,6 +4,8 @@ import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
 import { latLng } from 'leaflet';
 
 export default {
+  name: 'LeafletMap',
+
   props: {
     mapActivities: {
       type: Array,

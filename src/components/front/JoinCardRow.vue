@@ -1,5 +1,7 @@
 <script>
 export default {
+  name: 'JoinCardRow',
+
   props: {
     activity: {
       type: Object,
