@@ -2,7 +2,7 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation } from 'swiper';
 import { mapActions, mapState } from 'pinia';
-import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import joinActivitiesStore from '@/stores/front/activitiesStore';
 import 'swiper/css';
 import 'swiper/css/navigation';
 

@@ -1,6 +1,6 @@
 <script>
 import { mapActions } from 'pinia';
-import authStore from '@/stores/front/authStore';
+import authStore from '@/stores/authStore';
 import StepPagination from '@/components/front/StepPagination.vue';
 import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
 import JoinAttendees from '@/components/front/JoinAttendees.vue';

@@ -122,7 +122,7 @@ export default {
                 detail: '已關閉此揪團',
                 life: 1000,
               });
-              this.$emit('getActivitiesOrders', this.$route.params.id);
+              this.$router.push('/');
             })
             .catch((err) => {
               this.$toast.add({

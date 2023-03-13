@@ -2,7 +2,7 @@
 import FrontHeader from '@/components/front/FrontHeader.vue';
 import { mapState, mapActions } from 'pinia';
 import searchStore from '@/stores/searchStore';
-import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import joinActivitiesStore from '@/stores/front/activitiesStore';
 
 export default {
   name: 'JoinListView',

@@ -1,7 +1,7 @@
 <script>
 import { mapState, mapActions } from 'pinia';
 import VuelidateForm from '@/components/front/VuelidateForm.vue';
-import createSteps from '@/stores/front/createSteps';
+import createSteps from '@/stores/front/createStepsStore';
 
 const { VITE_URL } = import.meta.env;
 

@@ -1,7 +1,7 @@
 <script>
 import { mapState, mapActions } from 'pinia';
 import searchStore from '@/stores/searchStore';
-import authStore from '@/stores/front/authStore';
+import authStore from '@/stores/authStore';
 
 export default {
   name: 'FrontHeader',

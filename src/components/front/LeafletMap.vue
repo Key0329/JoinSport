@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'pinia';
-import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import joinActivitiesStore from '@/stores/front/activitiesStore';
 import { latLng } from 'leaflet';
 
 export default {

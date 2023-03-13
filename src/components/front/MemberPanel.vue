@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'pinia';
-import authStore from '@/stores/front/authStore';
+import authStore from '@/stores/authStore';
 import memberStore from '@/stores/front/memberStore';
 
 export default {

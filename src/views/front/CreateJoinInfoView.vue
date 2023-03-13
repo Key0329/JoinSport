@@ -2,7 +2,7 @@
 import { mapState, mapActions } from 'pinia';
 import VuelidateForm from '@/components/front/VuelidateForm.vue';
 import StepPagination from '@/components/front/StepPagination.vue';
-import createSteps from '../../stores/front/createSteps';
+import createSteps from '@/stores/front/createStepsStore';
 
 export default {
   name: 'CreateJoinInfoView',

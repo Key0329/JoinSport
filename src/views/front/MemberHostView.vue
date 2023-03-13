@@ -1,6 +1,6 @@
 <script>
 import { mapActions } from 'pinia';
-import authStore from '@/stores/front/authStore';
+import authStore from '@/stores/authStore';
 
 const { VITE_URL } = import.meta.env;
 

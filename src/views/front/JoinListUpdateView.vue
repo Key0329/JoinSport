@@ -2,8 +2,8 @@
 import JoinCardRow from '@/components/front/JoinCardRow.vue';
 import LeafletMap from '@/components/front/LeafletMap.vue';
 import { mapActions, mapState } from 'pinia';
-import authStore from '@/stores/front/authStore';
-import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import authStore from '@/stores/authStore';
+import joinActivitiesStore from '@/stores/front/activitiesStore';
 import PaginationComponent from '@/components/front/PaginationComponent.vue';
 
 export default {

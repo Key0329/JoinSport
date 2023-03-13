@@ -1,6 +1,6 @@
 <script>
 import { mapState } from 'pinia';
-import createSteps from '../../stores/front/createSteps';
+import createSteps from '@/stores/front/createStepsStore';
 
 export default {
   name: 'StepPagination',

@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'pinia';
-import authStore from '@/stores/front/authStore';
+import authStore from '@/stores/authStore';
 
 export default {
   name: 'HomeHeader',

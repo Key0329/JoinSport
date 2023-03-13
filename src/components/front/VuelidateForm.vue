@@ -2,7 +2,7 @@
 import { mapState } from 'pinia';
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@/utils/i18n-validators';
-import createSteps from '@/stores/front/createSteps';
+import createSteps from '@/stores/front/createStepsStore';
 
 const { VITE_URL } = import.meta.env;
 

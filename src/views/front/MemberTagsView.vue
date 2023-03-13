@@ -2,7 +2,7 @@
 import { mapState, mapActions } from 'pinia';
 import searchStore from '@/stores/searchStore';
 import memberStore from '@/stores/front/memberStore';
-import authStore from '@/stores/front/authStore';
+import authStore from '@/stores/authStore';
 
 export default {
   name: 'MemberTagsView',

@@ -1,6 +1,6 @@
 <script>
 import { mapActions } from 'pinia';
-import authStore from '@/stores/front/authStore';
+import authStore from '@/stores/authStore';
 
 import FrontHeader from '@/components/front/FrontHeader.vue';
 import JoinDetailMore from '@/components/front/JoinDetailMore.vue';

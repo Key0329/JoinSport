@@ -1,8 +1,8 @@
 <script>
 import { mapState, mapActions } from 'pinia';
-import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import joinActivitiesStore from '@/stores/front/activitiesStore';
 import JoinCardRow from '@/components/front/JoinCardRow.vue';
-import authStore from '@/stores/front/authStore';
+import authStore from '@/stores/authStore';
 
 export default {
   components: {

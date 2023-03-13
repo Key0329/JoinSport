@@ -1,7 +1,7 @@
 <script>
 import { mapActions, mapState } from 'pinia';
-import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
-import authStore from '@/stores/front/authStore';
+import joinActivitiesStore from '@/stores/front/activitiesStore';
+import authStore from '@/stores/authStore';
 import FullCalendar from '@fullcalendar/vue3';
 import listPlugin from '@fullcalendar/list';
 import zhTw from '@fullcalendar/core/locales/zh-tw';

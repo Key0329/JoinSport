@@ -2,7 +2,7 @@
 import { mapState, mapActions } from 'pinia';
 import { useVuelidate } from '@vuelidate/core';
 import { required, email } from '@/utils/i18n-validators';
-import authStore from '@/stores/front/authStore';
+import authStore from '@/stores/authStore';
 import memberStore from '@/stores/front/memberStore';
 
 export default {
