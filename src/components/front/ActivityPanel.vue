@@ -1,8 +1,58 @@
 <script>
+import { mapActions, mapState } from 'pinia';
+import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import authStore from '@/stores/front/authStore';
+
 export default {
   name: 'ActivityPanel',
 
-  components: {},
+  computed: {
+    ...mapState(joinActivitiesStore, ['availableActivities']),
+
+    // 篩選出此會員參與的活動
+    filteredArray() {
+      // 取出 userId
+      const id = parseInt(this.getUserId(), 10);
+      // 取出此會員參與的活動
+      const filteredArray = this.availableActivities.filter((activity) =>
+        activity.participantsId.includes(id)
+      );
+
+      return filteredArray;
+    },
+    nextActivity() {
+      // 調整需要的日期格式
+      const membersActivities = this.filteredArray.map((activity) => {
+        const month = activity.date?.split('/')[0];
+        const day = activity.date?.split('/')[1];
+
+        const newActivity = {
+          ...activity,
+          month: parseInt(month, 10),
+          day: parseInt(day, 10),
+        };
+
+        return newActivity;
+      });
+
+      // 依日期排序
+      const sortActivities = membersActivities.sort(
+        (a, b) => a.originTime - b.originTime
+      );
+
+      return sortActivities.slice(0, 1);
+    },
+  },
+  methods: {
+    ...mapActions(joinActivitiesStore, ['getActivities', 'getOrders']),
+    ...mapActions(authStore, ['getUserId']),
+  },
+
+  mounted() {
+    this.getActivities();
+    this.getOrders();
+    this.getUserId();
+  },
 };
 </script>
 
@@ -18,14 +68,14 @@ export default {
         >
       </div>
       <RouterLink
-        to="/Member/List"
+        :to="`/JoinDetail/id=${nextActivity[0]?.id}`"
         class="group flex flex-col rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] sm:flex-row"
       >
         <!-- card img -->
-        <div class="relative flex w-full items-center p-2 pl-4 sm:w-1/2">
+        <div class="relative flex w-full items-center py-4 pl-4 sm:w-1/2">
           <img
-            class="rounded"
-            src="../../assets/images/group/group07.png"
+            class="h-full rounded"
+            :src="nextActivity[0]?.mainImg"
             alt="card-img-01"
           />
         </div>
@@ -34,18 +84,21 @@ export default {
           class="w-full rounded-b-[10px] border-x border-b px-2 pt-2 pb-3 sm:border-0"
         >
           <h5 class="mb-2 group-hover:text-primary-01">
-            周末#羽球#新店運動中心
+            {{ nextActivity[0]?.title }}
           </h5>
 
           <p class="flex items-center text-sm text-[#3D3D3D]">
             <span class="material-icons mr-1 text-primary-01"> room </span
-            >捷運新店區公所
+            >{{ nextActivity[0]?.city }}{{ nextActivity[0]?.district }}
           </p>
           <p class="mb-1 flex items-center text-sm text-[#3D3D3D]">
             <span class="material-icons mr-1 text-primary-01"> schedule </span
-            >3/25 10:00
+            >{{ nextActivity[0]?.month }}/{{ nextActivity[0]?.day }}
+            {{ nextActivity[0]?.startTime.time }}
           </p>
-          <p class="text-end text-xs">5 位參加者</p>
+          <p class="text-end text-xs">
+            {{ nextActivity[0]?.participantsId.length }} 位參加者
+          </p>
         </div>
       </RouterLink>
     </div>
