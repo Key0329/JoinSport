@@ -106,12 +106,14 @@ export default {
 
 <template>
   <div class="my-6">
-    <h3 class="text-lg">本周活動</h3>
+    <div class="flex justify-between">
+      <h3 class="text-lg">本周活動</h3>
+      <RouterLink
+        to="/Member/Calendar"
+        class="mt-1 flex items-center justify-end hover:text-primary-01"
+        >詳細月曆<i class="pi pi-arrow-up-right ml-1"></i
+      ></RouterLink>
+    </div>
     <FullCalendar :options="calendarOptions" />
-    <RouterLink
-      to="/Member/Calendar"
-      class="mt-1 flex items-center justify-end hover:text-primary-01"
-      >詳細月曆<i class="pi pi-arrow-up-right ml-1"></i
-    ></RouterLink>
   </div>
 </template>

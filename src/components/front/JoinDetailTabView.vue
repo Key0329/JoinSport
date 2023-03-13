@@ -81,8 +81,6 @@ export default {
           updateTime: replyTime,
           isCancelled: false,
         };
-        console.log(1);
-        console.log(id);
         detail = '回覆成功';
         errDetail = '回覆失敗';
       }
@@ -97,7 +95,6 @@ export default {
           updateTime: replyTime,
           isCancelled: false,
         };
-        console.log(2);
         detail = '留言成功';
         errDetail = '留言失敗';
       }
