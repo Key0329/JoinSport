@@ -62,7 +62,9 @@ export default {
 <template>
   <main class="pt-4 pb-20 md:pt-10">
     <div class="container">
-      <h2 class="mb-6 text-center text-2xl md:mb-10 md:text-start">熱門揪團</h2>
+      <h2 class="mb-6 text-center text-2xl md:mb-10 md:text-start">
+        即將到來的揪團
+      </h2>
       <!-- pagination -->
       <PaginationComponent
         :currentPage="currentPage"
