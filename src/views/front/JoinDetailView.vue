@@ -1,13 +1,13 @@
 <script>
-import { mapState, mapActions } from 'pinia';
-import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
+import { mapActions } from 'pinia';
 import authStore from '@/stores/front/authStore';
 
 import FrontHeader from '@/components/front/FrontHeader.vue';
-import JoinAttendees from '@/components/front/JoinAttendees.vue';
-import JoinCardRow from '@/components/front/JoinCardRow.vue';
+import JoinDetailMore from '@/components/front/JoinDetailMore.vue';
 import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
 import JoinDetailBottom from '@/components/front/JoinDetailBottom.vue';
+import JoinDetailTabView from '@/components/front/JoinDetailTabView.vue';
+import JoinDetailCancel from '@/components/front/JoinDetailCancel.vue';
 
 const { VITE_URL } = import.meta.env;
 
@@ -15,24 +15,21 @@ export default {
   name: 'JoinDetailView',
   components: {
     FrontHeader,
-    JoinAttendees,
-    JoinCardRow,
+    JoinDetailMore,
     JoinDetailAside,
     JoinDetailBottom,
+    JoinDetailTabView,
+    JoinDetailCancel,
   },
   data() {
     return {
       userId: null,
       activity: [],
       orders: [],
-      textareaValue: '',
       imgLoading: true,
-      sectionRerender: false,
     };
   },
   computed: {
-    ...mapState(joinActivitiesStore, ['availableActivities']),
-
     // 加入調整日期
     newDateActivity() {
       if (!this.activity.date) {
@@ -60,31 +57,8 @@ export default {
 
       return newDateActivity;
     },
-    // 選出兩個推播活動
-    slicedActivities() {
-      // 避免 side effect
-      const tempActivity = [...this.availableActivities];
-      // 刪掉已取消的揪團
-      const filterList = tempActivity.filter(
-        (activity) => activity?.isCancelled === false
-      );
-      // 避免選到同個活動
-      const excluded = filterList.filter((activity) => {
-        if (!activity?.id) {
-          return [];
-        }
-
-        return activity.id !== parseInt(this.$route.params.id, 10);
-      });
-      // 亂序排列
-      const random = excluded.sort(() => Math.random() - 0.5);
-      // 選出兩個推播
-      const sliced = random.slice(0, 2);
-      return sliced;
-    },
   },
   methods: {
-    ...mapActions(joinActivitiesStore, ['getActivities', 'getOrders']),
     ...mapActions(authStore, ['getUserId']),
 
     getActivityDetail(id) {
@@ -137,8 +111,6 @@ export default {
     this.getActivityDetail(this.$route.params.id);
     this.getActivityOrders(this.$route.params.id);
     this.userId = this.getUserId();
-    this.getActivities();
-    this.getOrders();
   },
 };
 </script>
@@ -256,155 +228,27 @@ export default {
             </div>
           </section>
           <!-- Tab -->
-          <TabView>
-            <TabPanel header="參與者">
-              <ul class="flex flex-wrap gap-4">
-                <li v-for="user in orders" :key="user.userId">
-                  <JoinAttendees :user="user"></JoinAttendees>
-                </li>
-              </ul>
-            </TabPanel>
-            <TabPanel header="更多照片">
-              <div class="flex flex-col justify-evenly gap-2 md:flex-row">
-                <div
-                  class="w-full"
-                  v-for="(img, i) in newDateActivity.imgs"
-                  :key="img + i"
-                >
-                  <img :src="img" alt="JoinDetailImg" class="h-full" />
-                </div>
-              </div>
-            </TabPanel>
-            <TabPanel header="留言">
-              <ul class="mb-10 flex flex-col gap-8 md:mb-20">
-                <li class="flex gap-4">
-                  <div>
-                    <img
-                      class="inline-block h-20 w-20 rounded-full ring-2 ring-white"
-                      src="../../assets/images/avatar/avatar01.png"
-                      alt="avatar01"
-                    />
-                  </div>
-                  <div class="w-full rounded-lg bg-white p-4">
-                    <p class="mb-2 text-sm">Annie</p>
-                    <p class="mb-4">請問租借球拍的費用是多少呢?</p>
-                    <div class="mb-2 flex text-sm">
-                      <span class="mr-2">B1</span>
-                      <span class="mr-2">4 小時前</span>
-                      <a href="#" class="text-[#b7b7b7]">回覆</a>
-                    </div>
-                    <a href="#" class="text-sm text-[#b1b1b1]"
-                      >— 查看其他 1 則留言</a
-                    >
-                  </div>
-                </li>
-                <li class="flex gap-4">
-                  <div>
-                    <img
-                      class="inline-block h-20 w-20 rounded-full ring-2 ring-white"
-                      src="../../assets/images/avatar/avatar01.png"
-                      alt="avatar01"
-                    />
-                  </div>
-                  <div class="w-full rounded-lg bg-white p-4">
-                    <p class="mb-2 text-sm">Annie</p>
-                    <p class="mb-4">請問租借球拍的費用是多少呢?</p>
-                    <div class="mb-2 flex text-sm">
-                      <span class="mr-2">B1</span>
-                      <span class="mr-2">4 小時前</span>
-                      <a href="#" class="text-[#b7b7b7]">回覆</a>
-                    </div>
-                    <a href="#" class="text-sm text-[#b1b1b1]"
-                      >— 查看其他 1 則留言</a
-                    >
-                  </div>
-                </li>
-              </ul>
-              <div>
-                <p class="mb-4">留言</p>
-                <form>
-                  <PTextarea
-                    v-model="textareaValue"
-                    rows="5"
-                    class="mb-2 w-full"
-                    placeholder="留下您的想法"
-                  />
-                  <div class="flex justify-end gap-4">
-                    <button
-                      type="button"
-                      class="btn bg-white transition-colors hover:bg-primary-02"
-                    >
-                      取消
-                    </button>
-                    <button
-                      type="button"
-                      class="btn bg-primary-04 transition-colors hover:bg-primary-02"
-                    >
-                      確認
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </TabPanel>
-          </TabView>
+          <JoinDetailTabView
+            :orders="orders"
+            :activity="newDateActivity"
+          ></JoinDetailTabView>
         </div>
         <!-- sidebar -->
         <JoinDetailAside :activity="newDateActivity"></JoinDetailAside>
       </div>
       <!-- 更多揪團 -->
       <section class="pt-10">
-        <h3 class="mb-8 text-xl font-medium">更多揪團活動</h3>
-        <ul class="grid grid-cols-2 gap-6">
-          <li
-            class="col-span-1"
-            v-for="activity in slicedActivities"
-            :key="activity.id"
-          >
-            <RouterLink class="h-full" :to="`/JoinDetail/id=${activity.id}`"
-              ><join-card-row
-                :activity="activity"
-                :userId="userId"
-              ></join-card-row
-            ></RouterLink>
-          </li>
-        </ul>
+        <JoinDetailMore></JoinDetailMore>
       </section>
     </div>
   </main>
 
   <!-- 揪團取消頁面 -->
   <main v-else>
-    <div
-      class="flex h-screen flex-col items-center justify-center bg-primary-03"
-    >
-      <h1 class="mb-10 text-4xl">Oops...此揪團已取消</h1>
-      <h2 class="mb-4 text-xl font-bold md:text-3xl">
-        {{ newDateActivity.title }}
-      </h2>
-      <div class="mb-10 flex items-center gap-4">
-        <PAvatar
-          :image="newDateActivity?.user?.img"
-          size="xlarge"
-          shape="circle"
-        />
-        <div>
-          <p>主辦者</p>
-          <p>{{ newDateActivity?.user?.name }}</p>
-        </div>
-      </div>
-      <router-link to="/">
-        <PButton
-          type="button"
-          label="回到首頁"
-          icon="pi pi-home"
-          iconPos="right"
-        />
-      </router-link>
-    </div>
+    <JoinDetailCancel :activity="newDateActivity"></JoinDetailCancel>
   </main>
 
   <section
-    :key="sectionRerender"
     v-if="!newDateActivity.isCancelled === true"
     class="sticky bottom-0 z-30 bg-white py-5"
   >
