@@ -37,7 +37,7 @@ export default {
 
       // 依日期排序
       const sortActivities = membersActivities.sort(
-        (a, b) => a.originTime - b.originTime
+        (a, b) => a.originDate - b.originDate
       );
 
       return sortActivities.slice(0, 1);

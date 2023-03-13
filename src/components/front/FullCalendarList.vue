@@ -68,11 +68,10 @@ export default {
       );
       // 調整需要的格式
       const membersActivities = filteredArray.map((activity) => {
-        const date = new Date(activity.originDate).toISOString().split('T')[0];
+        const date = new Date(activity?.originDate).toISOString().split('T')[0];
         const time = `${date}T${activity.startTime?.time}:00`;
         const status =
           new Date(time).getTime() - new Date().getTime() < 0 ? 'done' : '';
-
         const schedule = {
           title: activity.title,
           id: activity.id,

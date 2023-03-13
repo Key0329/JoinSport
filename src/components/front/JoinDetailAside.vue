@@ -17,21 +17,6 @@ export default {
 
 <template>
   <aside class="sticky top-20 col-span-3 col-end-13 hidden h-[717px] md:block">
-    <div class="mb-6 rounded-lg bg-white p-4">
-      <div class="flex items-center gap-4">
-        <div class="w-1/3">
-          <img
-            class="rounded-lg"
-            src="../../assets/images/group/group03.png"
-            alt="group"
-          />
-        </div>
-        <div>
-          <h4>大台北羽球群組</h4>
-          <p>公開群組</p>
-        </div>
-      </div>
-    </div>
     <template v-if="activity">
       <ul class="mb-6 flex flex-wrap items-center gap-2">
         <li v-for="(tag, i) of activity.tags" :key="tag + i">

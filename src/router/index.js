@@ -243,23 +243,7 @@ const routes = [
       },
     ],
   },
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: () => import('../views/DashboardView.vue'),
-    children: [
-      {
-        path: '',
-        name: 'AdminHome',
-        component: () => import('../views/admin/AdminHomeView.vue'),
-      },
-      {
-        path: 'orders',
-        name: 'AdminOrders',
-        component: () => import('../views/admin/AdminOrdersView.vue'),
-      },
-    ],
-  },
+
   {
     path: '/:pathMatch(.*)*',
     component: () => import('../views/NotFound.vue'),
