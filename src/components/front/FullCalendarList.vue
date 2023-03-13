@@ -46,7 +46,7 @@ export default {
           { title: '開會', start: new Date() },
           {
             title: '打球',
-            start: '2023-03-10T14:30:00',
+            start: '2023-03-15T14:30:00',
             extendedProps: {
               status: 'done',
             },
@@ -68,7 +68,8 @@ export default {
       );
       // 調整需要的格式
       const membersActivities = filteredArray.map((activity) => {
-        const time = `${activity.originDate}T${activity.startTime?.time}:00`;
+        const date = new Date(activity.originDate).toISOString().split('T')[0];
+        const time = `${date}T${activity.startTime?.time}:00`;
         const status =
           new Date(time).getTime() - new Date().getTime() < 0 ? 'done' : '';
 
