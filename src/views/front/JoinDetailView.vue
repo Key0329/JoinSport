@@ -229,8 +229,10 @@ export default {
           </section>
           <!-- Tab -->
           <JoinDetailTabView
+            :userId="userId"
             :orders="orders"
             :activity="newDateActivity"
+            @getActivity="getActivityDetail"
           ></JoinDetailTabView>
         </div>
         <!-- sidebar -->

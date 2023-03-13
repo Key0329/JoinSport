@@ -19,9 +19,10 @@ export default {
       'taiwanCities',
       'filteredTags',
     ]),
+    ...mapState(authStore, ['user']),
   },
   methods: {
-    ...mapActions(authStore, ['getToken', 'logOut']),
+    ...mapActions(authStore, ['getUserId', 'getUser', 'getToken', 'logOut']),
     ...mapActions(searchStore, [
       'getTags',
       'getTaiwanDistrictData',
@@ -48,6 +49,7 @@ export default {
   mounted() {
     this.getTags();
     this.getTaiwanDistrictData();
+    this.getUser(this.getUserId());
   },
 };
 </script>
@@ -185,7 +187,7 @@ export default {
         </li>
         <li>
           <img
-            src="../../assets/images/avatar/avatar01.png"
+            :src="user.img"
             alt="member-avatar"
             class="h-10 w-10 rounded-full object-cover"
           />

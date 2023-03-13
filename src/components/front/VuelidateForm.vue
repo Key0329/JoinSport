@@ -404,6 +404,7 @@ export default {
             placeholder="請選擇活動日期"
             dateFormat="yy-mm-dd"
             :showIcon="true"
+            :minDate="new Date()"
             class="w-full"
             :class="{ 'p-invalid': v$.date.$invalid && submitted }"
           />

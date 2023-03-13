@@ -1,8 +1,13 @@
 <script>
 import JoinAttendees from '@/components/front/JoinAttendees.vue';
 
+const { VITE_URL } = import.meta.env;
+
 export default {
   props: {
+    userId: {
+      type: String,
+    },
     orders: {
       type: Array,
     },
@@ -16,7 +21,121 @@ export default {
   data() {
     return {
       textareaValue: '',
+      userMessages: [],
+      hostReplyMessages: [],
+      isOpened: false,
+      openedTextarea: '',
+      userTimeDiff: '',
     };
+  },
+  methods: {
+    getMessages(id) {
+      const path = `${VITE_URL}/messages?activityId=${id}&_expand=user`;
+
+      this.$http
+        .get(path)
+        .then((res) => {
+          this.userMessages = res.data;
+        })
+        .catch((err) => {
+          this.$toast.add({
+            severity: 'error',
+            detail: `${err} 找不到資料`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
+        });
+    },
+    getReplyMessage(id) {
+      const path = `${VITE_URL}/messageReply?userId=${id}&_expand=user`;
+
+      this.$http
+        .get(path)
+        .then((res) => {
+          this.hostReplyMessages = res.data;
+        })
+        .catch((err) => {
+          this.$toast.add({
+            severity: 'err',
+            detail: `${err} 找不到資料`,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
+        });
+    },
+    sendMessageHandler(e, id) {
+      const content = this.textareaValue;
+      const replyTime = new Date().getTime();
+      let path = '';
+      let data = {};
+      let detail = '';
+      let errDetail = '';
+
+      if (id) {
+        path = `${VITE_URL}/messageReply`;
+
+        data = {
+          userId: this.userId,
+          messageId: id,
+          content,
+          updateTime: replyTime,
+          isCancelled: false,
+        };
+        console.log(1);
+        console.log(id);
+        detail = '回覆成功';
+        errDetail = '回覆失敗';
+      }
+
+      if (!id) {
+        path = `${VITE_URL}/messages`;
+
+        data = {
+          userId: this.userId,
+          activityId: this.activity.id,
+          content,
+          updateTime: replyTime,
+          isCancelled: false,
+        };
+        console.log(2);
+        detail = '留言成功';
+        errDetail = '留言失敗';
+      }
+
+      this.$http
+        .post(path, data)
+        .then(() => {
+          this.$emit('getActivity', this.$route.params.id);
+          this.$toast.add({
+            severity: 'success',
+            detail,
+            life: 1000,
+          });
+          this.textareaValue = '';
+        })
+        .catch(() => {
+          this.$toast.add({
+            severity: 'error',
+            detail: errDetail,
+            life: 1000,
+            contentStyleClass: 'custom-toast-danger',
+          });
+        });
+    },
+    textareaHandler(id) {
+      this.isOpened = !this.isOpened;
+      this.openedTextarea = id;
+      this.textareaValue = '';
+    },
+    isHost() {
+      return this.activity.userId === this.userId;
+    },
+  },
+  watch: {
+    activity(to) {
+      this.getMessages(to.id);
+      this.getReplyMessage(to.userId);
+    },
   },
 };
 </script>
@@ -39,48 +158,114 @@ export default {
     </TabPanel>
     <TabPanel header="留言">
       <ul class="mb-10 flex flex-col gap-8 md:mb-20">
-        <li class="flex gap-4">
-          <div>
+        <li v-for="(message, i) in userMessages" :key="message.id" class="flex">
+          <div class="mr-4 flex-shrink-0">
             <img
-              class="inline-block h-20 w-20 rounded-full ring-2 ring-white"
-              src="../../assets/images/avatar/avatar01.png"
+              class="h-20 w-20 rounded-full ring-2 ring-white"
+              :src="message.user.img"
               alt="avatar01"
             />
           </div>
-          <div class="w-full rounded-lg bg-white p-4">
-            <p class="mb-2 text-sm">Annie</p>
-            <p class="mb-4">請問租借球拍的費用是多少呢?</p>
-            <div class="mb-2 flex text-sm">
-              <span class="mr-2">B1</span>
-              <span class="mr-2">4 小時前</span>
-              <a href="#" class="text-[#b7b7b7]">回覆</a>
+          <div class="w-full">
+            <div class="mb-6 w-3/4 rounded-lg bg-white p-4">
+              <p class="mb-2 font-bold">{{ message.user.name }}</p>
+              <p class="mb-4">{{ message.content }}</p>
+              <div class="flex text-sm">
+                <span class="mr-2">B{{ i + 1 }}</span>
+                <span
+                  v-if="
+                    isHost() &&
+                    hostReplyMessages.find(
+                      (hostMsg) =>
+                        parseInt(hostMsg.messageId, 10) === message.id
+                    )
+                  "
+                  class="text-[#b7b7b7]"
+                  >已回覆</span
+                >
+                <button
+                  v-else-if="isHost()"
+                  @click="textareaHandler(message.id)"
+                  type="button"
+                  class="hover:text-primary-01"
+                >
+                  回覆
+                </button>
+              </div>
             </div>
-            <a href="#" class="text-sm text-[#b1b1b1]">— 查看其他 1 則留言</a>
-          </div>
-        </li>
-        <li class="flex gap-4">
-          <div>
-            <img
-              class="inline-block h-20 w-20 rounded-full ring-2 ring-white"
-              src="../../assets/images/avatar/avatar01.png"
-              alt="avatar01"
-            />
-          </div>
-          <div class="w-full rounded-lg bg-white p-4">
-            <p class="mb-2 text-sm">Annie</p>
-            <p class="mb-4">請問租借球拍的費用是多少呢?</p>
-            <div class="mb-2 flex text-sm">
-              <span class="mr-2">B1</span>
-              <span class="mr-2">4 小時前</span>
-              <a href="#" class="text-[#b7b7b7]">回覆</a>
+            <div
+              v-if="
+                hostReplyMessages.find(
+                  (hostMsg) => parseInt(hostMsg.messageId, 10) === message.id
+                )
+              "
+              class="ml-auto flex items-center gap-6 pl-10"
+            >
+              <i
+                class="pi pi-reply rotate-180 scale-x-[-1] transform text-2xl"
+              ></i>
+              <div
+                class="flex w-full items-center justify-between rounded-lg bg-white p-4"
+              >
+                <div>
+                  <p class="mb-2">主辦者回覆 B{{ i + 1 }}</p>
+                  <p>
+                    {{
+                      hostReplyMessages.filter(
+                        (hostMsg) =>
+                          parseInt(hostMsg.messageId, 10) === message.id
+                      )[0].content
+                    }}
+                  </p>
+                </div>
+                <div>
+                  <img
+                    class="inline-block h-20 w-20 rounded-full ring-2 ring-white"
+                    :src="
+                      hostReplyMessages.filter(
+                        (hostMsg) =>
+                          parseInt(hostMsg.messageId, 10) === message.id
+                      )[0].user.img
+                    "
+                    alt="avatar01"
+                  />
+                </div>
+              </div>
             </div>
-            <a href="#" class="text-sm text-[#b1b1b1]">— 查看其他 1 則留言</a>
+            <div v-else>
+              <form
+                v-if="isOpened && openedTextarea === message.id"
+                @submit.prevent="sendMessageHandler($event, message.id)"
+              >
+                <PTextarea
+                  v-model="textareaValue"
+                  rows="3"
+                  class="mb-2 w-full"
+                  placeholder="回覆"
+                />
+                <div class="flex justify-end gap-4">
+                  <button
+                    @click="textareaHandler"
+                    type="button"
+                    class="btn bg-white transition-colors hover:bg-primary-02"
+                  >
+                    取消
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn bg-primary-04 transition-colors hover:bg-primary-02"
+                  >
+                    確認
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </li>
       </ul>
-      <div>
+      <div v-if="!isHost()" class="border-t pt-4">
         <p class="mb-4">留言</p>
-        <form>
+        <form @submit.prevent="sendMessageHandler($event)">
           <PTextarea
             v-model="textareaValue"
             rows="5"
@@ -89,13 +274,14 @@ export default {
           />
           <div class="flex justify-end gap-4">
             <button
+              @click="textareaHandler"
               type="button"
               class="btn bg-white transition-colors hover:bg-primary-02"
             >
               取消
             </button>
             <button
-              type="button"
+              type="submit"
               class="btn bg-primary-04 transition-colors hover:bg-primary-02"
             >
               確認

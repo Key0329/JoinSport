@@ -12,7 +12,8 @@ export default {
     ...mapActions(authStore, ['getUserId', 'getUser', 'getToken', 'logOut']),
   },
   mounted() {
-    this.getUser(this.getUserId());
+    const userId = this.getUserId();
+    this.getUser(userId);
   },
 };
 </script>
