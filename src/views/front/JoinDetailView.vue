@@ -2,10 +2,12 @@
 import { mapState, mapActions } from 'pinia';
 import joinActivitiesStore from '@/stores/front/joinActivitiesStore';
 import authStore from '@/stores/front/authStore';
+
 import FrontHeader from '@/components/front/FrontHeader.vue';
 import JoinAttendees from '@/components/front/JoinAttendees.vue';
 import JoinCardRow from '@/components/front/JoinCardRow.vue';
 import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
+import BookMark from '@/components/front/BookMark.vue';
 
 const { VITE_URL } = import.meta.env;
 
@@ -16,6 +18,7 @@ export default {
     JoinAttendees,
     JoinCardRow,
     JoinDetailAside,
+    BookMark,
   },
   data() {
     return {
@@ -23,8 +26,6 @@ export default {
       activity: [],
       orders: [],
       textareaValue: '',
-      bookmarkId: null,
-      isBookmarked: false,
       imgLoading: true,
       sectionRerender: false,
     };
@@ -32,6 +33,7 @@ export default {
   computed: {
     ...mapState(joinActivitiesStore, ['availableActivities']),
 
+    // 加入調整日期
     newDateActivity() {
       if (!this.activity.date) {
         return {};
@@ -58,6 +60,7 @@ export default {
 
       return newDateActivity;
     },
+    // 選出兩個推播活動
     slicedActivities() {
       // 避免 side effect
       const tempActivity = [...this.availableActivities];
@@ -100,7 +103,7 @@ export default {
         .get(path)
         .then((res) => {
           this.activity = res.data;
-          return this.getActivityBookmark();
+          // return this.$refs.bookmark.getActivityBookmark();
         })
         .catch((err) => {
           const errMessage = err.response.statusText;
@@ -124,29 +127,6 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 找不到參與者資訊`,
-            life: 1000,
-            contentStyleClass: 'custom-toast-danger',
-          });
-        });
-    },
-    getActivityBookmark() {
-      const path = `${VITE_URL}/users/${this.userId}/bookmarks?activityId=${this.activity.id}`;
-
-      this.$http
-        .get(path)
-        .then((res) => {
-          if (res.data[0]) {
-            if (res.data[0].isCancelled === false) {
-              this.isBookmarked = true;
-            }
-            this.bookmarkId = res.data[0].id;
-          }
-        })
-        .catch((err) => {
-          const errMessage = err.response.statusText;
-          this.$toast.add({
-            severity: 'error',
-            detail: `${errMessage}'找不到收藏資料'`,
             life: 1000,
             contentStyleClass: 'custom-toast-danger',
           });
@@ -263,72 +243,6 @@ export default {
       this.$primevue.config.locale.accept = '確認';
       this.$primevue.config.locale.reject = '取消';
     },
-    handleBookmark() {
-      if (!this.bookmarkId && this.isBookmarked === false) {
-        const path = `${VITE_URL}/bookmarks/`;
-        const data = {
-          userId: parseInt(this.userId, 10),
-          activityId: this.activity.id,
-          isCancelled: false,
-        };
-
-        this.$http
-          .post(path, data)
-          .then((res) => {
-            this.isBookmarked = true;
-            this.bookmarkId = res.data.id;
-          })
-          .catch((err) => {
-            const errMessage = err.response.statusText;
-            this.$toast.add({
-              severity: 'error',
-              detail: errMessage,
-              life: 1000,
-              contentStyleClass: 'custom-toast-danger',
-            });
-          });
-
-        return;
-      }
-
-      const id = this.bookmarkId;
-      const path = `${VITE_URL}/bookmarks/${id}`;
-      const data = {
-        isCancelled: false,
-      };
-      if (this.isBookmarked === true) {
-        data.isCancelled = true;
-      }
-
-      this.$http
-        .patch(path, data)
-        .then(() => {
-          this.isBookmarked = !this.isBookmarked;
-          if (this.isBookmarked === true) {
-            this.$toast.add({
-              severity: 'success',
-              detail: '加入我的收藏',
-              life: 1000,
-            });
-          }
-          if (this.isBookmarked === false) {
-            this.$toast.add({
-              severity: 'info',
-              detail: '移除我的收藏',
-              life: 1000,
-            });
-          }
-        })
-        .catch((err) => {
-          const errMessage = err.response.statusText;
-          this.$toast.add({
-            severity: 'error',
-            detail: errMessage,
-            life: 1000,
-            contentStyleClass: 'custom-toast-danger',
-          });
-        });
-    },
     onImageLoad() {
       this.imgLoading = false;
     },
@@ -434,6 +348,7 @@ export default {
               }}</span>
             </div>
           </section>
+          <!-- 主要內文 -->
           <article class="mb-10 md:mb-20">
             <QuillEditor
               v-model:content="newDateActivity.content"
@@ -442,6 +357,7 @@ export default {
               theme="bubble"
             />
           </article>
+          <!-- 揪團資訊 -->
           <section
             class="mb-10 flex justify-evenly border-y border-[#3d3d3d] py-10 md:mb-20"
           >
@@ -462,6 +378,7 @@ export default {
               <p>{{ newDateActivity.maxJoinNum }} 人</p>
             </div>
           </section>
+          <!-- Tab -->
           <TabView>
             <TabPanel header="參與者">
               <ul class="flex flex-wrap gap-4">
@@ -557,6 +474,7 @@ export default {
         <!-- sidebar -->
         <JoinDetailAside :activity="newDateActivity"></JoinDetailAside>
       </div>
+      <!-- 更多揪團 -->
       <section class="pt-10">
         <h3 class="mb-8 text-xl font-medium">更多揪團活動</h3>
         <ul class="grid grid-cols-2 gap-6">
@@ -636,10 +554,11 @@ export default {
             個空位
           </p>
           <!-- 收藏 -->
-          <button type="button" @click="handleBookmark">
-            <i v-if="!isBookmarked" class="pi pi-star text-lg"></i>
-            <i v-else class="pi pi-star-fill text-lg text-yellow-300"></i>
-          </button>
+          <BookMark
+            ref="bookmark"
+            :userId="userId"
+            :activity="activity"
+          ></BookMark>
           <!-- 主辦者 -->
           <template v-if="isHost">
             <button
