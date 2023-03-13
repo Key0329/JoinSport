@@ -22,7 +22,7 @@ export default {
   computed: {
     ...mapState(joinActivitiesStore, ['availableActivities', 'isLoading']),
     hotActivitiesList: ({ availableActivities, arrangePage }) => {
-      // 刪掉已取消的揪團
+      // 過濾已取消的揪團
       const filterList = availableActivities.filter(
         (activity) => activity.isCancelled === false
       );

@@ -29,8 +29,8 @@ export default {
           <div class="flex flex-col gap-4">
             <MemberPanel></MemberPanel>
             <PanelMenu></PanelMenu>
-            <FullCalendarList></FullCalendarList>
             <ActivityPanel></ActivityPanel>
+            <FullCalendarList></FullCalendarList>
           </div>
         </div>
         <div class="col-span-7 col-end-13"><RouterView></RouterView></div>

@@ -139,7 +139,7 @@ export default {
           <i class="pi pi-user mr-1"></i>此揪團已取消
         </div>
       </div>
-      <p class="mb-4 text-sm text-[#6f6f6f]">
+      <p class="mb-4 h-10 text-sm text-[#6f6f6f]">
         {{ activity?.description }}
       </p>
       <div class="mb-2 flex flex-col gap-2 md:flex-row">
@@ -158,7 +158,7 @@ export default {
       </div>
       <div class="flex flex-col md:flex-row md:items-end">
         <div class="mb-2 md:mb-0">
-          <ul class="my-3 flex -space-x-2 overflow-hidden">
+          <ul class="my-3 flex h-9 -space-x-2 overflow-hidden">
             <li
               v-for="(participant, i) in activity?.participants"
               :key="'participant' + i"

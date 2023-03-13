@@ -9,7 +9,8 @@ import 'swiper/css/navigation';
 import HomeHeader from '../../components/front/HomeHeader.vue';
 import HomeBanner from '../../components/front/HomeBanner.vue';
 import JoinCard from '../../components/front/JoinCard.vue';
-import GroupCard from '../../components/front/GroupCard.vue';
+import JoinCardRow from '../../components/front/JoinCardRow.vue';
+// import GroupCard from '../../components/front/GroupCard.vue';
 import Loading from '../../components/front/LoadingComponent.vue';
 
 export default {
@@ -20,7 +21,8 @@ export default {
     JoinCard,
     Swiper,
     SwiperSlide,
-    GroupCard,
+    // GroupCard,
+    JoinCardRow,
     HomeHeader,
   },
   data() {
@@ -32,24 +34,28 @@ export default {
   computed: {
     ...mapState(joinActivitiesStore, ['availableActivities', 'isLoading']),
     shuffledActivities() {
+      // 過濾已取消活動
       const filterList = this.availableActivities.filter(
         (activity) => activity.isCancelled === false
       );
 
-      // 將參與者的相片數量控制在 3 張以下
-      const newActivitiesCopy = filterList.map((item) => {
-        const newItem = { ...item };
+      // 隨機排序
+      const randomAct = filterList.sort(() => Math.random() - 0.5);
+      return randomAct;
+    },
 
-        if (newItem?.participants?.length > 3) {
-          newItem.participants = newItem.participants.slice(0, 3);
-        }
+    hotActivitiesList() {
+      // 過濾已取消的揪團
+      const filterList = this.availableActivities.filter(
+        (activity) => activity.isCancelled === false
+      );
 
-        return newItem;
+      // 依照參與人數排序熱門程度
+      const tempList = filterList.sort((a, b) => {
+        return b.numParticipants - a.numParticipants;
       });
 
-      // 隨機排序
-      const randomAct = newActivitiesCopy.sort(() => Math.random() - 0.5);
-      return randomAct.slice(0, 8);
+      return tempList.slice(0, 12);
     },
   },
   methods: {
@@ -143,12 +149,12 @@ export default {
   <!-- Coming activities -->
   <section class="relative hidden py-9 sm:block md:py-20">
     <div class="container">
-      <h2 class="mb-8 text-center text-3xl md:mb-16">即將到來的揪團</h2>
+      <h2 class="mb-8 text-center text-3xl md:mb-16">熱門揪團</h2>
       <ul
-        class="hidden gap-x-6 gap-y-10 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        class="hidden gap-x-6 gap-y-12 sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <li
-          v-for="activity in shuffledActivities"
+          v-for="activity in hotActivitiesList"
           :key="activity.id"
           class="md:col-span-1"
         >
@@ -168,7 +174,7 @@ export default {
   <!-- Coming activities mobile-->
   <section class="pt-9 xs:mb-12 sm:hidden md:py-20">
     <div class="container">
-      <h2 class="mb-8 text-center text-3xl">即將到來的揪團</h2>
+      <h2 class="mb-8 text-center text-3xl">熱門揪團</h2>
       <div>
         <swiper
           :slides-per-view="1"
@@ -177,14 +183,13 @@ export default {
           :modules="modules"
           class="swiper2 relative"
         >
-          <swiper-slide>
-            <router-link to=""><join-card></join-card></router-link>
-          </swiper-slide>
-          <swiper-slide>
-            <router-link to=""><join-card></join-card></router-link>
-          </swiper-slide>
-          <swiper-slide>
-            <router-link to=""><join-card></join-card></router-link>
+          <swiper-slide
+            v-for="activity in shuffledActivities"
+            :key="activity.id"
+          >
+            <router-link to=""
+              ><JoinCardRow :activity="activity"></JoinCardRow
+            ></router-link>
           </swiper-slide>
         </swiper>
       </div>
@@ -192,9 +197,11 @@ export default {
   </section>
 
   <!-- Hot activities -->
-  <section class="relative mb-10 overflow-hidden pt-9 md:py-24">
+  <section class="relative overflow-hidden pt-10 pb-[100px]">
     <div class="container">
-      <h2 class="mb-8 text-center text-3xl md:mb-0 md:text-left">熱門群組</h2>
+      <h2 class="mb-8 text-center text-3xl md:mb-0 md:text-left">
+        即將到來的揪團
+      </h2>
       <div>
         <swiper
           :space-between="24"
@@ -204,26 +211,16 @@ export default {
             576: {
               slidesPerView: 2,
             },
-            960: {
-              slidesPerView: 3,
-            },
           }"
           class="swiper1 relative"
         >
-          <swiper-slide>
-            <router-link to=""><group-card></group-card></router-link>
-          </swiper-slide>
-          <swiper-slide>
-            <router-link to=""><group-card></group-card></router-link>
-          </swiper-slide>
-          <swiper-slide>
-            <router-link to=""><group-card></group-card></router-link>
-          </swiper-slide>
-          <swiper-slide>
-            <router-link to=""><group-card></group-card></router-link>
-          </swiper-slide>
-          <swiper-slide>
-            <router-link to=""><group-card></group-card></router-link>
+          <swiper-slide
+            v-for="activity in shuffledActivities"
+            :key="activity.id"
+          >
+            <router-link :to="`/JoinDetail/id=${activity.id}`"
+              ><JoinCardRow :activity="activity"></JoinCardRow
+            ></router-link>
           </swiper-slide>
         </swiper>
       </div>
@@ -255,7 +252,7 @@ export default {
 .swiper1:deep(.swiper-button-prev:after),
 .swiper2:deep(.swiper-button-next:after),
 .swiper2:deep(.swiper-button-prev:after) {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .swiper1:deep(.swiper-button-next) {
@@ -283,10 +280,6 @@ export default {
   font-weight: 900;
 }
 
-.swiper1 {
-  padding-bottom: 60px;
-}
-
 @media (min-width: 576px) {
   .swiper1:deep(.swiper-button-next) {
     right: 35%;
@@ -299,7 +292,7 @@ export default {
 @media (min-width: 960px) {
   .swiper1 {
     padding-top: 60px;
-    padding-bottom: 0;
+    padding-bottom: 20px;
   }
   .swiper1:deep(.swiper-button-next) {
     background-color: #ef5230;

@@ -28,9 +28,16 @@ export default {
 <template>
   <div class="rounded-lg bg-primary-03 px-10 py-6">
     <div class="mb-8 flex items-center gap-6">
-      <PAvatar :image="user.img" size="xlarge" shape="circle" />
+      <PAvatar
+        :image="user.img"
+        size="xlarge"
+        shape="circle"
+        class="ring-2 ring-white"
+      />
       <div>
-        <h3 class="text-xl">{{ user.name }}</h3>
+        <h3 class="text-xl">
+          {{ user.name }}
+        </h3>
         <span class="text-sm">{{ user.email }}</span>
       </div>
     </div>

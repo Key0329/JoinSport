@@ -104,40 +104,26 @@ export default {
           });
         });
     },
-    getMapLatLng(address) {
-      const path = `${VITE_MAP_URL}?address=${address}&key=${VITE_MAP_KEY}`;
-
-      this.$http
-        .get(path)
-        .then((res) => {
-          const tempLocation = res.data.results[0].geometry.location;
-          this.location = [tempLocation.lat, tempLocation.lng];
-        })
-        .then((err) => {
-          const errMessage = err.response.statusText;
-          this.$toast.add({
-            severity: 'error',
-            detail: `${errMessage} 轉換地址失敗`,
-            life: 1000,
-            contentStyleClass: 'custom-toast-danger',
-          });
-        });
-    },
     async handleSubmit() {
       try {
-        const mapPath = `${VITE_MAP_URL}?address=${this.tempForm.address}&key=${VITE_MAP_KEY}`;
+        // 設定地址格式
+        const address = `${this.tempForm.city.name}${this.tempForm.district.name}${this.tempForm.address}`;
+
+        const mapPath = `${VITE_MAP_URL}?address=${address}&key=${VITE_MAP_KEY}`;
         const path = `${VITE_URL}/activities`;
 
+        // google geocoding api 轉換成座標
         const response = await this.$http.get(mapPath);
-
         const tempLocation = response.data.results[0].geometry.location;
         this.location = [tempLocation.lat, tempLocation.lng];
         const data = this.tempActivity;
 
+        // 送出表單
         await this.$http.post(path, data);
 
         this.$router.push('/CreateJoin/step5');
 
+        // 清除 LocalStorage
         const keysToRemove = [
           'createTempFormData',
           'editorValue',
@@ -145,12 +131,10 @@ export default {
         ];
         keysToRemove.forEach((key) => localStorage.removeItem(key));
       } catch (err) {
-        console.log(err);
-        const errMessage = err;
         this.$toast.add({
           severity: 'error',
-          detail: `${errMessage} 開團失敗，請檢查地址格式是否正確`,
-          life: 1000,
+          detail: `開團失敗，因定位需求，請檢查地址格式是否正確`,
+          life: 3000,
           contentStyleClass: 'custom-toast-danger',
         });
       }
