@@ -38,8 +38,8 @@ npm run dev
 </br>
 
 
-## 下載 Json-server 資料庫
-此專案使用 Json-server 模擬 API，在本地端觀看請需搭配下載 Json-server 資料庫並且獨立運行 ( GitHub Page 已連線遠端資料庫故無需另外下載 )
+## 下載 Json-Server 資料庫
+此專案使用 Json-Server 模擬 API，在本地端觀看請需搭配下載 Json-Server 資料庫並且獨立運行 ( GitHub Page 已連線遠端資料庫故無需另外下載 )
 
 ### 複製專案
 ```
@@ -109,8 +109,10 @@ json-server-auth --watch db.json
 </br>
 
 ## 首頁設計稿提供
-####[設計稿](https://www.figma.com/file/eL7NwmFJE0f6DhYnR6rPKD/Join-Sport-%E6%8F%AA%E9%81%8B%E5%8B%95?node-id=7%3A550&t=Rb3uMpzlsKzFX3I0-0)
-感謝六角學院合作設計師 Claire LIN 設計的首頁
+#### [設計稿](https://www.figma.com/file/eL7NwmFJE0f6DhYnR6rPKD/Join-Sport-%E6%8F%AA%E9%81%8B%E5%8B%95?node-id=7%3A550&t=Rb3uMpzlsKzFX3I0-0)
+感謝六角學院合作設計師 
+### Claire LIN 
+設計的首頁
 
 </br>
 
