@@ -53,7 +53,7 @@ export default {
 
 <template>
   <h3 class="mb-8 text-xl font-medium">更多揪團活動</h3>
-  <ul class="grid grid-cols-2 gap-6">
+  <ul class="grid gap-6 md:grid-cols-2">
     <li
       class="col-span-1"
       v-for="activity in slicedActivities"

@@ -51,9 +51,9 @@ export default {
   >
     <!-- card img -->
 
-    <div class="relative w-full sm:w-1/2">
+    <div class="relative h-full w-full sm:w-1/2">
       <div
-        class="skeleton flex h-full w-full items-center justify-center rounded-l-[10px]"
+        class="skeleton flex h-[180px] w-full items-center justify-center rounded-l-[10px]"
       >
         <i class="pi pi-image text-xl text-gray-500"></i>
       </div>
@@ -90,7 +90,7 @@ export default {
 
   <div
     v-else
-    class="group flex h-full flex-col gap-4 rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] sm:flex-row"
+    class="group flex h-full flex-col rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] sm:flex-row"
     :class="{ 'opacity-50': isCancelled }"
   >
     <!-- card img -->
@@ -98,13 +98,13 @@ export default {
     <div class="relative w-full sm:w-1/2">
       <div
         v-if="imgLoading"
-        class="skeleton flex h-full w-full items-center justify-center rounded-l-[10px]"
+        class="skeleton flex h-full w-full items-center justify-center rounded-t-[10px]"
       >
         <i class="pi pi-image text-xl text-gray-500"></i>
       </div>
       <img
         @load="onImageLoad"
-        class="h-full rounded-l-[10px]"
+        class="h-[180px] w-full rounded-t-[10px] sm:h-full sm:rounded-l-[10px] sm:rounded-tr-none"
         :src="activity?.mainImg"
         alt="card-img-01"
       />
@@ -116,7 +116,7 @@ export default {
     </div>
     <!-- card body -->
     <div
-      class="w-full rounded-b-[10px] border-x border-b px-3 pt-2 pb-3 sm:border-0"
+      class="w-full rounded-b-[10px] border-x border-b px-3 pt-2 pb-3 sm:rounded-bl-none sm:border-y sm:border-l-0 md:border-0"
     >
       <div class="flex items-center justify-between">
         <h5 class="mb-2 text-lg">{{ activity?.title }}</h5>
@@ -139,12 +139,14 @@ export default {
           <i class="pi pi-user mr-1"></i>此揪團已取消
         </div>
       </div>
-      <p class="mb-4 h-10 text-sm text-[#6f6f6f]">
+      <p class="h-10 text-sm text-[#6f6f6f]">
         {{ activity?.description }}
       </p>
-      <div class="mb-2 flex flex-col gap-2 md:flex-row">
+      <div
+        class="absolute top-3 right-2 mb-4 gap-2 sm:relative sm:flex sm:flex-row"
+      >
         <p
-          class="flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D]"
+          class="mb-2 flex items-center rounded-full bg-primary-03 py-1 px-2 text-sm text-[#3D3D3D] sm:mb-0 md:mb-0"
         >
           <span class="material-icons text-primary-01"> room </span
           >{{ activity?.city }}{{ activity?.district }}

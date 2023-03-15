@@ -53,7 +53,7 @@ export default {
         class="mt-5 flex w-full flex-col items-center justify-between border-b py-5 md:my-0 md:flex-row lg:py-0"
       >
         <!-- list type -->
-        <TabMenu :model="listTypes" class="mb-6 text-2xl md:mb-0" />
+        <TabMenu :model="listTypes" class="mb-6 text-lg md:mb-0 md:text-2xl" />
         <!-- tags -->
         <div class="mb-6 hidden items-center gap-4 sm:flex md:mb-0 md:w-1/3">
           <h3>Tags:</h3>

@@ -58,7 +58,7 @@ export default {
       label="上一步"
       icon="pi pi-arrow-left"
       iconPos="left"
-      class="w-1/4"
+      class="md:w-1/4"
       @click="prevStep"
     />
     <PButton
@@ -67,7 +67,7 @@ export default {
       label="下一步"
       icon="pi pi-arrow-right"
       iconPos="right"
-      class="ml-auto w-1/4"
+      class="ml-auto md:w-1/4"
       @click="nextStep"
     />
     <PButton
@@ -76,7 +76,7 @@ export default {
       label="確認開團"
       icon="pi pi-arrow-right"
       iconPos="right"
-      class="ml-auto w-1/4"
+      class="ml-auto md:w-1/4"
       @click="handleSubmit"
     />
   </div>

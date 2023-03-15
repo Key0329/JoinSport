@@ -5,11 +5,21 @@ import authStore from '@/stores/authStore';
 export default {
   name: 'HomeHeader',
 
+  data() {
+    return {
+      isOpened: false,
+    };
+  },
+
   computed: {
     ...mapState(authStore, ['user']),
   },
   methods: {
     ...mapActions(authStore, ['getUserId', 'getUser', 'getToken', 'logOut']),
+
+    toggleMenu() {
+      this.isOpened = !this.isOpened;
+    },
   },
   mounted() {
     const userId = this.getUserId();
@@ -98,9 +108,80 @@ export default {
             />
           </li>
         </ul>
-        <a href="#" class="flex items-center md:hidden"
-          ><span class="material-icons"> menu </span></a
+
+        <button
+          type="button"
+          @click="toggleMenu"
+          class="flex items-center md:hidden"
         >
+          <span class="material-icons"> menu </span>
+        </button>
+      </nav>
+
+      <!-- mobile -->
+      <nav v-if="isOpened">
+        <ul v-if="!getToken()" class="text-center">
+          <li>
+            <router-link
+              class="py-4 transition-colors hover:text-primary-01 focus:text-secondary-blue"
+              to="/JoinList/Hot/1"
+              >揪團列表</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="border-t py-4 hover:text-primary-01 focus:text-secondary-blue"
+              to="/CreateJoin/step1"
+              >我要開團</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="border-t py-4 transition-colors hover:text-primary-01 focus:text-secondary-blue"
+              to="/login"
+              >登入 / 註冊</router-link
+            >
+          </li>
+        </ul>
+        <ul v-else class="text-center">
+          <li>
+            <router-link
+              class="py-4 hover:text-primary-01 focus:text-secondary-blue"
+              to="/JoinList/Hot/1"
+              >揪團列表</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="border-t py-4 hover:text-primary-01 focus:text-secondary-blue"
+              to="/CreateJoin/step1"
+              >我要開團</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="border-t py-4 hover:text-primary-01 focus:text-secondary-blue"
+              to="/Member/List"
+              >我的揪團</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="border-t py-4 hover:text-primary-01 focus:text-secondary-blue"
+              to="/Member/Info"
+              >會員資料</router-link
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              @click.prevent="logOut(this.$router)"
+              class="border-t py-4 transition-colors hover:text-primary-01 focus:text-secondary-blue"
+              to="/login"
+              >登出</a
+            >
+          </li>
+        </ul>
       </nav>
     </div>
   </header>

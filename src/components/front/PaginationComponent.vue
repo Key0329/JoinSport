@@ -23,10 +23,10 @@ export default {
 
 <template>
   <nav>
-    <ul class="flex gap-2">
+    <ul class="flex gap-1 xs:gap-2">
       <li>
         <router-link
-          class="flex h-10 w-10 items-center justify-center rounded-full p-2 text-gray-800 transition-colors hover:bg-primary-03"
+          class="flex h-10 w-8 items-center justify-center rounded-full p-2 text-gray-800 transition-colors hover:bg-primary-03 xs:w-10"
           :to="pageUrl + 1"
           aria-label="Previous"
           :class="{ disabled: currentPageNum === 1 }"
@@ -36,7 +36,7 @@ export default {
       </li>
       <li>
         <router-link
-          class="flex h-10 w-10 items-center justify-center rounded-full p-2 text-gray-800 transition-colors hover:bg-primary-03"
+          class="flex h-10 w-8 items-center justify-center rounded-full p-2 text-gray-800 transition-colors hover:bg-primary-03 xs:w-10"
           :to="pageUrl + prev"
           aria-label="Previous"
           :class="{ disabled: currentPageNum === 1 }"
@@ -48,7 +48,7 @@ export default {
         <router-link
           :active="page == currentPage"
           :class="{ active: page == currentPage }"
-          class="flex h-10 w-10 items-center justify-center rounded-full p-2 text-gray-800 transition-colors hover:bg-primary-03"
+          class="flex h-10 w-8 items-center justify-center rounded-full p-2 text-gray-800 transition-colors hover:bg-primary-03 xs:w-10"
           :to="pageUrl + page"
           active-class="bg-primary-04"
         >
@@ -57,7 +57,7 @@ export default {
       </li>
       <li>
         <router-link
-          class="flex h-10 w-10 items-center justify-center rounded-full p-2 text-gray-800 transition-colors hover:bg-primary-03"
+          class="flex h-10 w-8 items-center justify-center rounded-full p-2 text-gray-800 transition-colors hover:bg-primary-03 xs:w-10"
           :to="pageUrl + next"
           aria-label="Next"
           :class="{ disabled: currentPageNum === pageTotal }"
@@ -67,7 +67,7 @@ export default {
       </li>
       <li>
         <router-link
-          class="flex h-10 w-10 items-center justify-center rounded-full p-2 text-gray-800 transition-colors hover:bg-primary-03"
+          class="flex h-10 w-8 items-center justify-center rounded-full p-2 text-gray-800 transition-colors hover:bg-primary-03 xs:w-10"
           :to="pageUrl + pageTotal"
           aria-label="Previous"
           :class="{ disabled: currentPageNum === pageTotal }"

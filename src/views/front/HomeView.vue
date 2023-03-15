@@ -146,7 +146,7 @@ export default {
       </div>
     </div>
   </section>
-  <!-- Coming activities -->
+  <!-- Hot activities -->
   <section class="relative hidden py-9 sm:block md:py-20">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl md:mb-16">熱門揪團</h2>
@@ -171,8 +171,8 @@ export default {
     </div>
   </section>
 
-  <!-- Coming activities mobile-->
-  <section class="pt-9 xs:mb-12 sm:hidden md:py-20">
+  <!-- Hot activities mobile-->
+  <section class="border-b pt-9 pb-9 sm:hidden">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl">熱門揪團</h2>
       <div>
@@ -196,7 +196,7 @@ export default {
     </div>
   </section>
 
-  <!-- Hot activities -->
+  <!-- coming activities -->
   <section class="relative overflow-hidden pt-10 pb-[100px]">
     <div class="container">
       <h2 class="mb-8 text-center text-3xl md:mb-0 md:text-left">
@@ -209,6 +209,9 @@ export default {
           :modules="modules"
           :breakpoints="{
             576: {
+              slidesPerView: 1,
+            },
+            960: {
               slidesPerView: 2,
             },
           }"
@@ -234,8 +237,8 @@ export default {
 
   <section class="bg-primary-02 py-10">
     <div class="container">
-      <div class="flex justify-end">
-        <h3 class="mr-10 text-xl">立刻創建自己的揪團</h3>
+      <div class="justify-end sm:flex">
+        <h3 class="mb-2 text-xl sm:mr-10 sm:mb-0">立刻創建自己的揪團</h3>
         <router-link
           to="/CreateJoin/step1"
           class="btn-primary btn p-ripple"
@@ -257,35 +260,35 @@ export default {
 
 .swiper1:deep(.swiper-button-next) {
   position: absolute;
-  top: 280px;
-  right: 30%;
+  top: 55%;
+  right: 0;
   width: 36px;
   height: 36px;
   transform: translateX(-50%);
   color: black;
   border-radius: 100%;
-  background-color: #fbe3d1;
   font-weight: 900;
+  transform: translateY(-50%);
 }
 .swiper1:deep(.swiper-button-prev) {
   position: absolute;
   width: 36px;
   height: 36px;
-  top: 280px;
-  left: 30%;
+  top: 55%;
+  left: 0;
   transform: translateX(50%);
   color: black;
   border-radius: 100%;
-  background-color: #fbe3d1;
   font-weight: 900;
+  transform: translateY(-50%);
 }
 
 @media (min-width: 576px) {
   .swiper1:deep(.swiper-button-next) {
-    right: 35%;
+    right: 0;
   }
   .swiper1:deep(.swiper-button-prev) {
-    left: 35%;
+    left: 0;
   }
 }
 
@@ -296,12 +299,12 @@ export default {
   }
   .swiper1:deep(.swiper-button-next) {
     background-color: #ef5230;
-    top: 36px;
+    top: 48px;
     right: 0;
   }
   .swiper1:deep(.swiper-button-prev) {
     background-color: #ef5230;
-    top: 36px;
+    top: 48px;
     left: 85%;
   }
 }
@@ -315,38 +318,28 @@ export default {
   }
 }
 
-.swiper2 {
-  padding-bottom: 80px;
-}
 .swiper2:deep(.swiper-button-next) {
   position: absolute;
-  top: 450px;
-  right: 30%;
-  width: 36px;
-  height: 36px;
+  top: 55%;
+  right: 0;
+  width: 18px;
+  height: 18px;
   transform: translateX(-50%);
   color: black;
   border-radius: 100%;
-  background-color: #fbe3d1;
   font-weight: 900;
+  transform: translateY(-50%);
 }
 .swiper2:deep(.swiper-button-prev) {
   position: absolute;
-  width: 36px;
-  height: 36px;
-  top: 450px;
-  left: 30%;
+  width: 18px;
+  height: 18px;
+  top: 55%;
+  left: 0;
   transform: translateX(50%);
   color: black;
   border-radius: 100%;
-  background-color: #fbe3d1;
   font-weight: 900;
-}
-
-@media (min-width: 375px) {
-  .swiper2:deep(.swiper-button-next),
-  .swiper2:deep(.swiper-button-prev) {
-    top: 480px;
-  }
+  transform: translateY(-50%);
 }
 </style>

@@ -50,14 +50,18 @@ export default {
 <template>
   <main>
     <section>
-      <h1 class="mb-12 text-3xl">我主持的揪團</h1>
+      <h1 class="mb-8 text-center text-xl md:mb-12 md:text-left md:text-3xl">
+        我主持的揪團
+      </h1>
       <table class="mb-[160px] table-fixed">
         <thead>
           <tr class="border-b border-gray-300">
             <th width="25%" class="py-2 text-start font-normal">名稱</th>
             <th width="15%" class="py-2 text-start font-normal">日期</th>
-            <th width="30%" class="py-2 text-start font-normal">地點</th>
-            <th width="10%" class="py-2 text-center font-normal">參與人數</th>
+            <th width="30%" class="hidden py-2 text-start font-normal md:block">
+              地點
+            </th>
+            <th width="10%" class="py-2 text-center font-normal">人數</th>
             <th width="20%" class="py-2"></th>
           </tr>
         </thead>
@@ -66,9 +70,9 @@ export default {
             <tr class="mb-4">
               <td class="py-2">{{ activity.title }}</td>
               <td class="py-2">{{ activity.date }}</td>
-              <td class="py-2">{{ activity.address }}</td>
+              <td class="hidden py-2 md:block">{{ activity.address }}</td>
               <td class="py-2 text-center">{{ activity.maxJoinNum }}</td>
-              <td class="flex gap-1 py-2 text-center">
+              <td class="flex flex-col gap-1 py-2 text-center md:flex-row">
                 <RouterLink :to="`/JoinDetail/id=${activity.id}`">
                   <button
                     type="button"

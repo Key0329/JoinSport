@@ -151,7 +151,7 @@ export default {
 
 <template>
   <PToast></PToast>
-  <section class="px-4 pt-20 pb-5">
+  <section class="px-4 pt-6 pb-5 md:pt-20">
     <div class="container">
       <div class="flex items-center">
         <h2 class="mb-4 mr-4 text-xl font-bold md:text-3xl">
@@ -216,22 +216,22 @@ export default {
             />
           </article>
           <section
-            class="mb-10 flex justify-evenly border-y border-[#3d3d3d] py-10 md:mb-20"
+            class="mb-10 flex justify-evenly border-y border-[#3d3d3d] py-6 md:mb-20 md:py-10"
           >
             <div class="text-center">
-              <span class="material-symbols-outlined text-4xl">
+              <span class="material-symbols-outlined md:text-4xl">
                 credit_card
               </span>
               <p>{{ tempForm.paymentMethod?.method }}</p>
             </div>
             <div class="text-center">
-              <span class="material-symbols-outlined text-4xl">
+              <span class="material-symbols-outlined md:text-4xl">
                 monetization_on
               </span>
               <p>$ {{ tempForm.costPerPerson }}</p>
             </div>
             <div class="text-center">
-              <span class="material-symbols-outlined text-4xl"> group </span>
+              <span class="material-symbols-outlined md:text-4xl"> group </span>
               <p>{{ tempForm.maxJoinNum?.number }} 人</p>
             </div>
           </section>
@@ -341,7 +341,10 @@ export default {
     </div>
   </section>
 
-  <StepPagination @handleSubmit="handleSubmit" class="mt-20"></StepPagination>
+  <StepPagination
+    @handleSubmit="handleSubmit"
+    class="mt-10 md:mt-20"
+  ></StepPagination>
 </template>
 
 <style scoped>

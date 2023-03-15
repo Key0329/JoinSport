@@ -149,24 +149,30 @@ export default {
     <TabPanel header="更多照片">
       <div class="flex flex-col justify-evenly gap-2 md:flex-row">
         <div class="w-full" v-for="(img, i) in activity.imgs" :key="img + i">
-          <img :src="img" alt="JoinDetailImg" class="h-full" />
+          <img
+            :src="img"
+            alt="JoinDetailImg"
+            class="h-[200px] w-full sm:h-[400px] md:h-full"
+          />
         </div>
       </div>
     </TabPanel>
     <TabPanel header="留言">
-      <ul class="mb-10 flex flex-col gap-8 md:mb-20">
+      <ul class="mb-2 flex flex-col gap-4 sm:mb-10 sm:gap-8 md:mb-20">
         <li v-for="(message, i) in userMessages" :key="message.id" class="flex">
-          <div class="mr-4 flex-shrink-0">
+          <div class="mr-1 flex-shrink-0 xs:mr-4">
             <img
-              class="h-20 w-20 rounded-full ring-2 ring-white"
+              class="h-10 w-10 rounded-full ring-2 ring-white sm:h-20 sm:w-20"
               :src="message.user.img"
               alt="avatar01"
             />
           </div>
           <div class="w-full">
             <div class="mb-6 w-3/4 rounded-lg bg-white p-4">
-              <p class="mb-2 font-bold">{{ message.user.name }}</p>
-              <p class="mb-4">{{ message.content }}</p>
+              <p class="mb-2 text-sm font-bold xs:text-base">
+                {{ message.user.name }}
+              </p>
+              <p class="mb-4 text-sm xs:text-base">{{ message.content }}</p>
               <div class="flex text-sm">
                 <span class="mr-2">B{{ i + 1 }}</span>
                 <span
@@ -196,17 +202,19 @@ export default {
                   (hostMsg) => parseInt(hostMsg.messageId, 10) === message.id
                 )
               "
-              class="ml-auto flex items-center gap-6 pl-10"
+              class="ml-auto flex items-center gap-6 pl-2 xs:pl-10"
             >
               <i
-                class="pi pi-reply rotate-180 scale-x-[-1] transform text-2xl"
+                class="pi pi-reply rotate-180 scale-x-[-1] transform text-base sm:text-2xl"
               ></i>
               <div
                 class="flex w-full items-center justify-between rounded-lg bg-white p-4"
               >
                 <div>
-                  <p class="mb-2">主辦者回覆 B{{ i + 1 }}</p>
-                  <p>
+                  <p class="mb-2 text-sm xs:text-base">
+                    主辦者回覆 B{{ i + 1 }}
+                  </p>
+                  <p class="text-sm xs:text-base">
                     {{
                       hostReplyMessages.filter(
                         (hostMsg) =>
@@ -217,7 +225,7 @@ export default {
                 </div>
                 <div>
                   <img
-                    class="inline-block h-20 w-20 rounded-full ring-2 ring-white"
+                    class="inline-block h-10 w-10 rounded-full ring-2 ring-white sm:h-20 sm:w-20"
                     :src="
                       hostReplyMessages.filter(
                         (hostMsg) =>
@@ -244,13 +252,13 @@ export default {
                   <button
                     @click="textareaHandler"
                     type="button"
-                    class="btn bg-white transition-colors hover:bg-primary-02"
+                    class="btn bg-white px-2 transition-colors hover:bg-primary-02"
                   >
                     取消
                   </button>
                   <button
                     type="submit"
-                    class="btn bg-primary-04 transition-colors hover:bg-primary-02"
+                    class="btn bg-primary-04 px-2 transition-colors hover:bg-primary-02"
                   >
                     確認
                   </button>
@@ -273,13 +281,13 @@ export default {
             <button
               @click="textareaHandler"
               type="button"
-              class="btn bg-white transition-colors hover:bg-primary-02"
+              class="btn bg-white !px-2 transition-colors hover:bg-primary-02"
             >
               取消
             </button>
             <button
               type="submit"
-              class="btn bg-primary-04 transition-colors hover:bg-primary-02"
+              class="btn bg-primary-04 !px-2 transition-colors hover:bg-primary-02"
             >
               確認
             </button>

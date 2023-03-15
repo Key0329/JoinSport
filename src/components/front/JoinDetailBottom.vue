@@ -162,42 +162,50 @@ export default {
         {{ activity.title }}
       </h2>
     </div>
-    <div class="flex items-center gap-6">
-      <p>
-        {{ activity.maxJoinNum - orders.length }}
-        個空位
-      </p>
-      <!-- 收藏 -->
-      <BookMark ref="bookmark" :userId="userId" :activity="activity"></BookMark>
+    <div class="flex flex-col items-center gap-2 md:flex-row md:gap-6">
+      <div class="flex items-center gap-2 md:flex-col">
+        <p>
+          {{ activity.maxJoinNum - orders.length }}
+          個空位
+        </p>
+        <!-- 收藏 -->
+        <BookMark
+          ref="bookmark"
+          :userId="userId"
+          :activity="activity"
+        ></BookMark>
+      </div>
       <!-- 主辦者 -->
       <template v-if="isHost">
-        <button
-          type="button"
-          class="btn btn-primary py-4 hover:bg-primary-01 hover:text-white"
-          disabled
-        >
-          主辦者
-        </button>
-        <button
-          type="button"
-          @click="hostCancelActivity"
-          class="btn border border-primary-01 py-4 hover:bg-primary-01 hover:text-white"
-        >
-          取消此揪團
-        </button>
+        <div class="flex gap-6">
+          <button
+            type="button"
+            class="btn btn-primary w-full py-2 hover:bg-primary-01 hover:text-white md:w-auto md:py-4"
+            disabled
+          >
+            主辦者
+          </button>
+          <button
+            type="button"
+            @click="hostCancelActivity"
+            class="btn w-full whitespace-nowrap border border-primary-01 py-2 hover:bg-primary-01 hover:text-white md:w-auto md:py-4"
+          >
+            取消此揪團
+          </button>
+        </div>
       </template>
       <!-- 參與者 - 已參加 -->
       <template v-else-if="hadJoined">
         <button
           type="button"
-          class="btn btn-primary py-4 hover:bg-primary-01 hover:text-white"
+          class="btn btn-primary w-full py-2 hover:bg-primary-01 hover:text-white md:w-auto md:py-4"
           disabled
         >
           已參加
         </button>
         <button
           type="button"
-          class="btn border border-primary-01 py-4 hover:bg-primary-01 hover:text-white"
+          class="btn w-full border border-primary-01 py-2 hover:bg-primary-01 hover:text-white md:w-auto md:py-4"
           @click="userCancelJoin"
           label="cancel"
         >
@@ -208,7 +216,7 @@ export default {
       <template v-else>
         <button
           type="button"
-          class="btn btn-primary py-4"
+          class="btn btn-primary w-full py-2 md:w-auto md:py-4"
           @click="userConfirmJoin"
           label="confirm"
         >

@@ -92,8 +92,10 @@ export default {
   <PToast></PToast>
   <section class="py-10">
     <div class="container">
-      <h1 class="mb-8 text-center text-4xl">選擇適合的標籤來描述將要開的團</h1>
-      <h2 class="mb-12 text-center text-xl">
+      <h1 class="mb-8 text-center text-xl md:text-4xl">
+        選擇適合的標籤來描述將要開的團
+      </h1>
+      <h2 class="mb-6 text-center text-lg md:mb-12 md:text-xl">
         請盡量詳細地選擇，將會幫助您的揪團找到最適合的團員<br />可以新增
         <strong class="text-primary-01">{{ 5 - selectedTags.length }}</strong>
         個標籤
@@ -110,13 +112,13 @@ export default {
           :disabled="selectedTags.length === 5"
           class="mb-10 flex w-full justify-center"
         />
-        <ul class="mb-[100px] flex w-1/2 flex-wrap gap-3">
+        <ul class="mb-4 flex flex-wrap gap-3 sm:mb-10 md:mb-[100px] md:w-1/2">
           <li
-            class="flex items-center rounded-full bg-secondary-yellow py-2 pl-8 pr-4"
+            class="flex items-center rounded-full bg-secondary-yellow py-2 pl-4 pr-4 md:pl-8"
             v-for="(tag, i) in selectedTags"
             :key="tag + i"
           >
-            <span class="mr-8 text-lg"
+            <span class="mr-2 text-sm md:mr-8 md:text-lg"
               ><i class="pi pi-tag mr-2"></i>{{ tag }}</span
             >
             <button
@@ -128,7 +130,7 @@ export default {
             </button>
           </li>
         </ul>
-        <div class="mb-10 w-1/2">
+        <div class="mb-10 md:w-1/2">
           <h3 class="mb-4 ml-2 text-lg">Tags :</h3>
           <ul class="flex flex-wrap">
             <li
@@ -137,7 +139,7 @@ export default {
               :key="tag + i"
             >
               <button
-                class="mb-2 mr-2 rounded-full bg-primary-02 px-8 py-2 hover:bg-primary-04"
+                class="mb-2 mr-2 rounded-full bg-primary-02 px-4 py-2 text-xs hover:bg-primary-04 md:px-8 md:text-base"
                 type="button"
                 :disabled="selectedTags.length === 5"
                 :class="{
@@ -151,7 +153,7 @@ export default {
             </li>
           </ul>
         </div>
-        <div class="mx-auto w-1/2">
+        <div class="mx-auto w-full md:w-1/2">
           <StepPagination
             @emit-next="saveTagsToLocal"
             @emit-prev="saveTagsToLocal"
@@ -164,6 +166,11 @@ export default {
 
 <style scoped>
 :deep(.p-autocomplete-input) {
-  width: 50%;
+  width: 100%;
+}
+@media (min-width: 960px) {
+  :deep(.p-autocomplete-input) {
+    width: 50%;
+  }
 }
 </style>

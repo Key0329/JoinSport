@@ -16,9 +16,9 @@ export default {
 
 <template>
   <FrontHeader></FrontHeader>
-  <section class="pt-[100px] pb-20">
+  <section class="pt-[100px] pb-10">
     <div class="container">
-      <CreateSteps></CreateSteps>
+      <CreateSteps class="hidden md:block"></CreateSteps>
       <RouterView></RouterView>
     </div>
   </section>

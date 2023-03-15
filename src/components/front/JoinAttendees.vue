@@ -12,7 +12,7 @@ export default {
 
 <template>
   <div
-    class="flex h-[120px] w-[120px] flex-col items-center justify-center rounded-full bg-white text-center"
+    class="flex h-20 w-20 flex-col items-center justify-center rounded-full bg-white text-center md:h-[120px] md:w-[120px]"
   >
     <PAvatar
       :image="user?.user?.img"

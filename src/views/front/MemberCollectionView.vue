@@ -111,7 +111,9 @@ export default {
 
 <template>
   <section>
-    <h1 class="mb-12 text-3xl">已收藏的揪團</h1>
+    <h1 class="mb-6 text-center text-xl md:mb-12 md:text-left md:text-3xl">
+      已收藏的揪團
+    </h1>
     <RouterLink
       v-if="bookmarks.length === 0"
       to="/JoinList/Hot/1"
@@ -130,12 +132,15 @@ export default {
       >
         <h3
           v-if="activities[0].day === parseInt(new Date().getDate(), 10)"
-          class="mb-6 border-b pb-4 text-xl"
+          class="mb-6 border-b pb-4 md:text-xl"
         >
           今天
         </h3>
-        <h3 v-else class="mb-6 border-b pb-4 text-xl">
-          <i class="pi pi-calendar text-xl"></i>
+        <h3
+          v-else
+          class="mb-6 border-b pb-4 text-center md:text-left md:text-xl"
+        >
+          <i class="pi pi-calendar md:text-xl"></i>
           {{ activities[0].dayOfWeekZHTW }} {{ activities[0].month }} 月
           {{ activities[0].day }} 日
         </h3>

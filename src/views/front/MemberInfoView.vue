@@ -77,7 +77,7 @@ export default {
 <template>
   <PToast></PToast>
   <section>
-    <h1 class="mb-10 text-4xl">編輯個人資訊</h1>
+    <h1 class="mb-10 text-xl md:text-4xl">編輯個人資訊</h1>
     <div class="mb-10 flex items-center">
       <PAvatar
         :image="user.img"
@@ -102,7 +102,7 @@ export default {
               type="text"
               v-model="v$.name.$model"
               placeholder="請輸入姓名"
-              class="mr-2 w-1/2"
+              class="mr-2 md:w-1/2"
               :class="{ 'p-invalid': v$.name.$invalid && submitted }"
               :disabled="isDisabled"
             />
@@ -128,7 +128,7 @@ export default {
               type="email"
               v-model="v$.email.$model"
               placeholder="請輸入電子信箱"
-              class="mr-2 w-1/2"
+              class="mr-2 md:w-1/2"
               :class="{ 'p-invalid': v$.email.$invalid && submitted }"
               :disabled="isDisabled"
             />

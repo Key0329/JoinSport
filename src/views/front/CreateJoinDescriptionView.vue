@@ -34,12 +34,12 @@ export default {
   <section class="py-10">
     <div class="container">
       <div class="mb-10 flex flex-col items-center">
-        <h1 class="mb-4 text-center text-4xl">快要完成囉！</h1>
-        <h2 class="mb-12 text-center text-xl">
+        <h1 class="mb-4 text-center text-xl md:text-4xl">快要完成囉！</h1>
+        <h2 class="mb-6 text-center text-lg md:mb-12 md:text-xl">
           接下來請為開的團添加更多描述<br />
           有明確的內容簡介，團友們將可以更了解您的揪團，您也可以選擇晚點再添加
         </h2>
-        <div class="mb-4">
+        <div class="mb-4 text-sm md:text-base">
           <p>您可以考慮：</p>
           <ol>
             <li>1. 開團的主要目的？</li>
@@ -53,7 +53,7 @@ export default {
           placeholder="請輸入簡介"
         />
       </div>
-      <div class="mx-auto mb-4 w-1/2 bg-secondary-coffee px-8 py-8">
+      <div class="mx-auto mb-4 bg-secondary-coffee p-4 md:w-1/2 md:p-8">
         <h3 class="mb-4 flex items-center">
           <span class="material-symbols-outlined mr-2"> tips_and_updates </span
           >內文範例
@@ -68,17 +68,16 @@ export default {
       </div>
       <a
         href="https://chat.openai.com/chat"
-        class="mx-auto w-1/2 text-end hover:text-primary-01"
+        class="mx-auto text-end hover:text-primary-01 md:w-1/2"
       >
         詢問 ChatGPT <i class="pi pi-external-link"></i>
       </a>
     </div>
+    <div class="mx-auto mt-10 md:mt-20 md:w-1/2">
+      <StepPagination
+        @emit-next="saveArticleToLocal"
+        @emit-prev="saveArticleToLocal"
+      ></StepPagination>
+    </div>
   </section>
-
-  <div class="mx-auto mt-20 w-1/2">
-    <StepPagination
-      @emit-next="saveArticleToLocal"
-      @emit-prev="saveArticleToLocal"
-    ></StepPagination>
-  </div>
 </template>

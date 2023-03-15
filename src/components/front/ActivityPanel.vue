@@ -72,7 +72,7 @@ export default {
         class="group flex flex-col rounded-[10px] bg-white shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] sm:flex-row"
       >
         <!-- card img -->
-        <div class="relative flex w-full items-center py-4 pl-4 sm:w-1/2">
+        <div class="relative flex w-full items-center sm:w-1/2 md:py-4 md:pl-4">
           <img
             class="h-full rounded"
             :src="nextActivity[0]?.mainImg"
@@ -111,43 +111,49 @@ export default {
           >探索更多運動</RouterLink
         >
       </div>
-      <div
-        class="grid grid-cols-3 gap-4 rounded-[10px] bg-white p-4 shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)]"
+      <ul
+        class="grid grid-cols-1 gap-4 rounded-[10px] bg-white p-4 shadow-[0_0_4px_rgba(0,0,0,0.3)] transition-all duration-100 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,0.3)] md:grid-cols-3"
       >
-        <RouterLink
-          to="/joinList/search/text=健身&area=0&date=0&page=1"
-          href="#"
-          class="relative col-span-1 h-[100px] hover:opacity-80 hover:after:absolute hover:after:left-1/2 hover:after:top-1/2 hover:after:-translate-x-1/2 hover:after:-translate-y-1/2 hover:after:text-xl hover:after:text-white hover:after:content-['健身']"
-        >
-          <img
-            class="h-full w-full rounded-lg"
-            src="../../assets/images/group/group03.png"
-            alt="favoriteSport"
-          />
-        </RouterLink>
-        <RouterLink
-          to="/joinList/search/text=潛水&area=0&date=0&page=1"
-          href="#"
-          class="relative col-span-1 h-[100px] hover:opacity-80 hover:after:absolute hover:after:left-1/2 hover:after:top-1/2 hover:after:-translate-x-1/2 hover:after:-translate-y-1/2 hover:after:text-xl hover:after:text-white hover:after:content-['潛水']"
-        >
-          <img
-            class="h-full w-full rounded-lg"
-            src="../../assets/images/group/group04.png"
-            alt="favoriteSport"
-          />
-        </RouterLink>
-        <RouterLink
-          to="/joinList/search/text=籃球&area=0&date=0&page=1"
-          href="#"
-          class="relative col-span-1 h-[100px] hover:opacity-80 hover:after:absolute hover:after:left-1/2 hover:after:top-1/2 hover:after:-translate-x-1/2 hover:after:-translate-y-1/2 hover:after:text-xl hover:after:text-white hover:after:content-['籃球']"
-        >
-          <img
-            class="h-full w-full rounded-lg"
-            src="../../assets/images/group/group05.png"
-            alt="favoriteSport"
-          />
-        </RouterLink>
-      </div>
+        <li>
+          <RouterLink
+            to="/joinList/search/text=健身&area=0&date=0&page=1"
+            href="#"
+            class="relative col-span-1 h-[100px] hover:opacity-80 hover:after:absolute hover:after:left-1/2 hover:after:top-1/2 hover:after:-translate-x-1/2 hover:after:-translate-y-1/2 hover:after:text-xl hover:after:text-white hover:after:content-['健身']"
+          >
+            <img
+              class="h-full w-full rounded-lg"
+              src="../../assets/images/group/group03.png"
+              alt="favoriteSport"
+            />
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink
+            to="/joinList/search/text=潛水&area=0&date=0&page=1"
+            href="#"
+            class="relative col-span-1 h-[100px] hover:opacity-80 hover:after:absolute hover:after:left-1/2 hover:after:top-1/2 hover:after:-translate-x-1/2 hover:after:-translate-y-1/2 hover:after:text-xl hover:after:text-white hover:after:content-['潛水']"
+          >
+            <img
+              class="h-full w-full rounded-lg"
+              src="../../assets/images/group/group04.png"
+              alt="favoriteSport"
+            />
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink
+            to="/joinList/search/text=籃球&area=0&date=0&page=1"
+            href="#"
+            class="relative col-span-1 h-[100px] hover:opacity-80 hover:after:absolute hover:after:left-1/2 hover:after:top-1/2 hover:after:-translate-x-1/2 hover:after:-translate-y-1/2 hover:after:text-xl hover:after:text-white hover:after:content-['籃球']"
+          >
+            <img
+              class="h-full w-full rounded-lg"
+              src="../../assets/images/group/group05.png"
+              alt="favoriteSport"
+            />
+          </RouterLink>
+        </li>
+      </ul>
     </div>
   </div>
 </template>

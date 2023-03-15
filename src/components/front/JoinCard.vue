@@ -40,7 +40,7 @@ export default {
     <div>
       <div
         v-if="isLoading"
-        class="skeleton flex h-full w-full items-center justify-center rounded-l-[10px]"
+        class="skeleton flex h-full w-full items-center justify-center rounded-t-[10px]"
       >
         <i class="pi pi-image text-xl text-gray-500"></i>
       </div>

@@ -152,7 +152,7 @@ export default {
         <strong class="text-primary-01">{{ 5 - selectedTags.length }}</strong>
         個標籤
       </h3>
-      <div class="flex items-center">
+      <div class="flex flex-col md:flex-row md:items-center">
         <AutoComplete
           v-model="tempSelectedTag"
           :suggestions="filteredTags"
@@ -167,7 +167,7 @@ export default {
           v-if="isDisabled === true"
           href="#"
           @click.prevent="enableEdit"
-          class="hover:text-primary-01"
+          class="mt-2 hover:text-primary-01 md:mt-0"
         >
           <i class="pi pi-pencil ml-4 mr-1"></i>
           編輯標籤
@@ -176,7 +176,7 @@ export default {
           v-else
           href="#"
           @click.prevent="addTag"
-          class="btn btn-primary ml-1 px-2 py-3"
+          class="btn btn-primary mt-2 ml-1 w-1/4 px-2 py-3 md:mt-0 md:w-auto"
         >
           新增
         </a>

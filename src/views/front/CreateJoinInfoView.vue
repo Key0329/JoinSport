@@ -31,14 +31,18 @@ export default {
 </script>
 
 <template>
-  <section class="mb-10 py-10">
+  <section class="py-6 md:mb-10 md:py-10">
     <div class="container">
-      <h1 class="mb-8 text-center text-4xl">五個步驟，讓您快速開團</h1>
-      <h2 class="mb-12 text-center text-xl">首先設定必要的資訊</h2>
+      <h1 class="mb-4 text-center text-xl md:mb-8 md:text-4xl">
+        五個步驟，讓您快速開團
+      </h1>
+      <h2 class="mb-4 text-center text-lg md:mb-12 md:text-xl">
+        首先設定必要的資訊
+      </h2>
       <div class="flex justify-center">
         <VuelidateForm ref="childForm"></VuelidateForm>
       </div>
-      <div class="mx-auto mt-20 w-1/2">
+      <div class="mx-auto mt-20 lg:w-1/2">
         <StepPagination @emit-next="submitChildForm"></StepPagination>
       </div>
     </div>

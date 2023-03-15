@@ -169,7 +169,9 @@ export default {
             </button>
           </form>
           <!-- tags -->
-          <ul class="mb-3 flex flex-wrap gap-x-2 gap-y-6 md:gap-2">
+          <ul
+            class="mb-3 flex gap-x-2 gap-y-6 overflow-x-auto md:flex-wrap md:gap-2"
+          >
             <li v-for="tag in slicedTagList" :key="tag">
               <RouterLink
                 :to="`/joinList/search/text=${tag.label}&area=0&date=0&page=1`"

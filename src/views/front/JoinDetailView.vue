@@ -208,22 +208,24 @@ export default {
           </article>
           <!-- 揪團資訊 -->
           <section
-            class="mb-10 flex justify-evenly border-y border-[#3d3d3d] py-10 md:mb-20"
+            class="mb-10 flex justify-evenly border-y border-[#3d3d3d] py-4 md:mb-20 md:py-10"
           >
             <div class="text-center">
-              <span class="material-symbols-outlined text-4xl">
+              <span class="material-symbols-outlined text-xl md:text-4xl">
                 credit_card
               </span>
               <p>{{ newDateActivity.paymentMethod }}</p>
             </div>
             <div class="text-center">
-              <span class="material-symbols-outlined text-4xl">
+              <span class="material-symbols-outlined text-xl md:text-4xl">
                 monetization_on
               </span>
               <p>$ {{ newDateActivity.costPerPerson }}</p>
             </div>
             <div class="text-center">
-              <span class="material-symbols-outlined text-4xl"> group </span>
+              <span class="material-symbols-outlined text-xl md:text-4xl">
+                group
+              </span>
               <p>{{ newDateActivity.maxJoinNum }} 人</p>
             </div>
           </section>
