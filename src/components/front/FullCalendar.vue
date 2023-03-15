@@ -24,6 +24,7 @@ export default {
         weekends: true,
         displayEventTime: false,
         locale: zhTw,
+        height: '600px',
         eventDidMount: (info) => {
           if (info.event.extendedProps.status === 'done') {
             // 過期背景顏色
@@ -40,7 +41,6 @@ export default {
           }
         },
         eventClick: (info) => {
-          // alert('Event: ' + info.event.id);
           this.$router.push(`/JoinDetail/id=${info.event.id}`);
         },
         events: [
@@ -54,7 +54,6 @@ export default {
       },
     };
   },
-  // http://localhost:5173/JoinSport/#/JoinDetail/id=3
   computed: {
     ...mapState(joinActivitiesStore, ['restructureActivitiesList']),
 
@@ -107,55 +106,3 @@ export default {
 <template>
   <FullCalendar :options="calendarOptions" />
 </template>
-
-<style>
-.fc.fc-theme-standard .fc-toolbar .fc-button,
-.fc.fc-theme-standard
-  .fc-toolbar
-  .fc-button.fc-dayGridMonth-button.fc-button-active,
-.fc.fc-theme-standard .fc-toolbar .fc-button:disabled,
-.fc.fc-theme-standard
-  .fc-toolbar
-  .fc-button.fc-timeGridWeek-button.fc-button-active,
-.fc.fc-theme-standard .fc-toolbar .fc-button:enabled:active,
-.fc.fc-theme-standard
-  .fc-toolbar
-  .fc-button.fc-timeGridDay-button.fc-button-active {
-  background: #ef5230;
-  border: #ef5230;
-}
-.fc.fc-theme-standard
-  .fc-toolbar
-  .fc-button.fc-dayGridMonth-button:not(:disabled):focus,
-.fc.fc-theme-standard
-  .fc-toolbar
-  .fc-button.fc-timeGridWeek-button:not(:disabled):focus,
-.fc.fc-theme-standard
-  .fc-toolbar
-  .fc-button.fc-timeGridDay-button:not(:disabled):focus,
-.fc.fc-theme-standard .fc-toolbar .fc-button:focus,
-.fc.fc-theme-standard .fc-toolbar .fc-button:enabled:active:focus,
-.fc.fc-theme-standard .fc-toolbar .fc-button:focus {
-  box-shadow: none;
-}
-.fc.fc-theme-standard
-  .fc-toolbar
-  .fc-button.fc-dayGridMonth-button.fc-button-active:hover,
-.fc.fc-theme-standard
-  .fc-toolbar
-  .fc-button.fc-timeGridWeek-button.fc-button-active:hover,
-.fc.fc-theme-standard
-  .fc-toolbar
-  .fc-button.fc-timeGridDay-button.fc-button-active:hover,
-.fc.fc-theme-standard .fc-toolbar .fc-button:enabled:hover {
-  background: #fbe3d1;
-  border: 1px solid #fbe3d1;
-}
-.fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-block-event {
-  background: #f1675d;
-  border: #f1675d;
-}
-.fc-list-event {
-  cursor: pointer;
-}
-</style>

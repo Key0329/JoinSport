@@ -121,9 +121,9 @@ export default {
 <template>
   <PToast></PToast>
   <FrontHeader></FrontHeader>
-  <main class="py-[120px]">
+  <main class="py-10 md:py-[120px]">
     <div class="container">
-      <div class="flex">
+      <div class="flex justify-center md:justify-start">
         <div class="hidden items-center justify-center md:flex">
           <img
             class="h-2/3"

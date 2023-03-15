@@ -14,5 +14,7 @@ export default {
 </script>
 
 <template>
-  <FullCalendar></FullCalendar>
+  <div class="container py-10">
+    <FullCalendar></FullCalendar>
+  </div>
 </template>
