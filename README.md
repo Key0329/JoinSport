@@ -8,14 +8,15 @@
 
 </br>
 
-![Alt text](src/assets/images/banner/HomePage.png)
-
-
-## 下載觀看
+![Alt text](src/assets/images/banner/JoinSportImage.png)
+![Alt text](src/assets/images/banner/JoinSportImage2.png)
+![Alt text](src/assets/images/banner/JoinSportImage3.png)
+## 本地端下載觀看 
 
 環境：Vue / Vite 4.0.0
+需搭配 Json-Server (下方連結)
 
-### 複製專案
+### 取得專案
 ```
 git clone https://github.com/Key0329/JoinSport.git
 ```
@@ -25,15 +26,21 @@ git clone https://github.com/Key0329/JoinSport.git
 cd JoinSport
 ```
 
-### 執行安裝
+### 安裝套件
 ```
 npm install
 ```
 
-### 運行
+### 運行專案
 ```
 npm run dev
 ```
+### 開啟專案
+在瀏覽器網址列輸入以下即可看到畫面
+```
+http://localhost:5173/JoinSport/
+```
+
 
 </br>
 
@@ -43,7 +50,7 @@ npm run dev
 
 Repo：https://github.com/Key0329/JoinSport-server-vercel
 
-### 複製專案
+### 取得專案
 ```
 git clone https://github.com/Key0329/JoinSport-server-vercel.git
 ```
@@ -53,12 +60,12 @@ git clone https://github.com/Key0329/JoinSport-server-vercel.git
 cd JoinSport-server-vercel
 ```
 
-### 執行安裝
+### 安裝套件
 ```
 npm install
 ```
 
-### 運行
+### 運行專案
 ```
 json-server-auth --watch db.json
 ```
@@ -94,7 +101,7 @@ json-server-auth --watch db.json
 
 </br>
 
-## 學習技術
+## 專案技術
 - Vite 環境建置
 - Vue 3 Options API
 - Vue Router 建構路由
@@ -104,21 +111,22 @@ json-server-auth --watch db.json
 - Tailwind 完成 RWD 版型
 - ESLint (airbnb) + Prettier 統一程式碼結構
 - PrimeVue UI 框架
-- leaflet、OpenStreetMap 串接地圖、google geocoding API
-- Json-server-auth 設計簡易資料庫並模擬 API 進行串接
+- Leaflet、OpenStreetMap 串接地圖、Google Geocoding API
+- Json-Server-Auth 設計簡易資料庫並模擬 API 進行串接
 - Vuelidate 表單驗證、Vue-i18n
 
 </br>
 
-## 首頁設計稿提供
-#### [設計稿](https://www.figma.com/file/eL7NwmFJE0f6DhYnR6rPKD/Join-Sport-%E6%8F%AA%E9%81%8B%E5%8B%95?node-id=7%3A550&t=Rb3uMpzlsKzFX3I0-0)
+
+## 設計稿提供
+
 感謝六角學院合作設計師 
-### Claire LIN 
+#### [Claire LIN](https://www.figma.com/file/eL7NwmFJE0f6DhYnR6rPKD/Join-Sport-%E6%8F%AA%E9%81%8B%E5%8B%95?node-id=7%3A550&t=Rb3uMpzlsKzFX3I0-0)
 設計的首頁
 
 </br>
 
 ## Contact me 聯繫我
-- Email：[springfield0329@gmail.com](springfield0329@gmail.com)
+- Email：springfield0329@gmail.com
 - Discord：JackC#0411
 
