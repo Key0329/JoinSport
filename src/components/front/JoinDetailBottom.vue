@@ -212,6 +212,16 @@ export default {
           取消報名
         </button>
       </template>
+      <template v-else-if="activity.maxJoinNum - orders.length === 0">
+        <button
+          type="button"
+          class="btn btn-primary w-full py-2 disabled:opacity-70 md:w-auto md:py-4"
+          label="cancel"
+          disabled
+        >
+          此揪團已滿
+        </button>
+      </template>
       <!-- 參與者 - 尚未參加 -->
       <template v-else>
         <button

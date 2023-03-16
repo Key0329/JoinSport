@@ -141,18 +141,26 @@ export default {
         v-if="searchActivitiesList.pageTotal"
         :currentPage="currentPage"
         :pageTotal="searchActivitiesList.pageTotal"
-        :pageUrl="'/JoinList/Search/${}'"
+        :pageUrl="`/JoinList/Search/text=${searchText}&area=${searchArea}&date=${searchDate}&page=`"
         class="mb-4"
       ></PaginationComponent>
 
       <section class="grid gap-8 md:grid-cols-12 lg:gap-0">
         <!-- activity cards -->
-        <h3
+        <div
+          class="col-span-7 flex"
           v-if="searchActivitiesList.pageTotal === 0"
-          class="col-span-7 text-xl"
         >
-          無搜尋結果
-        </h3>
+          <h3 class="text-xl">
+            無搜尋結果 <i class="pi pi-arrow-right px-4"></i>
+          </h3>
+          <router-link
+            to="/CreateJoin/step1"
+            class="text-xl hover:text-primary-01"
+          >
+            馬上自己開一團</router-link
+          >
+        </div>
         <ul v-else class="col-span-7 flex flex-col gap-6">
           <li v-for="activity in searchActivitiesList.list" :key="activity?.id">
             <RouterLink :to="`/JoinDetail/id=${activity?.id}`"

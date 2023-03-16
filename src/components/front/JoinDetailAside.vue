@@ -57,10 +57,5 @@ export default {
       v-if="!this.$route.path.includes('step')"
       :mapActivity="activity"
     ></LeafletMap>
-    <div class="rounded-b-lg bg-white p-4">
-      <button type="button" class="btn btn-primary w-full">
-        <i class="pi pi-comments mr-2"></i>揪團聊天
-      </button>
-    </div>
   </aside>
 </template>
