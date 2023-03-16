@@ -41,6 +41,8 @@ npm run dev
 ## 下載 Json-Server 資料庫
 此專案使用 Json-Server 模擬 API，在本地端觀看請需搭配下載 Json-Server 資料庫並且獨立運行 ( GitHub Page 已連線遠端資料庫故無需另外下載 )
 
+Repo：https://github.com/Key0329/JoinSport-server-vercel
+
 ### 複製專案
 ```
 git clone https://github.com/Key0329/JoinSport-server-vercel.git
