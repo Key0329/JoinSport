@@ -18,16 +18,19 @@ export default {
   data() {
     return {
       id: null,
-      title: '',
-      description: '',
-      city: '',
-      district: '',
-      address: '',
-      date: '',
-      startTime: '',
+      title: '清水斷崖獨木舟看日出',
+      description:
+        '在清水斷崖的美景中體驗獨木舟探險，享受刺激與放鬆的同時，感受大自然的震撼！',
+      city: { name: '花蓮縣' },
+      district: { name: '秀林鄉' },
+      address: '花蓮縣秀林鄉清水斷崖',
+      date: '2023-04-01',
+      startTime: {
+        time: '04:00',
+      },
       paymentMethod: '',
-      costPerPerson: null,
-      maxJoinNum: null,
+      costPerPerson: 3000,
+      maxJoinNum: { number: 12 },
       submitted: false,
       tempDistrict: [],
     };

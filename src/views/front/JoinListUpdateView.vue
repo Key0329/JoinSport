@@ -28,8 +28,8 @@ export default {
       );
       // 依照更新日期排序
       const tempList = filterList.sort((a, b) => {
-        const dateA = new Date(a.updateDate);
-        const dateB = new Date(b.updateDate);
+        const dateA = new Date(a.updateDate).getTime();
+        const dateB = new Date(b.updateDate).getTime();
         return dateB - dateA;
       });
 

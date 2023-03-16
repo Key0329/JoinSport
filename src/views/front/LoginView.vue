@@ -20,8 +20,8 @@ export default {
   setup: () => ({ v$: useVuelidate() }),
   data() {
     return {
-      email: '',
-      password: '',
+      email: 'jack@mail.com',
+      password: '123456Aa',
       submitted: false,
       checked: false,
     };

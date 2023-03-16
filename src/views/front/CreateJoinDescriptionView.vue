@@ -9,7 +9,8 @@ export default {
   },
   data() {
     return {
-      editorValue: '',
+      editorValue:
+        '<h3>本次活動將在清水斷崖進行獨木舟探險，全程約3公里，沿途可以欣賞美麗的山林風景以及清澈的溪流。活動結束後，可以一起前往附近的溫泉餐廳享用美食，放鬆身心，交流感受。<h3>',
       quillEditor: null,
     };
   },
