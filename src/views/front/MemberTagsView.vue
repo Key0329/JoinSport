@@ -39,19 +39,18 @@ export default {
       }
     },
     addTag(event) {
-      // 下方可點選 tags
+      /* 頁面下面區塊可點選 tags 做篩選 */
       if (event.target.tagName === 'BUTTON') {
         const newTag = event.target.textContent;
         this.selectedTags.push(newTag);
         this.tempSelectedTag = '';
         return;
       }
-      // 新增按鈕
+
+      /* 新增按鈕 */
       if (event.target.tagName === 'A') {
-        // autocomplete 是物件
-        const newTag = this.tempSelectedTag.value || this.tempSelectedTag;
-        // 判斷是否有重複標籤或沒有內容
-        const tagExists = this.selectedTags.some((item) => item === newTag);
+        const newTag = this.tempSelectedTag.value || this.tempSelectedTag; // autocomplete 是物件
+        const tagExists = this.selectedTags.some((item) => item === newTag); // 判斷是否有重複標籤或沒有內容
         if (tagExists) {
           this.$toast.add({
             severity: 'warn',
@@ -74,11 +73,9 @@ export default {
         return;
       }
 
-      // Enter 輸入
-      const newTag = event.target.value;
+      const newTag = event.target.value; // Enter 輸入
 
-      // 判斷是否有重複標籤或沒有內容
-      const tagExists = this.selectedTags.some((item) => item === newTag);
+      const tagExists = this.selectedTags.some((item) => item === newTag); // 判斷是否有重複標籤或沒有內容
       if (tagExists) {
         this.$toast.add({
           severity: 'warn',

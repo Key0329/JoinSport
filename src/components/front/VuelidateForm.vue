@@ -263,7 +263,7 @@ export default {
 <template>
   <div class="container">
     <!-- <div class="flex items-center"> -->
-    <form class="mx-auto flex flex-col gap-6 lg:w-1/2">
+    <form class="mx-auto flex flex-col gap-6">
       <!-- title -->
       <div>
         <div class="items-center md:flex">

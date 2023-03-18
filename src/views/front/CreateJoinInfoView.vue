@@ -39,7 +39,7 @@ export default {
       <h2 class="mb-4 text-center text-lg md:mb-12 md:text-xl">
         首先設定必要的資訊
       </h2>
-      <div class="flex justify-center">
+      <div class="mx-auto flex justify-center lg:w-1/2">
         <VuelidateForm ref="childForm"></VuelidateForm>
       </div>
       <div class="mx-auto mt-20 lg:w-1/2">

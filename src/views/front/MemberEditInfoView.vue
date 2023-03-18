@@ -25,11 +25,9 @@ export default {
 
     submitChildForm() {
       if (!this.$refs.childForm.v$.$invalid) {
-        // 如果驗證成功
-        this.updateFormValid(false);
+        this.updateFormValid(false); // 如果驗證成功
       } else {
-        // 如果驗證失敗
-        this.updateFormValid(true);
+        this.updateFormValid(true); // 如果驗證失敗
       }
       this.$refs.childForm.handleUpdate(!this.$refs.childForm.v$.$invalid);
     },

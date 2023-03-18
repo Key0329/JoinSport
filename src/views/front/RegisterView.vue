@@ -6,6 +6,8 @@ import { required, minLength, email } from '@/utils/i18n-validators';
 
 const { VITE_URL } = import.meta.env;
 
+/* 驗證輸入密碼格式為 => 
+至少一個小寫、一個大寫、一個數字、長度至少為 8 碼 */
 const validatePassword = (password) => {
   const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   return regex.test(password);
@@ -99,7 +101,8 @@ export default {
             class="h-1/2"
             src="../../assets/images/feature/Mask-group.png"
             alt="registerImg"
-          /><img
+          />
+          <img
             class="absolute bottom-[120px] -z-10 h-1/2 opacity-50"
             src="../../assets/images/banner/Vector-3.png"
             alt="registerImg"

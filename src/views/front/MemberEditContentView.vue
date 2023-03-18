@@ -65,6 +65,7 @@ export default {
 </script>
 
 <template>
+  <PToast></PToast>
   <section class="py-10">
     <div class="mb-10 flex flex-col items-center">
       <PEditor

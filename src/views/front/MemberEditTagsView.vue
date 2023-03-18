@@ -35,7 +35,7 @@ export default {
       }
     },
     addTag(event) {
-      // 下方可點選 tags
+      /* 頁面下面區塊可點選 tags 做篩選 */
       if (event.target.tagName === 'BUTTON') {
         const newTag = event.target.textContent;
         this.selectedTags.push(newTag);
@@ -43,16 +43,24 @@ export default {
         return;
       }
 
-      // Enter 輸入
-      const newTag = event.target.value;
-      // 判斷是否有重複標籤或沒有內容
+      const newTag = event.target.value; // Enter 輸入
+
+      /* 判斷是否有重複標籤或沒有內容 */
       const tagExists = this.selectedTags.some((item) => item === newTag);
       if (tagExists) {
-        alert('已有相同標籤');
+        this.$toast.add({
+          severity: 'warn',
+          detail: '已有相同標籤',
+          life: 1000,
+        });
         return;
       }
       if (newTag === '') {
-        alert('請輸入標籤內容');
+        this.$toast.add({
+          severity: 'info',
+          detail: '請輸入標籤內容',
+          life: 1000,
+        });
         return;
       }
 

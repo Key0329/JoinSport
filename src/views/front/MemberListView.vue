@@ -12,11 +12,11 @@ export default {
   computed: {
     ...mapState(joinActivitiesStore, ['availableActivities']),
 
-    // 篩選出此會員參與的活動
+    /* 篩選出此會員參與的活動 */
     filteredArray() {
-      // 取出 userId
-      const id = parseInt(this.getUserId(), 10);
-      // 取出此會員參與的活動
+      const id = parseInt(this.getUserId(), 10); // 取出 userId
+
+      /* 取出此會員參與的活動 */
       const filteredArray = this.availableActivities.filter((activity) =>
         activity.participantsId.includes(id)
       );
@@ -24,7 +24,7 @@ export default {
       return filteredArray;
     },
     membersActivities() {
-      // 調整需要的日期格式
+      /* 調整需要的日期格式 */
       const membersActivities = this.filteredArray.map((activity) => {
         const month = activity.date?.split('/')[0];
         const day = activity.date?.split('/')[1];
@@ -54,12 +54,12 @@ export default {
         return newActivity;
       });
 
-      // 依日期排序
+      /* 依日期排序 */
       const sortActivities = membersActivities.sort(
         (a, b) => a.originTime - b.originTime
       );
 
-      // 依照日期分類組合成想要的格式
+      /* 依照日期分類組合成想要的格式 */
       const cateActivities = sortActivities.reduce((acc, activity) => {
         const { date } = activity;
         if (!acc[date]) {
@@ -73,7 +73,7 @@ export default {
     },
 
     hasTodayActivity() {
-      // 今天的日期
+      /* 今天的日期 */
       const year = new Date().getFullYear();
       const currentMonth = new Date().getMonth() + 1;
       const currentDate = new Date().getDate();
@@ -82,7 +82,7 @@ export default {
         .toString()
         .padStart(2, '0')}-${currentDate.toString().padStart(2, '0')}`;
 
-      // 找有沒有活動的日期跟今天相同
+      /* 找有沒有活動的日期跟今天相同 */
       const hasTodayActivity =
         this.filteredArray.find(
           (activity) => activity.originDate === todayDate
@@ -99,7 +99,6 @@ export default {
   mounted() {
     this.getActivities();
     this.getOrders();
-    this.getUserId();
   },
 };
 </script>

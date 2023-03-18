@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     ...mapActions(authStore, ['getUserId']),
+
     getUsersActivity() {
       const id = this.getUserId();
       const path = `${VITE_URL}/activities?userId=${id}`;

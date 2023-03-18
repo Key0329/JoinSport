@@ -19,11 +19,6 @@ export default {
       visible: false,
     };
   },
-  // watch: {
-  //   $route() {
-  //     this.visible = !this.visible;
-  //   },
-  // },
 };
 </script>
 
