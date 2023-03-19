@@ -22,7 +22,6 @@ export default {
         })
         .catch((err) => {
           const errMessage = err.response.statusText;
-          console.log(err);
 
           this.$toast.add({
             severity: 'error',
