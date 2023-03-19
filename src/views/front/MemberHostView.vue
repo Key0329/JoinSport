@@ -36,7 +36,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 未能取得會員活動資訊`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });

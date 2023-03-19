@@ -76,7 +76,7 @@ export default {
           this.$toast.add({
             severity: 'success',
             detail: '登入成功，即將返回頁面',
-            life: 1000,
+            life: 3000,
           });
 
           // 從重定向参数中取出之前頁面的路徑
@@ -91,7 +91,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 登入失敗`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });

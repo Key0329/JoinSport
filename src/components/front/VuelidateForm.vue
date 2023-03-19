@@ -159,7 +159,7 @@ export default {
           this.$toast.add({
             severity: 'success',
             detail: '更新成功',
-            life: 1000,
+            life: 3000,
           });
           this.getFormData();
         })
@@ -168,7 +168,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 更新失敗`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });
@@ -200,12 +200,12 @@ export default {
         .then((res) => {
           this.tempDistrict = res.data;
         })
-        .then((err) => {
+        .catch((err) => {
           const errMessage = err;
           this.$toast.add({
             severity: 'error',
-            detail: `${errMessage}`,
-            life: 1000,
+            detail: `${errMessage}123`,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });

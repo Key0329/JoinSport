@@ -35,7 +35,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage}'找不到收藏資料'`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });
@@ -60,7 +60,7 @@ export default {
             this.$toast.add({
               severity: 'error',
               detail: errMessage,
-              life: 1000,
+              life: 3000,
               contentStyleClass: 'custom-toast-danger',
             });
           });
@@ -85,14 +85,14 @@ export default {
             this.$toast.add({
               severity: 'success',
               detail: '加入我的收藏',
-              life: 1000,
+              life: 3000,
             });
           }
           if (this.isBookmarked === false) {
             this.$toast.add({
               severity: 'info',
               detail: '移除我的收藏',
-              life: 1000,
+              life: 3000,
             });
           }
         })
@@ -101,7 +101,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: errMessage,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });

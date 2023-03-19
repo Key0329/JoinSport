@@ -55,7 +55,7 @@ export default {
           this.$toast.add({
             severity: 'warn',
             detail: '已有相同標籤',
-            life: 1000,
+            life: 3000,
           });
           return;
         }
@@ -63,7 +63,7 @@ export default {
           this.$toast.add({
             severity: 'info',
             detail: '請輸入標籤內容',
-            life: 1000,
+            life: 3000,
           });
           return;
         }
@@ -80,7 +80,7 @@ export default {
         this.$toast.add({
           severity: 'warn',
           detail: '已有相同標籤',
-          life: 1000,
+          life: 3000,
         });
         return;
       }
@@ -88,7 +88,7 @@ export default {
         this.$toast.add({
           severity: 'info',
           detail: '請輸入標籤內容',
-          life: 1000,
+          life: 3000,
         });
         return;
       }
@@ -106,7 +106,7 @@ export default {
       this.$toast.add({
         severity: 'success',
         detail: '修改成功',
-        life: 1000,
+        life: 3000,
       });
       this.isDisabled = true;
     },

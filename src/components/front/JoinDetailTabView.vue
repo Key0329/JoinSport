@@ -41,7 +41,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${err} 找不到資料`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });
@@ -58,7 +58,7 @@ export default {
           this.$toast.add({
             severity: 'err',
             detail: `${err} 找不到資料`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });
@@ -106,7 +106,7 @@ export default {
           this.$toast.add({
             severity: 'success',
             detail,
-            life: 1000,
+            life: 3000,
           });
           this.textareaValue = '';
         })
@@ -114,7 +114,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: errDetail,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });

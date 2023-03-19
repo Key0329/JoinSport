@@ -73,7 +73,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 找不到活動資訊`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });
@@ -90,7 +90,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 找不到參與者資訊`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });

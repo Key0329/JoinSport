@@ -94,7 +94,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 取得收藏資訊失敗`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });

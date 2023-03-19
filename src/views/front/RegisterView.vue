@@ -68,7 +68,7 @@ export default {
           this.$toast.add({
             severity: 'success',
             detail: '註冊成功，返回登入頁面',
-            life: 1000,
+            life: 3000,
           });
           setTimeout(() => {
             this.$router.push('/login');
@@ -79,7 +79,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 註冊失敗`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });

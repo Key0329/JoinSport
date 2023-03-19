@@ -22,10 +22,12 @@ export default {
         })
         .catch((err) => {
           const errMessage = err.response.statusText;
+          console.log(err);
+
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 取得活動資訊失敗`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });
@@ -41,7 +43,7 @@ export default {
           this.$toast.add({
             severity: 'success',
             detail: '修改成功',
-            life: 1000,
+            life: 3000,
           });
         })
         .catch((err) => {
@@ -49,7 +51,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 更新活動資訊失敗`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });
@@ -65,7 +67,7 @@ export default {
 </script>
 
 <template>
-  <PToast></PToast>
+  <PToast />
   <section class="py-10">
     <div class="mb-10 flex flex-col items-center">
       <PEditor

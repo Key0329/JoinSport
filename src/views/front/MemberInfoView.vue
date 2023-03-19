@@ -53,7 +53,7 @@ export default {
       this.$toast.add({
         severity: 'success',
         detail: '修改成功',
-        life: 1000,
+        life: 3000,
       });
       this.isDisabled = true;
     },

@@ -45,7 +45,7 @@ export default {
           this.$toast.add({
             severity: 'error',
             detail: `${errMessage} 取得活動資訊失敗`,
-            life: 1000,
+            life: 3000,
             contentStyleClass: 'custom-toast-danger',
           });
         });
@@ -69,6 +69,7 @@ export default {
 </script>
 
 <template>
+  <PToast />
   <section class="mb-10 py-10">
     <VuelidateForm :activity="activity" ref="childForm"></VuelidateForm>
     <div class="mt-16 flex gap-4">

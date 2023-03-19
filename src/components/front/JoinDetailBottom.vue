@@ -51,7 +51,7 @@ export default {
               this.$toast.add({
                 severity: 'success',
                 detail: '報名成功',
-                life: 1000,
+                life: 3000,
               });
               this.$emit('getActivitiesOrders', this.$route.params.id);
             })
@@ -59,7 +59,7 @@ export default {
               this.$toast.add({
                 severity: 'error',
                 detail: `${err}'報名失敗'`,
-                life: 1000,
+                life: 3000,
                 contentStyleClass: 'custom-toast-danger',
               });
             });
@@ -87,7 +87,7 @@ export default {
               this.$toast.add({
                 severity: 'success',
                 detail: '成功取消此揪團',
-                life: 1000,
+                life: 3000,
               });
               this.$emit('getActivitiesOrders', this.$route.params.id);
             })
@@ -95,7 +95,7 @@ export default {
               this.$toast.add({
                 severity: 'error',
                 detail: `${err}'取消報名失敗'`,
-                life: 1000,
+                life: 3000,
                 contentStyleClass: 'custom-toast-danger',
               });
             });
@@ -120,7 +120,7 @@ export default {
               this.$toast.add({
                 severity: 'success',
                 detail: '已關閉此揪團',
-                life: 1000,
+                life: 3000,
               });
               this.$router.push('/');
             })
@@ -128,7 +128,7 @@ export default {
               this.$toast.add({
                 severity: 'error',
                 detail: `${err}'關閉失敗'`,
-                life: 1000,
+                life: 3000,
                 contentStyleClass: 'custom-toast-danger',
               });
             });
