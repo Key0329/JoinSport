@@ -22,10 +22,10 @@ export default {
               您可以在會員主頁繼續編輯您的揪團<br />
               詳細的內容與照片能幫助您的揪團找到最適合的團員
             </p>
-            <router-link to="/">
+            <router-link to="/JoinList/Hot/1">
               <PButton
                 type="button"
-                label="回到首頁"
+                label="回到揪團列表"
                 icon="pi pi-home"
                 iconPos="right"
               />

@@ -119,10 +119,12 @@ export default {
             .then(() => {
               this.$toast.add({
                 severity: 'success',
-                detail: '已關閉此揪團',
+                detail: '已關閉此揪團，即將回到揪團列表',
                 life: 3000,
               });
-              this.$router.push('/');
+              setTimeout(() => {
+                this.$router.push('/JoinList/Hot/1');
+              }, 2000);
             })
             .catch((err) => {
               this.$toast.add({
