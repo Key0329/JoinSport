@@ -83,6 +83,7 @@ export default {
           >
             <!-- 收藏 -->
             <BookMark
+              v-if="userId"
               class="absolute right-4 top-3 z-50"
               :userId="userId"
               :activity="activity"
