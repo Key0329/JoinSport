@@ -5,6 +5,7 @@ import { mapActions, mapState } from 'pinia';
 import joinActivitiesStore from '@/stores/front/activitiesStore';
 import authStore from '@/stores/authStore';
 import PaginationComponent from '@/components/front/PaginationComponent.vue';
+import BookMark from '@/components/front/BookMark.vue';
 
 export default {
   name: 'JoinListComingView',
@@ -12,6 +13,7 @@ export default {
     JoinCardRow,
     LeafletMap,
     PaginationComponent,
+    BookMark,
   },
   data() {
     return {
@@ -60,6 +62,7 @@ export default {
 </script>
 
 <template>
+  <PToast></PToast>
   <main class="pt-4 pb-20 md:pt-10">
     <div class="container">
       <h2 class="mb-6 text-center text-2xl md:mb-10 md:text-start">
@@ -74,7 +77,18 @@ export default {
       ></PaginationComponent>
       <section class="grid gap-8 md:grid-cols-12 lg:gap-0">
         <ul class="col-span-7 flex flex-col gap-6">
-          <li v-for="activity in hotActivitiesList.list" :key="activity?.id">
+          <li
+            v-for="activity in hotActivitiesList.list"
+            :key="activity?.id"
+            class="relative"
+          >
+            <!-- 收藏 -->
+            <BookMark
+              class="absolute right-4 top-3 z-50"
+              :userId="userId"
+              :activity="activity"
+              @click.stop
+            ></BookMark>
             <RouterLink :to="`/JoinDetail/id=${activity?.id}`"
               ><join-card-row
                 :activity="activity"

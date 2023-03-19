@@ -10,6 +10,7 @@ export default {
       type: String,
     },
   },
+
   data() {
     return {
       imgLoading: true,
@@ -120,23 +121,25 @@ export default {
     >
       <div class="flex items-center justify-between">
         <h5 class="mb-2 text-lg">{{ activity?.title }}</h5>
-        <div
-          v-if="hasJoined"
-          class="flex items-center rounded-lg bg-primary-04 px-2 py-1 text-xs text-gray-600"
-        >
-          <i class="pi pi-check mr-1"></i>已參加揪團
-        </div>
-        <div
-          v-else-if="isHost"
-          class="flex items-center rounded-lg bg-primary-01 px-2 py-1 text-xs text-white"
-        >
-          <i class="pi pi-user mr-1"></i>您是主辦者
-        </div>
-        <div
-          v-else-if="isCancelled"
-          class="flex items-center rounded-lg bg-red-400 px-2 py-1 text-xs text-white"
-        >
-          <i class="pi pi-user mr-1"></i>此揪團已取消
+        <div class="mr-8 flex">
+          <div
+            v-if="hasJoined"
+            class="flex items-center rounded-lg bg-primary-04 px-2 py-1 text-xs text-gray-600"
+          >
+            <i class="pi pi-check mr-1"></i>已參加揪團
+          </div>
+          <div
+            v-else-if="isHost"
+            class="flex items-center rounded-lg bg-primary-01 px-2 py-1 text-xs text-white"
+          >
+            <i class="pi pi-user mr-1"></i>您是主辦者
+          </div>
+          <div
+            v-else-if="isCancelled"
+            class="flex items-center rounded-lg bg-red-400 px-2 py-1 text-xs text-white"
+          >
+            <i class="pi pi-user mr-1"></i>此揪團已取消
+          </div>
         </div>
       </div>
       <p class="h-10 text-sm text-[#6f6f6f]">
@@ -187,9 +190,14 @@ export default {
             <span class="mr-2 text-sm"
               >{{ activity?.numParticipants }} 位已參加揪團</span
             >
-            <span class="text-sm text-red-500"
+            <span class="mr-2 text-sm text-red-500"
               >剩餘
               {{ activity?.maxJoinNum - activity?.numParticipants }} 空位</span
+            >
+            <span
+              v-if="activity?.maxJoinNum - activity?.numParticipants === 0"
+              class="rounded-lg bg-primary-01 px-2 py-1 text-sm text-white"
+              >揪團已滿</span
             >
           </div>
         </div>

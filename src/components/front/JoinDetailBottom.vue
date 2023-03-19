@@ -169,11 +169,7 @@ export default {
           個空位
         </p>
         <!-- 收藏 -->
-        <BookMark
-          ref="bookmark"
-          :userId="userId"
-          :activity="activity"
-        ></BookMark>
+        <BookMark :userId="userId" :activity="activity"></BookMark>
       </div>
       <!-- 主辦者 -->
       <template v-if="isHost">

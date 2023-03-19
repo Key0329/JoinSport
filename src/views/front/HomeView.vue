@@ -10,7 +10,6 @@ import HomeHeader from '../../components/front/HomeHeader.vue';
 import HomeBanner from '../../components/front/HomeBanner.vue';
 import JoinCard from '../../components/front/JoinCard.vue';
 import JoinCardRow from '../../components/front/JoinCardRow.vue';
-// import GroupCard from '../../components/front/GroupCard.vue';
 import Loading from '../../components/front/LoadingComponent.vue';
 
 export default {
@@ -21,7 +20,6 @@ export default {
     JoinCard,
     Swiper,
     SwiperSlide,
-    // GroupCard,
     JoinCardRow,
     HomeHeader,
   },
@@ -34,23 +32,23 @@ export default {
   computed: {
     ...mapState(joinActivitiesStore, ['availableActivities', 'isLoading']),
     shuffledActivities() {
-      // 過濾已取消活動
+      /* 過濾已取消活動 */
       const filterList = this.availableActivities.filter(
         (activity) => activity.isCancelled === false
       );
 
-      // 隨機排序
+      /* 隨機排序 */
       const randomAct = filterList.sort(() => Math.random() - 0.5);
       return randomAct;
     },
 
     hotActivitiesList() {
-      // 過濾已取消的揪團
+      /* 過濾已取消的揪團 */
       const filterList = this.availableActivities.filter(
         (activity) => activity.isCancelled === false
       );
 
-      // 依照參與人數排序熱門程度
+      /* 依照參與人數排序熱門程度 */
       const tempList = filterList.sort((a, b) => {
         return b.numParticipants - a.numParticipants;
       });

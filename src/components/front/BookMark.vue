@@ -112,12 +112,21 @@ export default {
       this.getActivityBookmark(to.id);
     },
   },
+  mounted() {
+    this.getActivityBookmark(this.activity.id);
+  },
 };
 </script>
 
 <template>
   <button type="button" @click="handleBookmark">
-    <i v-if="!isBookmarked" class="pi pi-star text-lg"></i>
-    <i v-else class="pi pi-star-fill text-lg text-yellow-300"></i>
+    <i
+      v-if="!isBookmarked"
+      class="pi pi-bookmark text-lg hover:text-primary-01"
+    ></i>
+    <i
+      v-else
+      class="pi pi-bookmark-fill text-lg text-yellow-300 hover:text-primary-01"
+    ></i>
   </button>
 </template>

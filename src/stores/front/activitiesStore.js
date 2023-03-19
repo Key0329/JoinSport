@@ -32,7 +32,7 @@ export default defineStore('joinActivities', {
 
       // 以 orders 為基礎，整理出參與者與參與人數
       this.orders.forEach(({ user, activity }) => {
-        const activityId = activity.id;
+        const activityId = activity?.id;
         const orderImg = user.img;
         const userId = user.id;
 
