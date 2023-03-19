@@ -154,12 +154,18 @@ export default {
           <h3 class="text-xl">
             無搜尋結果 <i class="pi pi-arrow-right px-4"></i>
           </h3>
-          <router-link
-            to="/CreateJoin/step1"
-            class="text-xl hover:text-primary-01"
-          >
-            馬上自己開一團</router-link
-          >
+          <div>
+            <router-link
+              to="/CreateJoin/step1"
+              class="text-xl hover:text-primary-01"
+            >
+              馬上自己開一團
+              <img
+                src="../../assets/images/feature/feature02.png"
+                alt="searchImg"
+              />
+            </router-link>
+          </div>
         </div>
         <ul v-else class="col-span-7 flex flex-col gap-6">
           <li v-for="activity in searchActivitiesList.list" :key="activity?.id">
