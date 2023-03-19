@@ -31,13 +31,7 @@ export default {
           }
         })
         .catch((err) => {
-          const errMessage = err.response.statusText;
-          this.$toast.add({
-            severity: 'error',
-            detail: `${errMessage}'找不到收藏資料'`,
-            life: 3000,
-            contentStyleClass: 'custom-toast-danger',
-          });
+          console.log(err);
         });
     },
     handleBookmark() {
