@@ -3,6 +3,7 @@
 以 Vue 製作的單頁式應用網站 (SPA)，可觀看桌面板 (體驗佳) 及手機版 (RWD)  
 
 ### Demo：[https://key0329.github.io/JoinSport/#/](https://key0329.github.io/JoinSport/#/)
+註: 模擬資料庫部屬於 Render，如觀看時暫停於 Loading 畫面請稍後約 30 秒等待喚醒，便可正常操作。
 
 相關連結：[Site Map 網站地圖](https://whimsical.com/site-map-join-sport-PAW5csqMBe9ZWiqns38Wxx)、[Wireframe 線稿圖](https://www.figma.com/file/Hs6V5EqxHEHnbaFMQPy6v1/Join-Sport?node-id=0%3A1&t=mXbVVTZDYyZPeE3X-0)
 
@@ -46,18 +47,18 @@ http://localhost:5173/JoinSport/
 
 
 ## 下載 Json-Server 資料庫
-此專案使用 Json-Server 模擬 API，在本地端觀看請需搭配下載 Json-Server 資料庫並且獨立運行 ( GitHub Page 已連線遠端資料庫故無需另外下載 )
+此專案使用 Json-Server 模擬 API，在本地端觀看請需搭配下載 Json-Server 資料庫並且獨立運行 ( GitHub Page 已連線遠端資料庫故無需另外下載，建議可直接使用上方 Demo 連結直接觀看 )
 
-Repo：https://github.com/Key0329/JoinSport-server-vercel
+Repo：https://github.com/Key0329/JoinSport-server-Render
 
 ### 取得專案
 ```
-git clone https://github.com/Key0329/JoinSport-server-vercel.git
+git clone https://github.com/Key0329/JoinSport-server-Render.git
 ```
 
 ### 移動至專案
 ```
-cd JoinSport-server-vercel
+cd JoinSport-server-Render
 ```
 
 ### 安裝套件
