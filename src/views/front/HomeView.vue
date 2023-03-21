@@ -10,12 +10,12 @@ import HomeHeader from '../../components/front/HomeHeader.vue';
 import HomeBanner from '../../components/front/HomeBanner.vue';
 import JoinCard from '../../components/front/JoinCard.vue';
 import JoinCardRow from '../../components/front/JoinCardRow.vue';
-import Loading from '../../components/front/LoadingComponent.vue';
+// import Loading from '../../components/front/LoadingComponent.vue';
 
 export default {
   name: 'HomeView',
   components: {
-    Loading,
+    // Loading,
     HomeBanner,
     JoinCard,
     Swiper,
@@ -67,13 +67,13 @@ export default {
 </script>
 
 <template>
-  <!-- loading -->
+  <!-- loading
   <VueLoading
     v-model:active="isLoading"
     :can-cancel="true"
     :is-full-page="fullPage"
     ><Loading></Loading>
-  </VueLoading>
+  </VueLoading> -->
 
   <home-header></home-header>
   <home-banner></home-banner>
