@@ -83,7 +83,7 @@ export default {
             <!-- 收藏 -->
             <BookMark
               v-if="userId"
-              class="absolute right-4 top-3 z-50"
+              class="absolute top-[190px] right-4 z-50 sm:right-4 sm:top-3"
               :userId="userId"
               :activity="activity"
               @click.stop
