@@ -1,0 +1,146 @@
+<div class="container">
+  <form class="flex flex-col gap-6 mx-auto">
+    <!-- title -->
+    <div>
+      <div class="items-center md:flex">
+        <label for="title" class="px-2 mr-4 whitespace-nowrap lg:mb-0"
+          :class="{ 'p-error': v$.title.$invalid && submitted }">揪團標題</label>
+        <InputText id="title" type="text" v-model="v$.title.$model" placeholder="請輸入揪團標題" class="w-full mt-2 md:mt-0"
+          :class="{ 'p-invalid': v$.title.$invalid && submitted }" />
+      </div>
+
+      <small v-if="(v$.title.$invalid && submitted) || v$.title.$pending.$response" class="block p-error text-end">{{
+        v$.title.required.$message.replace('Value', '標題') }}</small>
+    </div>
+    <!-- description -->
+    <div>
+      <div class="items-center md:flex">
+        <label for="description" class="px-2 mr-4 whitespace-nowrap lg:mb-0"
+          :class="{ 'p-error': v$.description.$invalid && submitted }">揪團描述</label>
+        <InputText id="description" type="text" v-model="v$.description.$model" placeholder="簡單描述此揪團"
+          class="w-full mt-2 md:mt-0" :class="{ 'p-invalid': v$.description.$invalid && submitted }" />
+      </div>
+
+      <small v-if="
+            (v$.description.$invalid && submitted) ||
+            v$.description.$pending.$response
+          " class="block p-error text-end">{{
+        v$.description.required.$message.replace('Value', '描述')
+        }}</small>
+    </div>
+    <!-- location -->
+    <div class="flex flex-col gap-4 md:flex-row">
+      <!-- city -->
+      <div>
+        <div class="items-center md:flex">
+          <label for="formCity" class="px-2 mr-4 whitespace-nowrap lg:mb-0"
+            :class="{ 'p-error': v$.city.$invalid && submitted }">活動地區</label>
+          <PDropdown id="formCity" v-model="v$.city.$model" optionLabel="name" placeholder="請選擇活動縣市"
+            :options="taiwanCities" class="w-full mt-2 md:mt-0"
+            :class="{ 'p-invalid': v$.city.$invalid && submitted }" />
+        </div>
+
+        <small v-if="(v$.city.$invalid && submitted) || v$.city.$pending.$response" class="block p-error text-end">{{
+          v$.city.required.$message.replace('Value', '縣市') }}</small>
+      </div>
+      <!-- district -->
+      <div>
+        <PDropdown id="district" v-model="v$.district.$model" optionLabel="name" placeholder="請選擇活動地區"
+          :options="districts" class="w-full mt-0" :class="{ 'p-invalid': v$.district.$invalid && submitted }" />
+        <small v-if="
+              (v$.district.$invalid && submitted) ||
+              v$.district.$pending.$response
+            " class="block p-error text-end">{{ v$.district.required.$message.replace('Value', '地區') }}</small>
+      </div>
+    </div>
+    <!-- address -->
+    <div>
+      <div class="items-center md:flex">
+        <label for="address" class="px-2 mr-4 whitespace-nowrap lg:mb-0"
+          :class="{ 'p-error': v$.address.$invalid && submitted }">活動地址</label>
+        <InputText id="address" type="text" class="w-full mt-2 md:mt-0" v-model="v$.address.$model"
+          placeholder="請輸入活動地址" :class="{ 'p-invalid': v$.address.$invalid && submitted }" />
+      </div>
+
+      <small v-if="
+            (v$.address.$invalid && submitted) || v$.address.$pending.$response
+          " class="block p-error text-end">{{ v$.address.required.$message.replace('Value', '地址') }}</small>
+    </div>
+    <div class="flex flex-col justify-between gap-4 md:flex-row">
+      <!-- date -->
+      <div>
+        <div class="items-center md:flex">
+          <label for="formDate" class="px-2 mr-4 whitespace-nowrap lg:mb-0"
+            :class="{ 'p-error': v$.date.$invalid && submitted }">活動日期</label>
+          <PCalendar id="formDate" v-model="v$.date.$model" placeholder="請選擇活動日期" dateFormat="yy-mm-dd" :showIcon="true"
+            :minDate="new Date()" class="w-full mt-2 md:mt-0" :class="{ 'p-invalid': v$.date.$invalid && submitted }" />
+        </div>
+
+        <small v-if="(v$.date.$invalid && submitted) || v$.date.$pending.$response" class="block p-error text-end">{{
+          v$.date.required.$message.replace('Value', '日期') }}</small>
+      </div>
+
+      <!-- start time -->
+      <div>
+        <div class="items-center md:flex">
+          <label for="startTime" class="px-2 mr-4 whitespace-nowrap lg:mb-0"
+            :class="{ 'p-error': v$.startTime.$invalid && submitted }">開始時間</label>
+          <PDropdown id="startTime" v-model="startTime" :options="startTimes" optionLabel="time" placeholder="請選擇開始時間"
+            class="w-full mt-2 md:mt-0" :class="{ 'p-invalid': v$.startTime.$invalid && submitted }" />
+        </div>
+
+        <small v-if="
+              (v$.startTime.$invalid && submitted) ||
+              v$.startTime.$pending.$response
+            " class="block p-error text-end">{{
+          v$.startTime.required.$message.replace('Value', '時間')
+          }}</small>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center justify-between gap-6 mt-6 md:flex-row">
+      <!-- 付費方式 -->
+      <div class="w-full">
+        <div class="p-float-label">
+          <PDropdown id="paymentMethod" v-model="paymentMethod" :options="paymentMethods" optionLabel="method"
+            class="w-full" :class="{ 'p-invalid': v$.paymentMethod.$invalid && submitted }" />
+          <label for="paymentMethod">付費方式</label>
+        </div>
+        <small v-if="
+              (v$.paymentMethod.$invalid && submitted) ||
+              v$.paymentMethod.$pending.$response
+            " class="block p-error text-end">{{
+          v$.paymentMethod.required.$message.replace('Value', '付費方式')
+          }}</small>
+      </div>
+      <!-- 每人費用 -->
+      <div class="w-full">
+        <div class="p-float-label">
+          <InputNumber id="costPerPerson" v-model="costPerPerson" class="w-full"
+            :class="{ 'p-invalid': v$.costPerPerson.$invalid && submitted }" />
+          <label for="costPerPerson">每人費用</label>
+        </div>
+        <small v-if="
+              (v$.costPerPerson.$invalid && submitted) ||
+              v$.costPerPerson.$pending.$response
+            " class="block p-error text-end">{{
+          v$.costPerPerson.required.$message.replace('Value', '費用')
+          }}</small>
+      </div>
+      <!-- 人數 -->
+      <div class="w-full">
+        <div class="p-float-label">
+          <PDropdown id="maxJoinNum" v-model="maxJoinNum" class="w-full" :options="joinNums" optionLabel="number"
+            :class="{ 'p-invalid': v$.maxJoinNum.$invalid && submitted }" />
+          <label for="maxJoinNum">人數</label>
+        </div>
+        <small v-if="
+              (v$.maxJoinNum.$invalid && submitted) ||
+              v$.maxJoinNum.$pending.$response
+            " class="block p-error text-end">{{
+          v$.maxJoinNum.required.$message.replace('Value', '人數')
+          }}</small>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'pinia';
-import VuelidateForm from '@/components/front/VuelidateForm.vue';
+import VuelidateForm from '@/components/front/VuelidateForm/VuelidateForm.vue';
 import StepPagination from '@/components/front/StepPagination.vue';
 import createSteps from '@/stores/front/createStepsStore';
 
