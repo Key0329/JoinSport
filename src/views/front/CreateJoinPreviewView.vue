@@ -3,7 +3,8 @@ import { mapActions } from 'pinia';
 import authStore from '@/stores/authStore';
 import StepPagination from '@/components/front/StepPagination.vue';
 import JoinDetailAside from '@/components/front/JoinDetailAside.vue';
-import JoinAttendees from '@/components/front/JoinAttendees.vue';
+import CreateJoinTabView from '@/components/front/CreateJoinTabView.vue';
+import CreateJoinBottomArea from '@/components/front/CreateJoinBottomArea.vue';
 
 const { VITE_URL, VITE_MAP_KEY, VITE_MAP_URL } = import.meta.env;
 
@@ -13,7 +14,8 @@ export default {
   components: {
     StepPagination,
     JoinDetailAside,
-    JoinAttendees,
+    CreateJoinTabView,
+    CreateJoinBottomArea,
   },
   data() {
     return {
@@ -235,75 +237,7 @@ export default {
               <p>{{ tempForm.maxJoinNum?.number }} 人</p>
             </div>
           </section>
-          <TabView>
-            <TabPanel header="參與者">
-              <ul class="flex flex-wrap gap-4">
-                <li>
-                  <JoinAttendees></JoinAttendees>
-                </li>
-                <li>
-                  <JoinAttendees></JoinAttendees>
-                </li>
-                <li>
-                  <JoinAttendees></JoinAttendees>
-                </li>
-              </ul>
-            </TabPanel>
-            <TabPanel header="更多照片">
-              <div class="flex flex-col justify-evenly gap-2 md:flex-row">
-                <div class="w-full">
-                  <img
-                    src="../../assets/images/activities/activity1501.jpg"
-                    alt="JoinDetailImg"
-                    class="h-full"
-                  />
-                </div>
-                <div class="w-full">
-                  <img
-                    src="../../assets/images/activities/activity1502.jpg"
-                    alt="JoinDetailImg"
-                    class="h-full"
-                  />
-                </div>
-                <div class="w-full">
-                  <img
-                    src="../../assets/images/activities/activity1503.jpg"
-                    alt="JoinDetailImg"
-                    class="h-full"
-                  />
-                </div>
-              </div>
-            </TabPanel>
-            <TabPanel header="留言">
-              <div>
-                <p class="mb-4">留言</p>
-                <form>
-                  <PTextarea
-                    rows="5"
-                    class="mb-2 w-full"
-                    placeholder="留下您的想法"
-                    disabled
-                  />
-                  <div class="flex justify-end gap-4">
-                    <button
-                      type="button"
-                      class="btn transition-color bg-white disabled:opacity-50"
-                      disabled
-                    >
-                      取消
-                    </button>
-                    <button
-                      type="button"
-                      class="btn transition-color bg-primary-04 disabled:opacity-50"
-                      disabled
-                    >
-                      確認
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </TabPanel>
-          </TabView>
+          <CreateJoinTabView></CreateJoinTabView>
         </div>
         <!-- sidebar -->
         <JoinDetailAside :activity="tempActivity"></JoinDetailAside>
@@ -314,30 +248,7 @@ export default {
   <!-- bottom area -->
   <section class="bg-white py-5">
     <div class="container">
-      <div class="flex flex-col items-center md:flex-row md:justify-between">
-        <div class="mb-2 md:mb-0">
-          <p class="mb-2 md:mb-0">
-            {{ tempForm.newDate }} {{ tempForm.dayOfWeekText }}
-            {{ tempForm.startTime?.time }}
-          </p>
-          <h2 class="text-lg font-semibold sm:text-xl">
-            {{ tempForm.title }}
-          </h2>
-        </div>
-        <div class="flex items-center gap-6">
-          <p>{{ tempForm.maxJoinNum?.number }} 個空位</p>
-          <p>
-            <i class="pi pi-star text-lg"></i>
-          </p>
-          <button
-            type="button"
-            class="btn btn-primary py-4 hover:bg-primary-01 hover:text-white disabled:opacity-70"
-            disabled
-          >
-            我要參加
-          </button>
-        </div>
-      </div>
+      <CreateJoinBottomArea :temp-form="tempForm"></CreateJoinBottomArea>
     </div>
   </section>
 

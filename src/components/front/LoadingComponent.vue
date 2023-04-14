@@ -5,25 +5,25 @@ export default {
 </script>
 
 <template>
-  <div class="relative">
+  <div class="slide-loading relative">
     <img
       src="../../assets/images/loading/loading3.png"
       class="w-[200px]"
       alt="loading"
     />
-    <div class="mb-2">
-      <img
-        src="../../assets/images/loading/loading1.png"
-        class="absolute -top-[170px] -left-[150px] w-[200px]"
-        alt="loading"
-      />
-      <img
-        src="../../assets/images/loading/loading2.png"
-        class="absolute -top-[170px] -right-[100px] w-[200px]"
-        alt="loading"
-      />
-    </div>
+    <!-- <div class="mb-2"> -->
+    <img
+      src="../../assets/images/loading/loading1.png"
+      class="absolute -top-[170px] -left-[150px] w-[200px]"
+      alt="loading"
+    />
+    <img
+      src="../../assets/images/loading/loading2.png"
+      class="absolute -top-[170px] -right-[100px] w-[200px]"
+      alt="loading"
+    />
   </div>
+  <!-- </div> -->
 </template>
 
 <!-- <style scoped>
@@ -60,7 +60,7 @@ export default {
     opacity: 0;
   }
   100% {
-    opacity: 0;
+    opacity: 1;
   }
 }
 </style> -->
